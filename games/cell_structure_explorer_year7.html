@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Structure Explorer - Year 7 Science Biology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #1d1d1f;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .game-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .game-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .game-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-header p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            border-radius: 10px;
+            height: 8px;
+            flex-grow: 1;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #059669, #10b981);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .score-display {
+            font-weight: 600;
+            color: #059669;
+            font-size: 1.1rem;
+        }
+
+        .cell-explorer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .cell-diagram {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            background: #f0fdf4;
+            border: 3px solid #10b981;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .organelle {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .organelle:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
+        .nucleus {
+            background: #8b5cf6;
+            color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+        }
+
+        .mitochondria {
+            background: #f59e0b;
+            color: white;
+            top: 30%;
+            left: 70%;
+        }
+
+        .chloroplast {
+            background: #22c55e;
+            color: white;
+            top: 70%;
+            left: 30%;
+        }
+
+        .vacuole {
+            background: #06b6d4;
+            color: white;
+            top: 20%;
+            left: 20%;
+            width: 50px;
+            height: 50px;
+        }
+
+        .cell-wall {
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 4px solid #059669;
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .cell-membrane {
+            background: #ec4899;
+            color: white;
+            top: 80%;
+            left: 80%;
+        }
+
+        .cytoplasm {
+            background: #94a3b8;
+            color: white;
+            top: 60%;
+            left: 60%;
+        }
+
+        .question-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #10b981;
+        }
+
+        .question-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .choices {
+            display: grid;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .choice-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .choice-btn:hover {
+            border-color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .choice-btn.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .choice-btn.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .feedback {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .next-btn.show {
+            display: inline-block;
+        }
+
+        .organelle-info {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #10b981;
+            display: none;
+        }
+
+        .organelle-info.show {
+            display: block;
+        }
+
+        .final-results {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .final-results.show {
+            display: block;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .microscope-mode {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .microscope-btn {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .microscope-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .game-header h1 {
+                font-size: 2rem;
+            }
+
+            .cell-diagram {
+                max-width: 350px;
+                padding: 1rem;
+            }
+
+            .organelle {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .nucleus {
+                width: 50px;
+                height: 50px;
+            }
+
+            .vacuole {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>🔬 Cell Structure Explorer</h1>
+            <p>Discover the amazing world of cells and their organelles</p>
+            <div class="progress-container">
+                <span>Progress:</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress"></div>
+                </div>
+                <div class="score-display" id="scoreDisplay">0/6</div>
+            </div>
+        </div>
+
+        <div class="cell-explorer" id="cellExplorer">
+            <div class="microscope-mode">
+                <h3>🔬 Microscope View</h3>
+                <p>Click on the organelles to learn about their functions!</p>
+                <button class="microscope-btn" onclick="startQuiz()">Start Cell Quiz →</button>
+            </div>
+
+            <div class="cell-diagram" id="cellDiagram">
+                <div class="cell-wall"></div>
+                <div class="organelle nucleus" data-organelle="nucleus" onclick="showOrganelleInfo('nucleus')">N</div>
+                <div class="organelle mitochondria" data-organelle="mitochondria" onclick="showOrganelleInfo('mitochondria')">M</div>
+                <div class="organelle chloroplast" data-organelle="chloroplast" onclick="showOrganelleInfo('chloroplast')">C</div>
+                <div class="organelle vacuole" data-organelle="vacuole" onclick="showOrganelleInfo('vacuole')">V</div>
+                <div class="organelle cell-membrane" data-organelle="cell-membrane" onclick="showOrganelleInfo('cell-membrane')">CM</div>
+                <div class="organelle cytoplasm" data-organelle="cytoplasm" onclick="showOrganelleInfo('cytoplasm')">Cy</div>
+            </div>
+
+            <div class="organelle-info" id="organelleInfo">
+                <!-- Organelle information will be displayed here -->
+            </div>
+
+            <div id="quizSection" style="display: none;">
+                <!-- Quiz content will be inserted here -->
+            </div>
+        </div>
+
+        <div class="final-results" id="finalResults">
+            <h2>Microscopy Complete! 🎉</h2>
+            <p id="finalScore"></p>
+            <p id="finalFeedback"></p>
+            <button class="restart-btn" onclick="restartExploration()">Explore Again</button>
+        </div>
+    </div>
+
+    <script>
+        const organelleData = {
+            nucleus: {
+                name: "Nucleus",
+                function: "The control center of the cell that contains DNA and controls all cell activities",
+                color: "#8b5cf6",
+                emoji: "🧠"
+            },
+            mitochondria: {
+                name: "Mitochondria",
+                function: "The powerhouse of the cell that produces energy (ATP) through cellular respiration",
+                color: "#f59e0b",
+                emoji: "⚡"
+            },
+            chloroplast: {
+                name: "Chloroplast",
+                function: "Found in plant cells, contains chlorophyll and carries out photosynthesis",
+                color: "#22c55e",
+                emoji: "🌱"
+            },
+            vacuole: {
+                name: "Vacuole",
+                function: "Storage compartment for water, nutrients, and waste products",
+                color: "#06b6d4",
+                emoji: "💧"
+            },
+            "cell-membrane": {
+                name: "Cell Membrane",
+                function: "Controls what enters and leaves the cell, maintaining cell shape",
+                color: "#ec4899",
+                emoji: "🚪"
+            },
+            cytoplasm: {
+                name: "Cytoplasm",
+                function: "Jelly-like substance that fills the cell and holds organelles in place",
+                color: "#94a3b8",
+                emoji: "🌊"
+            }
+        };
+
+        const quizQuestions = [
+            {
+                question: "Which organelle is known as the 'powerhouse of the cell'?",
+                choices: ["Nucleus", "Mitochondria", "Chloroplast", "Vacuole"],
+                correct: 1,
+                feedback: "Correct! Mitochondria are called the powerhouses because they produce ATP (energy) for the cell through cellular respiration."
+            },
+            {
+                question: "What is the function of the nucleus?",
+                choices: ["Produces energy", "Controls cell activities", "Makes food", "Stores water"],
+                correct: 1,
+                feedback: "Excellent! The nucleus is the control center that contains DNA and directs all cellular activities."
+            },
+            {
+                question: "Which organelle is only found in plant cells?",
+                choices: ["Mitochondria", "Nucleus", "Chloroplast", "Cell membrane"],
+                correct: 2,
+                feedback: "Perfect! Chloroplasts are unique to plant cells and contain chlorophyll for photosynthesis."
+            },
+            {
+                question: "What does the cell membrane do?",
+                choices: ["Controls what enters and exits the cell", "Produces proteins", "Stores DNA", "Makes energy"],
+                correct: 0,
+                feedback: "Correct! The cell membrane is selectively permeable and controls the movement of substances in and out of the cell."
+            },
+            {
+                question: "Which organelle stores water and maintains plant cell shape?",
+                choices: ["Nucleus", "Mitochondria", "Vacuole", "Cytoplasm"],
+                correct: 2,
+                feedback: "Great! Large vacuoles in plant cells store water and help maintain the plant's structure and rigidity."
+            },
+            {
+                question: "What is cytoplasm?",
+                choices: ["The cell's DNA", "Jelly-like substance filling the cell", "The cell's energy producer", "The cell's outer boundary"],
+                correct: 1,
+                feedback: "Excellent! Cytoplasm is the jelly-like substance that fills the cell and provides a medium for organelles to move and function."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let quizMode = false;
+
+        function showOrganelleInfo(organelleType) {
+            if (quizMode) return;
+
+            const organelle = organelleData[organelleType];
+            const infoDiv = document.getElementById('organelleInfo');
+
+            infoDiv.innerHTML = `
+                <h3 style="color: ${organelle.color}; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 2rem;">${organelle.emoji}</span>
+                    ${organelle.name}
+                </h3>
+                <p style="font-size: 1.1rem; margin-top: 1rem; line-height: 1.6;">
+                    <strong>Function:</strong> ${organelle.function}
+                </p>
+            `;
+
+            infoDiv.classList.add('show');
+        }
+
+        function startQuiz() {
+            quizMode = true;
+            document.querySelector('.microscope-mode').style.display = 'none';
+            document.getElementById('organelleInfo').classList.remove('show');
+            document.getElementById('quizSection').style.display = 'block';
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            if (currentQuestion >= quizQuestions.length) {
+                showResults();
+                return;
+            }
+
+            const question = quizQuestions[currentQuestion];
+            const quizSection = document.getElementById('quizSection');
+
+            quizSection.innerHTML = `
+                <div class="question-card">
+                    <div class="question-title">Question ${currentQuestion + 1}: ${question.question}</div>
+                    <div class="choices" id="choices"></div>
+                    <div class="feedback" id="feedback"></div>
+                    <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Continue Exploration →</button>
+                </div>
+            `;
+
+            const choicesDiv = document.getElementById('choices');
+            question.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.className = 'choice-btn';
+                button.textContent = choice;
+                button.onclick = () => selectChoice(index);
+                choicesDiv.appendChild(button);
+            });
+
+            updateProgress();
+        }
+
+        function selectChoice(selectedIndex) {
+            const question = quizQuestions[currentQuestion];
+            const choices = document.querySelectorAll('.choice-btn');
+            const feedback = document.getElementById('feedback');
+            const nextBtn = document.getElementById('nextBtn');
+
+            choices.forEach((choice, index) => {
+                choice.onclick = null;
+                if (index === question.correct) {
+                    choice.classList.add('correct');
+                } else if (index === selectedIndex && index !== question.correct) {
+                    choice.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === question.correct) {
+                score++;
+                feedback.innerHTML = `<strong>✅ Correct!</strong> ${question.feedback}`;
+            } else {
+                feedback.innerHTML = `<strong>❌ Not quite right.</strong> ${question.feedback}`;
+            }
+
+            feedback.classList.add('show');
+            nextBtn.classList.add('show');
+            updateScore();
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            displayQuestion();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function updateScore() {
+            document.getElementById('scoreDisplay').textContent = `${score}/${quizQuestions.length}`;
+        }
+
+        function showResults() {
+            document.getElementById('cellExplorer').style.display = 'none';
+            document.getElementById('finalResults').classList.add('show');
+
+            const percentage = Math.round((score / quizQuestions.length) * 100);
+            document.getElementById('finalScore').textContent = `Final Score: ${score}/${quizQuestions.length} (${percentage}%)`;
+
+            let feedback = "";
+            if (percentage >= 90) {
+                feedback = "Outstanding! You have excellent knowledge of cell structure and organelle functions. You're ready for more advanced cell biology concepts!";
+            } else if (percentage >= 70) {
+                feedback = "Great work! You have a solid understanding of cell structure. Keep exploring to master all the organelle functions.";
+            } else if (percentage >= 50) {
+                feedback = "Good effort! You're learning about cells well. Review the organelle functions and try exploring the cell diagram again.";
+            } else {
+                feedback = "Keep studying! Cell biology takes practice. Try clicking on each organelle in the diagram to learn their functions before taking the quiz again.";
+            }
+
+            document.getElementById('finalFeedback').textContent = feedback;
+        }
+
+        function restartExploration() {
+            currentQuestion = 0;
+            score = 0;
+            quizMode = false;
+
+            document.getElementById('cellExplorer').style.display = 'block';
+            document.getElementById('finalResults').classList.remove('show');
+            document.querySelector('.microscope-mode').style.display = 'block';
+            document.getElementById('quizSection').style.display = 'none';
+            document.getElementById('organelleInfo').classList.remove('show');
+
+            updateScore();
+            document.getElementById('progress').style.width = '0%';
+        }
+
+        // Initialize the display
+        updateScore();
+    </script>
+</body>
+</html>
