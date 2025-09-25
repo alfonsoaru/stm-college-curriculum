@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Structure Builder - Year 7 English Creative Writing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #1d1d1f;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .game-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .game-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .game-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d97706;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-header p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .story-builder {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .story-part {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px dashed #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .story-part.active {
+            border-color: #d97706;
+            background: #fef3c7;
+        }
+
+        .story-part.completed {
+            border-color: #22c55e;
+            background: #dcfce7;
+        }
+
+        .part-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .part-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .part-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #d97706;
+        }
+
+        .part-description {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #d97706;
+        }
+
+        .story-input {
+            width: 100%;
+            min-height: 80px;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .story-input:focus {
+            outline: none;
+            border-color: #d97706;
+        }
+
+        .story-input.completed {
+            border-color: #22c55e;
+            background: #f0fdf4;
+        }
+
+        .suggestions {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .suggestion-chip {
+            background: #fff7ed;
+            border: 1px solid #d97706;
+            color: #d97706;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-chip:hover {
+            background: #d97706;
+            color: white;
+        }
+
+        .progress-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+            gap: 1rem;
+        }
+
+        .progress-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #6b7280;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active {
+            background: #d97706;
+            color: white;
+        }
+
+        .progress-step.completed {
+            background: #22c55e;
+            color: white;
+        }
+
+        .progress-line {
+            height: 2px;
+            width: 60px;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .progress-line.completed {
+            background: #22c55e;
+        }
+
+        .action-buttons {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .final-story {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .final-story.show {
+            display: block;
+        }
+
+        .story-display {
+            background: #f8f9fa;
+            border-left: 4px solid #d97706;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .game-header h1 {
+                font-size: 2rem;
+            }
+
+            .part-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .part-icon {
+                margin-bottom: 0.5rem;
+                margin-right: 0;
+            }
+
+            .progress-section {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>✍️ Story Structure Builder</h1>
+            <p>Create an amazing story by building each part step by step</p>
+        </div>
+
+        <div class="story-builder" id="storyBuilder">
+            <div class="progress-section" id="progressSection">
+                <!-- Progress indicators will be added here -->
+            </div>
+
+            <div id="storyParts">
+                <!-- Story parts will be added here -->
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="previousPart()" id="prevBtn" style="display: none;">← Previous</button>
+                <button class="btn btn-primary" onclick="nextPart()" id="nextBtn">Next Part →</button>
+                <button class="btn btn-primary" onclick="showFinalStory()" id="finishBtn" style="display: none;">View Complete Story 📖</button>
+            </div>
+        </div>
+
+        <div class="final-story" id="finalStory">
+            <h2 style="color: #d97706; text-align: center; margin-bottom: 1.5rem;">🎉 Your Complete Story!</h2>
+            <div class="story-display" id="storyDisplay"></div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="restartStory()">Create New Story</button>
+                <button class="btn btn-secondary" onclick="editStory()">Edit Story</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const storyParts = [
+            {
+                id: 'setting',
+                title: 'Setting',
+                icon: '🏞️',
+                description: 'Describe WHERE and WHEN your story takes place. Paint a picture with words!',
+                placeholder: 'Example: In a mysterious forest on a foggy autumn morning...',
+                suggestions: ['mysterious forest', 'busy school playground', 'quiet village', 'modern city', 'magical kingdom', 'space station', 'old castle', 'family home']
+            },
+            {
+                id: 'character',
+                title: 'Main Character',
+                icon: '👤',
+                description: 'Introduce your main character. What are they like? What do they want?',
+                placeholder: 'Example: Maya was a curious 12-year-old who loved solving puzzles...',
+                suggestions: ['brave student', 'shy artist', 'adventurous explorer', 'clever detective', 'kind friend', 'funny joker', 'determined athlete', 'creative writer']
+            },
+            {
+                id: 'problem',
+                title: 'Problem/Conflict',
+                icon: '⚡',
+                description: 'What challenge or problem does your character face? This drives your story forward!',
+                placeholder: 'Example: Maya discovered that her best friend was missing...',
+                suggestions: ['lost something important', 'made a difficult choice', 'faced a fear', 'solved a mystery', 'helped someone', 'learned a lesson', 'overcame a challenge', 'discovered a secret']
+            },
+            {
+                id: 'events',
+                title: 'Main Events',
+                icon: '🎬',
+                description: 'What happens as your character tries to solve their problem? Include exciting details!',
+                placeholder: 'Example: Maya searched everywhere, found mysterious clues, and followed a trail...',
+                suggestions: ['searched for clues', 'asked for help', 'made a plan', 'took risks', 'learned new skills', 'met interesting people', 'faced obstacles', 'discovered surprises']
+            },
+            {
+                id: 'climax',
+                title: 'Climax',
+                icon: '🎯',
+                description: 'The most exciting moment! This is where your character faces their biggest challenge.',
+                placeholder: 'Example: Maya finally found her friend trapped in the old library basement...',
+                suggestions: ['confronted the problem', 'made a brave choice', 'used their skills', 'worked with others', 'overcame their fear', 'solved the puzzle', 'saved the day', 'learned the truth']
+            },
+            {
+                id: 'resolution',
+                title: 'Resolution/Ending',
+                icon: '🌟',
+                description: 'How does everything work out? What did your character learn or achieve?',
+                placeholder: 'Example: Maya rescued her friend and they both learned the importance of staying together...',
+                suggestions: ['friendship grew stronger', 'lesson was learned', 'problem was solved', 'character grew wiser', 'peace was restored', 'adventure ended happily', 'new friendship formed', 'confidence was gained']
+            }
+        ];
+
+        let currentPart = 0;
+        let storyContent = {};
+
+        function initializeGame() {
+            createProgressIndicators();
+            displayCurrentPart();
+        }
+
+        function createProgressIndicators() {
+            const progressSection = document.getElementById('progressSection');
+            progressSection.innerHTML = '';
+
+            storyParts.forEach((part, index) => {
+                const step = document.createElement('div');
+                step.className = `progress-step ${index === 0 ? 'active' : ''}`;
+                step.textContent = index + 1;
+                progressSection.appendChild(step);
+
+                if (index < storyParts.length - 1) {
+                    const line = document.createElement('div');
+                    line.className = 'progress-line';
+                    progressSection.appendChild(line);
+                }
+            });
+        }
+
+        function displayCurrentPart() {
+            const part = storyParts[currentPart];
+            const storyPartsContainer = document.getElementById('storyParts');
+
+            storyPartsContainer.innerHTML = `
+                <div class="story-part active">
+                    <div class="part-header">
+                        <div class="part-icon">${part.icon}</div>
+                        <div class="part-title">${part.title}</div>
+                    </div>
+                    <div class="part-description">${part.description}</div>
+                    <textarea class="story-input"
+                              id="input-${part.id}"
+                              placeholder="${part.placeholder}"
+                              oninput="updateContent('${part.id}')">${storyContent[part.id] || ''}</textarea>
+                    <div class="suggestions">
+                        ${part.suggestions.map(suggestion =>
+                            `<span class="suggestion-chip" onclick="addSuggestion('${part.id}', '${suggestion}')">${suggestion}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+
+            updateButtons();
+            updateProgress();
+        }
+
+        function updateContent(partId) {
+            const input = document.getElementById(`input-${partId}`);
+            storyContent[partId] = input.value;
+        }
+
+        function addSuggestion(partId, suggestion) {
+            const input = document.getElementById(`input-${partId}`);
+            const currentValue = input.value;
+
+            if (currentValue && !currentValue.endsWith(' ') && !currentValue.endsWith('.')) {
+                input.value = currentValue + ' ' + suggestion;
+            } else {
+                input.value = currentValue + suggestion;
+            }
+
+            storyContent[partId] = input.value;
+            input.focus();
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const finishBtn = document.getElementById('finishBtn');
+
+            prevBtn.style.display = currentPart > 0 ? 'inline-block' : 'none';
+            nextBtn.style.display = currentPart < storyParts.length - 1 ? 'inline-block' : 'none';
+            finishBtn.style.display = currentPart === storyParts.length - 1 ? 'inline-block' : 'none';
+        }
+
+        function updateProgress() {
+            const steps = document.querySelectorAll('.progress-step');
+            const lines = document.querySelectorAll('.progress-line');
+
+            steps.forEach((step, index) => {
+                step.className = 'progress-step';
+                if (index < currentPart) {
+                    step.classList.add('completed');
+                } else if (index === currentPart) {
+                    step.classList.add('active');
+                }
+            });
+
+            lines.forEach((line, index) => {
+                if (index < currentPart) {
+                    line.classList.add('completed');
+                } else {
+                    line.classList.remove('completed');
+                }
+            });
+        }
+
+        function nextPart() {
+            if (currentPart < storyParts.length - 1) {
+                currentPart++;
+                displayCurrentPart();
+            }
+        }
+
+        function previousPart() {
+            if (currentPart > 0) {
+                currentPart--;
+                displayCurrentPart();
+            }
+        }
+
+        function showFinalStory() {
+            const storyDisplay = document.getElementById('storyDisplay');
+            const finalStorySection = document.getElementById('finalStory');
+            const storyBuilder = document.getElementById('storyBuilder');
+
+            let completeStory = '';
+            storyParts.forEach(part => {
+                if (storyContent[part.id]) {
+                    completeStory += `<strong>${part.title}:</strong> ${storyContent[part.id]}<br><br>`;
+                }
+            });
+
+            if (completeStory) {
+                storyDisplay.innerHTML = completeStory;
+                storyBuilder.style.display = 'none';
+                finalStorySection.classList.add('show');
+            } else {
+                alert('Please complete at least one part of your story first!');
+            }
+        }
+
+        function editStory() {
+            const finalStorySection = document.getElementById('finalStory');
+            const storyBuilder = document.getElementById('storyBuilder');
+
+            finalStorySection.classList.remove('show');
+            storyBuilder.style.display = 'block';
+        }
+
+        function restartStory() {
+            currentPart = 0;
+            storyContent = {};
+            const finalStorySection = document.getElementById('finalStory');
+            const storyBuilder = document.getElementById('storyBuilder');
+
+            finalStorySection.classList.remove('show');
+            storyBuilder.style.display = 'block';
+            displayCurrentPart();
+        }
+
+        // Initialize the game
+        initializeGame();
+    </script>
+</body>
+</html>

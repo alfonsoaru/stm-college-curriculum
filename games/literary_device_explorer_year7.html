@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literary Device Explorer - Year 7 English Literature</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: #1d1d1f;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .game-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .game-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #16a34a;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-header p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            border-radius: 10px;
+            height: 8px;
+            flex-grow: 1;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #16a34a, #4ade80);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .score-display {
+            font-weight: 600;
+            color: #16a34a;
+            font-size: 1.1rem;
+        }
+
+        .device-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .device-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #16a34a, #4ade80);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .device-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #16a34a;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .device-definition {
+            background: #f8f9fa;
+            border-left: 4px solid #16a34a;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 1rem;
+        }
+
+        .example-text {
+            background: #e8f5e8;
+            border: 2px dashed #16a34a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .choices {
+            display: grid;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .choice-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .choice-btn:hover {
+            border-color: #16a34a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+        }
+
+        .choice-btn.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .choice-btn.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .feedback {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #16a34a, #4ade80);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+        }
+
+        .next-btn.show {
+            display: inline-block;
+        }
+
+        .final-results {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .final-results.show {
+            display: block;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .game-header h1 {
+                font-size: 2rem;
+            }
+
+            .device-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+            }
+
+            .game-container {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>📚 Literary Device Explorer</h1>
+            <p>Discover and identify literary devices in exciting texts and examples</p>
+            <div class="progress-container">
+                <span>Progress:</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress"></div>
+                </div>
+                <div class="score-display" id="scoreDisplay">0/6</div>
+            </div>
+        </div>
+
+        <div class="device-card" id="gameCard">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+
+        <div class="final-results" id="finalResults">
+            <h2>Explorer Complete! 🎉</h2>
+            <p id="finalScore"></p>
+            <p id="finalFeedback"></p>
+            <button class="restart-btn" onclick="restartGame()">Explore Again</button>
+        </div>
+    </div>
+
+    <script>
+        const devices = [
+            {
+                name: "Simile",
+                emoji: "🔍",
+                definition: "A comparison between two different things using the words 'like' or 'as'",
+                example: "The stars sparkled like diamonds in the night sky.",
+                question: "Which sentence contains a simile?",
+                choices: [
+                    "The wind whispered through the trees",
+                    "She was as quiet as a mouse during the test",
+                    "The rain danced on the rooftops",
+                    "His words cut deep into her heart"
+                ],
+                correct: 1,
+                feedback: "Correct! 'As quiet as a mouse' is a simile because it compares her quietness to a mouse using the word 'as'. Similes help readers visualize and understand by comparing something unfamiliar to something familiar."
+            },
+            {
+                name: "Metaphor",
+                emoji: "🎭",
+                definition: "A direct comparison between two different things without using 'like' or 'as'",
+                example: "Life is a journey filled with unexpected twists and turns.",
+                question: "Identify the metaphor in these sentences:",
+                choices: [
+                    "The classroom was as noisy as a zoo",
+                    "Time is money in the business world",
+                    "She runs like the wind across the field",
+                    "The cake smells as sweet as honey"
+                ],
+                correct: 1,
+                feedback: "Excellent! 'Time is money' is a metaphor because it directly compares time to money without using 'like' or 'as'. This metaphor suggests that time is valuable and shouldn't be wasted."
+            },
+            {
+                name: "Personification",
+                emoji: "🌟",
+                definition: "Giving human qualities, actions, or emotions to non-human things",
+                example: "The old house groaned and complained in the fierce wind.",
+                question: "Which example uses personification?",
+                choices: [
+                    "The car is as red as a fire truck",
+                    "The sun smiled down on the happy children",
+                    "He's strong like an ox",
+                    "The water was crystal clear"
+                ],
+                correct: 1,
+                feedback: "Perfect! 'The sun smiled down' gives the sun a human action (smiling), which is personification. This makes the description more vivid and engaging for the reader."
+            },
+            {
+                name: "Alliteration",
+                emoji: "🎵",
+                definition: "The repetition of the same consonant sound at the beginning of words close together",
+                example: "Peter Piper picked a peck of pickled peppers.",
+                question: "Find the sentence with alliteration:",
+                choices: [
+                    "The bright blue butterfly flew away",
+                    "Sally sells seashells by the seashore",
+                    "The music was loud and clear",
+                    "She walked slowly down the path"
+                ],
+                correct: 1,
+                feedback: "Great work! 'Sally sells seashells by the seashore' repeats the 's' sound, creating alliteration. This literary device creates rhythm and makes text more memorable and fun to read."
+            },
+            {
+                name: "Onomatopoeia",
+                emoji: "💥",
+                definition: "Words that imitate the actual sound they represent",
+                example: "The bacon sizzled and popped in the hot frying pan.",
+                question: "Which word is an example of onomatopoeia?",
+                choices: [
+                    "Beautiful",
+                    "Crash",
+                    "Mountain",
+                    "Purple"
+                ],
+                correct: 1,
+                feedback: "Spot on! 'Crash' imitates the actual sound of something breaking or colliding. Onomatopoeia words like buzz, pop, hiss, and whoosh make writing more vivid and help readers 'hear' the story."
+            },
+            {
+                name: "Rhyme",
+                emoji: "🎼",
+                definition: "Words that end with the same sound, often used in poetry to create rhythm and pattern",
+                example: "Twinkle, twinkle, little star, How I wonder what you are.",
+                question: "Which pair of words rhyme?",
+                choices: [
+                    "Cat and dog",
+                    "Moon and June",
+                    "Happy and sad",
+                    "Book and pen"
+                ],
+                correct: 1,
+                feedback: "Excellent! 'Moon' and 'June' rhyme because they end with the same sound ('-oon'). Rhyming words create musicality in poetry and make verses easier to remember and more enjoyable to read."
+            }
+        ];
+
+        let currentDevice = 0;
+        let score = 0;
+
+        function updateProgress() {
+            const progress = (currentDevice / devices.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function updateScore() {
+            document.getElementById('scoreDisplay').textContent = `${score}/${devices.length}`;
+        }
+
+        function displayDevice() {
+            if (currentDevice >= devices.length) {
+                showResults();
+                return;
+            }
+
+            const device = devices[currentDevice];
+            const gameCard = document.getElementById('gameCard');
+
+            gameCard.innerHTML = `
+                <div class="device-icon">${device.emoji}</div>
+                <div class="device-name">${device.name}</div>
+                <div class="device-definition">${device.definition}</div>
+                <div class="example-text">${device.example}</div>
+                <div class="question">${device.question}</div>
+                <div class="choices" id="choices"></div>
+                <div class="feedback" id="feedback"></div>
+                <button class="next-btn" id="nextBtn" onclick="nextDevice()">Continue Exploring →</button>
+            `;
+
+            const choicesDiv = document.getElementById('choices');
+            device.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.className = 'choice-btn';
+                button.textContent = choice;
+                button.onclick = () => selectChoice(index);
+                choicesDiv.appendChild(button);
+            });
+
+            updateProgress();
+        }
+
+        function selectChoice(selectedIndex) {
+            const device = devices[currentDevice];
+            const choices = document.querySelectorAll('.choice-btn');
+            const feedback = document.getElementById('feedback');
+            const nextBtn = document.getElementById('nextBtn');
+
+            choices.forEach((choice, index) => {
+                choice.onclick = null; // Disable further clicks
+                if (index === device.correct) {
+                    choice.classList.add('correct');
+                } else if (index === selectedIndex && index !== device.correct) {
+                    choice.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === device.correct) {
+                score++;
+                feedback.innerHTML = `<strong>✅ Correct!</strong> ${device.feedback}`;
+            } else {
+                feedback.innerHTML = `<strong>❌ Try again next time!</strong> ${device.feedback}`;
+            }
+
+            feedback.classList.add('show');
+            nextBtn.classList.add('show');
+            updateScore();
+        }
+
+        function nextDevice() {
+            currentDevice++;
+            displayDevice();
+        }
+
+        function showResults() {
+            document.getElementById('gameCard').style.display = 'none';
+            document.getElementById('finalResults').classList.add('show');
+
+            const percentage = Math.round((score / devices.length) * 100);
+            document.getElementById('finalScore').textContent = `Final Score: ${score}/${devices.length} (${percentage}%)`;
+
+            let feedback = "";
+            if (percentage >= 90) {
+                feedback = "Amazing! You're a literary device expert! You clearly understand how authors use these techniques to make their writing more interesting and engaging.";
+            } else if (percentage >= 70) {
+                feedback = "Great job! You have a good understanding of literary devices. Keep reading different texts to spot these techniques in action.";
+            } else if (percentage >= 50) {
+                feedback = "Good effort! You're learning well. Practice identifying these devices in your favorite books and poems to improve your skills.";
+            } else {
+                feedback = "Keep exploring! Literary devices take time to master. Try reading poems and short stories to see these techniques used by different authors.";
+            }
+
+            document.getElementById('finalFeedback').textContent = feedback;
+        }
+
+        function restartGame() {
+            currentDevice = 0;
+            score = 0;
+
+            document.getElementById('gameCard').style.display = 'block';
+            document.getElementById('finalResults').classList.remove('show');
+
+            updateScore();
+            displayDevice();
+        }
+
+        // Initialize the game
+        displayDevice();
+    </script>
+</body>
+</html>
