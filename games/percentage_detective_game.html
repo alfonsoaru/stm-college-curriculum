@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Percentage Detective - STM Y7 Maths</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .game-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .detective-header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 3px solid #3b82f6;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #1a1a1a, #333);
+            color: white;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detective-header::before {
+            content: "🕵️‍♂️";
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+
+        .detective-header::after {
+            content: "🔍";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .case-file {
+            background: #fff;
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+            position: relative;
+        }
+
+        .case-file::before {
+            content: "📋 CASE FILE";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #3b82f6;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .story-section {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #3b82f6;
+        }
+
+        .question-box {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .question-box::before {
+            content: "❓ INVESTIGATION QUESTION";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #f59e0b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+            min-width: 120px;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.correct {
+            background: #10b981;
+            animation: correctPulse 0.6s ease;
+        }
+
+        .btn.incorrect {
+            background: #ef4444;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feedback.correct {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #10b981;
+        }
+
+        .feedback.incorrect {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #ef4444;
+        }
+
+        .score-board {
+            background: linear-gradient(45deg, #3b82f6, #1e40af);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .score-item {
+            display: inline-block;
+            margin: 0 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #10b981;
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        .clue-revealed {
+            background: #dcfce7;
+            border: 2px solid #10b981;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .clue-revealed::before {
+            content: "🔍 CLUE DISCOVERED!";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #10b981;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .input-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .number-input {
+            padding: 10px;
+            border: 2px solid #3b82f6;
+            border-radius: 5px;
+            font-size: 1.1em;
+            width: 100px;
+            text-align: center;
+        }
+
+        .case-complete {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .case-complete.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hint-box {
+            background: #e0f2fe;
+            border: 2px solid #0284c7;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .hint-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .navigation {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .detective-header::before,
+            .detective-header::after {
+                font-size: 2em;
+            }
+            
+            .score-item {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="detective-header">
+            <h1>The Percentage Detective</h1>
+            <p class="subtitle">Solve mysteries with the power of percentages!</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">🏆 Score: <span id="score">0</span></div>
+            <div class="score-item">🔍 Cases Solved: <span id="casesSolved">0</span>/5</div>
+            <div class="score-item">💡 Hints Used: <span id="hintsUsed">0</span></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Case 1: The Missing Money Mystery -->
+        <div class="case-file" id="case1">
+            <h2>🏪 Case #1: The Missing Money Mystery</h2>
+            <div class="story-section">
+                <p><strong>Detective Brief:</strong> Welcome to your first case! The Corner Shop owner, Mrs. Chen, is puzzled. She had £240 in her till at the start of the day, but now she only has £180 left. She needs to know what percentage of her money is missing to file an insurance claim.</p>
+                <p><em>"Detective, I'm counting on you to solve this percentage puzzle!"</em> - Mrs. Chen</p>
+            </div>
+
+            <div class="question-box">
+                <p><strong>Investigation Question:</strong> What percentage of Mrs. Chen's money is missing?</p>
+                <p><strong>Evidence:</strong></p>
+                <ul>
+                    <li>Starting amount: £240</li>
+                    <li>Current amount: £180</li>
+                    <li>Missing amount: £240 - £180 = £60</li>
+                </ul>
+            </div>
+
+            <div class="input-section">
+                <span>The missing percentage is:</span>
+                <input type="number" id="answer1" class="number-input" placeholder="%" min="0" max="100">
+                <span>%</span>
+                <button class="btn" onclick="checkAnswer(1)">Submit Answer</button>
+                <button class="btn" onclick="showHint(1)" style="background: #f59e0b;">💡 Hint</button>
+            </div>
+
+            <div class="hint-box" id="hint1">
+                <p><strong>💡 Detective Hint:</strong> To find what percentage is missing, use the formula:</p>
+                <p><strong>(Missing Amount ÷ Original Amount) × 100 = Missing Percentage</strong></p>
+                <p>So: (£60 ÷ £240) × 100 = ?</p>
+            </div>
+
+            <div class="feedback" id="feedback1"></div>
+
+            <div class="clue-revealed" id="clue1" style="display: none;">
+                <p><strong>Clue Unlocked:</strong> Great detective work! You've learned that Mrs. Chen lost 25% of her money. This clue will help you with future percentage calculations. Remember: percentage = (part ÷ whole) × 100!</p>
+            </div>
+        </div>
+
+        <!-- Case 2: The Sale Scam -->
+        <div class="case-file" id="case2" style="display: none;">
+            <h2>🛍️ Case #2: The Sale Scam</h2>
+            <div class="story-section">
+                <p><strong>Detective Brief:</strong> The Electronics Store claims they're having a "50% OFF EVERYTHING" sale, but customer Jake is suspicious. He found a TV originally priced at £800, now marked as £480. Is this really a 50% discount, or is something fishy going on?</p>
+                <p><em>"Detective, help me figure out if I'm being scammed!"</em> - Jake</p>
+            </div>
+
+            <div class="question-box">
+                <p><strong>Investigation Question:</strong> What is the actual percentage discount on the TV?</p>
+                <p><strong>Evidence:</strong></p>
+                <ul>
+                    <li>Original price: £800</li>
+                    <li>Sale price: £480</li>
+                    <li>Discount amount: £800 - £480 = £320</li>
+                </ul>
+            </div>
+
+            <div class="input-section">
+                <span>The actual discount is:</span>
+                <input type="number" id="answer2" class="number-input" placeholder="%" min="0" max="100">
+                <span>%</span>
+                <button class="btn" onclick="checkAnswer(2)">Submit Answer</button>
+                <button class="btn" onclick="showHint(2)" style="background: #f59e0b;">💡 Hint</button>
+            </div>
+
+            <div class="hint-box" id="hint2">
+                <p><strong>💡 Detective Hint:</strong> To find the discount percentage:</p>
+                <p><strong>(Discount Amount ÷ Original Price) × 100 = Discount Percentage</strong></p>
+                <p>So: (£320 ÷ £800) × 100 = ?</p>
+            </div>
+
+            <div class="feedback" id="feedback2"></div>
+
+            <div class="clue-revealed" id="clue2" style="display: none;">
+                <p><strong>Clue Unlocked:</strong> Excellent work! The actual discount is 40%, not 50% as advertised. Jake was right to be suspicious! You've uncovered false advertising and saved Jake from being misled.</p>
+            </div>
+        </div>
+
+        <!-- Case 3: The Test Score Mystery -->
+        <div class="case-file" id="case3" style="display: none;">
+            <h2>🎓 Case #3: The Test Score Mystery</h2>
+            <div class="story-section">
+                <p><strong>Detective Brief:</strong> Student Emma is confused about her test results. She answered 36 questions correctly out of 45 total questions. She needs to know her percentage score to see if she passed (passing grade is 75%).</p>
+                <p><em>"Detective, did I pass my test? I need to know my percentage!"</em> - Emma</p>
+            </div>
+
+            <div class="question-box">
+                <p><strong>Investigation Question:</strong> What percentage did Emma score on her test?</p>
+                <p><strong>Evidence:</strong></p>
+                <ul>
+                    <li>Correct answers: 36</li>
+                    <li>Total questions: 45</li>
+                    <li>Passing grade needed: 75%</li>
+                </ul>
+            </div>
+
+            <div class="input-section">
+                <span>Emma's score is:</span>
+                <input type="number" id="answer3" class="number-input" placeholder="%" min="0" max="100">
+                <span>%</span>
+                <button class="btn" onclick="checkAnswer(3)">Submit Answer</button>
+                <button class="btn" onclick="showHint(3)" style="background: #f59e0b;">💡 Hint</button>
+            </div>
+
+            <div class="hint-box" id="hint3">
+                <p><strong>💡 Detective Hint:</strong> To find Emma's percentage score:</p>
+                <p><strong>(Correct Answers ÷ Total Questions) × 100 = Percentage Score</strong></p>
+                <p>So: (36 ÷ 45) × 100 = ?</p>
+            </div>
+
+            <div class="feedback" id="feedback3"></div>
+
+            <div class="clue-revealed" id="clue3" style="display: none;">
+                <p><strong>Clue Unlocked:</strong> Fantastic detective work! Emma scored 80%, which means she passed with flying colors! She exceeded the 75% requirement. You've solved another percentage mystery!</p>
+            </div>
+        </div>
+
+        <!-- Case 4: The Restaurant Tip Trouble -->
+        <div class="case-file" id="case4" style="display: none;">
+            <h2>🍽️ Case #4: The Restaurant Tip Trouble</h2>
+            <div class="story-section">
+                <p><strong>Detective Brief:</strong> Family night out turned into a math mystery! The Johnson family's restaurant bill was £85, and they want to leave a 15% tip. But the waiter calculated their tip as £15.30. The family thinks this is wrong and needs your detective skills to solve this tip trouble!</p>
+                <p><em>"Detective, is our waiter trying to overcharge us for the tip?"</em> - Mr. Johnson</p>
+            </div>
+
+            <div class="question-box">
+                <p><strong>Investigation Question:</strong> What should the correct 15% tip be?</p>
+                <p><strong>Evidence:</strong></p>
+                <ul>
+                    <li>Bill amount: £85</li>
+                    <li>Desired tip percentage: 15%</li>
+                    <li>Waiter's calculated tip: £15.30</li>
+                </ul>
+            </div>
+
+            <div class="input-section">
+                <span>The correct 15% tip is: £</span>
+                <input type="number" id="answer4" class="number-input" placeholder="0.00" step="0.01" min="0">
+                <button class="btn" onclick="checkAnswer(4)">Submit Answer</button>
+                <button class="btn" onclick="showHint(4)" style="background: #f59e0b;">💡 Hint</button>
+            </div>
+
+            <div class="hint-box" id="hint4">
+                <p><strong>💡 Detective Hint:</strong> To calculate a 15% tip:</p>
+                <p><strong>Tip = Bill Amount × (Percentage ÷ 100)</strong></p>
+                <p>So: £85 × (15 ÷ 100) = £85 × 0.15 = ?</p>
+            </div>
+
+            <div class="feedback" id="feedback4"></div>
+
+            <div class="clue-revealed" id="clue4" style="display: none;">
+                <p><strong>Clue Unlocked:</strong> Mystery solved! The correct 15% tip is £12.75, not £15.30. The waiter made an error (or was trying to get a bigger tip!). You've saved the Johnson family £2.55!</p>
+            </div>
+        </div>
+
+        <!-- Case 5: The Final Challenge - Population Percentage -->
+        <div class="case-file" id="case5" style="display: none;">
+            <h2>🏙️ Case #5: The Population Percentage Puzzle</h2>
+            <div class="story-section">
+                <p><strong>Detective Brief:</strong> This is your final and most challenging case! The city mayor needs your help. In Mathville, there are 2,400 residents. During the recent festival, 1,680 people attended. The mayor wants to know what percentage of the population attended to plan for next year's festival.</p>
+                <p><em>"Detective, this is crucial data for our city planning. We're counting on your percentage expertise!"</em> - Mayor Martinez</p>
+            </div>
+
+            <div class="question-box">
+                <p><strong>Investigation Question:</strong> What percentage of Mathville's population attended the festival?</p>
+                <p><strong>Evidence:</strong></p>
+                <ul>
+                    <li>Total population: 2,400 residents</li>
+                    <li>Festival attendance: 1,680 people</li>
+                    <li>This will determine festival planning for next year</li>
+                </ul>
+            </div>
+
+            <div class="input-section">
+                <span>The attendance percentage is:</span>
+                <input type="number" id="answer5" class="number-input" placeholder="%" min="0" max="100">
+                <span>%</span>
+                <button class="btn" onclick="checkAnswer(5)">Submit Answer</button>
+                <button class="btn" onclick="showHint(5)" style="background: #f59e0b;">💡 Hint</button>
+            </div>
+
+            <div class="hint-box" id="hint5">
+                <p><strong>💡 Detective Hint:</strong> To find what percentage attended:</p>
+                <p><strong>(Attendees ÷ Total Population) × 100 = Attendance Percentage</strong></p>
+                <p>So: (1,680 ÷ 2,400) × 100 = ?</p>
+                <p><strong>Extra Tip:</strong> 1,680 ÷ 2,400 = 0.7, then multiply by 100!</p>
+            </div>
+
+            <div class="feedback" id="feedback5"></div>
+
+            <div class="clue-revealed" id="clue5" style="display: none;">
+                <p><strong>Final Clue Unlocked:</strong> Outstanding detective work! 70% of Mathville's population attended the festival. This is excellent attendance! The mayor now knows that festivals are very popular and should plan for similar or larger crowds next year.</p>
+            </div>
+        </div>
+
+        <!-- Game Complete Section -->
+        <div class="case-complete" id="gameComplete">
+            <h2>🎉 CASE CLOSED: Master Detective Status Achieved!</h2>
+            <p><strong>Congratulations, Detective!</strong> You've successfully solved all five percentage mysteries and earned the title of <strong>Master Percentage Detective!</strong></p>
+            
+            <div style="font-size: 1.2em; margin: 20px 0;">
+                <p>🏆 <strong>Final Score:</strong> <span id="finalScore">0</span> points</p>
+                <p>🔍 <strong>Cases Solved:</strong> 5/5</p>
+                <p>💡 <strong>Hints Used:</strong> <span id="finalHints">0</span></p>
+                <p>📊 <strong>Detective Rating:</strong> <span id="rating">Excellent</span></p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3>🎓 Mathematical Skills Mastered:</h3>
+                <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+                    <li>✅ Calculating percentage of a whole</li>
+                    <li>✅ Finding percentage discounts</li>
+                    <li>✅ Converting fractions to percentages</li>
+                    <li>✅ Calculating percentage tips</li>
+                    <li>✅ Real-world percentage applications</li>
+                </ul>
+            </div>
+
+            <button class="btn" onclick="restartGame()" style="background: #10b981; font-size: 1.2em; padding: 15px 30px;">
+                🔄 Solve New Cases
+            </button>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="nextCaseBtn" onclick="nextCase()" style="display: none;">
+                Next Case 👉
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentCase = 1;
+        let score = 0;
+        let casesSolved = 0;
+        let hintsUsed = 0;
+        let totalCases = 5;
+
+        // Correct answers for each case
+        const correctAnswers = {
+            1: 25,    // £60 missing from £240 = 25%
+            2: 40,    // £320 discount from £800 = 40%
+            3: 80,    // 36/45 = 80%
+            4: 12.75, // 15% of £85 = £12.75
+            5: 70     // 1680/2400 = 70%
+        };
+
+        function checkAnswer(caseNum) {
+            const userAnswer = parseFloat(document.getElementById(`answer${caseNum}`).value);
+            const correctAnswer = correctAnswers[caseNum];
+            const feedback = document.getElementById(`feedback${caseNum}`);
+            const clue = document.getElementById(`clue${caseNum}`);
+
+            if (!userAnswer && userAnswer !== 0) {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '⚠️ Please enter an answer, Detective!';
+                return;
+            }
+
+            if (Math.abs(userAnswer - correctAnswer) < 0.01) {
+                // Correct answer
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = `🎉 Excellent detective work! The correct answer is ${correctAnswer}${caseNum === 4 ? '' : '%'}. Case solved!`;
+                
+                // Show clue
+                clue.style.display = 'block';
+                
+                // Update score and progress
+                score += (hintsUsed === casesSolved ? 15 : 20); // Reduce points if hint was used
+                casesSolved++;
+                updateScoreBoard();
+                
+                // Enable next case after a delay
+                setTimeout(() => {
+                    if (currentCase < totalCases) {
+                        document.getElementById('nextCaseBtn').style.display = 'inline-block';
+                    } else {
+                        // Game complete!
+                        showGameComplete();
+                    }
+                }, 2000);
+                
+            } else {
+                // Incorrect answer
+                feedback.className = 'feedback incorrect show';
+                let hint = '';
+                if (caseNum === 1) hint = ' Remember: (Missing ÷ Original) × 100';
+                else if (caseNum === 2) hint = ' Remember: (Discount ÷ Original Price) × 100';
+                else if (caseNum === 3) hint = ' Remember: (Correct ÷ Total) × 100';
+                else if (caseNum === 4) hint = ' Remember: Amount × (Percentage ÷ 100)';
+                else if (caseNum === 5) hint = ' Remember: (Part ÷ Whole) × 100';
+                
+                feedback.innerHTML = `❌ Not quite right, Detective. Try again!${hint}`;
+                
+                // Subtract small penalty
+                score = Math.max(0, score - 2);
+                updateScoreBoard();
+            }
+        }
+
+        function showHint(caseNum) {
+            const hint = document.getElementById(`hint${caseNum}`);
+            hint.classList.add('show');
+            hintsUsed++;
+            updateScoreBoard();
+            
+            // Add a small score penalty for using hint
+            score = Math.max(0, score - 3);
+            updateScoreBoard();
+        }
+
+        function nextCase() {
+            // Hide current case
+            document.getElementById(`case${currentCase}`).style.display = 'none';
+            
+            // Show next case
+            currentCase++;
+            document.getElementById(`case${currentCase}`).style.display = 'block';
+            
+            // Hide next case button
+            document.getElementById('nextCaseBtn').style.display = 'none';
+            
+            // Scroll to top of new case
+            document.getElementById(`case${currentCase}`).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateScoreBoard() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('casesSolved').textContent = casesSolved;
+            document.getElementById('hintsUsed').textContent = hintsUsed;
+            
+            const progress = (casesSolved / totalCases) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showGameComplete() {
+            document.getElementById('gameComplete').classList.add('show');
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('finalHints').textContent = hintsUsed;
+            
+            // Calculate rating
+            let rating = 'Good Detective';
+            if (score >= 90) rating = 'Master Detective';
+            else if (score >= 70) rating = 'Expert Detective';
+            else if (score >= 50) rating = 'Skilled Detective';
+            
+            document.getElementById('rating').textContent = rating;
+            
+            // Scroll to completion
+            setTimeout(() => {
+                document.getElementById('gameComplete').scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        }
+
+        function restartGame() {
+            // Reset all variables
+            currentCase = 1;
+            score = 0;
+            casesSolved = 0;
+            hintsUsed = 0;
+            
+            // Hide all cases except the first
+            for (let i = 2; i <= totalCases; i++) {
+                document.getElementById(`case${i}`).style.display = 'none';
+            }
+            
+            // Show first case
+            document.getElementById('case1').style.display = 'block';
+            
+            // Hide game complete section
+            document.getElementById('gameComplete').classList.remove('show');
+            
+            // Clear all inputs and feedback
+            for (let i = 1; i <= totalCases; i++) {
+                document.getElementById(`answer${i}`).value = '';
+                document.getElementById(`feedback${i}`).className = 'feedback';
+                document.getElementById(`feedback${i}`).innerHTML = '';
+                document.getElementById(`clue${i}`).style.display = 'none';
+                document.getElementById(`hint${i}`).classList.remove('show');
+            }
+            
+            // Hide next case button
+            document.getElementById('nextCaseBtn').style.display = 'none';
+            
+            // Update score board
+            updateScoreBoard();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize the game
+        updateScoreBoard();
+        
+        // Add enter key support for inputs
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const activeInput = document.activeElement;
+                if (activeInput && activeInput.classList.contains('number-input')) {
+                    const caseNum = activeInput.id.replace('answer', '');
+                    checkAnswer(parseInt(caseNum));
+                }
+            }
+        });
+
+        // Add some detective sound effects (using Web Audio API)
+        function playCorrectSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(520, audioContext.currentTime);
+            oscillator.frequency.setValueAtTime(660, audioContext.currentTime + 0.1);
+            oscillator.frequency.setValueAtTime(880, audioContext.currentTime + 0.2);
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.3);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+
+        console.log("🕵️‍♂️ The Percentage Detective Game is ready!");
+        console.log("Good luck solving all the mathematical mysteries!");
+    </script>
+</body>
+</html>

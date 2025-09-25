@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FDP Quiz Challenge - STM Y7 Maths</title>
+<style>
+  :root{
+    --blue:#3b82f6;
+    --ink:#0f172a;
+    --ink-2:#334155;
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --good:#16a34a;
+    --bad:#dc2626;
+    --amber:#f59e0b;
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    background:linear-gradient(180deg,#ffffff, var(--bg));
+    color:var(--ink);
+  }
+  .game-container{
+    max-width:900px; margin:0 auto; padding:20px; 
+  }
+  header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  h1{font-size:clamp(22px,4vw,32px);margin:0;letter-spacing:.2px}
+  .badge{background:var(--blue);color:#fff;padding:6px 10px;border-radius:999px;font-weight:600}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:0 8px 24px rgba(15,23,42,.08);padding:18px}
+  .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  label{font-size:14px;color:var(--ink-2);display:block;margin-bottom:6px}
+  select,button,input[type="checkbox"]{width:100%;padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;font-size:16px}
+  .btn{background:var(--blue);color:white;border:none;cursor:pointer;border-radius:12px;font-weight:700;transition:transform .05s ease, box-shadow .2s}
+  .btn:active{transform:translateY(1px)}
+  .btn.secondary{background:#1118270d;color:var(--ink)}
+
+  .quiz{margin-top:16px;display:none}
+  .question{font-size:clamp(18px,3.4vw,26px);font-weight:800;margin:10px 0 8px}
+  .subtle{color:var(--ink-2);font-size:14px}
+  .choices{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+  .choice{padding:14px 16px;border:1.5px solid #e5e7eb;border-radius:14px;background:#fff;cursor:pointer;font-size:18px;font-weight:700;text-align:left;min-height:44px}
+  .choice:hover{border-color:#cbd5e1}
+  .choice.correct{border-color:var(--good);background:#16a34a10}
+  .choice.wrong{border-color:var(--bad);background:#dc262610}
+
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .scoreboard{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .pill{padding:8px 12px;border-radius:999px;background:#f1f5f9;font-weight:700}
+  .pill.good{background:#16a34a1a;color:#14532d}
+  .pill.bad{background:#dc26261a;color:#7f1d1d}
+  .pill.info{background:#3b82f61a;color:#1e3a8a}
+
+  .progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden}
+  .progress>div{height:100%;width:0;background:var(--blue);transition:width .35s ease}
+
+  .explanation{margin-top:10px;color:var(--ink-2)}
+  .actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  @media (min-width:640px){
+    .choices{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+  <div class="game-container">
+    <header>
+      <h1>FDP Quiz Challenge</h1>
+      <span class="badge">Year 7 · Fractions • Decimals • Percentages</span>
+    </header>
+
+    <section class="card" aria-labelledby="setupHeading">
+      <h2 id="setupHeading" class="sr-only">Setup</h2>
+      <div class="controls">
+        <div>
+          <label for="difficulty">Difficulty</label>
+          <select id="difficulty" aria-label="Select difficulty">
+            <option value="beginner">Beginner</option>
+            <option value="intermediate" selected>Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+        <div>
+          <label for="questionCount">Questions</label>
+          <select id="questionCount" aria-label="Select number of questions">
+            <option>5</option>
+            <option selected>10</option>
+            <option>15</option>
+          </select>
+        </div>
+        <div>
+          <label for="timed">Timed (20s/question)</label>
+          <div class="row">
+            <input id="timed" type="checkbox" aria-label="Toggle timer"/> Enable timer
+          </div>
+        </div>
+        <div>
+          <label for="modes">Question Types</label>
+          <select id="modes" multiple aria-label="Select question modes">
+            <option value="f2d" selected>Fraction → Decimal</option>
+            <option value="d2f" selected>Decimal → Fraction</option>
+            <option value="p2d" selected>Percent ↔ Decimal</option>
+            <option value="compare" selected>Compare Numbers</option>
+            <option value="adddec">Add/Subtract Decimals</option>
+            <option value="addfrac">Add/Subtract Fractions (same den.)</option>
+          </select>
+          <div class="subtle">Hold Ctrl/Cmd to select multiple.</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="startBtn" class="btn" aria-label="Start quiz">Start Quiz</button>
+        <button id="howBtn" class="btn secondary" aria-label="Show help">How it works</button>
+      </div>
+    </section>
+
+    <section id="help" class="card" style="display:none">
+      <strong>Goal:</strong> Master converting between Fractions, Decimals, and Percentages, and perform simple operations.
+      <ul>
+        <li>Beginner: easy denominators (2, 4, 5, 10, 100), tenths/hundredths.</li>
+        <li>Intermediate: 8, 20, 25, 50; mixed forms; simple operations.</li>
+        <li>Advanced: non-terminating as rounded decimals, improper/simplified fractions, multi-step comparisons.</li>
+      </ul>
+    </section>
+
+    <section class="card quiz" id="quiz" aria-live="polite">
+      <div class="scoreboard">
+        <div class="row">
+          <span class="pill info" id="qProgress">Q 1/10</span>
+          <span class="pill" id="streak">Streak: 0</span>
+        </div>
+        <div class="row">
+          <span class="pill good" id="score">Score: 0</span>
+          <span class="pill bad" id="timer" style="display:none">20</span>
+        </div>
+      </div>
+      <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+      <div class="question" id="questionText">Question text</div>
+      <div class="subtle" id="objective">Convert / Compare / Calculate</div>
+      <div class="choices" id="choices"></div>
+      <div class="explanation" id="explanation"></div>
+      <div class="actions">
+        <button id="nextBtn" class="btn" disabled>Next</button>
+        <button id="restartBtn" class="btn secondary">Restart</button>
+      </div>
+    </section>
+
+    <section id="results" class="card" style="display:none">
+      <h2>Round Complete 🎉</h2>
+      <p id="summary"></p>
+      <div class="actions">
+        <button id="againBtn" class="btn">Play Again</button>
+      </div>
+    </section>
+  </div>
+
+<script>
+(function(){
+  const el = id=>document.getElementById(id);
+  const rand = (a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+  const shuffle = arr => arr.sort(()=>Math.random()-0.5);
+  const gcd = (a,b)=> b ? gcd(b, a%b) : Math.abs(a);
+  const simplify = (n,d)=>{const g=gcd(n,d); return [n/g, d/g];}
+  const toPercent = x => (Math.round(x*1000)/10).toFixed(1) + '%';
+
+  const state = {
+    qTotal:10, qIndex:0, score:0, streak:0,
+    difficulty:'intermediate', modes:['f2d','d2f','p2d','compare','adddec','addfrac'],
+    timed:false, timeLeft:20, timerId:null,
+    current:null, asked:[]
+  };
+
+  // UI refs
+  const startBtn=el('startBtn'), nextBtn=el('nextBtn'), restartBtn=el('restartBtn');
+  const againBtn=el('againBtn'), howBtn=el('howBtn');
+  const quiz=el('quiz'), results=el('results'), help=el('help');
+  const qText=el('questionText'), choices=el('choices'), explain=el('explanation');
+  const score=el('score'), streak=el('streak'), qProg=el('qProgress'), bar=el('bar');
+  const timer=el('timer'), objective=el('objective');
+
+  howBtn.onclick=()=> help.style.display = help.style.display==='none' ? 'block':'none';
+
+  startBtn.onclick=()=>{
+    // read settings
+    state.difficulty = el('difficulty').value;
+    state.qTotal = parseInt(el('questionCount').value,10);
+    state.timed = el('timed').checked;
+    state.modes = Array.from(el('modes').selectedOptions).map(o=>o.value);
+
+    // reset
+    Object.assign(state,{qIndex:0, score:0, streak:0, asked:[]});
+    score.textContent = 'Score: 0'; streak.textContent = 'Streak: 0';
+    qProg.textContent = `Q 1/${state.qTotal}`; bar.style.width = '0%';
+    timer.style.display = state.timed? 'inline-flex':'none'; timer.textContent = '20';
+    results.style.display='none'; quiz.style.display='block'; help.style.display='none';
+    nextBtn.disabled = true; explain.textContent = '';
+    newQuestion();
+  };
+
+  restartBtn.onclick=()=>{quiz.style.display='none'; results.style.display='none'};
+  againBtn.onclick=()=>{startBtn.click()};
+
+  function newQuestion(){
+    if(state.qIndex>=state.qTotal){ endRound(); return; }
+    const q = makeQuestion();
+    state.current = q; state.asked.push(q.uid);
+    renderQuestion(q);
+    if(state.timed){ startTimer(); }
+  }
+
+  function endRound(){
+    quiz.style.display='none'; results.style.display='block';
+    const pct = Math.round(100*state.score/(state.qTotal));
+    el('summary').textContent = `You scored ${state.score} / ${state.qTotal} (${pct}%). Longest streak: ${state.bestStreak||state.streak||0}.`;
+  }
+
+  function startTimer(){
+    stopTimer(); state.timeLeft=20; timer.textContent=state.timeLeft;
+    state.timerId = setInterval(()=>{
+      state.timeLeft--; timer.textContent = state.timeLeft;
+      if(state.timeLeft<=0){ stopTimer(); lockChoices(); showAnswer(-1); }
+    },1000);
+  }
+  function stopTimer(){ if(state.timerId){ clearInterval(state.timerId); state.timerId=null; } }
+
+  function renderQuestion(q){
+    qText.textContent = q.text; objective.textContent = q.objective; explain.textContent='';
+    qProg.textContent = `Q ${state.qIndex+1}/${state.qTotal}`;
+    bar.style.width = `${(state.qIndex/state.qTotal)*100}%`;
+    choices.innerHTML=''; nextBtn.disabled=true;
+    q.choices.forEach((c,i)=>{
+      const b=document.createElement('button');
+      b.className='choice'; b.textContent=c; b.setAttribute('aria-label',`choice ${i+1}`);
+      b.onclick=()=>{ stopTimer(); lockChoices(); showAnswer(i); };
+      choices.appendChild(b);
+    });
+  }
+
+  function lockChoices(){ Array.from(choices.children).forEach(ch=>ch.disabled=true); }
+
+  function showAnswer(i){
+    const correct = state.current.answerIndex;
+    const buttons = Array.from(choices.children);
+    buttons.forEach((b,idx)=>{
+      if(idx===correct) b.classList.add('correct');
+      if(i===idx && i!==correct) b.classList.add('wrong');
+    });
+
+    const gotIt = i===correct;
+    if(gotIt){ state.score++; state.streak++; state.bestStreak=Math.max(state.bestStreak||0,state.streak); }
+    else{ state.streak=0; }
+    score.textContent = `Score: ${state.score}`;
+    streak.textContent = `Streak: ${state.streak}`;
+
+    explain.innerHTML = `<strong>${gotIt? 'Correct! ✅':'Here\'s how:'}</strong> ${state.current.explanation}`;
+    nextBtn.disabled=false;
+    nextBtn.onclick=()=>{ state.qIndex++; newQuestion(); };
+  }
+
+  // ---------- Question Generators ----------
+  function denominatorsByDiff(){
+    if(state.difficulty==='beginner') return [2,4,5,10,100];
+    if(state.difficulty==='advanced') return [3,6,8,9,12,20,25,50,100];
+    return [2,4,5,8,10,20,25,50,100];
+  }
+
+  function makeQuestion(){
+    const mode = state.modes[rand(0,state.modes.length-1)];
+    const uid = `${mode}-${Date.now()}-${Math.random().toString(36).slice(2,7)}`;
+
+    switch(mode){
+      case 'f2d': return qFractionToDecimal(uid);
+      case 'd2f': return qDecimalToFraction(uid);
+      case 'p2d': return qPercentDecimal(uid);
+      case 'compare': return qCompare(uid);
+      case 'adddec': return qAddDecimals(uid);
+      case 'addfrac': return qAddFractions(uid);
+      default: return qPercentDecimal(uid);
+    }
+  }
+
+  function qFractionToDecimal(uid){
+    const dens = denominatorsByDiff();
+    const d = dens[rand(0,dens.length-1)];
+    let n = rand(1, d-1);
+    // favour tidy values at lower difficulties
+    if(state.difficulty!=='advanced'){
+      const tidy = [1,2,3,4,5,8,10,20,25,50];
+      n = Math.min(n, d-1);
+    }
+    const [sn, sd] = simplify(n,d);
+    const decimal = sn/sd;
+    let shown;
+    if(state.difficulty==='advanced' && !Number.isInteger(10**6 * decimal)){
+      shown = (Math.round(decimal*1000)/1000).toString();
+    } else {
+      shown = decimal.toString();
+    }
+
+    const answer = shown;
+    const wrongs = distractorDecimals(answer, decimal);
+    const choices = shuffle([answer, ...wrongs]);
+    const answerIndex = choices.indexOf(answer);
+    const text = `Convert 
+      ${sn}/${sd} to a decimal.`;
+    const explanation = `Divide numerator by denominator: ${sn} ÷ ${sd} = ${decimal}.`;
+    return { uid, text, objective:'Convert a fraction to a decimal', choices, answerIndex, explanation };
+  }
+
+  function qDecimalToFraction(uid){
+    const places = state.difficulty==='beginner' ? [1,2] : state.difficulty==='advanced' ? [1,2,3] : [1,2];
+    const p = places[rand(0,places.length-1)];
+    const whole = rand(0,1)===1 ? 0 : rand(0,3);
+    const digits = rand(1, 9);
+    const dec = whole + digits/10**p;
+    const asFracN = whole*10**p + digits; const asFracD = 10**p; 
+    let [n,d] = simplify(asFracN, asFracD);
+    // If proper fraction desired, show as proper if whole is 0, else mixed number form
+    const answer = whole===0 ? `${n}/${d}` : `${n}/${d}`; // keep as improper to simplify marking
+
+    // build distractors by ±1 to numerator/denominator and unsimplified
+    const ds = new Set();
+    ds.add(answer);
+    ds.add(`${asFracN}/${asFracD}`);
+    ds.add(`${Math.max(1,n-1)}/${d}`);
+    ds.add(`${n}/${d+1}`);
+    const choices = shuffle(Array.from(ds).slice(0,4));
+    const answerIndex = choices.indexOf(answer);
+
+    const text = `Write ${dec.toFixed(p)} as a fraction in simplest form.`;
+    const explanation = `Place value: ${dec.toFixed(p)} = ${asFracN}/${asFracD}. Simplify by dividing top and bottom by ${gcd(asFracN,asFracD)} → ${n}/${d}.`;
+    return { uid, text, objective:'Convert a decimal to a simplified fraction', choices, answerIndex, explanation };
+  }
+
+  function qPercentDecimal(uid){
+    const direction = rand(0,1); // 0: % → dec, 1: dec → %
+    if(direction===0){
+      const whole = rand(1,99);
+      const answer = (whole/100).toFixed(2).replace(/\.00$/,'');
+      const wrongs = [ (whole/10).toFixed(1), (whole).toString(), (whole/1000).toFixed(3) ];
+      const choices = shuffle([answer, ...wrongs]);
+      const answerIndex = choices.indexOf(answer);
+      const text = `Convert ${whole}% to a decimal.`;
+      const explanation = `${whole}% means ${whole}/100 = ${answer}.`;
+      return { uid, text, objective:'Percent to decimal', choices, answerIndex, explanation };
+    } else {
+      const p = rand(1,2);
+      const dec = (rand(1,99)/ (p===1?10:100)).toFixed(p);
+      const num = Number(dec);
+      const answer = (num*100).toFixed(0)+'%';
+      const wrongs = [ (num*10).toFixed(0)+'%', (num*1000).toFixed(0)+'%', (num*100).toFixed(1)+'%' ];
+      const choices = shuffle([answer, ...wrongs]);
+      const answerIndex = choices.indexOf(answer);
+      const text = `Convert ${dec} to a percentage.`;
+      const explanation = `Multiply by 100 and add %: ${dec} × 100 = ${answer}.`;
+      return { uid, text, objective:'Decimal to percent', choices, answerIndex, explanation };
+    }
+  }
+
+  function qCompare(uid){
+    // Compare one fraction and one decimal/percent
+    const forms = ['fraction','decimal','percent'];
+    const leftType = forms[rand(0,2)], rightType = forms[rand(0,2)];
+    const left = sampleNumber(leftType), right = sampleNumber(rightType);
+    const answer = left.value>right.value ? '>' : left.value<right.value ? '<' : '=';
+    const choicesArr = shuffle(['>','<','=']);
+    const answerIndex = choicesArr.indexOf(answer);
+    const text = `Choose the correct symbol: ${left.label}  ?  ${right.label}`;
+    const explanation = `Convert to decimals: ${left.decimal} and ${right.decimal}. Compare to decide ${answer}.`;
+    return { uid, text, objective:'Compare values', choices:choicesArr, answerIndex, explanation };
+  }
+
+  function sampleNumber(type){
+    if(type==='decimal'){
+      const p = rand(1,2); const dec=(rand(1,99)/ (p===1?10:100)).toFixed(p);
+      return {label:dec, value:Number(dec), decimal:dec};
+    }
+    if(type==='percent'){
+      const pct = rand(5,95); const dec=(pct/100).toFixed(2);
+      return {label:pct+'%', value:pct/100, decimal:dec};
+    }
+    // fraction
+    const dens = denominatorsByDiff(); const d = dens[rand(0,dens.length-1)]; const n = rand(1,d-1);
+    const [sn,sd]=simplify(n,d); const dec=(sn/sd).toFixed(3);
+    return {label:`${sn}/${sd}`, value:sn/sd, decimal:dec};
+  }
+
+  function qAddDecimals(uid){
+    const places = state.difficulty==='advanced' ? 2 : 1;
+    const a = (rand(10,90)/ (10**places)).toFixed(places);
+    const b = (rand(10,90)/ (10**places)).toFixed(places);
+    const op = rand(0,1)? '+':'-';
+    const ans = (op==='+'? (Number(a)+Number(b)) : (Number(a)-Number(b)) ).toFixed(places);
+    const wrongs = [ (Number(ans)+0.1).toFixed(places), (Number(ans)-0.1).toFixed(places), (Number(a)+(op==='+'?-Number(b):Number(b))).toFixed(places) ];
+    const choicesArr = shuffle([ans,...wrongs]);
+    const answerIndex = choicesArr.indexOf(ans);
+    const text = `Work out: ${a} ${op} ${b}`;
+    const explanation = `Line up decimal points and ${op==='+'?'add':'subtract'}: ${a} ${op} ${b} = ${ans}.`;
+    return { uid, text, objective:'Operate with decimals', choices:choicesArr, answerIndex, explanation };
+  }
+
+  function qAddFractions(uid){
+    const dens = state.difficulty==='advanced' ? [6,8,9,12] : [4,5,6,8,10,12];
+    const d = dens[rand(0,dens.length-1)];
+    const a = rand(1,d-1), b = rand(1,d-1);
+    const op = rand(0,1)? '+':'-';
+    const n = op==='+'? (a+b) : (a-b);
+    // ensure non-negative and proper options
+    const ensure = op==='-' && a<b ? [b,a] : [a,b];
+    const A=ensure[0], B=ensure[1];
+    const nn = op==='+'? (A+B) : (A-B);
+    const [sn,sd]= simplify(nn,d);
+    const answer = `${sn}/${sd}`;
+    const wrongs = [ `${nn}/${d}`, `${Math.max(1,sn-1)}/${sd}`, `${sn}/${sd+1}` ];
+    const choicesArr = shuffle([answer,...wrongs]);
+    const answerIndex = choicesArr.indexOf(answer);
+    const text = `Compute: ${A}/${d} ${op} ${B}/${d}`;
+    const explanation = `Same denominator: operate numerators → ${A} ${op} ${B} = ${nn}. Simplify ${nn}/${d} to ${sn}/${sd}.`;
+    return { uid, text, objective:'Operate with like-denominator fractions', choices:choicesArr, answerIndex, explanation };
+  }
+
+  function distractorDecimals(answerStr, exact){
+    const num = Number(answerStr);
+    const arr = new Set();
+    arr.add((num+0.1).toFixed(2).replace(/\.00$/,''));
+    arr.add((num-0.1).toFixed(2).replace(/\.00$/,''));
+    arr.add((exact*10).toFixed(2).replace(/\.00$/,'')); // misplace decimal point
+    const out = Array.from(arr).filter(x=>x!==answerStr);
+    while(out.length<3){ out.push((num+Math.random()).toFixed(2)); }
+    return out.slice(0,3);
+  }
+})();
+</script>
+</body>
+</html>
