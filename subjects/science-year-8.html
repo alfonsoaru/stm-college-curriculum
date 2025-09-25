@@ -260,6 +260,22 @@
             line-height: 1.6;
         }
 
+        .vocab-section {
+            margin: 2rem 0;
+        }
+
+        .vocab-section h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .vocab-section p {
+            color: #86868b;
+            line-height: 1.6;
+        }
+
         .download-btn {
             background: rgba(255, 255, 255, 0.2);
             color: white;
@@ -351,6 +367,40 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Vocab Section -->
+            <div class="vocab-section" style="margin: 2rem 0;">
+                <h4>Key Vocabulary</h4>
+                <p><strong>Biology:</strong> Reproduction, Sexual, Asexual, Gametes, Fertilisation, Inheritance, Genes, Chromosomes, DNA, Characteristics<br>
+                <strong>Chemistry:</strong> Periodic table, Atomic number, Mass number, Electron, Proton, Neutron, Chemical bonding, Ionic, Covalent, Metallic</p>
+            </div>
+
+            <!-- I Can Now Answer Box -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #e8f4ff, #f0f8ff); border-radius: 12px; border-left: 4px solid #e85d00;">
+                <h4 style="color: #e85d00; margin-bottom: 1rem; font-size: 2.2rem;">✅ I Can Now Answer:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🔬 Biology:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"What's the difference between sexual and asexual reproduction?"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">Sexual reproduction needs two parents and creates genetic variation. Asexual reproduction uses one parent and creates identical offspring.</p>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🧪 Chemistry:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"How are elements arranged in the periodic table?"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">Elements are arranged by atomic number (number of protons) in rows called periods and columns called groups.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="spring" class="term-section">
@@ -382,6 +432,40 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Vocab Section -->
+            <div class="vocab-section" style="margin: 2rem 0;">
+                <h4>Key Vocabulary</h4>
+                <p><strong>Physics:</strong> Electricity, Current, Voltage, Resistance, Circuit, Series, Parallel, Magnetism, Electromagnetic, Induction<br>
+                <strong>Biology:</strong> Ecosystem, Food web, Food chain, Producer, Consumer, Decomposer, Population, Habitat, Adaptation, Biodiversity</p>
+            </div>
+
+            <!-- I Can Now Answer Box -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #e8f4ff, #f0f8ff); border-radius: 12px; border-left: 4px solid #e85d00;">
+                <h4 style="color: #e85d00; margin-bottom: 1rem; font-size: 2.2rem;">✅ I Can Now Answer:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">⚡ Physics:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"What's the difference between series and parallel circuits?"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">In series circuits, components are connected in a single loop. In parallel circuits, components have separate branches.</p>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🔬 Biology:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"How do food chains show energy transfer in ecosystems?"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">Energy flows from producers (plants) to primary consumers (herbivores) to secondary consumers (carnivores). Only 10% transfers at each level.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="summer" class="term-section">
@@ -411,6 +495,40 @@
                     <p class="unit-skills">
                         <strong>Key Skills:</strong> Wave property measurement, light refraction experiments, sound frequency analysis, electromagnetic spectrum applications
                     </p>
+                </div>
+            </div>
+
+            <!-- Vocab Section -->
+            <div class="vocab-section" style="margin: 2rem 0;">
+                <h4>Key Vocabulary</h4>
+                <p><strong>Chemistry:</strong> Acid, Base, pH, Neutralisation, Indicator, Chemical equation, Reactant, Product, Catalyst, Rate of reaction<br>
+                <strong>Physics:</strong> Wave, Frequency, Amplitude, Wavelength, Sound, Light, Electromagnetic spectrum, Refraction, Reflection, Absorption</p>
+            </div>
+
+            <!-- I Can Now Answer Box -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #e8f4ff, #f0f8ff); border-radius: 12px; border-left: 4px solid #e85d00;">
+                <h4 style="color: #e85d00; margin-bottom: 1rem; font-size: 2.2rem;">✅ I Can Now Answer:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🧪 Chemistry:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"How can I tell if a solution is acidic, neutral, or alkaline?"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">Use pH indicators or a pH meter. pH less than 7 is acidic, pH 7 is neutral, pH greater than 7 is alkaline.</p>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">⚡ Physics:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"What determines the pitch and loudness of a sound wave?"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">Frequency determines pitch (high frequency = high pitch). Amplitude determines loudness (high amplitude = loud sound).</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
