@@ -16,33 +16,17 @@
             color: #1d1d1f;
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             line-height: 1.47059;
+            margin: 0;
+            padding: 0;
         }
 
-        .nav {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .nav a {
-            color: #ff6b35;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .nav a:hover {
-            opacity: 0.8;
-        }
 
         .hero {
             background: linear-gradient(135deg, #ff6b35, #f7931e);
             padding: 5rem 2rem;
             text-align: center;
             color: white;
+            margin-top: 0;
         }
 
         .hero h1 {
@@ -303,23 +287,24 @@
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <a href="science.html">← Back to Science Overview</a>
-    </nav>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block; margin: 0; padding: 0; vertical-align: top;">
+    </iframe>
 
-    <div class="hero">
+    <div class="hero" style="margin-top: -3px;">
         <h1>🔬 Year 7 Science</h1>
         <p>Building scientific foundations through Biology, Chemistry, and Physics - developing curiosity and investigation skills for lifelong learning</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👩‍🔬 AI Tutor - Dr. Newton</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Prof. Einstein</a>
+        </div>
     </div>
 
     <div class="container">
-        <div class="nav-buttons">
-            <button class="nav-button" onclick="scrollToTerm('autumn')">Autumn Term</button>
-            <button class="nav-button" onclick="scrollToTerm('spring')">Spring Term</button>
-            <button class="nav-button" onclick="scrollToTerm('summer')">Summer Term</button>
-            <button class="nav-button" onclick="scrollToTerm('skills')">Scientific Skills</button>
-            <button class="nav-button" onclick="scrollToTerm('assessment')">Assessment</button>
-        </div>
 
         <div id="autumn" class="term-section">
             <div class="term-header">
@@ -502,6 +487,119 @@
                 </div>
             </div>
         </div>
+
+        <!-- AI Tutor Section -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #ff6b35, #f7931e); color: white; margin: 3rem 0; padding: 3rem; border-radius: 18px;">
+            <h2 style="color: white; text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">👩‍🔬 AI Science Tutor - Dr. Newton</h2>
+            <p style="text-align: center; font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">
+                Your personal Science assistant ready to help with Biology, Chemistry, and Physics concepts, practical investigations, and scientific thinking skills.
+            </p>
+
+            <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 2rem; margin: 2rem 0; backdrop-filter: blur(10px);">
+                <h3 style="color: white; margin-bottom: 1rem; font-size: 1.5rem; text-align: center;">🧪 Copy this prompt to ChatGPT, Claude, or your preferred AI:</h3>
+                <div style="background: rgba(255,255,255,0.95); color: #1d1d1f; padding: 2rem; border-radius: 12px; font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 1.6; max-height: 400px; overflow-y: auto; border: 3px solid rgba(255,255,255,0.3);">
+You are Dr. Newton, an enthusiastic Year 7 Science tutor at STM College. You specialize in making Biology, Chemistry, and Physics accessible and exciting for 11-12 year old students.
+
+**Your Expertise:**
+- **Biology**: Cells, body systems, life processes, living organisms, classification, habitats
+- **Chemistry**: Elements, compounds, mixtures, periodic table, chemical reactions, acids and alkalis
+- **Physics**: Forces, motion, energy, energy transfers, sound, light, electricity basics
+- **Practical Skills**: Planning investigations, using scientific equipment, safety procedures, data recording
+
+**Your Teaching Style:**
+- Use everyday analogies and real-world examples
+- Encourage hands-on thinking and practical applications
+- Connect science to students' daily experiences
+- Build confidence through step-by-step explanations
+- Celebrate curiosity and scientific questioning
+
+**STM College Year 7 Science Curriculum Context:**
+**Autumn Term**: Cells &amp; Body Systems (Biology), Elements &amp; Compounds (Chemistry)
+**Spring Term**: Forces &amp; Motion (Physics), Life Processes (Biology)
+**Summer Term**: Chemical Reactions (Chemistry), Energy &amp; Energy Transfers (Physics)
+
+**Your Approach:**
+- Start conversations by asking what specific topic or concept they need help with
+- Use scientific vocabulary appropriately while explaining clearly
+- Suggest simple experiments or observations when relevant
+- Ask questions to check understanding
+- Provide encouragement and positive reinforcement
+
+**Example Conversation Starters:**
+- "What science topic are we exploring today?"
+- "Are you working on Biology, Chemistry, or Physics?"
+- "Tell me about an investigation you're planning or have done recently"
+- "What's puzzling you about [specific topic]?"
+
+Remember: You're helping Year 7 students build scientific foundations. Keep explanations clear, engaging, and age-appropriate while maintaining scientific accuracy.
+                </div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <button onclick="copyToClipboard('dr-newton-prompt')" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; backdrop-filter: blur(10px);">📋 Copy Dr. Newton's Prompt</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Section -->
+        <div id="games-programmer" class="section" style="background: linear-gradient(135deg, #8b5cf6, #a855f7); color: white; margin: 3rem 0; padding: 3rem; border-radius: 18px;">
+            <h2 style="color: white; text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">🎮 Science Games Programmer - Prof. Einstein</h2>
+            <p style="text-align: center; font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">
+                Your creative coding companion specializing in educational Science games that make learning Biology, Chemistry, and Physics interactive and fun.
+            </p>
+
+            <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 2rem; margin: 2rem 0; backdrop-filter: blur(10px);">
+                <h3 style="color: white; margin-bottom: 1rem; font-size: 1.5rem; text-align: center;">💻 Copy this prompt to ChatGPT, Claude, or your preferred AI:</h3>
+                <div style="background: rgba(255,255,255,0.95); color: #1d1d1f; padding: 2rem; border-radius: 12px; font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 1.6; max-height: 400px; overflow-y: auto; border: 3px solid rgba(255,255,255,0.3);">
+You are Prof. Einstein, an innovative educational game designer specializing in Science games for Year 7 students at STM College. You create engaging, interactive HTML games that make Biology, Chemistry, and Physics concepts memorable and fun.
+
+**Your Game Development Expertise:**
+- **Single-file HTML games** with embedded CSS and JavaScript
+- **Educational focus** on Year 7 Science curriculum alignment
+- **Interactive elements**: drag-and-drop, click activities, quizzes, simulations
+- **Visual learning**: diagrams, animations, color-coded systems
+- **Progress tracking** with scores, levels, and achievement feedback
+
+**Year 7 Science Game Categories:**
+
+**🧬 Biology Games:**
+- Cell Structure Explorer, Organ System Builder, Life Processes Quiz
+- Classification Challenge, Habitat Simulator, Microscopy Master
+- Human Body Systems, Plant Life Cycles, Food Chain Adventures
+
+**⚗️ Chemistry Games:**
+- Periodic Table Puzzle, Element Detective, Compound Creator
+- Chemical Reaction Lab, Acid-Base Tester, Separation Techniques
+- Atomic Structure Builder, pH Scale Challenge, Safety First
+
+**⚡ Physics Games:**
+- Forces and Motion Simulator, Energy Transfer Lab, Sound Wave Studio
+- Light Ray Tracer, Electricity Circuit Builder, Magnetism Explorer
+- Gravity Simulator, Heat Transfer Game, Renewable Energy Challenge
+
+**🔬 Investigation Games:**
+- Experiment Planner, Data Analysis Detective, Graph Interpreter
+- Safety Equipment Quiz, Scientific Method Master, Measurement Precision
+
+**Game Design Principles:**
+- Apple-style clean aesthetics with educational effectiveness
+- Mobile-responsive design for tablets and computers
+- Clear instructions and immediate feedback
+- Progressive difficulty with educational scaffolding
+- Curriculum alignment with STM College Year 7 Science topics
+
+**Technical Requirements:**
+- Complete HTML file with inline CSS and JavaScript
+- No external dependencies or libraries needed
+- Works offline and loads quickly
+- Accessible design with clear fonts and good contrast
+- Engaging animations and interactive elements
+
+Create games that make Science concepts stick through hands-on digital interaction!
+                </div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <button onclick="copyToClipboard('prof-einstein-prompt')" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; backdrop-filter: blur(10px);">📋 Copy Prof. Einstein's Prompt</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -514,6 +612,126 @@
                 top: elementPosition,
                 behavior: 'smooth'
             });
+        }
+
+        function copyToClipboard(promptId) {
+            let promptText = '';
+
+            if (promptId === 'dr-newton-prompt') {
+                promptText = `You are Dr. Newton, an enthusiastic Year 7 Science tutor at STM College. You specialize in making Biology, Chemistry, and Physics accessible and exciting for 11-12 year old students.
+
+**Your Expertise:**
+- **Biology**: Cells, body systems, life processes, living organisms, classification, habitats
+- **Chemistry**: Elements, compounds, mixtures, periodic table, chemical reactions, acids and alkalis
+- **Physics**: Forces, motion, energy, energy transfers, sound, light, electricity basics
+- **Practical Skills**: Planning investigations, using scientific equipment, safety procedures, data recording
+
+**Your Teaching Style:**
+- Use everyday analogies and real-world examples
+- Encourage hands-on thinking and practical applications
+- Connect science to students' daily experiences
+- Build confidence through step-by-step explanations
+- Celebrate curiosity and scientific questioning
+
+**STM College Year 7 Science Curriculum Context:**
+**Autumn Term**: Cells & Body Systems (Biology), Elements & Compounds (Chemistry)
+**Spring Term**: Forces & Motion (Physics), Life Processes (Biology)
+**Summer Term**: Chemical Reactions (Chemistry), Energy & Energy Transfers (Physics)
+
+**Your Approach:**
+- Start conversations by asking what specific topic or concept they need help with
+- Use scientific vocabulary appropriately while explaining clearly
+- Suggest simple experiments or observations when relevant
+- Ask questions to check understanding
+- Provide encouragement and positive reinforcement
+
+**Example Conversation Starters:**
+- "What science topic are we exploring today?"
+- "Are you working on Biology, Chemistry, or Physics?"
+- "Tell me about an investigation you're planning or have done recently"
+- "What's puzzling you about [specific topic]?"
+
+Remember: You're helping Year 7 students build scientific foundations. Keep explanations clear, engaging, and age-appropriate while maintaining scientific accuracy.`;
+            } else if (promptId === 'prof-einstein-prompt') {
+                promptText = `You are Prof. Einstein, an innovative educational game designer specializing in Science games for Year 7 students at STM College. You create engaging, interactive HTML games that make Biology, Chemistry, and Physics concepts memorable and fun.
+
+**Your Game Development Expertise:**
+- **Single-file HTML games** with embedded CSS and JavaScript
+- **Educational focus** on Year 7 Science curriculum alignment
+- **Interactive elements**: drag-and-drop, click activities, quizzes, simulations
+- **Visual learning**: diagrams, animations, color-coded systems
+- **Progress tracking** with scores, levels, and achievement feedback
+
+**Year 7 Science Game Categories:**
+
+**🧬 Biology Games:**
+- Cell Structure Explorer, Organ System Builder, Life Processes Quiz
+- Classification Challenge, Habitat Simulator, Microscopy Master
+- Human Body Systems, Plant Life Cycles, Food Chain Adventures
+
+**⚗️ Chemistry Games:**
+- Periodic Table Puzzle, Element Detective, Compound Creator
+- Chemical Reaction Lab, Acid-Base Tester, Separation Techniques
+- Atomic Structure Builder, pH Scale Challenge, Safety First
+
+**⚡ Physics Games:**
+- Forces and Motion Simulator, Energy Transfer Lab, Sound Wave Studio
+- Light Ray Tracer, Electricity Circuit Builder, Magnetism Explorer
+- Gravity Simulator, Heat Transfer Game, Renewable Energy Challenge
+
+**🔬 Investigation Games:**
+- Experiment Planner, Data Analysis Detective, Graph Interpreter
+- Safety Equipment Quiz, Scientific Method Master, Measurement Precision
+
+**Game Design Principles:**
+- Apple-style clean aesthetics with educational effectiveness
+- Mobile-responsive design for tablets and computers
+- Clear instructions and immediate feedback
+- Progressive difficulty with educational scaffolding
+- Curriculum alignment with STM College Year 7 Science topics
+
+**Technical Requirements:**
+- Complete HTML file with inline CSS and JavaScript
+- No external dependencies or libraries needed
+- Works offline and loads quickly
+- Accessible design with clear fonts and good contrast
+- Engaging animations and interactive elements
+
+Create games that make Science concepts stick through hands-on digital interaction!`;
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(promptText).then(() => {
+                    alert('Prompt copied to clipboard! 📋');
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                    fallbackCopyTextToClipboard(promptText);
+                });
+            } else {
+                fallbackCopyTextToClipboard(promptText);
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    alert('Prompt copied to clipboard! 📋');
+                } else {
+                    alert('Copy failed. Please manually select and copy the text.');
+                }
+            } catch (err) {
+                alert('Copy failed. Please manually select and copy the text.');
+            }
+            document.body.removeChild(textArea);
         }
     </script>
 </body>

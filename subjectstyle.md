@@ -26,6 +26,36 @@ Each subject page follows this exact structure:
 </iframe>
 ```
 
+## 🚨 CRITICAL: Navigation Button Placement Rules
+
+**This is the #1 most important rule for maintaining consistency across all subject pages.**
+
+### Subject Index Pages (e.g., science.html, mathematics.html)
+✅ **ONLY Year navigation buttons** go in the hero section:
+```html
+<div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+    <a href="[subject]-year-7.html" class="year-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">[EMOJI] Year 7</a>
+    <a href="[subject]-year-8.html" class="year-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">[EMOJI] Year 8</a>
+    <span style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: not-allowed;">[EMOJI] Year 9</span>
+    <span style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: not-allowed;">[EMOJI] Year 10</span>
+    <span style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: not-allowed;">[EMOJI] Year 11</span>
+</div>
+```
+
+### Year-Specific Pages (e.g., science-year-7.html, mathematics-year-7.html)
+✅ **Term navigation + AI Tutor + Games buttons** go in the hero section:
+```html
+<div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+    <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+    <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+    <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+    <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👩‍🏫 AI Tutor - [Name]</a>
+    <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - [Name]</a>
+</div>
+```
+
+❌ **NEVER MIX**: Do not put year buttons on year-specific pages or term/AI buttons on subject index pages.
+
 ## Hero Section Format
 
 ### Structure
