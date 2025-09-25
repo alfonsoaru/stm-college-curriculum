@@ -461,3 +461,85 @@ When creating new subject pages:
 4. **Test all functionality**: Verify navigation, links, and responsive behavior match the reference
 
 The Mathematics Year 7 page represents the "gold standard" - all other subject pages should be visually and structurally indistinguishable when viewed at the same screen size.
+
+---
+
+# Interactive Chemistry Games Style Guide
+
+## Elements & Compound Mixer Game Standards
+
+### Database Requirements
+- **35+ GCSE-level compounds** covering all major chemical categories
+- **29 elements** in periodic table supporting compound formation
+- **British spellings** throughout (sulphate, sulphur, aluminium, fertiliser, colour)
+- **Educational information** for each compound with real-world applications
+
+### User Experience Standards
+- **Auto-clear functionality**: Selected elements clear when starting new experiment (not timer-based)
+- **Proper chemical notation**: All formulas use HTML subscripts (H₂O, CO₂, H₂SO₄)
+- **8-element selection limit** to support complex compounds
+- **Results persistence**: Compound information stays visible until new selection begins
+
+### Compound Categories Required
+1. **Basic Compounds**: H₂O, CO₂, NaCl, CaCO₃, CH₄, NH₃
+2. **Strong Acids**: HCl, HNO₃, H₂SO₄
+3. **Strong Bases**: NaOH, Ca(OH)₂
+4. **Metal Oxides**: CaO, MgO, Fe₂O₃, Al₂O₃, ZnO, CuO, FeO
+5. **Non-metal Oxides**: CO, SO₂, SiO₂, N₂O, P₂O₅, NO₂
+6. **Halide Salts**: KCl, CaCl₂, MgCl₂, BaCl₂, NaBr, KI, CaBr₂
+7. **Sulphate Compounds**: MgSO₄, CuSO₄
+8. **Specialist Compounds**: AgNO₃
+
+### British Chemistry Terminology
+- **Sulphate** (not Sulfate) - MgSO₄, CuSO₄
+- **Sulphur** (not Sulfur) - element name, SO₂
+- **Sulphuric Acid** (not Sulfuric) - H₂SO₄
+- **Aluminium** (not Aluminum) - element name, Al₂O₃
+- **Fertiliser** (not Fertilizer) - compound applications
+- **Colour** (not Color) - in descriptions
+
+### Educational Content Standards
+Each compound must include:
+- **Official name** with British spelling
+- **Common name** if applicable (e.g., "Epsom Salt", "Quicklime")
+- **Real-world applications** relevant to UK students
+- **Safety information** where appropriate
+- **Industrial/domestic uses** to show practical relevance
+
+### Technical Implementation
+- **HTML subscript formatting**: `formula.replace(/(\d+)/g, '<sub>$1</sub>')`
+- **Element clearing logic**: Clear on first new element selection, not timer
+- **Compound recognition**: Pattern matching against element counts
+- **Responsive design**: Works on desktop, tablet, and mobile devices
+
+---
+
+# British Spelling Standards
+
+## Required UK Spellings for Educational Content
+
+All STM College curriculum content must use British English spellings to align with UK educational standards and GCSE examinations:
+
+### Chemistry-Specific Terms
+- **Sulphate** (not Sulfate) - in all compound names
+- **Sulphur** (not Sulfur) - element name and descriptions
+- **Sulphuric** (not Sulfuric) - acid names
+- **Aluminium** (not Aluminum) - element name and compounds
+- **Colour** (not Color) - in all descriptions
+- **Odour** (not Odor) - in chemical property descriptions
+
+### General Academic Terms
+- **Fertiliser** (not Fertilizer) - agricultural applications
+- **Realise** (not Realize) - in learning objectives
+- **Analyse** (not Analyze) - in assessment criteria
+- **Emphasise** (not Emphasize) - in explanations
+- **Organisation** (not Organization) - in content structure
+- **Behaviour** (not Behavior) - in science contexts
+- **Centre** (not Center) - in geographical references
+- **Metre/Litre** (not Meter/Liter) - in measurement units
+
+### Quality Assurance
+- **Content Review**: All educational materials must be checked for American spellings
+- **Student Familiarity**: Use terminology students recognise from UK textbooks and exams
+- **Exam Preparation**: Align with spelling conventions used in GCSE papers
+- **Professional Standards**: Maintain consistency with UK educational publications
