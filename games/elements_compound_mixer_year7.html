@@ -511,6 +511,11 @@
                 name: 'Nitrogen Dioxide',
                 elements: ['N', 'O', 'O'],
                 info: 'A brown, toxic gas! Nitrogen dioxide is produced by car engines and power plants. It contributes to air pollution and acid rain, which is why we need cleaner energy sources.'
+            },
+            'MgSO4': {
+                name: 'Magnesium Sulfate (Epsom Salt)',
+                elements: ['Mg', 'S', 'O', 'O', 'O', 'O'],
+                info: 'Also known as Epsom salt! Magnesium sulfate is used in baths to soothe sore muscles and as a fertilizer in gardens. It helps plants grow by providing magnesium and sulfur nutrients.'
             }
         };
 
@@ -578,6 +583,11 @@
         }
 
         function selectElement(symbol) {
+            // Clear previous results when starting a new selection
+            if (selectedElements.length === 0) {
+                document.getElementById('resultDisplay').classList.remove('show', 'error');
+            }
+
             if (selectedElements.length < 5) { // Limit selection
                 selectedElements.push(symbol);
                 updateSelectedDisplay();
@@ -639,10 +649,7 @@
                 `;
             }
 
-            // Auto-clear the selection after mixing (give time to read the result)
-            setTimeout(() => {
-                clearSelection();
-            }, 3000);
+            // Result stays until user starts selecting elements again
         }
 
         function formatChemicalFormula(formula) {
