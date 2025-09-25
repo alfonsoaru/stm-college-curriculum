@@ -516,6 +516,11 @@
                 name: 'Magnesium Sulfate (Epsom Salt)',
                 elements: ['Mg', 'S', 'O', 'O', 'O', 'O'],
                 info: 'Also known as Epsom salt! Magnesium sulfate is used in baths to soothe sore muscles and as a fertilizer in gardens. It helps plants grow by providing magnesium and sulfur nutrients.'
+            },
+            'CuSO4': {
+                name: 'Copper Sulfate',
+                elements: ['Cu', 'S', 'O', 'O', 'O', 'O'],
+                info: 'Beautiful blue crystals! Copper sulfate is used as a fungicide in gardens, in swimming pools to control algae, and in science experiments. Its bright blue color makes it easy to identify.'
             }
         };
 
@@ -588,7 +593,7 @@
                 document.getElementById('resultDisplay').classList.remove('show', 'error');
             }
 
-            if (selectedElements.length < 5) { // Limit selection
+            if (selectedElements.length < 8) { // Allow more complex compounds
                 selectedElements.push(symbol);
                 updateSelectedDisplay();
                 updateMixButton();
