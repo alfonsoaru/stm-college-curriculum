@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romeo & Juliet Character Quest - Year 8 English Literature</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1d1d1f;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .game-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .game-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #8b5a9c;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-header p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            border-radius: 10px;
+            height: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #8b5a9c, #667eea);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .character-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .character-portrait {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5a9c, #667eea);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .character-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #8b5a9c;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .quote-box {
+            background: #f8f9fa;
+            border-left: 4px solid #8b5a9c;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .choices {
+            display: grid;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .choice-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .choice-btn:hover {
+            border-color: #8b5a9c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 90, 156, 0.2);
+        }
+
+        .choice-btn.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .choice-btn.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .feedback {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #8b5a9c, #667eea);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 90, 156, 0.3);
+        }
+
+        .next-btn.show {
+            display: inline-block;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #8b5a9c;
+            margin: 1rem 0;
+        }
+
+        .final-results {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .final-results.show {
+            display: block;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .game-header h1 {
+                font-size: 2rem;
+            }
+
+            .character-portrait {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+
+            .game-container {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>🎭 Romeo & Juliet Character Quest</h1>
+            <p>Explore the motivations, relationships, and development of Shakespeare's most famous characters</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <div class="score-display" id="scoreDisplay">Score: 0/0</div>
+        </div>
+
+        <div class="character-card" id="gameCard">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+
+        <div class="final-results" id="finalResults">
+            <h2>Quest Complete! 🏆</h2>
+            <p id="finalScore"></p>
+            <p id="finalFeedback"></p>
+            <button class="restart-btn" onclick="restartGame()">Begin New Quest</button>
+        </div>
+    </div>
+
+    <script>
+        const characters = [
+            {
+                name: "Romeo Montague",
+                emoji: "🌹",
+                quote: "But soft, what light through yonder window breaks? It is the east, and Juliet is the sun.",
+                question: "What does Romeo's use of light imagery in this famous balcony scene quotation reveal about his character?",
+                choices: [
+                    "He is practical and realistic about love",
+                    "He is poetic and idealistic, seeing Juliet as perfect and divine",
+                    "He is concerned about the physical dangers of their meeting",
+                    "He is primarily interested in Juliet's family wealth"
+                ],
+                correct: 1,
+                feedback: "Correct! Romeo's comparison of Juliet to the sun and eastern light shows his idealistic, romantic nature. He elevates her to divine status, seeing her as bringing light and life to his world. This metaphorical language reveals his passionate, poetic character."
+            },
+            {
+                name: "Juliet Capulet",
+                emoji: "💫",
+                quote: "O Romeo, Romeo, wherefore art thou Romeo? Deny thy father and refuse thy name.",
+                question: "What does Juliet mean by 'wherefore art thou Romeo?' and what does this reveal about her character development?",
+                choices: [
+                    "She's asking where Romeo is physically located",
+                    "She's asking why he has to be Romeo (a Montague), showing her struggle with family loyalty versus love",
+                    "She's questioning whether Romeo truly loves her",
+                    "She's asking when Romeo will visit her again"
+                ],
+                correct: 1,
+                feedback: "Excellent! 'Wherefore' means 'why', not 'where'. Juliet is lamenting that Romeo must be a Montague, her family's enemy. This shows her maturity in recognizing that names and family feuds are meaningless compared to true love—a significant development from the obedient daughter we first meet."
+            },
+            {
+                name: "Mercutio",
+                emoji: "⚡",
+                quote: "A plague on both your houses! They have made worms' meat of me.",
+                question: "How does Mercutio's death curse on 'both your houses' function in the play's structure?",
+                choices: [
+                    "It's just angry words with no real significance",
+                    "It foreshadows the tragic ending and shows how the feud destroys innocent lives",
+                    "It proves Mercutio was always evil and vengeful",
+                    "It demonstrates that Mercutio didn't understand the family conflict"
+                ],
+                correct: 1,
+                feedback: "Perfect analysis! Mercutio's curse is prophetic—both houses will indeed suffer tragedy. As Romeo's loyal friend who dies because of the feud (despite not being part of it), Mercutio represents how hatred spreads beyond the original participants, destroying innocent lives."
+            },
+            {
+                name: "Friar Lawrence",
+                emoji: "🌿",
+                quote: "These violent delights have violent ends, And in their triumph die, like fire and powder.",
+                question: "What is the Friar warning about with this metaphor, and how does it relate to the play's themes?",
+                choices: [
+                    "He's warning that their love is too passionate and may lead to destruction",
+                    "He's telling them to be more careful about their secret meetings",
+                    "He's advising them to wait longer before marrying",
+                    "He's suggesting they should tell their parents immediately"
+                ],
+                correct: 0,
+                feedback: "Brilliant understanding! The Friar uses the metaphor of fire and gunpowder (which explodes when combined) to warn that intense, impulsive passion often leads to destruction. This directly foreshadows the tragic ending and reinforces the theme that extreme emotions, even love, can be dangerous."
+            },
+            {
+                name: "Nurse",
+                emoji: "👵",
+                quote: "I think it best you married with the County. O, he's a lovely gentleman! Romeo's a dishclout to him.",
+                question: "Why does the Nurse change her advice about Romeo, and what does this reveal about her character versus Juliet's?",
+                choices: [
+                    "She never really liked Romeo and was pretending to help",
+                    "She's being practical and trying to protect Juliet from scandal, but lacks understanding of true love",
+                    "She's been bribed by Juliet's parents to change her mind",
+                    "She believes Romeo has betrayed Juliet with another woman"
+                ],
+                correct: 1,
+                feedback: "Excellent character insight! The Nurse is being practical—Romeo is banished, Paris is available and approved by Juliet's parents. However, her willingness to abandon Romeo shows she doesn't understand the depth of Juliet's love. This contrast highlights Juliet's romantic idealism versus the Nurse's practical, worldly approach."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let gameComplete = false;
+
+        function updateProgress() {
+            const progress = (currentQuestion / characters.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function updateScore() {
+            document.getElementById('scoreDisplay').textContent = `Score: ${score}/${characters.length}`;
+        }
+
+        function displayQuestion() {
+            if (currentQuestion >= characters.length) {
+                showResults();
+                return;
+            }
+
+            const character = characters[currentQuestion];
+            const gameCard = document.getElementById('gameCard');
+
+            gameCard.innerHTML = `
+                <div class="character-portrait">${character.emoji}</div>
+                <div class="character-name">${character.name}</div>
+                <div class="quote-box">"${character.quote}"</div>
+                <div class="question">${character.question}</div>
+                <div class="choices" id="choices"></div>
+                <div class="feedback" id="feedback"></div>
+                <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Continue Quest →</button>
+            `;
+
+            const choicesDiv = document.getElementById('choices');
+            character.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.className = 'choice-btn';
+                button.textContent = choice;
+                button.onclick = () => selectChoice(index);
+                choicesDiv.appendChild(button);
+            });
+
+            updateProgress();
+        }
+
+        function selectChoice(selectedIndex) {
+            const character = characters[currentQuestion];
+            const choices = document.querySelectorAll('.choice-btn');
+            const feedback = document.getElementById('feedback');
+            const nextBtn = document.getElementById('nextBtn');
+
+            choices.forEach((choice, index) => {
+                choice.onclick = null; // Disable further clicks
+                if (index === character.correct) {
+                    choice.classList.add('correct');
+                } else if (index === selectedIndex && index !== character.correct) {
+                    choice.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === character.correct) {
+                score++;
+                feedback.innerHTML = `<strong>✅ Correct!</strong> ${character.feedback}`;
+            } else {
+                feedback.innerHTML = `<strong>❌ Incorrect.</strong> ${character.feedback}`;
+            }
+
+            feedback.classList.add('show');
+            nextBtn.classList.add('show');
+            updateScore();
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            displayQuestion();
+        }
+
+        function showResults() {
+            document.getElementById('gameCard').style.display = 'none';
+            document.getElementById('finalResults').classList.add('show');
+
+            const percentage = Math.round((score / characters.length) * 100);
+            document.getElementById('finalScore').textContent = `Final Score: ${score}/${characters.length} (${percentage}%)`;
+
+            let feedback = "";
+            if (percentage >= 90) {
+                feedback = "Outstanding! You have excellent understanding of Shakespeare's character development and dramatic techniques. You clearly grasp how character motivation drives the plot in Romeo and Juliet.";
+            } else if (percentage >= 70) {
+                feedback = "Well done! You show good understanding of the main characters and their relationships. Keep analyzing how Shakespeare uses language to reveal character traits.";
+            } else if (percentage >= 50) {
+                feedback = "Good effort! You're developing your character analysis skills. Try re-reading key scenes and pay attention to what characters say and do, and how other characters react to them.";
+            } else {
+                feedback = "Keep studying! Character analysis takes practice. Focus on how Shakespeare reveals character through dialogue, actions, and what others say about them. Consider re-reading Acts 1-2.";
+            }
+
+            document.getElementById('finalFeedback').textContent = feedback;
+        }
+
+        function restartGame() {
+            currentQuestion = 0;
+            score = 0;
+            gameComplete = false;
+
+            document.getElementById('gameCard').style.display = 'block';
+            document.getElementById('finalResults').classList.remove('show');
+
+            updateScore();
+            displayQuestion();
+        }
+
+        // Initialize the game
+        displayQuestion();
+    </script>
+</body>
+</html>
