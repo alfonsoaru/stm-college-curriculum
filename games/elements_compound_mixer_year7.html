@@ -617,9 +617,10 @@
 
             if (compounds[formula]) {
                 const compound = compounds[formula];
+                const formattedFormula = formatChemicalFormula(formula);
                 resultDisplay.className = 'result-display show';
                 resultDisplay.innerHTML = `
-                    <div class="compound-formula">${formula}</div>
+                    <div class="compound-formula">${formattedFormula}</div>
                     <div class="compound-name">${compound.name}</div>
                     <div class="compound-info">
                         <h4>Fascinating Facts:</h4>
@@ -637,6 +638,16 @@
                     </div>
                 `;
             }
+
+            // Auto-clear the selection after mixing
+            setTimeout(() => {
+                clearSelection();
+            }, 100);
+        }
+
+        function formatChemicalFormula(formula) {
+            // Convert numbers to subscripts in chemical formulas
+            return formula.replace(/(\d+)/g, '<sub>$1</sub>');
         }
 
         function getFormulaFromElements(elements) {
