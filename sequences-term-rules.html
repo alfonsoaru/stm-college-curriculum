@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequences: Term-to-Term & Position-to-Term Rules</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            line-height: 1.4;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .page {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            margin: 10px 0 0 0;
+        }
+
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .explanation {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-left: 6px solid #3498db;
+        }
+
+        .examples {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            border-left: 6px solid #e74c3c;
+        }
+
+        .practice {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            border-left: 6px solid #f39c12;
+            color: white;
+        }
+
+        .game {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-left: 6px solid #9b59b6;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin: 20px 0 10px 0;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+        }
+
+        .definition-box {
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px dashed #3498db;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .example-box {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid #e74c3c;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .sequence-display {
+            font-size: 1.8em;
+            text-align: center;
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .question {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .question h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .answer-space {
+            border-bottom: 2px dotted #333;
+            width: 200px;
+            display: inline-block;
+            margin: 0 10px;
+            height: 20px;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .game-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 3px solid #3498db;
+        }
+
+        .tips-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .step {
+            background: rgba(46, 204, 113, 0.2);
+            border-left: 4px solid #2ecc71;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .formula {
+            font-size: 1.4em;
+            text-align: center;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .page {
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Introduction and Explanation -->
+    <div class="page">
+        <div class="header">
+            <h1>🔢 Sequences: Finding Rules!</h1>
+            <p>STM College Year 7 Mathematics • Autumn Term</p>
+        </div>
+
+        <div class="section explanation">
+            <h2><span class="emoji">🧠</span> What Are Sequences?</h2>
+            <div class="definition-box">
+                <p><strong>A sequence</strong> is a list of numbers that follow a pattern or rule. Each number in the sequence is called a <strong>term</strong>.</p>
+            </div>
+
+            <div class="sequence-display">
+                3, 6, 9, 12, 15, ...
+            </div>
+            <p style="text-align: center;"><em>Position: 1st, 2nd, 3rd, 4th, 5th, ...</em></p>
+
+            <h3>🎯 Two Types of Rules:</h3>
+
+            <div class="step">
+                <h4>1️⃣ Term-to-Term Rule</h4>
+                <p>Tells you how to get from one term to the next term.</p>
+                <p><strong>Example:</strong> "Add 3 to get the next term"</p>
+                <div class="formula">3 → (+3) → 6 → (+3) → 9 → (+3) → 12</div>
+            </div>
+
+            <div class="step">
+                <h4>2️⃣ Position-to-Term Rule (nth term)</h4>
+                <p>Tells you how to find any term using its position number.</p>
+                <p><strong>Example:</strong> "Multiply the position by 3"</p>
+                <div class="formula">Position 1: 1 × 3 = 3<br>Position 4: 4 × 3 = 12</div>
+            </div>
+        </div>
+
+        <div class="section tips-box">
+            <h3>💡 Top Tips for Success!</h3>
+            <ul>
+                <li>🔍 Look for patterns - what's the same between terms?</li>
+                <li>➕ Check if you're adding/subtracting the same number</li>
+                <li>✖️ Check if you're multiplying by the same number</li>
+                <li>📝 Always test your rule with multiple terms!</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page 2: Worked Examples -->
+    <div class="page">
+        <div class="header">
+            <h1>✨ Worked Examples</h1>
+        </div>
+
+        <div class="section examples">
+            <h2><span class="emoji">📚</span> Let's Practice Together!</h2>
+
+            <div class="example-box">
+                <h3>Example 1: Linear Sequence (Adding)</h3>
+                <div class="sequence-display">5, 8, 11, 14, 17, ...</div>
+
+                <h4>Finding the Term-to-Term Rule:</h4>
+                <div class="step">8 - 5 = 3</div>
+                <div class="step">11 - 8 = 3</div>
+                <div class="step">14 - 11 = 3</div>
+                <p><strong>Term-to-Term Rule:</strong> Add 3</p>
+
+                <h4>Finding the Position-to-Term Rule:</h4>
+                <div class="step">Position 1: 5 = (1 × 3) + 2</div>
+                <div class="step">Position 2: 8 = (2 × 3) + 2</div>
+                <div class="step">Position 3: 11 = (3 × 3) + 2</div>
+                <div class="formula">nth term = 3n + 2</div>
+            </div>
+
+            <div class="example-box">
+                <h3>Example 2: Quadratic Sequence</h3>
+                <div class="sequence-display">2, 8, 18, 32, 50, ...</div>
+
+                <h4>Finding the Term-to-Term Rule:</h4>
+                <div class="step">8 - 2 = 6</div>
+                <div class="step">18 - 8 = 10</div>
+                <div class="step">32 - 18 = 14</div>
+                <div class="step">50 - 32 = 18</div>
+                <p><strong>Differences:</strong> 6, 10, 14, 18 (increasing by 4)</p>
+                <p><strong>This is a quadratic sequence!</strong></p>
+
+                <h4>Pattern Recognition:</h4>
+                <div class="step">Position 1: 2 = 2 × 1²</div>
+                <div class="step">Position 2: 8 = 2 × 2²</div>
+                <div class="step">Position 3: 18 = 2 × 3²</div>
+                <div class="formula">nth term = 2n²</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Practice Questions -->
+    <div class="page">
+        <div class="header">
+            <h1>🏋️ Practice Time!</h1>
+        </div>
+
+        <div class="section practice">
+            <h2><span class="emoji">✏️</span> Your Turn to Shine!</h2>
+
+            <div class="question">
+                <h4>Question 1: Find the term-to-term rule</h4>
+                <div class="sequence-display" style="color: #2c3e50;">7, 12, 17, 22, 27, ...</div>
+                <p>Term-to-term rule: <span class="answer-space"></span></p>
+                <p>Next two terms: <span class="answer-space"></span>, <span class="answer-space"></span></p>
+            </div>
+
+            <div class="question">
+                <h4>Question 2: Find the position-to-term rule (nth term)</h4>
+                <div class="sequence-display" style="color: #2c3e50;">4, 7, 10, 13, 16, ...</div>
+                <p>nth term = <span class="answer-space"></span></p>
+                <p>10th term = <span class="answer-space"></span></p>
+            </div>
+
+            <div class="question">
+                <h4>Question 3: Mixed Challenge!</h4>
+                <div class="sequence-display" style="color: #2c3e50;">1, 4, 9, 16, 25, ...</div>
+                <p>What type of sequence is this? <span class="answer-space"></span></p>
+                <p>nth term = <span class="answer-space"></span></p>
+                <p>7th term = <span class="answer-space"></span></p>
+            </div>
+
+            <div class="question">
+                <h4>Question 4: Create Your Own!</h4>
+                <p>Create a sequence with the rule "multiply position by 4, then subtract 1":</p>
+                <p><span class="answer-space"></span>, <span class="answer-space"></span>, <span class="answer-space"></span>, <span class="answer-space"></span>, <span class="answer-space"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 4: The Sequence Detective Game -->
+    <div class="page">
+        <div class="header">
+            <h1>🕵️ The Sequence Detective Game!</h1>
+        </div>
+
+        <div class="section game">
+            <h2><span class="emoji">🎮</span> Become a Pattern Detective!</h2>
+
+            <div class="definition-box">
+                <h3>🎯 How to Play:</h3>
+                <ol>
+                    <li>🔍 Each card shows a sequence with missing terms</li>
+                    <li>🧮 Work out the rule and fill in the gaps</li>
+                    <li>⭐ Score points: Easy = 1 point, Medium = 2 points, Hard = 3 points</li>
+                    <li>🏆 Get 15+ points to become a Sequence Master!</li>
+                </ol>
+            </div>
+
+            <div class="game-board">
+                <div class="game-card">
+                    <h4>🟢 EASY (1 pt)</h4>
+                    <p>2, 5, 8, __, 14</p>
+                    <small>Linear sequence</small>
+                </div>
+                <div class="game-card">
+                    <h4>🟢 EASY (1 pt)</h4>
+                    <p>10, 20, __, 40, 50</p>
+                    <small>Adding same number</small>
+                </div>
+                <div class="game-card">
+                    <h4>🟡 MEDIUM (2 pts)</h4>
+                    <p>3, 6, 12, __, 48</p>
+                    <small>Geometric sequence</small>
+                </div>
+                <div class="game-card">
+                    <h4>🟡 MEDIUM (2 pts)</h4>
+                    <p>1, 5, 9, __, 17, __</p>
+                    <small>Find two terms</small>
+                </div>
+                <div class="game-card">
+                    <h4>🔴 HARD (3 pts)</h4>
+                    <p>1, 4, 9, __, 25, 36</p>
+                    <small>Square numbers</small>
+                </div>
+                <div class="game-card">
+                    <h4>🔴 HARD (3 pts)</h4>
+                    <p>2, 6, 12, __, 30, 42</p>
+                    <small>Triangular pattern</small>
+                </div>
+                <div class="game-card">
+                    <h4>🟢 EASY (1 pt)</h4>
+                    <p>100, 90, 80, __, __</p>
+                    <small>Decreasing sequence</small>
+                </div>
+                <div class="game-card">
+                    <h4>🟡 MEDIUM (2 pts)</h4>
+                    <p>If nth term = 2n + 3<br>Find the 5th term</p>
+                    <small>Position-to-term</small>
+                </div>
+            </div>
+
+            <div class="tips-box" style="margin-top: 30px;">
+                <h3>🏆 Scoring Guide:</h3>
+                <ul>
+                    <li>🥉 0-8 points: Sequence Starter - Keep practicing!</li>
+                    <li>🥈 9-14 points: Pattern Pro - You're getting good!</li>
+                    <li>🥇 15+ points: Sequence Master - Excellent work!</li>
+                </ul>
+                <p><strong>Bonus Challenge:</strong> Create your own sequence puzzle for a friend! 🌟</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 5: Answer Key -->
+    <div class="page">
+        <div class="header">
+            <h1>🔑 Answer Key</h1>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #c3f0ca 0%, #fcf4d9 100%);">
+            <h2><span class="emoji">✅</span> Practice Questions Answers</h2>
+
+            <div class="example-box">
+                <h4>Question 1:</h4>
+                <p><strong>Term-to-term rule:</strong> Add 5</p>
+                <p><strong>Next two terms:</strong> 32, 37</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Question 2:</h4>
+                <p><strong>nth term:</strong> 3n + 1</p>
+                <p><strong>10th term:</strong> 31</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Question 3:</h4>
+                <p><strong>Type:</strong> Square numbers (quadratic)</p>
+                <p><strong>nth term:</strong> n²</p>
+                <p><strong>7th term:</strong> 49</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Question 4:</h4>
+                <p><strong>Sequence:</strong> 3, 7, 11, 15, 19</p>
+                <p><strong>Rule:</strong> 4n - 1</p>
+            </div>
+
+            <h2><span class="emoji">🎮</span> Game Answers</h2>
+
+            <div class="game-board" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="game-card">
+                    <h4>Easy Cards:</h4>
+                    <p>2, 5, 8, <strong>11</strong>, 14</p>
+                    <p>10, 20, <strong>30</strong>, 40, 50</p>
+                    <p>100, 90, 80, <strong>70, 60</strong></p>
+                </div>
+                <div class="game-card">
+                    <h4>Medium Cards:</h4>
+                    <p>3, 6, 12, <strong>24</strong>, 48</p>
+                    <p>1, 5, 9, <strong>13</strong>, 17, <strong>21</strong></p>
+                    <p>5th term = <strong>13</strong></p>
+                </div>
+                <div class="game-card">
+                    <h4>Hard Cards:</h4>
+                    <p>1, 4, 9, <strong>16</strong>, 25, 36</p>
+                    <p>2, 6, 12, <strong>20</strong>, 30, 42</p>
+                    <small>(n² + n pattern)</small>
+                </div>
+                <div class="game-card" style="background: linear-gradient(45deg, #ff6b6b, #feca57); color: white;">
+                    <h4>🌟 Well Done!</h4>
+                    <p>You're becoming a sequence expert!</p>
+                    <p>Keep practicing and exploring patterns!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Print-friendly script
+        window.onload = function() {
+            // Auto-print functionality for easy PDF creation
+            if (window.location.search.includes('print=true')) {
+                window.print();
+            }
+        }
+    </script>
+</body>
+</html>

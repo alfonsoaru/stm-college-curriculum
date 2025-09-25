@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Year 8 - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+        }
+
+
+        .hero {
+            background: linear-gradient(135deg, #3b82f6, #93c5fd);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Two Column Layout for Curriculum Section */
+        .curriculum-split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .curriculum-text-column {
+            padding-right: 1rem;
+        }
+
+        .curriculum-text-column h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-text-column p {
+            font-size: 1.1rem;
+            color: #86868b;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-image-column {
+            text-align: center;
+        }
+
+        .arrow-image-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+        }
+
+        .arrow-image-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .curriculum-arrow-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .click-to-view {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-split-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .curriculum-text-column {
+                padding-right: 0;
+                text-align: center;
+            }
+        }
+
+        .section {
+            margin: 4rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.125rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .term-nav-btn {
+            background: #007aff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .term-nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+            background: #0051d0;
+        }
+
+        .term-section {
+            margin: 4rem 0;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #3b82f6;
+            letter-spacing: -0.003em;
+        }
+
+        .skills-overview {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .skills-overview h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skills-overview p {
+            font-size: 1.125rem;
+            color: #86868b;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .skill-item h3 {
+            color: #3b82f6;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .skill-item p {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+
+        .week-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .week-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .week-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .week-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .week-content li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .week-content li:before {
+            content: "•";
+            color: #007aff;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .vocab-section {
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .vocab-section h4 {
+            color: #3b82f6;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .vocab-section p {
+            color: #86868b;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .qa-section {
+            margin: 3rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 2rem;
+        }
+
+        .qa-section h3 {
+            color: #1d1d1f;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .qa-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .qa-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .question {
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .answer {
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block;">
+    </iframe>
+
+    <div class="hero">
+        <h1>🔢 Mathematics Year 8</h1>
+        <p>Advancing mathematical proficiency through algebraic mastery, coordinate geometry, and advanced problem-solving techniques</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>Year 8 Mathematical Journey</h2>
+            <p>Year 8 Mathematics at STM College builds upon Year 7 foundations, advancing into sophisticated algebraic manipulation, coordinate geometry, statistical analysis, and complex problem-solving. Students develop mathematical reasoning skills through challenging investigations and real-world applications that prepare them for GCSE-level mathematics.</p>
+        </div>
+
+
+        <div class="skills-overview">
+            <h2>Advanced Skills Development</h2>
+            <p>Throughout Year 8, students progressively develop eight advanced mathematical skill areas that bridge foundation concepts with GCSE-level mathematical thinking.</p>
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>📊 Advanced Algebraic Manipulation</h3>
+                    <p>Expanding, factorising, and solving complex equations with multiple variables and algebraic fractions</p>
+                </div>
+                <div class="skill-item">
+                    <h3>📈 Coordinate Geometry</h3>
+                    <p>Working with linear graphs, gradients, intercepts, and geometric transformations on coordinate planes</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🔄 Ratio & Proportion Mastery</h3>
+                    <p>Advanced ratio problems, direct and inverse proportion, and compound percentage calculations</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🎯 Statistical Analysis</h3>
+                    <p>Interpreting data, calculating averages, understanding spread, and critically evaluating statistical claims</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🔺 Advanced Geometry</h3>
+                    <p>Circle theorems, Pythagoras' theorem, and complex angle calculations in polygons and parallel lines</p>
+                </div>
+                <div class="skill-item">
+                    <h3>📐 Mathematical Proof & Reasoning</h3>
+                    <p>Constructing logical arguments, algebraic proof techniques, and geometric reasoning with formal justification</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🎲 Advanced Probability</h3>
+                    <p>Tree diagrams, conditional probability, combinations, and probability calculations with multiple events</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🧮 Mathematical Modelling</h3>
+                    <p>Creating mathematical models for real-world situations and interpreting solutions in context</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-section">
+            <h3>❓ Frequently Asked Questions</h3>
+
+            <div class="qa-item">
+                <div class="question">Q: How does Year 8 Mathematics differ from Year 7?</div>
+                <div class="answer">A: Year 8 builds significantly on Year 7 foundations, introducing abstract algebraic concepts, coordinate geometry, and advanced problem-solving. Students work with more complex equations, statistical analysis, and geometric proofs that prepare them directly for GCSE Mathematics.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Q: What calculator do students need for Year 8 Mathematics?</div>
+                <div class="answer">A: Students need a scientific calculator capable of handling trigonometric functions, statistical calculations, and fraction operations. We recommend the Casio FX-83GTX or FX-85GTX models which are approved for GCSE examinations.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Q: How are students prepared for GCSE Mathematics in Year 8?</div>
+                <div class="answer">A: Year 8 directly introduces GCSE-style problem-solving techniques, algebraic manipulation, and mathematical reasoning. Students practice examination-style questions and develop the analytical skills needed for higher-tier GCSE Mathematics.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Q: What support is available for students finding Year 8 Mathematics challenging?</div>
+                <div class="answer">A: We offer targeted intervention groups, peer tutoring partnerships, additional online resources through Sparx Mathematics, and regular progress reviews. Differentiated classwork ensures all students can access learning at their appropriate level.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Q: How much homework is set each week in Year 8 Mathematics?</div>
+                <div class="answer">A: Year 8 students typically receive 60-75 minutes of Mathematics homework per week, including problem-solving investigations (25-35 mins), skills practice (20-25 mins), and Sparx online assignments (15-20 mins), reflecting the increased complexity of Year 8 content.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Term Sections -->
+    <div class="container">
+        <!-- Autumn Term -->
+        <div id="autumn-term" class="term-section">
+            <h2>🍂 Autumn Term - Algebraic Mastery</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Advanced Algebraic Expressions & Equations</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Expand and factorise complex algebraic expressions</li>
+                        <li>Solve multi-step linear equations with brackets and fractions</li>
+                        <li>Substitute values into complex algebraic formulae</li>
+                        <li>Rearrange formulae to change the subject</li>
+                        <li>Work with algebraic fractions and simplify expressions</li>
+                        <li>Solve simultaneous equations using elimination and substitution</li>
+                        <li>Apply algebraic techniques to geometric problems</li>
+                        <li>Form and solve equations from word problems</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Algebra:</strong> Factorise, Expand, Substitute, Subject, Simultaneous, Elimination<br>
+                        <strong>Equations:</strong> Linear, Quadratic, Formula, Expression, Identity, Coefficient, Unknown, Solution set</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Coordinate Geometry & Linear Graphs</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Plot and interpret linear graphs with negative gradients</li>
+                        <li>Calculate gradients and y-intercepts from graphs and equations</li>
+                        <li>Find equations of lines in the form y = mx + c</li>
+                        <li>Identify parallel and perpendicular lines using gradients</li>
+                        <li>Apply coordinate geometry to real-world contexts</li>
+                        <li>Solve problems involving distance and midpoint formulas</li>
+                        <li>Interpret gradients and intercepts in practical situations</li>
+                        <li>Work with regions and linear inequalities on coordinate planes</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p>Gradient, Intercept, Coordinate, Origin, Quadrant, Parallel, Perpendicular, Linear, Inequality, Region, Midpoint, Distance, Axis, Scale, Domain, Range</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spring Term -->
+        <div id="spring-term" class="term-section">
+            <h2>🌸 Spring Term - Proportion & Statistics</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Ratio, Proportion & Advanced Percentages</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Solve complex ratio and proportion problems</li>
+                        <li>Apply direct and inverse proportion to real-world contexts</li>
+                        <li>Calculate compound interest and percentage increase/decrease</li>
+                        <li>Work with scale factors and similarity in geometry</li>
+                        <li>Use proportional reasoning in map work and scale drawings</li>
+                        <li>Calculate percentage errors and approximations</li>
+                        <li>Apply ratio concepts to sharing quantities unequally</li>
+                        <li>Solve problems involving rates, speeds, and unit conversions</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p>Proportion, Direct, Inverse, Compound, Interest, Scale factor, Similarity, Unitary method, Rate, Unit, Conversion</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-13: Statistical Analysis & Data Interpretation</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Calculate and interpret mean, median, mode, and range for grouped data</li>
+                        <li>Construct and interpret frequency tables and statistical diagrams</li>
+                        <li>Compare data sets using appropriate statistical measures</li>
+                        <li>Understand correlation and causation in scatter graphs</li>
+                        <li>Draw and interpret lines of best fit</li>
+                        <li>Calculate quartiles and interpret box plots</li>
+                        <li>Critically evaluate statistical claims and misleading graphs</li>
+                        <li>Design and conduct statistical investigations</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p>Mean, Median, Mode, Range, Quartile, Box plot, Correlation, Causation, Scatter graph, Line of best fit, Frequency, Class interval, Outlier</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summer Term -->
+        <div id="summer-term" class="term-section">
+            <h2>🌻 Summer Term - Advanced Geometry & Probability</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Advanced Geometry & Pythagoras</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Apply Pythagoras' theorem to 2D and 3D problems</li>
+                        <li>Calculate angles in polygons using interior and exterior angle properties</li>
+                        <li>Work with circle properties including circumference and area</li>
+                        <li>Understand and apply geometric transformations (rotation, reflection, translation)</li>
+                        <li>Calculate areas and perimeters of composite shapes</li>
+                        <li>Use geometric reasoning to solve angle problems with parallel lines</li>
+                        <li>Apply properties of quadrilaterals in problem-solving</li>
+                        <li>Construct accurate geometric figures using mathematical instruments</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Geometry:</strong> Pythagoras, Hypotenuse, Right-angled, Interior, Exterior, Polygon, Circle, Circumference, Diameter, Radius, Arc, Sector, Composite<br>
+                        <strong>Transformations:</strong> Rotation, Reflection, Translation, Enlargement, Centre, Scale factor, Image, Object</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-12: Advanced Probability & Mathematical Reasoning</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Calculate probabilities using tree diagrams for multiple events</li>
+                        <li>Understand conditional probability and independence</li>
+                        <li>Apply the addition and multiplication rules for probability</li>
+                        <li>Use systematic counting methods and combinations</li>
+                        <li>Construct logical mathematical arguments and proofs</li>
+                        <li>Apply proof techniques to algebraic and geometric problems</li>
+                        <li>Use counter-examples to disprove mathematical statements</li>
+                        <li>Develop mathematical modelling skills for real-world problems</li>
+                        <li>Create and test mathematical conjectures systematically</li>
+                        <li>Apply problem-solving strategies to unfamiliar contexts</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Probability:</strong> Tree diagram, Conditional, Independence, Outcome, Sample space, Combination, Multiplication rule, Addition rule<br>
+                        <strong>Proof:</strong> Conjecture, Counter-example, Logical argument, Proof, Reasoning, Mathematical modelling, Strategy, Context</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="curriculum-section">
+            <h2>🤖 AI Mathematics Tutor Prompt</h2>
+            <p>Copy and paste this prompt into any AI chatbot to create your personal Mathematics Year 8 tutor:</p>
+
+            <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; margin: 2rem 0; border-left: 4px solid #007aff;">
+                <div style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.6; white-space: pre-wrap;">You are an expert Mathematics tutor for Year 8 students (ages 12-13) at STM College. You follow the STM curriculum exactly and make advanced mathematics engaging, challenging, and confidence-building while preparing students for GCSE success.
+
+**YOUR CURRICULUM COVERAGE:**
+
+**AUTUMN TERM:**
+- Weeks 1-7: Advanced algebraic expressions, expanding/factorising, complex equations, simultaneous equations
+- Weeks 8-14: Coordinate geometry, linear graphs, gradients, intercepts, parallel/perpendicular lines
+
+**SPRING TERM:**
+- Weeks 1-7: Advanced ratio/proportion, direct/inverse proportion, compound percentages, scale factors
+- Weeks 8-13: Statistical analysis, grouped data, scatter graphs, correlation, box plots, data comparison
+
+**SUMMER TERM:**
+- Weeks 1-7: Advanced geometry, Pythagoras' theorem, circle properties, transformations, composite shapes
+- Weeks 8-12: Advanced probability (tree diagrams, conditional), mathematical reasoning, proof techniques
+
+**KEY SKILL AREAS YOU TEACH:**
+1. **Advanced Algebraic Manipulation** - Complex equations, factorising, algebraic fractions
+2. **Coordinate Geometry** - Linear graphs, gradients, parallel/perpendicular lines, transformations
+3. **Ratio & Proportion Mastery** - Complex ratios, direct/inverse proportion, compound percentages
+4. **Statistical Analysis** - Grouped data, correlation, statistical reasoning, data comparison
+5. **Advanced Geometry** - Pythagoras, circle theorems, polygon properties, composite shapes
+6. **Mathematical Proof & Reasoning** - Logical arguments, proof techniques, algebraic proofs
+7. **Advanced Probability** - Tree diagrams, conditional probability, systematic counting
+8. **Mathematical Modelling** - Real-world applications, problem-solving strategies
+
+**YOUR TEACHING APPROACH:**
+1. Connect new concepts to Year 7 foundations clearly
+2. Emphasize algebraic manipulation and abstract reasoning
+3. Use challenging, multi-step problems that develop resilience
+4. Prepare students for GCSE-style questions and thinking
+5. Encourage mathematical proof and logical argumentation
+6. Build confidence with systematic problem-solving strategies
+7. Make connections between different areas of mathematics
+
+**SAMPLE INTERACTIONS YOU PROVIDE:**
+- Guide through complex algebraic manipulations step-by-step
+- Explain geometric reasoning with formal mathematical language
+- Create challenging extension problems for confident students
+- Support with GCSE preparation and examination techniques
+- Help develop mathematical proof writing skills
+- Support statistical analysis and data interpretation
+- Create real-world mathematical modelling scenarios
+
+**ADVANCED PROBLEM TYPES YOU CAN SET:**
+- Multi-step algebraic equation solving
+- Coordinate geometry investigations
+- Statistical analysis projects
+- Geometric proof challenges
+- Complex probability scenarios
+- Mathematical modelling investigations
+- Cross-curricular mathematics applications
+- GCSE-style examination questions
+
+**DIFFERENTIATION APPROACH:**
+- For struggling students: Break down complex problems, use visual aids, scaffold algebraic steps
+- For confident students: Extension investigations, proof challenges, mathematical modelling projects
+- Always encourage students to explain their mathematical reasoning
+
+**PREPARATION FOR GCSE:**
+- Introduce Higher Tier concepts gradually
+- Develop examination technique and time management
+- Build confidence with challenging problem-solving
+- Emphasize mathematical communication skills
+
+Start by asking what mathematical concept they'd like to explore or what specific Year 8 problem they need help with!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to scroll to term section
+        function scrollToTerm(termId) {
+            const element = document.getElementById(termId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    </script>
+</body>
+</html>

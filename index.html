@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STM College Curriculum Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            line-height: 1.47059;
+        }
+
+        .header {
+            background: #ffffff;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .header p {
+            font-size: 1.375rem;
+            color: #86868b;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.381;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .subject-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            overflow: hidden;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .subject-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .card-description {
+            color: #86868b;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #515154;
+            font-weight: 500;
+        }
+
+        .overview-section {
+            background: #f5f5f7;
+            border-radius: 18px;
+            padding: 3rem;
+            margin-bottom: 5rem;
+            text-align: center;
+        }
+
+        .overview-section h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .overview-section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.4;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #007aff;
+            display: block;
+            letter-spacing: -0.003em;
+        }
+
+        .stat-label {
+            color: #86868b;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 5rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, #007aff, #0051d8);
+            border-radius: 18px;
+            color: #ffffff;
+        }
+
+        .cta-section h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #ffffff;
+            color: #007aff;
+            padding: 16px 32px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Subject-specific gradients - Apple style */
+        .art { 
+            background: linear-gradient(135deg, #ff6b6b, #ffa8a8);
+        }
+        .english { 
+            background: linear-gradient(135deg, #a78bfa, #c4b5fd);
+        }
+        .mathematics { 
+            background: linear-gradient(135deg, #3b82f6, #93c5fd);
+        }
+        .science { 
+            background: linear-gradient(135deg, #10b981, #6ee7b7);
+        }
+        .history { 
+            background: linear-gradient(135deg, #f59e0b, #fcd34d);
+        }
+        .geography { 
+            background: linear-gradient(135deg, #06b6d4, #67e8f9);
+        }
+        .pe { 
+            background: linear-gradient(135deg, #ea580c, #fb923c);
+        }
+        .music { 
+            background: linear-gradient(135deg, #8b5cf6, #c4b5fd);
+        }
+        .drama { 
+            background: linear-gradient(135deg, #ef4444, #fca5a5);
+        }
+        .re { 
+            background: linear-gradient(135deg, #6b7280, #9ca3af);
+        }
+        .french { 
+            background: linear-gradient(135deg, #3b82f6, #93c5fd);
+        }
+        .german { 
+            background: linear-gradient(135deg, #f59e0b, #fcd34d);
+        }
+        .computer { 
+            background: linear-gradient(135deg, #64748b, #94a3b8);
+        }
+        .design { 
+            background: linear-gradient(135deg, #dc2626, #fca5a5);
+        }
+        .health { 
+            background: linear-gradient(135deg, #059669, #6ee7b7);
+        }
+        .cpshe { 
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+        }
+    </style>
+</head>
+<body>
+    <iframe src="shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white;">
+    </iframe>
+
+    <div class="header">
+        <h1>STM College Curriculum</h1>
+        <p>Discover comprehensive curriculum pathways designed to inspire and educate students across all subjects at St Thomas More RC College.</p>
+    </div>
+
+    <div class="container">
+        <div class="overview-section">
+            <h2>Curriculum at a Glance</h2>
+            <p>Complete documentation covering all subjects with detailed progression pathways from Year 7 through GCSE level.</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">72</span>
+                    <div class="stat-label">Documents</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">17</span>
+                    <div class="stat-label">Subjects</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">3</span>
+                    <div class="stat-label">Key Stages</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">Coverage</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year 7 Curriculum Highlight Section -->
+        <div class="overview-section" style="background: linear-gradient(135deg, #10b981, #059669); color: white; margin-bottom: 4rem;">
+            <h2 style="color: white;">🎓 Complete Year 7 Curriculum Now Available</h2>
+            <p style="color: rgba(255,255,255,0.9);">Explore detailed weekly breakdowns for every Year 7 subject with comprehensive curriculum content, skills development, and assessment information.</p>
+            <div class="stats-grid" style="margin-top: 2rem;">
+                <div class="stat-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <span class="stat-number" style="color: white;">13</span>
+                    <div class="stat-label" style="color: rgba(255,255,255,0.8);">Year 7 Subjects</div>
+                </div>
+                <div class="stat-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <span class="stat-number" style="color: white;">78</span>
+                    <div class="stat-label" style="color: rgba(255,255,255,0.8);">Weekly Units</div>
+                </div>
+                <div class="stat-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <span class="stat-number" style="color: white;">100%</span>
+                    <div class="stat-label" style="color: rgba(255,255,255,0.8);">Coverage</div>
+                </div>
+                <div class="stat-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <span class="stat-number" style="color: white;">6</span>
+                    <div class="stat-label" style="color: rgba(255,255,255,0.8);">Terms Each</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Core Subjects</h2>
+        <p class="section-subtitle">Foundation subjects essential for every student's academic journey</p>
+        <div class="subjects-grid">
+            <a href="subjects/english.html" class="subject-card">
+                <div class="card-image english">📚</div>
+                <div class="card-content">
+                    <h3 class="card-title">English</h3>
+                    <p class="card-description">Developing literacy, critical thinking, and communication through literature, language, and creative expression. <strong>✅ Year 7 detailed curriculum available</strong></p>
+                    <div class="card-stats">
+                        <span>3 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/mathematics.html" class="subject-card">
+                <div class="card-image mathematics">🔢</div>
+                <div class="card-content">
+                    <h3 class="card-title">Mathematics</h3>
+                    <p class="card-description">Building numerical fluency and problem-solving skills from basic concepts to advanced reasoning. <strong>✅ Year 7 detailed curriculum available</strong></p>
+                    <div class="card-stats">
+                        <span>3 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/science.html" class="subject-card">
+                <div class="card-image science">🔬</div>
+                <div class="card-content">
+                    <h3 class="card-title">Science</h3>
+                    <p class="card-description">Exploring biology, chemistry, and physics through investigation and scientific inquiry. <strong>✅ Year 7 detailed curriculum available</strong></p>
+                    <div class="card-stats">
+                        <span>4 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Humanities</h2>
+        <p class="section-subtitle">Understanding our world through history, geography, and faith</p>
+        <div class="subjects-grid">
+            <a href="subjects/history.html" class="subject-card">
+                <div class="card-image history">🏛️</div>
+                <div class="card-content">
+                    <h3 class="card-title">History</h3>
+                    <p class="card-description">Understanding the past to make sense of the present through analysis and research.</p>
+                    <div class="card-stats">
+                        <span>3 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/geography.html" class="subject-card">
+                <div class="card-image geography">🌍</div>
+                <div class="card-content">
+                    <h3 class="card-title">Geography</h3>
+                    <p class="card-description">Exploring physical and human geography to develop global awareness and understanding.</p>
+                    <div class="card-stats">
+                        <span>3 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/re.html" class="subject-card">
+                <div class="card-image re">✝️</div>
+                <div class="card-content">
+                    <h3 class="card-title">Religious Education</h3>
+                    <p class="card-description">Exploring faith, ethics, and spirituality within our Catholic school community.</p>
+                    <div class="card-stats">
+                        <span>3 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Creative Arts</h2>
+        <p class="section-subtitle">Fostering creativity and self-expression through diverse artistic mediums</p>
+        <div class="subjects-grid">
+            <a href="subjects/art.html" class="subject-card">
+                <div class="card-image art">🎨</div>
+                <div class="card-content">
+                    <h3 class="card-title">Art</h3>
+                    <p class="card-description">Developing creativity and visual literacy across various media and artistic techniques.</p>
+                    <div class="card-stats">
+                        <span>3 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/music.html" class="subject-card">
+                <div class="card-image music">🎵</div>
+                <div class="card-content">
+                    <h3 class="card-title">Music</h3>
+                    <p class="card-description">Building musical skills through performance, composition, and appreciation of diverse styles.</p>
+                    <div class="card-stats">
+                        <span>3 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="subject-card" onclick="alert('Drama is only offered at GCSE level (Years 10-11). Year 7 students focus on core curriculum subjects.')">
+                <div class="card-image drama">🎭</div>
+                <div class="card-content">
+                    <h3 class="card-title">Drama</h3>
+                    <p class="card-description">Developing performance skills and confidence through theatrical exploration.</p>
+                    <div class="card-stats">
+                        <span>3 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Technology & Modern Skills</h2>
+        <p class="section-subtitle">Preparing students for the digital future with practical skills</p>
+        <div class="subjects-grid">
+            <a href="subjects/computer-science.html" class="subject-card">
+                <div class="card-image computer">💻</div>
+                <div class="card-content">
+                    <h3 class="card-title">Computer Science & Media</h3>
+                    <p class="card-description">Digital literacy, programming, and media production for the modern world. <strong>✅ Year 7 detailed curriculum available</strong></p>
+                    <div class="card-stats">
+                        <span>17 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/design-technology.html" class="subject-card">
+                <div class="card-image design">🔧</div>
+                <div class="card-content">
+                    <h3 class="card-title">Design & Technology</h3>
+                    <p class="card-description">Problem-solving through design including food technology, textiles, and product design.</p>
+                    <div class="card-stats">
+                        <span>8 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/pe.html" class="subject-card">
+                <div class="card-image pe">⚽</div>
+                <div class="card-content">
+                    <h3 class="card-title">Physical Education</h3>
+                    <p class="card-description">Promoting fitness, teamwork, and healthy lifestyles through sporting activities.</p>
+                    <div class="card-stats">
+                        <span>8 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Additional Subjects</h2>
+        <p class="section-subtitle">Specialized subjects for broader learning and career preparation</p>
+        <div class="subjects-grid">
+            <a href="subjects/french.html" class="subject-card">
+                <div class="card-image french">🇫🇷</div>
+                <div class="card-content">
+                    <h3 class="card-title">French</h3>
+                    <p class="card-description">Master French language and culture through engaging topics and authentic communication.</p>
+                    <div class="card-stats">
+                        <span>2 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/german.html" class="subject-card">
+                <div class="card-image german">🇩🇪</div>
+                <div class="card-content">
+                    <h3 class="card-title">German</h3>
+                    <p class="card-description">Explore German language and culture from personal identity to advanced communication skills.</p>
+                    <div class="card-stats">
+                        <span>2 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/health-social-care.html" class="subject-card">
+                <div class="card-image health">❤️</div>
+                <div class="card-content">
+                    <h3 class="card-title">Health & Social Care</h3>
+                    <p class="card-description">Understanding health and wellbeing in preparation for future careers in care.</p>
+                    <div class="card-stats">
+                        <span>3 Documents</span>
+                        <span>Years 10-11</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="subjects/cpshe.html" class="subject-card">
+                <div class="card-image cpshe">🧠</div>
+                <div class="card-content">
+                    <h3 class="card-title">CPSHE</h3>
+                    <p class="card-description">Citizenship, Personal, Social, Health & Economic education for life skills.</p>
+                    <div class="card-stats">
+                        <span>2 Documents</span>
+                        <span>Years 7-11</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="cta-section">
+            <h3>Complete Curriculum Framework</h3>
+            <p>Access the comprehensive overview document that outlines the entire STM College curriculum approach.</p>
+            <a href="stm_curriculum_downloads/overview/The%20Big%20Picture.pdf" class="download-btn" target="_blank">
+                View The Big Picture
+            </a>
+        </div>
+    </div>
+</body>
+</html>

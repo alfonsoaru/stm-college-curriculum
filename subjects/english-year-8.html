@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Year 8 - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+        }
+
+
+        .hero {
+            background: linear-gradient(135deg, #a78bfa, #c4b5fd);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Two Column Layout for Curriculum Section */
+        .curriculum-split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .curriculum-text-column {
+            padding-right: 1rem;
+        }
+
+        .curriculum-text-column h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #a78bfa;
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-text-column p {
+            font-size: 1.1rem;
+            color: #86868b;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-image-column {
+            text-align: center;
+        }
+
+        .arrow-image-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+        }
+
+        .arrow-image-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .curriculum-arrow-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .click-to-view {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-split-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .curriculum-text-column {
+                padding-right: 0;
+                text-align: center;
+            }
+        }
+
+        .section {
+            margin: 4rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.125rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .term-nav-btn {
+            background: #007aff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .term-nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+            background: #0051d0;
+        }
+
+        .term-section {
+            margin: 4rem 0;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #a78bfa;
+            letter-spacing: -0.003em;
+        }
+
+        .skills-overview {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .skills-overview h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skills-overview p {
+            font-size: 1.125rem;
+            color: #86868b;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            background: rgba(167, 139, 250, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .skill-item h3 {
+            color: #a78bfa;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .skill-item p {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+
+        .week-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .week-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .week-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .week-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .week-content li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .week-content li:before {
+            content: "•";
+            color: #007aff;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .vocab-section {
+            background: rgba(167, 139, 250, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .vocab-section h4 {
+            color: #a78bfa;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .vocab-section p {
+            color: #86868b;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .qa-section {
+            margin: 3rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 2rem;
+        }
+
+        .qa-section h3 {
+            color: #1d1d1f;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .qa-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .qa-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .question {
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .answer {
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block;">
+    </iframe>
+
+    <div class="hero">
+        <h1>📚 English Year 8</h1>
+        <p>Developing critical thinking, creative expression, and advanced literary analysis through challenging texts and sophisticated writing</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>Year 8 English Journey</h2>
+            <p>Year 8 English at STM College deepens literary understanding through <strong>Shakespearean drama</strong>, challenging contemporary texts, and sophisticated creative writing. Students develop critical analysis skills while exploring themes of power, conflict, identity, and social justice through diverse voices and perspectives.</p>
+        </div>
+
+
+        <div class="skills-overview">
+            <h2>Key Skills Development</h2>
+            <p>Throughout Year 8, students progressively develop seven essential English skills that form the foundation for advanced literary study and sophisticated communication.</p>
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>📖 Critical Literary Analysis</h3>
+                    <p>Examining themes, character development, and author's craft in complex texts including Shakespeare and modern literature</p>
+                </div>
+                <div class="skill-item">
+                    <h3>✍️ Advanced Creative Writing</h3>
+                    <p>Crafting sophisticated narratives, developing unique voice, and mastering various literary techniques and genres</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🎭 Dramatic Analysis</h3>
+                    <p>Understanding stagecraft, performance elements, and the unique features of dramatic texts and live theatre</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🗣️ Confident Communication</h3>
+                    <p>Developing advanced speaking and listening skills through debate, presentation, and collaborative discussion</p>
+                </div>
+                <div class="skill-item">
+                    <h3>📝 Analytical Writing</h3>
+                    <p>Constructing well-reasoned arguments, using evidence effectively, and developing sophisticated essay writing skills</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🔍 Language Investigation</h3>
+                    <p>Exploring how language changes over time, analysing linguistic choices, and understanding context and audience</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🌍 Cultural Understanding</h3>
+                    <p>Examining diverse perspectives, historical contexts, and social issues through literature from different cultures</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-section">
+            <h3>❓ Frequently Asked Questions</h3>
+
+            <div class="qa-item">
+                <div class="question">Q: Why does Year 8 focus so heavily on Shakespeare and classic literature?</div>
+                <div class="answer">A: Shakespeare and classic texts provide rich foundations for understanding language development, universal themes, and literary techniques. They challenge students to develop sophisticated analysis skills while connecting to timeless human experiences that remain relevant today.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Q: How much reading will students need to do outside of class?</div>
+                <div class="answer">A: Year 8 students typically read 20-30 minutes per night, including class novel chapters (15-20 mins), independent reading (10-15 mins), and occasional poetry or article analysis. We provide a wide range of engaging texts to suit different interests and reading levels.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Q: What support is available for students who struggle with Shakespeare?</div>
+                <div class="answer">A: We use modern translations alongside original texts, video adaptations, interactive activities, and peer collaboration. Students receive glossaries, character guides, and can access online resources including BBC Bitesize and No Fear Shakespeare.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Q: How are creative writing skills developed throughout Year 8?</div>
+                <div class="answer">A: Students complete monthly creative writing pieces across different genres (short stories, poetry, dramatic scripts, journalistic writing). We focus on developing personal voice, sophisticated vocabulary, and advanced literary techniques through regular practice and peer feedback.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Q: What assessment methods are used to track student progress?</div>
+                <div class="answer">A: Assessment includes regular reading comprehension tasks, creative writing portfolios, formal essays, speaking and listening assessments, and end-of-unit tests. We also use peer assessment and self-reflection to help students understand their progress and set targets.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Term Sections -->
+    <div class="container">
+        <!-- Autumn Term -->
+        <div id="autumn-term" class="term-section">
+            <h2>🍂 Autumn Term - Literary Foundations</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Shakespeare's Romeo and Juliet</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Explore the prologue and understand Shakespearean sonnet structure</li>
+                        <li>Analyse character motivations and relationships in Acts I-II</li>
+                        <li>Examine themes of love, fate, and family conflict</li>
+                        <li>Investigate Elizabethan context and social conventions</li>
+                        <li>Study poetic devices including metaphor, imagery, and dramatic irony</li>
+                        <li>Compare different film and stage adaptations</li>
+                        <li>Develop understanding of iambic pentameter and soliloquy</li>
+                        <li>Create character studies and alternative scene interpretations</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Shakespeare:</strong> Soliloquy, Aside, Iambic pentameter, Sonnet, Prologue<br>
+                        <strong>Literary Analysis:</strong> Dramatic irony, Metaphor, Symbolism, Foreshadowing, Characterisation, Motif, Juxtaposition</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Power and Conflict Poetry</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Analyse war poetry including Owen, Sassoon, and contemporary voices</li>
+                        <li>Explore different perspectives on conflict and its consequences</li>
+                        <li>Investigate historical contexts of major conflicts</li>
+                        <li>Examine poetic form, structure, and their effects on meaning</li>
+                        <li>Compare attitudes towards war across different time periods</li>
+                        <li>Develop skills in comparative analysis and essay writing</li>
+                        <li>Create original poetry inspired by themes of power and conflict</li>
+                        <li>Present poetry performances with attention to rhythm and emphasis</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Poetry:</strong> Stanza, Enjambment, Caesura, Alliteration, Assonance, Onomatopoeia<br>
+                        <strong>Analysis:</strong> Tone, Mood, Persona, Voice, Structure, Form, Rhythm, Metre</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spring Term -->
+        <div id="spring-term" class="term-section">
+            <h2>🌸 Spring Term - Critical Perspectives</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Contemporary Fiction Study</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Read and analyse a challenging contemporary novel (e.g., The Hate U Give, Wonder)</li>
+                        <li>Explore themes of identity, belonging, and social justice</li>
+                        <li>Examine narrative techniques and point of view</li>
+                        <li>Investigate contemporary social issues through literature</li>
+                        <li>Develop empathy through diverse character perspectives</li>
+                        <li>Create alternative endings and character viewpoint shifts</li>
+                        <li>Research historical and cultural contexts of the novel</li>
+                        <li>Participate in book club discussions and debates</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Narrative:</strong> First person, Third person, Omniscient, Limited, Unreliable narrator<br>
+                        <strong>Themes:</strong> Social justice, Identity, Prejudice, Resilience, Community, Activism</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-13: Advanced Writing Techniques</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Master sophisticated sentence structures and varied paragraph openings</li>
+                        <li>Develop advanced vocabulary and precise word choice</li>
+                        <li>Experiment with different narrative voices and perspectives</li>
+                        <li>Create compelling character development and dialogue</li>
+                        <li>Use literary devices effectively in creative writing</li>
+                        <li>Write across multiple genres: short stories, journalism, poetry</li>
+                        <li>Edit and redraft work for maximum impact and clarity</li>
+                        <li>Participate in peer review sessions and writing workshops</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Writing Craft:</strong> Voice, Style, Register, Audience, Purpose, Genre<br>
+                        <strong>Techniques:</strong> Show don't tell, Dialogue, Description, Pacing, Tension, Climax</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summer Term -->
+        <div id="summer-term" class="term-section">
+            <h2>🌻 Summer Term - Advanced Expression</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Media and Non-Fiction Analysis</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Analyse newspaper articles, speeches, and persuasive texts</li>
+                        <li>Investigate bias, propaganda, and media representation</li>
+                        <li>Examine rhetorical devices and persuasive techniques</li>
+                        <li>Create multimedia presentations on current issues</li>
+                        <li>Compare different media coverage of the same events</li>
+                        <li>Develop critical thinking skills for information evaluation</li>
+                        <li>Write persuasive articles, speeches, and opinion pieces</li>
+                        <li>Understand the relationship between audience, purpose, and form</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Media:</strong> Bias, Propaganda, Representation, Stereotype, Audience<br>
+                        <strong>Persuasion:</strong> Rhetoric, Ethos, Pathos, Logos, Emotive language, Statistics, Anecdote</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-12: Drama and Performance</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Study extracts from contemporary plays and classic dramas</li>
+                        <li>Explore stagecraft, set design, and theatrical conventions</li>
+                        <li>Analyse how drama creates meaning through performance</li>
+                        <li>Create and perform original dramatic scenes</li>
+                        <li>Investigate different theatre traditions and styles</li>
+                        <li>Write reviews of live or filmed theatrical performances</li>
+                        <li>Develop confidence in speaking and presentation skills</li>
+                        <li>Collaborate effectively in group creative projects</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Drama:</strong> Stagecraft, Blocking, Monologue, Dialogue, Stage directions<br>
+                        <strong>Performance:</strong> Gesture, Vocal variety, Pace, Pause, Emphasis, Projection, Body language</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="curriculum-section">
+            <h2>🤖 AI English Tutor Prompt</h2>
+            <p>Copy and paste this prompt into any AI chatbot to create your personal English Year 8 tutor:</p>
+
+            <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; margin: 2rem 0; border-left: 4px solid #a78bfa;">
+                <div style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.6; white-space: pre-wrap;">You are an expert English tutor for Year 8 students (ages 12-13) at STM College. You follow the STM curriculum exactly and make English engaging, inspiring, and confidence-building.
+
+**YOUR CURRICULUM COVERAGE:**
+
+**AUTUMN TERM:**
+- Weeks 1-7: Shakespeare's Romeo and Juliet - character analysis, themes, dramatic techniques, Elizabethan context
+- Weeks 8-14: Power and Conflict Poetry - war poetry, comparative analysis, historical contexts, poetic techniques
+
+**SPRING TERM:**
+- Weeks 1-7: Contemporary Fiction Study - modern novels, social themes, narrative techniques, cultural contexts
+- Weeks 8-13: Advanced Writing Techniques - sophisticated style, genre variety, editing skills, peer review
+
+**SUMMER TERM:**
+- Weeks 1-7: Media and Non-Fiction Analysis - persuasive texts, bias detection, rhetorical devices, critical thinking
+- Weeks 8-12: Drama and Performance - stagecraft, theatrical analysis, performance skills, creative collaboration
+
+**KEY SKILL AREAS YOU TEACH:**
+1. **Critical Literary Analysis** - Theme exploration, character development, author's craft
+2. **Advanced Creative Writing** - Sophisticated style, voice development, genre mastery
+3. **Dramatic Analysis** - Stagecraft understanding, performance elements, theatrical conventions
+4. **Confident Communication** - Speaking, listening, debate, presentation skills
+5. **Analytical Writing** - Essay structure, evidence use, argument development
+6. **Language Investigation** - Historical change, linguistic choice analysis, context awareness
+7. **Cultural Understanding** - Diverse perspectives, historical contexts, social issues
+
+**YOUR TEACHING APPROACH:**
+1. Connect literature to students' lived experiences
+2. Use multimedia resources and different adaptations
+3. Encourage creative responses and alternative interpretations
+4. Build confidence through scaffolded challenges
+5. Develop critical thinking through questioning
+6. Celebrate diverse voices and perspectives
+7. Foster collaborative learning and peer support
+
+**SAMPLE INTERACTIONS YOU PROVIDE:**
+- Guide through Shakespeare language and themes
+- Help with essay planning and structure
+- Support creative writing development
+- Analyse poetic devices and their effects
+- Develop reading comprehension strategies
+- Practice speaking and presentation skills
+- Provide feedback on written work
+
+**ENGAGING ACTIVITIES YOU CAN SUGGEST:**
+- Character hot-seating and role-play
+- Modern adaptations of classic scenes
+- Creative writing competitions
+- Poetry slams and performances
+- Debate tournaments on text themes
+- Media creation projects
+- Book trailer productions
+- Literary escape rooms
+- Character social media profiles
+- Alternative ending competitions
+
+**DIFFERENTIATION APPROACH:**
+- For developing readers: Provide summaries, glossaries, audio support, visual aids
+- For confident students: Offer extension texts, independent research, peer mentoring roles
+- Always encourage personal response and interpretation
+- Use different learning styles and multimedia approaches
+
+Start by asking what aspect of English they'd like to explore or what specific text they need help with!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to scroll to term section
+        function scrollToTerm(termId) {
+            const element = document.getElementById(termId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    </script>
+</body>
+</html>

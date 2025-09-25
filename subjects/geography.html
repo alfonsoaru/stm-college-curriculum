@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geography - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+        }
+
+
+        .hero {
+            background: linear-gradient(135deg, #06b6d4, #67e8f9);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .curriculum-arrow-section {
+            text-align: center;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .arrow-image-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .arrow-image-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .curriculum-arrow-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .click-to-enlarge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .arrow-description {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: #86868b;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 2% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: #ffffff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .document-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .document-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #007aff;
+        }
+
+        .document-description {
+            color: #86868b;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #007aff;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+        }
+
+        .year-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .year-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            cursor: pointer;
+        }
+
+        .year-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .year-card h4 {
+            color: #007aff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .year-card p {
+            color: #86868b;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .explore-btn {
+            background: #f8f9fa;
+            color: #007aff;
+            padding: 10px 20px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 122, 255, 0.2);
+        }
+
+        .explore-btn:hover {
+            background: #007aff;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 5rem 0;
+            padding: 3rem;
+            background: #f8f9fa;
+            border-radius: 18px;
+        }
+
+        .cta-section h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .documents-grid, .year-breakdown {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .close {
+                top: -40px;
+                right: -10px;
+                font-size: 25px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white;">
+    </iframe>
+
+    <div class="hero">
+        <h1>🌍 Geography</h1>
+        <p>Exploring physical and human geography to develop global awareness and environmental understanding</p>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Geography Curriculum Pathway</h2>
+            <div class="curriculum-arrow-section">
+                <div class="arrow-image-container" onclick="openModal()">
+                    <img src="../images/curriculum-arrows/geography-arrow.png"
+                         alt="Geography Curriculum Arrow"
+                         class="curriculum-arrow-img">
+                    <div class="click-to-enlarge">🔍 Click to enlarge</div>
+                </div>
+                <div class="arrow-description">
+                    <strong>Geography Curriculum Arrow:</strong> This pathway shows the development of geographical knowledge and skills from Year 7 through GCSE level, covering physical geography, human geography, and fieldwork investigation techniques.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Curriculum Documents</h2>
+            <p>Access comprehensive Geography curriculum documentation including detailed planning and assessment approaches.</p>
+            <div class="documents-grid">
+                <div class="document-card">
+                    <div class="document-title">📅 Long Term Plan</div>
+                    <div class="document-description">
+                        Detailed year-by-year curriculum covering physical and human geography with fieldwork investigations and environmental studies.
+                    </div>
+                    <a href="../stm_curriculum_downloads/geography/STM%2520Long%2520Term%2520Plan%2520Geography.pdf" class="download-btn" target="_blank">
+                        View Long Term Plan
+                    </a>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">✅ Assessment Information</div>
+                    <div class="document-description">
+                        Comprehensive assessment framework detailing evaluation of geographical knowledge, skills, and fieldwork competencies.
+                    </div>
+                    <a href="../stm_curriculum_downloads/geography/Geography%2520Assessment%2520Information.pdf" class="download-btn" target="_blank">
+                        View Assessment Details
+                    </a>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">🎯 Curriculum Arrow</div>
+                    <div class="document-description">
+                        Visual progression pathway showing geographical skill development and knowledge acquisition from foundation to advanced levels.
+                    </div>
+                    <a href="../stm_curriculum_downloads/geography/Curriculum%2520Arrow%2520Geography.pdf" class="download-btn" target="_blank">
+                        View Curriculum Arrow PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Year-by-Year Geographical Journey</h2>
+            <p>Explore detailed curriculum content, fieldwork opportunities, and skill development for each year group.</p>
+
+            <div class="year-breakdown">
+                <div class="year-card" onclick="window.open('geography-year-7.html', '_blank')">
+                    <h4>Year 7 - Geographical Foundations</h4>
+                    <p>Map skills, physical and human geography introduction, climate studies, fieldwork introduction, and global awareness development.</p>
+                    <span class="explore-btn">Explore Year 7 →</span>
+                </div>
+
+                <div class="year-card">
+                    <h4>Year 8 - Regional Studies</h4>
+                    <p>Regional geography focus, ecosystem studies, urbanization, development geography, and advanced mapping skills with local fieldwork.</p>
+                    <span class="explore-btn">Explore Year 8 →</span>
+                </div>
+
+                <div class="year-card">
+                    <h4>Year 9 - GCSE Preparation</h4>
+                    <p>Advanced physical and human geography, environmental issues, geographical investigation skills, and preparation for GCSE requirements.</p>
+                    <span class="explore-btn">Explore Year 9 →</span>
+                </div>
+
+                <div class="year-card">
+                    <h4>Years 10-11 - GCSE Geography</h4>
+                    <p>Specialized geographical themes, controlled assessment, fieldwork investigation, and advanced analytical skills development.</p>
+                    <span class="explore-btn">Explore GCSE Years →</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Geographical Excellence</h3>
+            <p>Our Geography curriculum develops spatial awareness and environmental understanding through fieldwork and real-world application of geographical skills.</p>
+            <a href="../stm_curriculum_downloads/geography/Geography%2520Assessment%2520Information.pdf"
+               class="download-btn"
+               target="_blank">
+                View Complete Assessment Framework
+            </a>
+        </div>
+    </div>
+
+    <div id="curriculumModal" class="modal" onclick="closeModal()">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img src="../images/curriculum-arrows/geography-arrow.png"
+                 alt="Geography Curriculum Arrow - Enlarged"
+                 class="modal-image">
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('curriculumModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('curriculumModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

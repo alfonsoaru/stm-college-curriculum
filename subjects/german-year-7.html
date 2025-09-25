@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Year 7 Curriculum - STM College</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .breadcrumb {
+            font-size: 1rem;
+            color: #6e6e73;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb a {
+            color: #0071e3;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            color: #6e6e73;
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .curriculum-arrow-section {
+            background: #f5f5f7;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .curriculum-text {
+            padding-right: 20px;
+        }
+
+        .curriculum-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .curriculum-text p {
+            font-size: 1.2rem;
+            color: #515154;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            background: #0071e3;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+
+        .pdf-link:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+        }
+
+        .curriculum-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .curriculum-arrow {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .curriculum-arrow:hover {
+            transform: scale(1.05);
+        }
+
+        .term-structure {
+            margin-bottom: 80px;
+        }
+
+        .term-structure h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: -0.02em;
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .term-card {
+            background: white;
+            border: 2px solid #f5f5f7;
+            border-radius: 18px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .term-card:hover {
+            border-color: #0071e3;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 113, 227, 0.15);
+        }
+
+        .term-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .term-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 16px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .autumn { background: linear-gradient(135deg, #ff6b35, #ff8c42); }
+        .spring { background: linear-gradient(135deg, #4ecdc4, #44a08d); }
+        .summer { background: linear-gradient(135deg, #ffd89b, #19547b); }
+
+        .term-card h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin: 0;
+        }
+
+        .weeks-info {
+            background: #f5f5f7;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .weeks-info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+
+        .week-period {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #515154;
+            border-left: 4px solid #0071e3;
+        }
+
+        .skills-section {
+            margin-bottom: 80px;
+        }
+
+        .skills-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: -0.02em;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 18px;
+            padding: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .skill-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .skill-card p {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .vocabulary-showcase {
+            background: #f5f5f7;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .vocabulary-showcase h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 30px;
+        }
+
+        .vocabulary-showcase p {
+            font-size: 1.2rem;
+            color: #515154;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .vocab-category {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .vocab-category h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+
+        .vocab-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .vocab-tag {
+            background: #0071e3;
+            color: white;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .complete-vocabulary {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 80px;
+            border: 2px solid #f5f5f7;
+        }
+
+        .complete-vocabulary h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .complete-vocabulary > p {
+            font-size: 1.2rem;
+            color: #515154;
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .vocab-terms {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .vocab-term-card {
+            background: #f5f5f7;
+            border-radius: 18px;
+            padding: 40px 30px;
+            border: 2px solid #e5e5e7;
+        }
+
+        .vocab-term-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0071e3;
+        }
+
+        .vocab-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .vocab-column h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0071e3;
+            margin-bottom: 16px;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #0071e3;
+        }
+
+        .vocab-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .vocab-item {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            border-left: 3px solid #0071e3;
+            transition: all 0.2s ease;
+        }
+
+        .vocab-item:hover {
+            background: #f8f9fa;
+            transform: translateX(4px);
+        }
+
+        .vocab-item strong {
+            color: #1d1d1f;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-image {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            font-size: 1.1rem;
+            color: #6e6e73;
+        }
+
+        .modal-body {
+            text-align: left;
+        }
+
+        .modal-body h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            margin-top: 24px;
+        }
+
+        .modal-body h4:first-of-type {
+            margin-top: 0;
+        }
+
+        .modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-body li {
+            margin-bottom: 8px;
+            color: #515154;
+        }
+
+        .faq-section {
+            margin-bottom: 60px;
+        }
+
+        .faq-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-item {
+            border: 2px solid #f5f5f7;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: #f5f5f7;
+            padding: 20px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: #ebebed;
+        }
+
+        .faq-question h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #0071e3;
+            transition: transform 0.2s ease;
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 20px 30px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            font-size: 1rem;
+            color: #515154;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-arrow-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .curriculum-text {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .curriculum-text h2 {
+                font-size: 2rem;
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vocab-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .modal-content {
+                padding: 20px;
+                margin: 20px;
+                width: auto;
+            }
+        }
+
+        .term-game-btn {
+            background: #f59e0b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .term-game-btn:hover {
+            background: #d97706;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> > <a href="german.html">German</a> > Year 7
+            </div>
+            <h1>German Year 7</h1>
+            <p>Begin your German journey with fundamental language skills, exploring personal identity, family, school life, and travel through engaging real-world contexts</p>
+        </div>
+
+        <div class="curriculum-arrow-section">
+            <div class="curriculum-text">
+                <h2>Year 7 Journey</h2>
+                <p>Year 7 German introduces students to the foundation of the German language through five engaging modules that connect to their daily experiences and interests.</p>
+                <a href="../stm_curriculum_downloads/MFL/German_Long_Term_Plan.pdf" class="pdf-link" target="_blank">
+                    View Complete Curriculum Plan →
+                </a>
+            </div>
+            <div class="curriculum-image">
+                <a href="../stm_curriculum_downloads/MFL/German_Long_Term_Plan.pdf" target="_blank">
+                    <img src="../images/curriculum-arrows/german-arrow-page-1.png" alt="German Year 7 Curriculum Arrow - Click to view PDF" class="curriculum-arrow">
+                </a>
+            </div>
+        </div>
+
+        <div class="term-structure">
+            <h2>Year 7 Term Structure</h2>
+            <div class="terms-grid">
+                <div class="term-card">
+                    <div class="term-header">
+                        <div class="term-icon autumn">🍂</div>
+                        <h3>Autumn Term</h3>
+                    </div>
+                    <div class="weeks-info">
+                        <h4>Learning Periods</h4>
+                        <div class="week-period">
+                            <strong>Term 1a (Weeks 1-7):</strong> Meine Welt und ich - Personal identity and basic introductions
+                        </div>
+                        <div class="week-period">
+                            <strong>Term 1b (Weeks 8-14):</strong> Familie und Tiere - Family members, pets, and descriptions
+                        </div>
+                        <a href="../german-pairs-game.html" class="term-game-btn">🎮 Practice Vocabulary</a>
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header">
+                        <div class="term-icon spring">🌸</div>
+                        <h3>Spring Term</h3>
+                    </div>
+                    <div class="weeks-info">
+                        <h4>Learning Periods</h4>
+                        <div class="week-period">
+                            <strong>Term 2a (Weeks 1-7):</strong> Freizeit - juhu! - Sports and leisure activities
+                        </div>
+                        <div class="week-period">
+                            <strong>Term 2b (Weeks 8-13):</strong> Schule ist klasse! - School subjects and teacher descriptions
+                        </div>
+                        <a href="../german-pairs-game.html" class="term-game-btn">🎮 Practice Vocabulary</a>
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header">
+                        <div class="term-icon summer">☀️</div>
+                        <h3>Summer Term</h3>
+                    </div>
+                    <div class="weeks-info">
+                        <h4>Learning Periods</h4>
+                        <div class="week-period">
+                            <strong>Term 3a (Weeks 1-7):</strong> Gute Reise! - Travel, towns, and shopping for souvenirs
+                        </div>
+                        <div class="week-period">
+                            <strong>Term 3b (Weeks 8-12):</strong> Revision, Assessment & Project Work
+                        </div>
+                        <a href="../german-pairs-game.html" class="term-game-btn">🎮 Practice All Vocabulary</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skills-section">
+            <h2>Key Skills Development</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Grammar Foundations</h3>
+                    <p>Master essential German grammar including present tense verbs 'haben' and 'sein', ordinal numbers, adjectives, and basic sentence structures</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Communication Skills</h3>
+                    <p>Build confidence in speaking, listening, reading and writing through practical conversations and authentic German texts</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Cultural Awareness</h3>
+                    <p>Explore German culture through topics like school systems, family traditions, sports, and travel destinations</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Opinion Expression</h3>
+                    <p>Learn to give opinions using 'gern' and reason-giving with 'weil', building towards more complex language use</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="vocabulary-showcase">
+            <h2>Key Vocabulary Areas</h2>
+            <p>Students will master essential German vocabulary across these core themes throughout Year 7</p>
+            <div class="vocab-grid">
+                <div class="vocab-category">
+                    <h4>Personal Identity</h4>
+                    <div class="vocab-items">
+                        <span class="vocab-tag">Hallo 1-19</span>
+                        <span class="vocab-tag">Zahlen</span>
+                        <span class="vocab-tag">Lieblingssachen</span>
+                        <span class="vocab-tag">Fragewörter</span>
+                    </div>
+                </div>
+                <div class="vocab-category">
+                    <h4>Family & Pets</h4>
+                    <div class="vocab-items">
+                        <span class="vocab-tag">Haustiere</span>
+                        <span class="vocab-tag">Eigenschaften</span>
+                        <span class="vocab-tag">Haare und Augen</span>
+                        <span class="vocab-tag">Das Datum</span>
+                    </div>
+                </div>
+                <div class="vocab-category">
+                    <h4>Leisure & Sports</h4>
+                    <div class="vocab-items">
+                        <span class="vocab-tag">Bist du sportlich?</span>
+                        <span class="vocab-tag">Freizeit</span>
+                        <span class="vocab-tag">Ich bin online</span>
+                        <span class="vocab-tag">Meinungen</span>
+                    </div>
+                </div>
+                <div class="vocab-category">
+                    <h4>School Life</h4>
+                    <div class="vocab-items">
+                        <span class="vocab-tag">Schulfächer</span>
+                        <span class="vocab-tag">Wochentage</span>
+                        <span class="vocab-tag">Die Zeit</span>
+                        <span class="vocab-tag">In der Schule</span>
+                    </div>
+                </div>
+                <div class="vocab-category">
+                    <h4>Travel & Towns</h4>
+                    <div class="vocab-items">
+                        <span class="vocab-tag">In der Stadt</span>
+                        <span class="vocab-tag">Souvenirs</span>
+                        <span class="vocab-tag">Verkaufsgespräch</span>
+                        <span class="vocab-tag">Sommerferien</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="complete-vocabulary">
+            <h2>Complete Year 7 German Vocabulary</h2>
+            <p>Master all essential German vocabulary organized by term and topic. This comprehensive list covers every word students need to know for Year 7 German success.</p>
+            
+            <div class="vocab-terms">
+                <div class="vocab-term-card">
+                    <h3>Term 1a: Meine Welt und ich</h3>
+                    <div class="vocab-columns">
+                        <div class="vocab-column">
+                            <h4>Greetings & Basics</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>Hallo</strong> - Hello</div>
+                                <div class="vocab-item"><strong>Guten Morgen</strong> - Good morning</div>
+                                <div class="vocab-item"><strong>Guten Tag</strong> - Good day</div>
+                                <div class="vocab-item"><strong>Guten Abend</strong> - Good evening</div>
+                                <div class="vocab-item"><strong>Auf Wiedersehen</strong> - Goodbye</div>
+                                <div class="vocab-item"><strong>Tschüs</strong> - Bye</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Numbers 1-19</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>eins</strong> - one</div>
+                                <div class="vocab-item"><strong>zwei</strong> - two</div>
+                                <div class="vocab-item"><strong>drei</strong> - three</div>
+                                <div class="vocab-item"><strong>vier</strong> - four</div>
+                                <div class="vocab-item"><strong>fünf</strong> - five</div>
+                                <div class="vocab-item"><strong>sechs</strong> - six</div>
+                                <div class="vocab-item"><strong>sieben</strong> - seven</div>
+                                <div class="vocab-item"><strong>acht</strong> - eight</div>
+                                <div class="vocab-item"><strong>neun</strong> - nine</div>
+                                <div class="vocab-item"><strong>zehn</strong> - ten</div>
+                                <div class="vocab-item"><strong>elf</strong> - eleven</div>
+                                <div class="vocab-item"><strong>zwölf</strong> - twelve</div>
+                                <div class="vocab-item"><strong>dreizehn</strong> - thirteen</div>
+                                <div class="vocab-item"><strong>vierzehn</strong> - fourteen</div>
+                                <div class="vocab-item"><strong>fünfzehn</strong> - fifteen</div>
+                                <div class="vocab-item"><strong>sechzehn</strong> - sixteen</div>
+                                <div class="vocab-item"><strong>siebzehn</strong> - seventeen</div>
+                                <div class="vocab-item"><strong>achtzehn</strong> - eighteen</div>
+                                <div class="vocab-item"><strong>neunzehn</strong> - nineteen</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Personal Information</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>Wie bist du?</strong> - What are you like?</div>
+                                <div class="vocab-item"><strong>Wo wohnst du?</strong> - Where do you live?</div>
+                                <div class="vocab-item"><strong>Wie heißt du?</strong> - What's your name?</div>
+                                <div class="vocab-item"><strong>Wie alt bist du?</strong> - How old are you?</div>
+                                <div class="vocab-item"><strong>ich bin</strong> - I am</div>
+                                <div class="vocab-item"><strong>ich habe</strong> - I have</div>
+                                <div class="vocab-item"><strong>ich wohne</strong> - I live</div>
+                                <div class="vocab-item"><strong>mein Name ist</strong> - my name is</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Question Words</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>wie</strong> - how</div>
+                                <div class="vocab-item"><strong>wo</strong> - where</div>
+                                <div class="vocab-item"><strong>was</strong> - what</div>
+                                <div class="vocab-item"><strong>wer</strong> - who</div>
+                                <div class="vocab-item"><strong>wann</strong> - when</div>
+                                <div class="vocab-item"><strong>warum</strong> - why</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-term-card">
+                    <h3>Term 1b: Familie und Tiere</h3>
+                    <div class="vocab-columns">
+                        <div class="vocab-column">
+                            <h4>Family Members</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>die Familie</strong> - family</div>
+                                <div class="vocab-item"><strong>der Vater</strong> - father</div>
+                                <div class="vocab-item"><strong>die Mutter</strong> - mother</div>
+                                <div class="vocab-item"><strong>der Bruder</strong> - brother</div>
+                                <div class="vocab-item"><strong>die Schwester</strong> - sister</div>
+                                <div class="vocab-item"><strong>der Großvater</strong> - grandfather</div>
+                                <div class="vocab-item"><strong>die Großmutter</strong> - grandmother</div>
+                                <div class="vocab-item"><strong>die Eltern</strong> - parents</div>
+                                <div class="vocab-item"><strong>die Großeltern</strong> - grandparents</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Pets & Animals</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>das Haustier</strong> - pet</div>
+                                <div class="vocab-item"><strong>der Hund</strong> - dog</div>
+                                <div class="vocab-item"><strong>die Katze</strong> - cat</div>
+                                <div class="vocab-item"><strong>das Kaninchen</strong> - rabbit</div>
+                                <div class="vocab-item"><strong>der Hamster</strong> - hamster</div>
+                                <div class="vocab-item"><strong>der Fisch</strong> - fish</div>
+                                <div class="vocab-item"><strong>der Vogel</strong> - bird</div>
+                                <div class="vocab-item"><strong>die Maus</strong> - mouse</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Physical Descriptions</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>die Haare</strong> - hair</div>
+                                <div class="vocab-item"><strong>die Augen</strong> - eyes</div>
+                                <div class="vocab-item"><strong>blond</strong> - blonde</div>
+                                <div class="vocab-item"><strong>braun</strong> - brown</div>
+                                <div class="vocab-item"><strong>schwarz</strong> - black</div>
+                                <div class="vocab-item"><strong>grün</strong> - green</div>
+                                <div class="vocab-item"><strong>blau</strong> - blue</div>
+                                <div class="vocab-item"><strong>groß</strong> - tall/big</div>
+                                <div class="vocab-item"><strong>klein</strong> - small</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Dates & Time</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>das Datum</strong> - date</div>
+                                <div class="vocab-item"><strong>der Geburtstag</strong> - birthday</div>
+                                <div class="vocab-item"><strong>Januar</strong> - January</div>
+                                <div class="vocab-item"><strong>Februar</strong> - February</div>
+                                <div class="vocab-item"><strong>März</strong> - March</div>
+                                <div class="vocab-item"><strong>April</strong> - April</div>
+                                <div class="vocab-item"><strong>Mai</strong> - May</div>
+                                <div class="vocab-item"><strong>Juni</strong> - June</div>
+                                <div class="vocab-item"><strong>Juli</strong> - July</div>
+                                <div class="vocab-item"><strong>August</strong> - August</div>
+                                <div class="vocab-item"><strong>September</strong> - September</div>
+                                <div class="vocab-item"><strong>Oktober</strong> - October</div>
+                                <div class="vocab-item"><strong>November</strong> - November</div>
+                                <div class="vocab-item"><strong>Dezember</strong> - December</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-term-card">
+                    <h3>Term 2a: Freizeit - juhu!</h3>
+                    <div class="vocab-columns">
+                        <div class="vocab-column">
+                            <h4>Sports & Activities</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>der Sport</strong> - sport</div>
+                                <div class="vocab-item"><strong>Fußball</strong> - football</div>
+                                <div class="vocab-item"><strong>Tennis</strong> - tennis</div>
+                                <div class="vocab-item"><strong>Basketball</strong> - basketball</div>
+                                <div class="vocab-item"><strong>schwimmen</strong> - swimming</div>
+                                <div class="vocab-item"><strong>laufen</strong> - running</div>
+                                <div class="vocab-item"><strong>Rad fahren</strong> - cycling</div>
+                                <div class="vocab-item"><strong>spielen</strong> - to play</div>
+                                <div class="vocab-item"><strong>sportlich</strong> - sporty</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Leisure Activities</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>die Freizeit</strong> - free time</div>
+                                <div class="vocab-item"><strong>lesen</strong> - to read</div>
+                                <div class="vocab-item"><strong>fernsehen</strong> - to watch TV</div>
+                                <div class="vocab-item"><strong>Musik hören</strong> - listen to music</div>
+                                <div class="vocab-item"><strong>tanzen</strong> - to dance</div>
+                                <div class="vocab-item"><strong>singen</strong> - to sing</div>
+                                <div class="vocab-item"><strong>malen</strong> - to paint</div>
+                                <div class="vocab-item"><strong>kochen</strong> - to cook</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Online Activities</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>online sein</strong> - to be online</div>
+                                <div class="vocab-item"><strong>das Internet</strong> - internet</div>
+                                <div class="vocab-item"><strong>der Computer</strong> - computer</div>
+                                <div class="vocab-item"><strong>das Handy</strong> - mobile phone</div>
+                                <div class="vocab-item"><strong>chatten</strong> - to chat</div>
+                                <div class="vocab-item"><strong>surfen</strong> - to surf (internet)</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Opinions</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>super</strong> - super/great</div>
+                                <div class="vocab-item"><strong>toll</strong> - great/fantastic</div>
+                                <div class="vocab-item"><strong>gut</strong> - good</div>
+                                <div class="vocab-item"><strong>okay</strong> - okay</div>
+                                <div class="vocab-item"><strong>schlecht</strong> - bad</div>
+                                <div class="vocab-item"><strong>langweilig</strong> - boring</div>
+                                <div class="vocab-item"><strong>doof</strong> - stupid</div>
+                                <div class="vocab-item"><strong>gern</strong> - like to</div>
+                                <div class="vocab-item"><strong>nicht gern</strong> - don't like to</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-term-card">
+                    <h3>Term 2b: Schule ist klasse!</h3>
+                    <div class="vocab-columns">
+                        <div class="vocab-column">
+                            <h4>School Subjects</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>das Schulfach</strong> - school subject</div>
+                                <div class="vocab-item"><strong>Deutsch</strong> - German</div>
+                                <div class="vocab-item"><strong>Englisch</strong> - English</div>
+                                <div class="vocab-item"><strong>Mathe</strong> - Maths</div>
+                                <div class="vocab-item"><strong>Sport</strong> - PE</div>
+                                <div class="vocab-item"><strong>Kunst</strong> - Art</div>
+                                <div class="vocab-item"><strong>Musik</strong> - Music</div>
+                                <div class="vocab-item"><strong>Geschichte</strong> - History</div>
+                                <div class="vocab-item"><strong>Erdkunde</strong> - Geography</div>
+                                <div class="vocab-item"><strong>Naturwissenschaften</strong> - Science</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Days of the Week</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>der Montag</strong> - Monday</div>
+                                <div class="vocab-item"><strong>der Dienstag</strong> - Tuesday</div>
+                                <div class="vocab-item"><strong>der Mittwoch</strong> - Wednesday</div>
+                                <div class="vocab-item"><strong>der Donnerstag</strong> - Thursday</div>
+                                <div class="vocab-item"><strong>der Freitag</strong> - Friday</div>
+                                <div class="vocab-item"><strong>der Samstag</strong> - Saturday</div>
+                                <div class="vocab-item"><strong>der Sonntag</strong> - Sunday</div>
+                                <div class="vocab-item"><strong>am Montag</strong> - on Monday</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Time Expressions</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>die Zeit</strong> - time</div>
+                                <div class="vocab-item"><strong>die Uhr</strong> - clock/o'clock</div>
+                                <div class="vocab-item"><strong>um acht Uhr</strong> - at 8 o'clock</div>
+                                <div class="vocab-item"><strong>um halb neun</strong> - at half past eight</div>
+                                <div class="vocab-item"><strong>Viertel nach</strong> - quarter past</div>
+                                <div class="vocab-item"><strong>Viertel vor</strong> - quarter to</div>
+                                <div class="vocab-item"><strong>heute</strong> - today</div>
+                                <div class="vocab-item"><strong>morgen</strong> - tomorrow</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Teacher Descriptions</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>der Lehrer</strong> - teacher (male)</div>
+                                <div class="vocab-item"><strong>die Lehrerin</strong> - teacher (female)</div>
+                                <div class="vocab-item"><strong>nett</strong> - nice</div>
+                                <div class="vocab-item"><strong>freundlich</strong> - friendly</div>
+                                <div class="vocab-item"><strong>lustig</strong> - funny</div>
+                                <div class="vocab-item"><strong>streng</strong> - strict</div>
+                                <div class="vocab-item"><strong>hilfsbereit</strong> - helpful</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-term-card">
+                    <h3>Term 3a: Gute Reise!</h3>
+                    <div class="vocab-columns">
+                        <div class="vocab-column">
+                            <h4>Town & Places</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>die Stadt</strong> - town/city</div>
+                                <div class="vocab-item"><strong>das Café</strong> - café</div>
+                                <div class="vocab-item"><strong>das Restaurant</strong> - restaurant</div>
+                                <div class="vocab-item"><strong>das Kino</strong> - cinema</div>
+                                <div class="vocab-item"><strong>die Bank</strong> - bank</div>
+                                <div class="vocab-item"><strong>der Supermarkt</strong> - supermarket</div>
+                                <div class="vocab-item"><strong>die Post</strong> - post office</div>
+                                <div class="vocab-item"><strong>der Bahnhof</strong> - train station</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Directions</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>Wo ist...?</strong> - Where is...?</div>
+                                <div class="vocab-item"><strong>links</strong> - left</div>
+                                <div class="vocab-item"><strong>rechts</strong> - right</div>
+                                <div class="vocab-item"><strong>geradeaus</strong> - straight ahead</div>
+                                <div class="vocab-item"><strong>hier</strong> - here</div>
+                                <div class="vocab-item"><strong>da</strong> - there</div>
+                                <div class="vocab-item"><strong>in der Nähe</strong> - nearby</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Shopping & Souvenirs</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>das Souvenir</strong> - souvenir</div>
+                                <div class="vocab-item"><strong>kaufen</strong> - to buy</div>
+                                <div class="vocab-item"><strong>verkaufen</strong> - to sell</div>
+                                <div class="vocab-item"><strong>das kostet</strong> - that costs</div>
+                                <div class="vocab-item"><strong>der Euro</strong> - euro</div>
+                                <div class="vocab-item"><strong>das Geschäft</strong> - shop</div>
+                                <div class="vocab-item"><strong>die T-Shirt</strong> - t-shirt</div>
+                                <div class="vocab-item"><strong>die Postkarte</strong> - postcard</div>
+                            </div>
+                        </div>
+                        <div class="vocab-column">
+                            <h4>Food & Drink</h4>
+                            <div class="vocab-list">
+                                <div class="vocab-item"><strong>das Essen</strong> - food</div>
+                                <div class="vocab-item"><strong>trinken</strong> - to drink</div>
+                                <div class="vocab-item"><strong>das Wasser</strong> - water</div>
+                                <div class="vocab-item"><strong>die Cola</strong> - cola</div>
+                                <div class="vocab-item"><strong>der Saft</strong> - juice</div>
+                                <div class="vocab-item"><strong>das Brot</strong> - bread</div>
+                                <div class="vocab-item"><strong>der Kuchen</strong> - cake</div>
+                                <div class="vocab-item"><strong>das Eis</strong> - ice cream</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(0)">
+                    <h3>What will my child learn in their first term of German?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>In the first term, students begin with "Meine Welt und ich" (My World and Me), learning to introduce themselves, talk about their age, name, and where they live. They'll master numbers 1-19, basic question words, and start using the key verbs 'haben' (to have) and 'sein' (to be). The second half of the term focuses on family and pets, expanding vocabulary to describe family members, pets, physical descriptions, and important dates like birthdays.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(1)">
+                    <h3>How does the German curriculum connect to real life?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Our German curriculum is built around practical themes that students can relate to. They learn to talk about sports they play, describe their school subjects and teachers, plan holidays, and go shopping in German-speaking countries. Each module includes authentic materials and real-world scenarios, preparing students for genuine communication in German-speaking environments.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(2)">
+                    <h3>What grammar will students master by the end of Year 7?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>By the end of Year 7, students will have mastered present tense forms of essential verbs (haben, sein, spielen), ordinal and cardinal numbers, basic adjectives for descriptions, opinion expressions using 'gern', reason-giving with 'weil', prepositions (in, an, auf, neben), and future expressions using the present tense. They'll also be comfortable with 'es gibt' constructions and 'ich möchte' for expressing wants.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(3)">
+                    <h3>How are students assessed in Year 7 German?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Assessment is balanced across all four language skills. Each module includes a formal assessment: Module 1 focuses on reading comprehension, Module 2 on listening skills, Module 3 returns to reading, Module 4 emphasizes writing for communication, and Module 5 tests listening again. The year concludes with comprehensive end-of-year exams covering listening, reading, and writing, while speaking is assessed continuously throughout the year.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(4)">
+                    <h3>What resources and support are available for German learning?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Students use a comprehensive pupil book with integrated activities and regular "Lernzieltest" (learning objective tests) and "Wiederholung" (revision) sections at the end of each module (pages 20-21, 42-43, 66-67, 88-89, and 110-111). The curriculum includes built-in retrieval practice through "Do now" tasks and scheme-of-work activities, plus assessment review sessions to reinforce learning.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function toggleFAQ(index) {
+            const answer = document.querySelectorAll('.faq-answer')[index];
+            const toggle = document.querySelectorAll('.faq-toggle')[index];
+
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                toggle.textContent = '+';
+                toggle.style.transform = 'rotate(0deg)';
+            } else {
+                answer.classList.add('active');
+                toggle.textContent = '×';
+                toggle.style.transform = 'rotate(45deg)';
+            }
+        }
+    </script>
+</body>
+</html>

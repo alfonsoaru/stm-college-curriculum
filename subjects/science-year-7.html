@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 7 Science - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav a {
+            color: #ff6b35;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: #ff6b35;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .term-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .term-subtitle {
+            font-size: 1.25rem;
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .unit-card {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .unit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .unit-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .unit-subject {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .unit-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .unit-skills {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .skills-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border: 1px solid rgba(255, 107, 53, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ff6b35;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skill-description {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .assessment-section {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .assessment-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
+        }
+
+        .download-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .units-grid, .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .nav-button {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="science.html">← Back to Science Overview</a>
+    </nav>
+
+    <div class="hero">
+        <h1>🔬 Year 7 Science</h1>
+        <p>Building scientific foundations through Biology, Chemistry, and Physics - developing curiosity and investigation skills for lifelong learning</p>
+    </div>
+
+    <div class="container">
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="scrollToTerm('autumn')">Autumn Term</button>
+            <button class="nav-button" onclick="scrollToTerm('spring')">Spring Term</button>
+            <button class="nav-button" onclick="scrollToTerm('summer')">Summer Term</button>
+            <button class="nav-button" onclick="scrollToTerm('skills')">Scientific Skills</button>
+            <button class="nav-button" onclick="scrollToTerm('assessment')">Assessment</button>
+        </div>
+
+        <div id="autumn" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🍂 Autumn Term</h2>
+                <p class="term-subtitle">Units A & B - Scientific Foundations</p>
+            </div>
+
+            <div class="units-grid">
+                <div class="unit-card">
+                    <div class="unit-subject">Unit A - Biology</div>
+                    <h3 class="unit-title">Cells and Body Systems</h3>
+                    <p class="unit-description">
+                        Introduction to the building blocks of life. Students explore cell structure, learn to use microscopes, and investigate how cells form tissues, organs, and organ systems.
+                    </p>
+                    <p class="unit-skills">
+                        <strong>Key Skills:</strong> Microscopy, cell identification, organ system mapping, scientific drawing
+                    </p>
+                </div>
+
+                <div class="unit-card">
+                    <div class="unit-subject">Unit B - Chemistry</div>
+                    <h3 class="unit-title">Elements, Compounds & Mixtures</h3>
+                    <p class="unit-description">
+                        Understanding the fundamental building blocks of matter. Students learn about atoms, elements, and how they combine to form compounds and mixtures.
+                    </p>
+                    <p class="unit-skills">
+                        <strong>Key Skills:</strong> Element identification, compound formation, separation techniques, periodic table navigation
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="spring" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🌸 Spring Term</h2>
+                <p class="term-subtitle">Units C & D - Building Understanding</p>
+            </div>
+
+            <div class="units-grid">
+                <div class="unit-card">
+                    <div class="unit-subject">Unit C - Physics</div>
+                    <h3 class="unit-title">Forces and Motion</h3>
+                    <p class="unit-description">
+                        Exploring how forces affect the world around us. Students investigate different types of forces, their effects on objects, and how motion can be measured and predicted.
+                    </p>
+                    <p class="unit-skills">
+                        <strong>Key Skills:</strong> Force measurement, motion analysis, graph interpretation, experimental design
+                    </p>
+                </div>
+
+                <div class="unit-card">
+                    <div class="unit-subject">Unit D - Biology</div>
+                    <h3 class="unit-title">Life Processes & Living Things</h3>
+                    <p class="unit-description">
+                        Understanding what makes something alive. Students explore the seven life processes and investigate how different organisms carry out these essential functions.
+                    </p>
+                    <p class="unit-skills">
+                        <strong>Key Skills:</strong> Life process identification, organism classification, habitat investigation, biodiversity assessment
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="summer" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">☀️ Summer Term</h2>
+                <p class="term-subtitle">Units E & F - Expanding Horizons</p>
+            </div>
+
+            <div class="units-grid">
+                <div class="unit-card">
+                    <div class="unit-subject">Unit E - Chemistry</div>
+                    <h3 class="unit-title">Chemical Reactions</h3>
+                    <p class="unit-description">
+                        Discovering how substances interact and change. Students observe chemical reactions, learn about reactants and products, and explore how reactions can be controlled.
+                    </p>
+                    <p class="unit-skills">
+                        <strong>Key Skills:</strong> Reaction observation, chemical equation writing, safety procedures, laboratory techniques
+                    </p>
+                </div>
+
+                <div class="unit-card">
+                    <div class="unit-subject">Unit F - Physics</div>
+                    <h3 class="unit-title">Energy and Energy Transfers</h3>
+                    <p class="unit-description">
+                        Understanding energy in all its forms. Students explore different types of energy, how energy can be transferred and transformed, and the principle of energy conservation.
+                    </p>
+                    <p class="unit-skills">
+                        <strong>Key Skills:</strong> Energy identification, energy transfer mapping, efficiency calculations, renewable energy evaluation
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="skills" class="skills-section">
+            <h2>Scientific Skills Development</h2>
+            <p>Year 7 Science focuses on building fundamental scientific skills that students will use throughout their scientific education and beyond.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🔬</div>
+                    <h3 class="skill-title">Practical Investigation</h3>
+                    <p class="skill-description">Learning to plan, conduct, and evaluate scientific experiments using appropriate equipment and safety procedures.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <h3 class="skill-title">Data Analysis</h3>
+                    <p class="skill-description">Collecting, recording, and interpreting scientific data using tables, graphs, and charts to identify patterns and trends.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🧠</div>
+                    <h3 class="skill-title">Scientific Thinking</h3>
+                    <p class="skill-description">Developing hypotheses, making predictions, and drawing conclusions based on evidence and scientific reasoning.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">💬</div>
+                    <h3 class="skill-title">Scientific Communication</h3>
+                    <p class="skill-description">Presenting scientific ideas clearly using appropriate scientific vocabulary, diagrams, and mathematical representations.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🔍</div>
+                    <h3 class="skill-title">Observation Skills</h3>
+                    <p class="skill-description">Making accurate and detailed observations using all senses and scientific instruments to gather reliable evidence.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🌱</div>
+                    <h3 class="skill-title">Environmental Awareness</h3>
+                    <p class="skill-description">Understanding human impact on the environment and developing responsible attitudes toward scientific applications.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="assessment" class="assessment-section">
+            <h2 class="assessment-title">Assessment & Progress Tracking</h2>
+            <p class="assessment-description">
+                Year 7 Science assessment focuses on both knowledge acquisition and practical skills development. Students are assessed through practical investigations, unit tests, and ongoing formative assessment that tracks their scientific thinking and communication skills.
+            </p>
+            <a href="../stm_curriculum_downloads/science/Science%2520Long%2520Term%2520Plan.pdf" class="download-btn" target="_blank">
+                View Complete Assessment Framework
+            </a>
+        </div>
+
+        <div class="section">
+            <h2>Key Vocabulary Development</h2>
+            <p>Throughout Year 7, students develop scientific vocabulary essential for understanding and communicating scientific concepts:</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3 class="skill-title">Biology Terms</h3>
+                    <p class="skill-description">Cell, tissue, organ, organ system, microscope, nucleus, cytoplasm, cell membrane, life processes, classification</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3 class="skill-title">Chemistry Terms</h3>
+                    <p class="skill-description">Element, compound, mixture, atom, molecule, periodic table, chemical reaction, reactant, product, separation</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3 class="skill-title">Physics Terms</h3>
+                    <p class="skill-description">Force, motion, energy, transfer, conservation, kinetic, potential, gravity, friction, acceleration</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToTerm(termId) {
+            const element = document.getElementById(termId);
+            const offset = 100;
+            const elementPosition = element.offsetTop - offset;
+
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

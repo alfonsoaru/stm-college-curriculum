@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 7 Art - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav a {
+            color: #8e44ad;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: #8e44ad;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(142, 68, 173, 0.3);
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .term-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #8e44ad;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .term-subtitle {
+            font-size: 1.25rem;
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .element-card {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .element-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(142, 68, 173, 0.3);
+        }
+
+        .element-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .element-focus {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .element-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .element-skills {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .skills-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border: 1px solid rgba(142, 68, 173, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(142, 68, 173, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #8e44ad;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skill-description {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .assessment-section {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .assessment-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
+        }
+
+        .download-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .vocabulary-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .vocab-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 4px solid #8e44ad;
+        }
+
+        .vocab-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #8e44ad;
+            margin-bottom: 1rem;
+        }
+
+        .vocab-list {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .elements-grid, .skills-grid, .vocab-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .nav-button {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="art.html">← Back to Art Overview</a>
+    </nav>
+
+    <div class="hero">
+        <h1>🎨 Year 7 Art</h1>
+        <p>Discovering the fundamental elements of art through creative exploration and visual literacy development</p>
+    </div>
+
+    <div class="container">
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="scrollToTerm('autumn')">Autumn Term</button>
+            <button class="nav-button" onclick="scrollToTerm('spring')">Spring Term</button>
+            <button class="nav-button" onclick="scrollToTerm('summer')">Summer Term</button>
+            <button class="nav-button" onclick="scrollToTerm('skills')">Creative Skills</button>
+            <button class="nav-button" onclick="scrollToTerm('assessment')">Assessment</button>
+        </div>
+
+        <div id="autumn" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🍂 Autumn Term</h2>
+                <p class="term-subtitle">Terms 1a & 1b - Line, Shape, Colour, Tone & Texture</p>
+            </div>
+
+            <div class="elements-grid">
+                <div class="element-card">
+                    <div class="element-focus">Term 1a - Formal Elements</div>
+                    <h3 class="element-title">Line, Shape & Colour</h3>
+                    <p class="element-description">
+                        Introduction to the fundamental building blocks of art. Students explore different types of lines, organic and geometric shapes, and the colour wheel including primary, secondary, and complementary colours.
+                    </p>
+                    <p class="element-skills">
+                        <strong>Key Skills:</strong> Line variety (wiggling, sensitive, bold), shape identification, colour theory, visual vocabulary development
+                    </p>
+                </div>
+
+                <div class="element-card">
+                    <div class="element-focus">Term 1b - Formal Elements</div>
+                    <h3 class="element-title">Tone & Texture</h3>
+                    <p class="element-description">
+                        Advanced exploration of visual elements focusing on light, mid and dark tones, gradient blending, and both implied and actual textures through various mark-making techniques.
+                    </p>
+                    <p class="element-skills">
+                        <strong>Key Skills:</strong> Tone gradients, texture creation (scribbling, stippling, cross-hatching), frottage techniques, critical analysis
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="spring" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🌸 Spring Term</h2>
+                <p class="term-subtitle">Term 2a - Pattern & Composition Foundations</p>
+            </div>
+
+            <div class="elements-grid">
+                <div class="element-card">
+                    <div class="element-focus">Term 2a - Pattern & Composition</div>
+                    <h3 class="element-title">Pattern & Composition</h3>
+                    <p class="element-description">
+                        Understanding how patterns are created through repetition, rotation, and reflection. Introduction to composition principles including space, focal points, and visual balance.
+                    </p>
+                    <p class="element-skills">
+                        <strong>Key Skills:</strong> Pattern creation (repetition, half-drop repeat), composition understanding, tessellation, M.C. Escher studies
+                    </p>
+                </div>
+
+                <div class="element-card">
+                    <div class="element-focus">Cross-Curricular Connections</div>
+                    <h3 class="element-title">Real-World Applications</h3>
+                    <p class="element-description">
+                        Connecting art concepts to other subjects including tessellation with Numeracy, colour theory with Science, and studying artists like Henri Matisse (French connections).
+                    </p>
+                    <p class="element-skills">
+                        <strong>Connections:</strong> Mathematics (geometry), Science (colour theory), Geography (contour lines), Languages (cultural artists)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="summer" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">☀️ Summer Term</h2>
+                <p class="term-subtitle">Terms 3a & 3b - Composition Development & Exhibition</p>
+            </div>
+
+            <div class="elements-grid">
+                <div class="element-card">
+                    <div class="element-focus">Term 3a - Advanced Composition</div>
+                    <h3 class="element-title">Composition Development</h3>
+                    <p class="element-description">
+                        Developing ideas and exploring materials using techniques learned from studying various artists. Primary and secondary observation drawing with focus on composition and balance.
+                    </p>
+                    <p class="element-skills">
+                        <strong>Key Skills:</strong> Idea development, artist technique application, observational drawing, composition balance, material exploration
+                    </p>
+                </div>
+
+                <div class="element-card">
+                    <div class="element-focus">Term 3b - Exhibition Skills</div>
+                    <h3 class="element-title">Exhibition & Presentation</h3>
+                    <p class="element-description">
+                        Synthesizing learning from the entire year into final artworks. Creating exhibition-ready pieces and learning professional presentation skills including artwork photography.
+                    </p>
+                    <p class="element-skills">
+                        <strong>Key Skills:</strong> Final artwork creation, exhibition preparation, photography techniques, professional presentation, reflection
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="skills" class="skills-section">
+            <h2>Creative Skills Development</h2>
+            <p>Year 7 Art builds fundamental creative skills through exploration of the formal elements, developing visual literacy and practical artistic techniques.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">✏️</div>
+                    <h3 class="skill-title">Drawing Techniques</h3>
+                    <p class="skill-description">Master various line qualities, shading techniques, and observational drawing skills using primary and secondary sources.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3 class="skill-title">Colour Theory</h3>
+                    <p class="skill-description">Understanding primary, secondary, and tertiary colours, complementary relationships, and warm/cool colour properties.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🔍</div>
+                    <h3 class="skill-title">Visual Analysis</h3>
+                    <p class="skill-description">Developing critical analysis skills to describe and evaluate artworks using appropriate artistic vocabulary and justifying opinions.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🌀</div>
+                    <h3 class="skill-title">Pattern Making</h3>
+                    <p class="skill-description">Creating patterns through repetition, rotation, reflection, and understanding mathematical concepts in art like tessellation.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">⚖️</div>
+                    <h3 class="skill-title">Composition</h3>
+                    <p class="skill-description">Understanding space, focal points, balance, and how to arrange visual elements effectively in artworks.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📚</div>
+                    <h3 class="skill-title">Visual Literacy</h3>
+                    <p class="skill-description">Building vocabulary to describe formal elements and developing the ability to communicate about art clearly and accurately.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="vocabulary-section">
+            <h2>Key Art Vocabulary</h2>
+            <p>Students develop essential artistic vocabulary throughout Year 7, building the language needed to discuss and analyze artworks:</p>
+
+            <div class="vocab-grid">
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Line</h3>
+                    <p class="vocab-list">Wiggling, sensitive, faint, bold, contour, expressive, structural, gestural</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Shape & Form</h3>
+                    <p class="vocab-list">Organic, geometric, 2D, 3D, positive space, negative space, silhouette</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Colour</h3>
+                    <p class="vocab-list">Primary, secondary, tertiary, complementary, warm, cold, analogous, hue, saturation</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Tone</h3>
+                    <p class="vocab-list">Light, mid-tone, dark, gradient, blending, scale, contrast, highlight, shadow</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Texture</h3>
+                    <p class="vocab-list">Implied, actual, mark-making, scribbling, stippling, cross-hatching, frottage, surface quality</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Pattern & Composition</h3>
+                    <p class="vocab-list">Repetition, rotation, reflection, half-drop repeat, focal point, balance, space, unity</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="assessment" class="assessment-section">
+            <h2 class="assessment-title">Assessment & Portfolio Development</h2>
+            <p class="assessment-description">
+                Year 7 Art assessment is portfolio-based, tracking progress from baseline to final exhibition pieces. Students complete critical analysis of artists' work, develop practical skills, and demonstrate understanding of formal elements through creative projects.
+            </p>
+            <a href="../stm_curriculum_downloads/art/ART%2520LONG%2520TERM%2520PLAN.pdf" class="download-btn" target="_blank">
+                View Complete Art Framework
+            </a>
+        </div>
+
+        <div class="section">
+            <h2>Cross-Curricular Connections</h2>
+            <p>Art education at STM College connects meaningfully with other subjects, enriching learning across the curriculum:</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3 class="skill-title">Mathematics</h3>
+                    <p class="skill-description">Geometric shapes, tessellation, rotation, reflection, proportion, and symmetry through artists like M.C. Escher.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3 class="skill-title">Science</h3>
+                    <p class="skill-description">Colour theory, light sources, natural patterns, biodiversity studies, and anatomy through observational drawing.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3 class="skill-title">Languages</h3>
+                    <p class="skill-description">Cultural connections through artists like Henri Matisse (French) and Max Ernst (German), expanding cultural awareness.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3 class="skill-title">Geography & History</h3>
+                    <p class="skill-description">Contour lines, traditional and contemporary art movements, and understanding art in historical and cultural contexts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToTerm(termId) {
+            const element = document.getElementById(termId);
+            const offset = 100;
+            const elementPosition = element.offsetTop - offset;
+
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science Year 7 - STM College</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a90e2 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #1e3c72;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .curriculum-arrow-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .curriculum-text {
+            padding-right: 20px;
+        }
+
+        .curriculum-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .curriculum-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .pdf-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        .curriculum-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .curriculum-arrow {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .curriculum-arrow:hover {
+            transform: scale(1.05);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .term-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .term-card:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .term-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .term-card .duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .term-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .skills-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 0.9rem;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .assessment-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .assessment-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .assessment-section p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .weekly-breakdown {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .weekly-breakdown h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .week-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .faq-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-arrow-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .curriculum-text {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .curriculum-text h2 {
+                font-size: 2rem;
+            }
+
+            .term-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="computer-science.html">← Back to Computer Science</a>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Computer Science Year 7</h1>
+            <p>Build essential digital skills through programming, e-safety, and computational thinking</p>
+        </div>
+
+        <div class="curriculum-arrow-section">
+            <div class="curriculum-text">
+                <h2>Your Computing Journey</h2>
+                <p>Year 7 Computer Science provides comprehensive foundation in digital literacy, programming concepts, and safe technology use, building essential skills for the digital age.</p>
+                <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Computer%2520Science%2520Arrow2.pdf" class="pdf-link" target="_blank">
+                    View Full Curriculum Arrow →
+                </a>
+            </div>
+            <div class="curriculum-image">
+                <img src="../images/curriculum-arrows/computer-science-arrow-page-1.png" alt="Computer Science Curriculum Arrow" class="curriculum-arrow">
+            </div>
+        </div>
+
+        <div class="terms-grid">
+            <div class="term-card">
+                <h3>Autumn Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Basic Computer Skills & E-Safety</strong> - Foundation digital literacy and online safety</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: What is a computer? Hardware and software basics</div>
+                    <div class="week-item">Weeks 3-4: Logging on and basic system navigation</div>
+                    <div class="week-item">Weeks 5-6: Online safety and responsible internet use</div>
+                    <div class="week-item">Week 7: Social media safety and digital footprints</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Logging on systems</span>
+                        <span class="skill-tag">Online safety protocols</span>
+                        <span class="skill-tag">Social media awareness</span>
+                        <span class="skill-tag">Data protection</span>
+                        <span class="skill-tag">Digital citizenship</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Create a poster for a target audience demonstrating understanding of e-safety principles and responsible computer use.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Autumn Term 2</h3>
+                <div class="duration">Weeks 8-14</div>
+                <p><strong>Algorithms & Basic Programming</strong> - Introduction to computational thinking</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Understanding algorithms and computational thinking</div>
+                    <div class="week-item">Weeks 10-11: Creating simple algorithms and flowcharts</div>
+                    <div class="week-item">Weeks 12-13: Basic programming using Code.org</div>
+                    <div class="week-item">Week 14: Sequencing, selection, and iteration concepts</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Algorithm creation</span>
+                        <span class="skill-tag">Computational thinking</span>
+                        <span class="skill-tag">Programming sequencing</span>
+                        <span class="skill-tag">Selection techniques</span>
+                        <span class="skill-tag">Problem solving</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>End of unit test covering algorithm understanding and completion of programming puzzles demonstrating basic coding concepts.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Spring Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Spreadsheets - Theme Park Project</strong> - Data handling and analysis skills</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Basic spreadsheet concepts and navigation</div>
+                    <div class="week-item">Weeks 3-4: Formulas and functions for calculations</div>
+                    <div class="week-item">Weeks 5-6: Data sorting and table management</div>
+                    <div class="week-item">Week 7: Creating graphs and formatting for audience</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Spreadsheet concepts</span>
+                        <span class="skill-tag">Formulas and functions</span>
+                        <span class="skill-tag">Data sorting</span>
+                        <span class="skill-tag">Graph creation</span>
+                        <span class="skill-tag">Audience formatting</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Complete theme park spreadsheet project with appropriate formulas, data analysis, and professional presentation for target audience.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Spring Term 2</h3>
+                <div class="duration">Weeks 8-13</div>
+                <p><strong>KODU Programming - 3D Games</strong> - Visual programming and game design</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Introduction to KODU and 3D environments</div>
+                    <div class="week-item">Weeks 10-11: Character creation and autonomous movement paths</div>
+                    <div class="week-item">Weeks 12-13: Enemy spawning and level design techniques</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">3D environment creation</span>
+                        <span class="skill-tag">Character manipulation</span>
+                        <span class="skill-tag">Path programming</span>
+                        <span class="skill-tag">Level design</span>
+                        <span class="skill-tag">Game planning</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Final KODU game project designed for specific target audience, demonstrating programming concepts and creative design skills.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Summer Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Microbits Block Programming</strong> - Hardware programming and real-world applications</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Introduction to microbit hardware and capabilities</div>
+                    <div class="week-item">Weeks 3-4: Block programming for LED displays and sensors</div>
+                    <div class="week-item">Weeks 5-6: Interactive program development and testing</div>
+                    <div class="week-item">Week 7: Problem-solving challenges and debugging</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Hardware programming</span>
+                        <span class="skill-tag">Real-life applications</span>
+                        <span class="skill-tag">Problem solving</span>
+                        <span class="skill-tag">Challenge development</span>
+                        <span class="skill-tag">Debugging techniques</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Create simple interactive game using microbit and complete programming challenges demonstrating hardware-software integration.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Summer Term 2</h3>
+                <div class="duration">Weeks 8-12</div>
+                <p><strong>Advanced Programming Challenges</strong> - Consolidation and extension of skills</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Review of programming concepts across platforms</div>
+                    <div class="week-item">Weeks 10-11: Complex challenge solving and project work</div>
+                    <div class="week-item">Week 12: Portfolio completion and reflection on learning</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Abstraction concepts</span>
+                        <span class="skill-tag">Algorithm refinement</span>
+                        <span class="skill-tag">Computational thinking</span>
+                        <span class="skill-tag">Debugging mastery</span>
+                        <span class="skill-tag">Project completion</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Complete comprehensive challenges demonstrating mastery of programming concepts and computational thinking skills developed throughout the year.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>Computer Science Year 7 Q&A</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">What programming languages and tools will students learn?</div>
+                <div class="faq-answer">Students use Code.org for visual programming, KODU for 3D game creation, and microbit block programming. This progression builds from visual to text-based programming concepts while maintaining engagement through practical projects.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How is e-safety integrated throughout the curriculum?</div>
+                <div class="faq-answer">E-safety is foundational, covering responsible internet use, social media safety, digital footprints, data protection, and cyberbullying prevention. Students learn through case studies including safe Snapchat use and identifying fake news.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What computational thinking skills are developed?</div>
+                <div class="faq-answer">Students develop pattern recognition, decomposition, abstraction, and algorithmic thinking through practical programming projects. They learn sequencing, selection, and iteration while solving real-world problems.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How do projects connect to real-world applications?</div>
+                <div class="faq-answer">Projects include theme park data management using spreadsheets, game design for target audiences, and microbit programming for interactive devices. Students see how computing concepts apply to entertainment, business, and technology industries.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

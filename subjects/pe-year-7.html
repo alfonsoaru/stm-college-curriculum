@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PE Year 7 - STM College</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 50%, #17a2b8 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .curriculum-arrow-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .curriculum-text {
+            padding-right: 20px;
+        }
+
+        .curriculum-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .curriculum-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .pdf-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        .curriculum-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .curriculum-arrow {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .curriculum-arrow:hover {
+            transform: scale(1.05);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .term-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .term-card:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .term-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .term-card .duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .term-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .skills-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 0.9rem;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .assessment-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .assessment-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .assessment-section p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .weekly-breakdown {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .weekly-breakdown h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .week-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .faq-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-arrow-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .curriculum-text {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .curriculum-text h2 {
+                font-size: 2rem;
+            }
+
+            .term-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="pe.html">← Back to PE</a>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>PE Year 7</h1>
+            <p>Build fundamental movement skills and develop physical literacy through diverse sporting activities</p>
+        </div>
+
+        <div class="curriculum-arrow-section">
+            <div class="curriculum-text">
+                <h2>Your PE Journey</h2>
+                <p>Year 7 PE introduces fundamental skills across game, net/wall, strike/field activities, gymnastics, and athletics, building essential movement competencies and physical confidence.</p>
+                <a href="../stm_curriculum_downloads/pe/PE%2520Core%2520Arrow%25202.pdf" class="pdf-link" target="_blank">
+                    View Full Curriculum Arrow →
+                </a>
+            </div>
+            <div class="curriculum-image">
+                <img src="../images/curriculum-arrows/pe-arrow-page-1.png" alt="PE Curriculum Arrow" class="curriculum-arrow">
+            </div>
+        </div>
+
+        <div class="terms-grid">
+            <div class="term-card">
+                <h3>Autumn Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Athletic Fitness Tests & Game Skills</strong> - Foundation fitness assessment and multi-sport introduction</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Baseline fitness assessments and athletic testing</div>
+                    <div class="week-item">Weeks 3-4: Introduction to game activities and basic skills</div>
+                    <div class="week-item">Weeks 5-6: Net and wall games fundamentals</div>
+                    <div class="week-item">Week 7: Strike and field activities introduction</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Fitness testing</span>
+                        <span class="skill-tag">Game skills</span>
+                        <span class="skill-tag">Net and wall games</span>
+                        <span class="skill-tag">Strike and field</span>
+                        <span class="skill-tag">Movement fundamentals</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Baseline fitness assessments and ongoing skill development tracking through assessment booklets completed every 6th lesson.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Autumn Term 2</h3>
+                <div class="duration">Weeks 8-14</div>
+                <p><strong>Volleyball, Trampolining & Table Tennis</strong> - Net/wall games and gymnastics focus</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Volleyball basics - dig, set, volley techniques</div>
+                    <div class="week-item">Weeks 10-11: Trampolining - shapes, turns, seat drop safety</div>
+                    <div class="week-item">Weeks 12-13: Table tennis - push, rally, serving skills</div>
+                    <div class="week-item">Week 14: Integration and rules understanding</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Volleyball techniques</span>
+                        <span class="skill-tag">Trampoline safety</span>
+                        <span class="skill-tag">Table tennis skills</span>
+                        <span class="skill-tag">Rules knowledge</span>
+                        <span class="skill-tag">Coordination</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Skill development assessment through practical demonstration and assessment booklet completion focusing on technique and rules understanding.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Spring Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Volleyball, Trampolining & Table Tennis</strong> - Skill refinement and game application</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Advanced volleyball - dig, set, rules application</div>
+                    <div class="week-item">Weeks 3-4: Trampoline progression - shapes, turns, seat drop mastery</div>
+                    <div class="week-item">Weeks 5-6: Table tennis development - push, rally, serving accuracy</div>
+                    <div class="week-item">Week 7: Competitive game situations and tactics</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Advanced techniques</span>
+                        <span class="skill-tag">Game application</span>
+                        <span class="skill-tag">Tactical awareness</span>
+                        <span class="skill-tag">Competitive play</span>
+                        <span class="skill-tag">Performance consistency</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Performance assessment in competitive situations demonstrating technical proficiency and tactical understanding across all three activities.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Spring Term 2</h3>
+                <div class="duration">Weeks 8-13</div>
+                <p><strong>Badminton, Gymnastics & Health-Related Fitness</strong> - Racket sports and fitness development</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Badminton fundamentals - serve, clear, footwork</div>
+                    <div class="week-item">Weeks 10-11: Gymnastics 2 - rolls, balances, sequences</div>
+                    <div class="week-item">Weeks 12-13: Health-Related Fitness 2 - ROPHA principles</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Badminton techniques</span>
+                        <span class="skill-tag">Gymnastics sequences</span>
+                        <span class="skill-tag">Fitness principles</span>
+                        <span class="skill-tag">Body conditioning</span>
+                        <span class="skill-tag">Movement quality</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Technical skill assessment in badminton, gymnastics sequence performance, and understanding of health-related fitness components.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Summer Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Athletics</strong> - Track and field fundamentals</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Sprint techniques and pacing strategies</div>
+                    <div class="week-item">Weeks 3-4: Jumping events - technique and safety</div>
+                    <div class="week-item">Weeks 5-6: Circuit training and continuous fitness</div>
+                    <div class="week-item">Week 7: Athletics competition and personal bests</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Sprint techniques</span>
+                        <span class="skill-tag">Jumping mechanics</span>
+                        <span class="skill-tag">Pacing strategies</span>
+                        <span class="skill-tag">Circuit training</span>
+                        <span class="skill-tag">Personal improvement</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Athletic performance measurement, technique assessment, and demonstration of continuous improvement in track and field events.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Summer Term 2</h3>
+                <div class="duration">Weeks 8-12</div>
+                <p><strong>Cricket, Rounders & Boxing</strong> - Strike/field games and combat sports introduction</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Cricket - batting, bowling, fielding basics</div>
+                    <div class="week-item">Weeks 10-11: Rounders - throwing, catching, hitting techniques</div>
+                    <div class="week-item">Week 12: Boxing - punch technique, footwork, safety</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Cricket techniques</span>
+                        <span class="skill-tag">Rounders skills</span>
+                        <span class="skill-tag">Boxing fundamentals</span>
+                        <span class="skill-tag">Safety awareness</span>
+                        <span class="skill-tag">Team tactics</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Strike and field game performance assessment covering batting, bowling, fielding skills, and understanding of game tactics and safety procedures.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>PE Year 7 Q&A</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">How are students assessed in PE?</div>
+                <div class="faq-answer">Students complete assessment booklets every 6th lesson, focusing on skill development, technique improvement, and understanding of rules and tactics. This includes baseline fitness tests and ongoing practical performance evaluation.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What sports and activities are covered in Year 7?</div>
+                <div class="faq-answer">Year 7 covers volleyball, trampolining, table tennis, badminton, gymnastics, athletics, cricket, rounders, and boxing fundamentals. Students experience game, net/wall, strike/field, and gymnastic activities.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How does PE support fitness and health education?</div>
+                <div class="faq-answer">The curriculum includes Health-Related Fitness (HRF) components covering ROPHA principles (Rate, Overload, Progression, Health, Adherence), circuit training, and understanding of cardiovascular fitness and body conditioning.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What safety measures are in place?</div>
+                <div class="faq-answer">Safety is paramount with structured progressions in activities like trampolining and boxing. Students learn proper techniques, safety protocols, and risk assessment while developing physical competence and confidence.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

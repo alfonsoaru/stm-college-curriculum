@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design & Technology Year 7 - STM College</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .curriculum-arrow-section {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .curriculum-arrow-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .arrow-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .arrow-text p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .arrow-image {
+            text-align: center;
+        }
+
+        .arrow-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .arrow-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .term-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .term-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .term-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .weeks-container {
+            margin-bottom: 25px;
+        }
+
+        .weeks-container h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #f0f0f0;
+        }
+
+        .week-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border-left: 4px solid #ffffff;
+        }
+
+        .week-item strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .skills-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .skills-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .assessment-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .assessment-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #ffeb3b;
+        }
+
+        .assessment-item {
+            background: rgba(255, 235, 59, 0.1);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-left: 3px solid #ffeb3b;
+        }
+
+        .subject-focus {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .focus-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .focus-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ffffff;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        .faq-section {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .faq-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-arrow-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .focus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Subject Overview</a>
+
+        <div class="header">
+            <h1>Design & Technology</h1>
+            <p>Year 7 Curriculum - Creating innovative solutions through design thinking, practical skills, and technology integration</p>
+        </div>
+
+        <div class="curriculum-arrow-section">
+            <div class="curriculum-arrow-content">
+                <div class="arrow-text">
+                    <h2>STM Design & Technology Curriculum Pathway</h2>
+                    <p>Our Design & Technology curriculum develops creative problem-solving skills through both Product Design and Food Technology.</p>
+                    <p>Students learn to design, make, and evaluate innovative solutions while developing technical skills and understanding materials and processes.</p>
+                    <p><strong>Click the curriculum arrow to view the complete progression pathway →</strong></p>
+                </div>
+                <div class="arrow-image">
+                    <img src="../images/curriculum-arrows/design-technology-arrow.png"
+                         alt="Design & Technology Curriculum Arrow"
+                         onclick="openModal(this.src)">
+                </div>
+            </div>
+        </div>
+
+        <div class="subject-focus">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.2rem;">Year 7 Focus Areas</h2>
+            <div class="focus-grid">
+                <div class="focus-item">
+                    <h3>🎨 Product Design</h3>
+                    <p>CAD/CAM, design principles, decorative techniques, and mechanical systems including cam mechanisms</p>
+                </div>
+                <div class="focus-item">
+                    <h3>🧵 Textiles Technology</h3>
+                    <p>Fabric properties, construction methods, sewing machine skills, and decorative techniques including tie-dye</p>
+                </div>
+                <div class="focus-item">
+                    <h3>🍳 Food Technology</h3>
+                    <p>Health & safety, nutrition, eat well guide, practical cooking skills, and food presentation techniques</p>
+                </div>
+                <div class="focus-item">
+                    <h3>🔧 Technical Skills</h3>
+                    <p>Drawing skills, rendering techniques, annotation using ACCESSFMM, and practical making skills</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="terms-grid">
+            <div class="term-card">
+                <h3>Term 1a - CAD & Design Principles</h3>
+                <div class="weeks-container">
+                    <h4>🎨 Product Design Focus</h4>
+                    <div class="week-item">
+                        <strong>CAD and CAM:</strong> Introduction to Computer-Aided Design and Computer-Aided Manufacture using Photoshop
+                    </div>
+                    <div class="week-item">
+                        <strong>Design Principles:</strong> Understanding fundamental design concepts and school ethos integration
+                    </div>
+                    <div class="week-item">
+                        <strong>Decorative Techniques:</strong> Exploring visual enhancement methods and creative applications
+                    </div>
+                    <div class="week-item">
+                        <strong>Fair Trade & Materials:</strong> Natural vs Synthetic materials and ethical considerations
+                    </div>
+                </div>
+                <div class="skills-section">
+                    <h4>Skills Development</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Photoshop</span>
+                        <span class="skill-tag">Design Development</span>
+                        <span class="skill-tag">Creative Thinking</span>
+                        <span class="skill-tag">Material Knowledge</span>
+                    </div>
+                </div>
+                <div class="assessment-section">
+                    <h4>Key Assessment</h4>
+                    <div class="assessment-item">Photoshop Logo Design - Creating professional logos with meaningful text and visual effects</div>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Term 1b - Textiles & Construction</h3>
+                <div class="weeks-container">
+                    <h4>🧵 Textiles Focus</h4>
+                    <div class="week-item">
+                        <strong>Decorative Techniques:</strong> Hand applique, embroidery, and tie-dye methods
+                    </div>
+                    <div class="week-item">
+                        <strong>Tools and Equipment:</strong> Sewing machine operation and textile tools
+                    </div>
+                    <div class="week-item">
+                        <strong>Fabrics and Components:</strong> Understanding fabric properties and construction materials
+                    </div>
+                    <div class="week-item">
+                        <strong>Construction Methods:</strong> Plain seams and joining techniques
+                    </div>
+                </div>
+                <div class="skills-section">
+                    <h4>Skills Development</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Sewing Machine</span>
+                        <span class="skill-tag">Hand Applique</span>
+                        <span class="skill-tag">Embroidery</span>
+                        <span class="skill-tag">Tie-dye</span>
+                    </div>
+                </div>
+                <div class="assessment-section">
+                    <h4>Key Assessment</h4>
+                    <div class="assessment-item">Practical Sewing Assessment - Safe and accurate machine use with creative sample creation</div>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Term 2a - Technical Drawing & CAM</h3>
+                <div class="weeks-container">
+                    <h4>📐 Technical Skills Focus</h4>
+                    <div class="week-item">
+                        <strong>Drawing Skills:</strong> Oblique projection and technical drawing techniques
+                    </div>
+                    <div class="week-item">
+                        <strong>Rendering Skills:</strong> Light, dark, and medium shades plus wood effect rendering
+                    </div>
+                    <div class="week-item">
+                        <strong>CAM Mechanisms:</strong> Understanding Computer-Aided Manufacture and mechanical systems
+                    </div>
+                    <div class="week-item">
+                        <strong>Annotation:</strong> Using ACCESSFMM criteria for design evaluation
+                    </div>
+                </div>
+                <div class="skills-section">
+                    <h4>Skills Development</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Oblique Projection</span>
+                        <span class="skill-tag">Rendering</span>
+                        <span class="skill-tag">CAM Systems</span>
+                        <span class="skill-tag">ACCESSFMM</span>
+                    </div>
+                </div>
+                <div class="assessment-section">
+                    <h4>Key Assessment</h4>
+                    <div class="assessment-item">Technical Drawing Assessment - Accurate projection and rendering with CAM mechanism analysis</div>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Term 2b - Mechanical Toy Making</h3>
+                <div class="weeks-container">
+                    <h4>🔧 Practical Making Focus</h4>
+                    <div class="week-item">
+                        <strong>Making a Mechanical Toy:</strong> Complete product manufacture from design to finish
+                    </div>
+                    <div class="week-item">
+                        <strong>Practical Skills:</strong> Marking out, cutting, drilling, and joining techniques
+                    </div>
+                    <div class="week-item">
+                        <strong>Finishing Techniques:</strong> Filling, smoothing, and surface finishing methods
+                    </div>
+                    <div class="week-item">
+                        <strong>Quality Control:</strong> Dimensional accuracy and functional testing
+                    </div>
+                </div>
+                <div class="skills-section">
+                    <h4>Skills Development</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Marking Out</span>
+                        <span class="skill-tag">Cutting</span>
+                        <span class="skill-tag">Drilling</span>
+                        <span class="skill-tag">Joining</span>
+                        <span class="skill-tag">Finishing</span>
+                    </div>
+                </div>
+                <div class="assessment-section">
+                    <h4>Key Assessment</h4>
+                    <div class="assessment-item">Mechanical Toy Production - High accuracy manufacturing with perfect functionality</div>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Term 3a - Food Technology & Nutrition</h3>
+                <div class="weeks-container">
+                    <h4>🍳 Food Technology Focus</h4>
+                    <div class="week-item">
+                        <strong>Health & Safety:</strong> Kitchen safety protocols and food hygiene
+                    </div>
+                    <div class="week-item">
+                        <strong>Nutrition Knowledge:</strong> Eat well guide, food groups, and healthy lifestyle
+                    </div>
+                    <div class="week-item">
+                        <strong>Practical Cooking:</strong> Pizza toast and flapjack preparation
+                    </div>
+                    <div class="week-item">
+                        <strong>Enzymic Browning:</strong> Scientific understanding of food chemistry
+                    </div>
+                </div>
+                <div class="skills-section">
+                    <h4>Skills Development</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Food Safety</span>
+                        <span class="skill-tag">Nutrition</span>
+                        <span class="skill-tag">Healthy Lifestyle</span>
+                        <span class="skill-tag">Food Science</span>
+                    </div>
+                </div>
+                <div class="assessment-section">
+                    <h4>Key Assessment</h4>
+                    <div class="assessment-item">Nutrition Assessment - Eat well guide knowledge and food group analysis</div>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Term 3b - Advanced Food Skills</h3>
+                <div class="weeks-container">
+                    <h4>👨‍🍳 Advanced Cooking Focus</h4>
+                    <div class="week-item">
+                        <strong>Pasta Salad Project:</strong> Planning, making, and evaluating complete dishes
+                    </div>
+                    <div class="week-item">
+                        <strong>Fruit Taste Testing:</strong> Sensory analysis and food evaluation skills
+                    </div>
+                    <div class="week-item">
+                        <strong>Smoothie Making:</strong> Healthy drink preparation and presentation
+                    </div>
+                    <div class="week-item">
+                        <strong>Bake Off Challenge:</strong> Shortbread making and competitive baking
+                    </div>
+                </div>
+                <div class="skills-section">
+                    <h4>Skills Development</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Cutting Techniques</span>
+                        <span class="skill-tag">Food Groups</span>
+                        <span class="skill-tag">Presentation</span>
+                        <span class="skill-tag">Boiling</span>
+                        <span class="skill-tag">Precision</span>
+                    </div>
+                </div>
+                <div class="assessment-section">
+                    <h4>Key Assessment</h4>
+                    <div class="assessment-item">Practical Cooking Assessment - Safe preparation with accurate cutting and attractive presentation</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.2rem;">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>What makes STM's Design & Technology curriculum unique?</h3>
+                <p>Our curriculum combines traditional making skills with cutting-edge technology, including CAD/CAM systems and Photoshop. Students experience both Product Design and Food Technology, developing creative problem-solving skills while understanding the design process from conception to manufacture.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How does the curriculum prepare students for GCSE?</h3>
+                <p>Year 7 introduces fundamental concepts like ACCESSFMM annotation criteria, technical drawing skills, and material understanding that form the foundation for GCSE Design & Technology. Students develop independence and analytical skills essential for higher-level study.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What practical skills will my child develop?</h3>
+                <p>Students master both traditional craft skills (hand sewing, woodworking tools) and modern technology (CAD software, sewing machines, laser cutting). They learn marking out, cutting, drilling, joining, and finishing techniques alongside food preparation and presentation skills.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How is Food Technology integrated into the curriculum?</h3>
+                <p>Food Technology runs alongside Product Design, covering nutrition science, food safety, and practical cooking skills. Students learn about the eat well guide, food groups, and healthy lifestyle choices while developing practical skills in food preparation and presentation.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What assessment methods are used?</h3>
+                <p>Assessment combines practical making skills with design portfolio work. Students are assessed on technical accuracy, creative problem-solving, independence, and ability to evaluate their work against design criteria. Each term focuses on specific skill development and assessment.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for curriculum arrow -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Curriculum Arrow">
+        </div>
+    </div>
+
+    <script>
+        function openModal(src) {
+            document.getElementById('imageModal').style.display = 'block';
+            document.getElementById('modalImage').src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

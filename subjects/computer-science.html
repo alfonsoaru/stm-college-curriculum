@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science & Media - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #141414;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+
+        .hero {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin: 3rem 0;
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #95a5a6;
+            border-left: 4px solid #95a5a6;
+            padding-left: 1rem;
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .document-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(149, 165, 166, 0.2);
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            background: rgba(149, 165, 166, 0.1);
+            border-color: #95a5a6;
+        }
+
+        .document-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #95a5a6;
+        }
+
+        .document-description {
+            color: #b3b3b3;
+            margin-bottom: 1.5rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #95a5a6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .curriculum-pathways {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pathway-card {
+            background: rgba(149, 165, 166, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid rgba(149, 165, 166, 0.3);
+        }
+
+        .pathway-title {
+            font-size: 1.5rem;
+            color: #95a5a6;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .year-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .year-card {
+            background: rgba(149, 165, 166, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #95a5a6;
+        }
+
+        .year-card h4 {
+            color: #95a5a6;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .year-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .year-card li {
+            padding: 0.3rem 0;
+            color: #b3b3b3;
+        }
+
+        .year-card li:before {
+            content: "•";
+            color: #95a5a6;
+            font-weight: bold;
+            width: 1em;
+            margin-right: 0.5em;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .documents-grid, .curriculum-pathways {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white;">
+    </iframe>
+
+    <div class="hero">
+        <h1>💻 Computer Science & Media</h1>
+        <p>Digital literacy, programming, and media production skills for the modern world</p>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>📋 Available Documents (17 Total)</h2>
+            <p>The most comprehensive subject area with detailed documentation across multiple pathways:</p>
+            
+            <div class="documents-grid">
+                <div class="document-card">
+                    <div class="document-title">💻 Computer Science Arrow</div>
+                    <div class="document-description">
+                        Visual progression pathway for Computer Science from KS3 through GCSE level,
+                        showing skill development in programming, algorithms, and computational thinking.
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Computer%20Science%20Arrow2.pdf" class="download-btn" target="_blank" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">
+                            📄 Main Arrow PDF
+                        </a>
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Curriculum%20Arrow%20GCSE%20Computer%20Science2.pdf" class="download-btn" target="_blank" style="margin-bottom: 0.5rem;">
+                            📄 GCSE Arrow PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">⚡ Core Computing Arrow</div>
+                    <div class="document-description">
+                        Foundation computing skills pathway covering digital literacy, basic programming, 
+                        and computer systems understanding for all students.
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Core%20Computing%20Arrow.pdf" class="download-btn" target="_blank" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">
+                            📄 Core Computing Arrow
+                        </a>
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Core%20Computing%20Assessment%20Information.pdf" class="download-btn" target="_blank" style="margin-bottom: 0.5rem;">
+                            📄 Assessment Info
+                        </a>
+                    </div>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">📱 iMedia Arrow</div>
+                    <div class="document-description">
+                        Creative media production pathway covering digital design, video production,
+                        and interactive media development skills.
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/iMedia%20Arrow%202.pdf" class="download-btn" target="_blank" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">
+                            📄 iMedia Arrow PDF
+                        </a>
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/iMedia%20Long%20Term%20Plan.pdf" class="download-btn" target="_blank" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">
+                            📄 Long Term Plan
+                        </a>
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/iMedia%20Assessment%20Information.pdf" class="download-btn" target="_blank" style="margin-bottom: 0.5rem;">
+                            📄 Assessment Info
+                        </a>
+                    </div>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">📺 GCSE Media Arrow</div>
+                    <div class="document-description">
+                        Advanced media studies pathway analyzing media texts, production techniques,
+                        and industry practices at GCSE level.
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/GCSE%20Media%20Arrow.pdf" class="download-btn" target="_blank" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">
+                            📄 Media Arrow PDF
+                        </a>
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/GCSE%20Media%20Long%20Term%20Plan.pdf" class="download-btn" target="_blank" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">
+                            📄 Long Term Plan
+                        </a>
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/GCSE%20Media%20Assessment%20Information.pdf" class="download-btn" target="_blank" style="margin-bottom: 0.5rem;">
+                            📄 Assessment Info
+                        </a>
+                    </div>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">🚀 Enterprise & Marketing</div>
+                    <div class="document-description">
+                        Business and entrepreneurship pathway developing enterprise skills, 
+                        marketing understanding, and business proposal creation.
+                    </div>
+                    <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/J837%20E%26M%20Learning%20ARROW.pdf" class="download-btn" target="_blank">
+                        📄 View Arrow PDF
+                    </a>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">📊 Scheme of Work Documents</div>
+                    <div class="document-description">
+                        Detailed unit-by-unit planning documents for Enterprise modules including 
+                        marketing concepts, business proposals, and pitching skills.
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Scheme%20of%20work%20Enterprise%20and%20marketing%20concepts%20(R067).pdf" class="download-btn" target="_blank" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">
+                            📄 Marketing Concepts
+                        </a>
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Scheme%20of%20work%20Design%20a%20business%20proposal%20(R068).pdf" class="download-btn" target="_blank" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">
+                            📄 Business Proposal
+                        </a>
+                        <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Scheme%20of%20work%20Market%20and%20pitch%20a%20business%20proposal%20(R069).pdf" class="download-btn" target="_blank" style="margin-bottom: 0.5rem;">
+                            📄 Market & Pitch
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Multiple Learning Pathways</h2>
+            <p>Computer Science & Media offers diverse pathways to suit different interests and career aspirations:</p>
+            
+            <div class="curriculum-pathways">
+                <div class="pathway-card">
+                    <h3 class="pathway-title">💻 Computer Science Track</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Programming fundamentals</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Algorithm development</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Data structures</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Software engineering</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• GCSE Computer Science</li>
+                    </ul>
+                </div>
+
+                <div class="pathway-card">
+                    <h3 class="pathway-title">📱 Creative Media Track</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Digital design</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Video production</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Interactive media</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Media analysis</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• GCSE Media Studies</li>
+                    </ul>
+                </div>
+
+                <div class="pathway-card">
+                    <h3 class="pathway-title">🚀 Enterprise Track</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Business concepts</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Marketing strategies</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Proposal development</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Presentation skills</li>
+                        <li style="padding: 0.5rem 0; color: #b3b3b3;">• Entrepreneurship</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Year-by-Year Development</h2>
+            <p>Comprehensive skill development across all year groups:</p>
+            
+            <div class="year-breakdown">
+                <div class="year-card" onclick="window.open('computer-science-year-7.html', '_blank')" style="cursor: pointer; transition: all 0.3s ease;">
+                    <h4>Year 7 - Digital Foundations</h4>
+                    <ul>
+                        <li>Digital literacy basics</li>
+                        <li>Introduction to coding</li>
+                        <li>Online safety</li>
+                        <li>Basic media creation</li>
+                        <li>Computer systems</li>
+                    </ul>
+                    <div style="margin-top: 1rem;">
+                        <span style="background: #f8f9fa; color: #007aff; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(0, 122, 255, 0.2);">Explore Year 7 →</span>
+                    </div>
+                </div>
+
+                <div class="year-card">
+                    <h4>Year 8</h4>
+                    <ul>
+                        <li>Programming concepts</li>
+                        <li>Algorithm design</li>
+                        <li>Media production</li>
+                        <li>Business basics</li>
+                        <li>Problem solving</li>
+                    </ul>
+                </div>
+
+                <div class="year-card">
+                    <h4>Year 9</h4>
+                    <ul>
+                        <li>Advanced programming</li>
+                        <li>Creative projects</li>
+                        <li>Enterprise skills</li>
+                        <li>GCSE preparation</li>
+                        <li>Career exploration</li>
+                    </ul>
+                </div>
+
+                <div class="year-card">
+                    <h4>GCSE Years</h4>
+                    <ul>
+                        <li>Specialist pathways</li>
+                        <li>Major projects</li>
+                        <li>Industry standards</li>
+                        <li>Exam preparation</li>
+                        <li>Portfolio development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: rgba(149, 165, 166, 0.1); border-radius: 12px;">
+            <h3>🎯 Assessment & Progression</h3>
+            <p style="margin: 1rem 0;">Students are assessed through practical projects, portfolio work, and theoretical understanding across all pathways.</p>
+            <div style="margin-top: 2rem;">
+                <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Computer%20Science%20Long%20Term%20Plan.pdf"
+                   class="download-btn" style="margin: 0.5rem;"
+                   target="_blank">
+                    📄 CS Long Term Plans
+                </a>
+                <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/Core%20Computing%20Assessment%20Information.pdf"
+                   class="download-btn" style="margin: 0.5rem;"
+                   target="_blank">
+                    📄 Core Computing Assessment
+                </a>
+                <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/GCSE%20Computer%20Science%20Long%20Term%20Plan.pdf"
+                   class="download-btn" style="margin: 0.5rem;"
+                   target="_blank">
+                    📄 GCSE CS Long Term Plan
+                </a>
+                <a href="../stm_curriculum_downloads/computer_science_enterprise_and_media/GCSE%20Computer%20Science%20Assessment%20Information.pdf"
+                   class="download-btn" style="margin: 0.5rem;"
+                   target="_blank">
+                    📄 GCSE CS Assessment
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

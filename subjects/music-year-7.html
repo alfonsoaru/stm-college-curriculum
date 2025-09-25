@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Year 7 - STM College</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #9C27B0 0%, #673AB7 50%, #3F51B5 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #9C27B0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .curriculum-arrow-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .curriculum-text {
+            padding-right: 20px;
+        }
+
+        .curriculum-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .curriculum-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .pdf-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        .curriculum-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .curriculum-arrow {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .curriculum-arrow:hover {
+            transform: scale(1.05);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .term-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .term-card:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .term-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .term-card .duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .term-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .skills-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 0.9rem;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .assessment-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .assessment-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .assessment-section p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .weekly-breakdown {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .weekly-breakdown h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .week-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .faq-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-arrow-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .curriculum-text {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .curriculum-text h2 {
+                font-size: 2rem;
+            }
+
+            .term-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="music.html">← Back to Music</a>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Music Year 7</h1>
+            <p>Discover the elements of music through vocal performance, instrumental skills, and creative composition</p>
+        </div>
+
+        <div class="curriculum-arrow-section">
+            <div class="curriculum-text">
+                <h2>Your Musical Journey</h2>
+                <p>Year 7 Music provides a comprehensive introduction to musical elements through practical performance, composition, and theory, building essential skills for musical literacy and creativity.</p>
+                <a href="../stm_curriculum_downloads/music/Music%2520Curriculum%2520Arrow.pdf" class="pdf-link" target="_blank">
+                    View Full Curriculum Arrow →
+                </a>
+            </div>
+            <div class="curriculum-image">
+                <img src="../images/curriculum-arrows/music-arrow-page-1.png" alt="Music Curriculum Arrow" class="curriculum-arrow">
+            </div>
+        </div>
+
+        <div class="terms-grid">
+            <div class="term-card">
+                <h3>Autumn Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Choral Music</strong> - Foundation vocal skills and musical elements introduction</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Introduction to vocal performance and posture</div>
+                    <div class="week-item">Weeks 3-4: Performing in canon and developing harmony</div>
+                    <div class="week-item">Weeks 5-6: Counter melodies and solfege techniques</div>
+                    <div class="week-item">Week 7: Musical elements identification and description</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Canon performance</span>
+                        <span class="skill-tag">Counter melodies</span>
+                        <span class="skill-tag">Harmony development</span>
+                        <span class="skill-tag">Solfege and Kodaly</span>
+                        <span class="skill-tag">Musical elements</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Individual vocal assessments demonstrating understanding of musical elements learned through choral activities and performance techniques.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Autumn Term 2</h3>
+                <div class="duration">Weeks 8-14</div>
+                <p><strong>Pitch</strong> - Keyboard skills and music theory fundamentals</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Keyboard layout and note identification</div>
+                    <div class="week-item">Weeks 10-11: Two-handed keyboard performance techniques</div>
+                    <div class="week-item">Weeks 12-13: Reading pitches and rhythms on treble clef</div>
+                    <div class="week-item">Week 14: Understanding bars and musical structure</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Keyboard performance</span>
+                        <span class="skill-tag">Two-handed playing</span>
+                        <span class="skill-tag">Note identification</span>
+                        <span class="skill-tag">Pitch reading</span>
+                        <span class="skill-tag">Treble clef understanding</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Individual keyboard assessment evaluating performance of variety of riffs and complex pieces using both hands with accurate note identification.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Spring Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Rhythm</strong> - Samba music composition and performance</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Basic rhythm patterns and notation</div>
+                    <div class="week-item">Weeks 3-4: Samba conventions - call and response</div>
+                    <div class="week-item">Weeks 5-6: Polyrhythms and improvisation techniques</div>
+                    <div class="week-item">Week 7: Canon, solos, and structural composition</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Call and response</span>
+                        <span class="skill-tag">Polyrhythms</span>
+                        <span class="skill-tag">Improvisation</span>
+                        <span class="skill-tag">Solo performance</span>
+                        <span class="skill-tag">Structural composition</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Small group practical assessment on Samba drums demonstrating understanding of rhythmic devices and Samba conventions through composition and performance.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Spring Term 2</h3>
+                <div class="duration">Weeks 8-13</div>
+                <p><strong>Non-Specialist Units</strong> - Composing rhythms using digital technology</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Introduction to Sibelius composition software</div>
+                    <div class="week-item">Weeks 10-11: Composing drum beats for pop songs</div>
+                    <div class="week-item">Weeks 12-13: Pop music conventions and structure</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Digital composition</span>
+                        <span class="skill-tag">Rhythmic devices</span>
+                        <span class="skill-tag">Pop conventions</span>
+                        <span class="skill-tag">Musical structure</span>
+                        <span class="skill-tag">Technology skills</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Paired assessment submitting compositions demonstrating understanding of rhythmic devices and pop music conventions using Sibelius software.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Summer Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Writing a Melody</strong> - Concerto composition and melodic development</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Understanding melodic devices and movement</div>
+                    <div class="week-item">Weeks 3-4: Concerto conventions and classical structure</div>
+                    <div class="week-item">Weeks 5-6: Theme and variation composition techniques</div>
+                    <div class="week-item">Week 7: Melody writing within given structures</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Melodic devices</span>
+                        <span class="skill-tag">Concerto conventions</span>
+                        <span class="skill-tag">Theme and variation</span>
+                        <span class="skill-tag">Classical structure</span>
+                        <span class="skill-tag">Compositional development</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Paired composition assessment demonstrating melodic development skills and understanding of concerto conventions through original melody composition.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Summer Term 2</h3>
+                <div class="duration">Weeks 8-12</div>
+                <p><strong>Computer Game Music</strong> - Minimalism and contemporary composition</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Features of minimalism in contemporary music</div>
+                    <div class="week-item">Weeks 10-11: Composing for retro computer games</div>
+                    <div class="week-item">Week 12: Technology integration and final compositions</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Minimalism techniques</span>
+                        <span class="skill-tag">Game music composition</span>
+                        <span class="skill-tag">Contemporary styles</span>
+                        <span class="skill-tag">Creative application</span>
+                        <span class="skill-tag">Digital composition</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Final composition project demonstrating understanding of minimalism and contemporary compositional techniques suitable for computer game accompaniment.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>Music Year 7 Q&A</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">What musical skills will students develop in Year 7?</div>
+                <div class="faq-answer">Students develop vocal performance through choral work, keyboard skills with two-handed playing, rhythm composition using Samba conventions, and digital composition using Sibelius software. They learn to read music notation and understand musical structure.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How is music theory integrated into practical work?</div>
+                <div class="faq-answer">Theory is taught through practical application including solfege and Kodaly methods for vocal work, treble clef reading for keyboard, rhythmic notation for Samba, and structural understanding through composition projects across different musical styles.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What technology is used in music education?</div>
+                <div class="faq-answer">Students use Sibelius composition software for creating original compositions across various genres including pop, classical concerto, and contemporary minimalist styles. This develops both creative and technical skills in digital music production.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How are students assessed in Music?</div>
+                <div class="faq-answer">Assessment includes individual vocal and keyboard performances, small group practical work on percussion, and composed submissions using digital software. Students demonstrate both technical proficiency and creative understanding through varied musical activities.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

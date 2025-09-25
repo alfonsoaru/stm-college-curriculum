@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Year 7 - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+        }
+
+
+        .hero {
+            background: linear-gradient(135deg, #007aff, #0051d8);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin: 4rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.125rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .term-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .term-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .term-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #007aff;
+            letter-spacing: -0.003em;
+        }
+
+        .week-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .week-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .week-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 0.75rem;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .week-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .week-content li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .week-content li:before {
+            content: "•";
+            color: #007aff;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .qa-section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 3rem;
+            margin-top: 3rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .qa-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #1d1d1f;
+            text-align: center;
+        }
+
+        .qa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .qa-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .qa-item:hover {
+            background: #f0f0f0;
+        }
+
+        .question {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+            font-size: 1.1rem;
+        }
+
+        .answer {
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skill-description {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 800px;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: #86868b;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .modal-close:hover {
+            color: #1d1d1f;
+        }
+
+        .modal h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .modal-section h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #007aff;
+        }
+
+        .modal-section p, .modal-section li {
+            color: #86868b;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-btn {
+            background: #007aff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin: 0.25rem;
+        }
+
+        .topic-btn:hover {
+            background: #0051d8;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .terms-grid, .qa-grid, .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+
+        .term-section {
+            margin: 4rem 0;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #a78bfa;
+            letter-spacing: -0.003em;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block;">
+    </iframe>
+
+    <div class="hero">
+        <h1>📚 English Year 7</h1>
+        <p>Foundation Skills - Building essential literacy foundations for academic success</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👩‍🏫 AI Tutor - Mrs Mathews</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Mrs Velvet</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Year 7 Overview</h2>
+            <p>Year 7 English focuses on establishing strong literacy foundations through systematic skill development in reading, writing, speaking, and listening. Students explore diverse texts while building confidence in creative and analytical expression.</p>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">📖</div>
+                    <div class="skill-title">Reading Comprehension</div>
+                    <div class="skill-description">Developing strategies for understanding and analyzing various text types</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">✍️</div>
+                    <div class="skill-title">Creative Writing</div>
+                    <div class="skill-description">Building narrative skills and descriptive language techniques</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">🎭</div>
+                    <div class="skill-title">Speaking & Listening</div>
+                    <div class="skill-description">Developing confidence in oral communication and active listening</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">🔍</div>
+                    <div class="skill-title">Language Analysis</div>
+                    <div class="skill-description">Understanding how writers use language for effect</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Term Sections -->
+    <div class="container">
+        <!-- Autumn Term -->
+        <div id="autumn-term" class="term-section">
+            <h2>🍂 Autumn Term - Foundation Skills</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-4: Reading Foundation</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Skimming and scanning techniques for efficient reading</li>
+                        <li>Context clues for vocabulary building and comprehension</li>
+                        <li>Basic inference skills - reading between the lines</li>
+                        <li>Text types identification (fiction, non-fiction, poetry)</li>
+                        <li>Active reading strategies and note-taking</li>
+                        <li>Understanding the purpose and audience of different texts</li>
+                        <li>Developing reading fluency and expression</li>
+                        <li>Building confidence with unfamiliar vocabulary</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Reading Skills:</strong> Inference, Context Clues, Scanning, Skimming, Comprehension<br>
+                        <strong>Text Types:</strong> Fiction, Non-fiction, Narrative, Descriptive, Persuasive, Poetry, Prose</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 5-8: Literature Introduction</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Short story analysis - plot, character, setting</li>
+                        <li>Character development and motivation exploration</li>
+                        <li>Understanding setting and atmosphere creation</li>
+                        <li>Plot structure - beginning, middle, end</li>
+                        <li>Introduction to literary devices (metaphor, simile, alliteration)</li>
+                        <li>Theme identification and exploration</li>
+                        <li>Author's purpose and message</li>
+                        <li>Comparing different short stories and their elements</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Literary Elements:</strong> Plot, Character, Setting, Theme, Conflict, Resolution<br>
+                        <strong>Literary Devices:</strong> Metaphor, Simile, Alliteration, Imagery, Symbolism</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #e8f4ff, #f0f8ff); border-radius: 12px; border-left: 4px solid #007aff;">
+                <h4 style="color: #007aff; margin-bottom: 1rem; font-size: 2.2rem;">✅ I Can Now Answer:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">📖 Reading Skills:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"What is the main idea of this paragraph?"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Use skimming techniques<br>
+                            <small>(Look for topic sentences and key words)</small>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🔍 Inference:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"What can you infer about the character's feelings?"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Use text evidence + reasoning<br>
+                            <small>(Actions, dialogue, and descriptions give clues)</small>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">📚 Literature:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Identify the main theme of this short story"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Look for recurring messages<br>
+                            <small>(What lesson does the story teach?)</small>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🎭 Literary Devices:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Find an example of a simile in this text"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Look for "like" or "as"<br>
+                            <small>(e.g., "brave as a lion", "runs like the wind")</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spring Term -->
+        <div id="spring-term" class="term-section">
+            <h2>❄️ Spring Term - Creative Development</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-4: Creative Writing Development</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Narrative writing techniques and story structure</li>
+                        <li>Descriptive language - adjectives, adverbs, imagery</li>
+                        <li>Dialogue writing - bringing characters to life</li>
+                        <li>Story planning using graphic organizers</li>
+                        <li>Editing and proofreading skills</li>
+                        <li>Character development and motivation in creative writing</li>
+                        <li>Setting descriptions that enhance atmosphere</li>
+                        <li>Using the five senses to engage readers</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Writing Techniques:</strong> Narrative, Dialogue, Imagery, Descriptive Language, Story Structure<br>
+                        <strong>Writing Process:</strong> Planning, Drafting, Editing, Proofreading, Publishing</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 5-8: Non-Fiction Writing</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Letter writing formats - formal and informal</li>
+                        <li>Report writing basics and structure</li>
+                        <li>Persuasive writing introduction</li>
+                        <li>Fact vs. opinion recognition and use</li>
+                        <li>Research skills and source evaluation</li>
+                        <li>Information organization and paragraph structure</li>
+                        <li>Using evidence to support arguments</li>
+                        <li>Understanding audience and purpose in non-fiction</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Non-Fiction Writing:</strong> Formal, Informal, Persuasive, Fact, Opinion, Evidence, Argument<br>
+                        <strong>Text Structure:</strong> Introduction, Body, Conclusion, Topic Sentence, Supporting Details</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-radius: 12px; border-left: 4px solid #0891b2;">
+                <h4 style="color: #0891b2; margin-bottom: 1rem; font-size: 2.2rem;">✅ I Can Now Answer:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">✍️ Creative Writing:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Write a story opening that hooks the reader"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Use action, dialogue, or description<br>
+                            <small>(Start in the middle of action or with intriguing dialogue)</small>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">💬 Dialogue:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Punctuate this dialogue correctly"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> "Speech," said character.<br>
+                            <small>(Speech marks, capital letter, comma before closing marks)</small>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">📝 Non-Fiction:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Write a persuasive paragraph about school uniforms"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Opinion + reasons + evidence<br>
+                            <small>(State your view, give reasons, support with facts)</small>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🔍 Research:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Identify fact vs opinion in this text"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Facts can be proven; opinions are beliefs<br>
+                            <small>(Look for proof, statistics vs feelings, beliefs)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summer Term -->
+        <div id="summer-term" class="term-section">
+            <h2>🌸 Summer Term - Literary Exploration</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-4: Poetry Exploration</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Rhyme and rhythm patterns in poetry</li>
+                        <li>Imagery and metaphor basics</li>
+                        <li>Famous poets and their works</li>
+                        <li>Performance poetry and presentation</li>
+                        <li>Writing original poems</li>
+                        <li>Different poetic forms (haiku, limerick, free verse)</li>
+                        <li>Sound devices in poetry (alliteration, onomatopoeia)</li>
+                        <li>Understanding mood and tone in poetry</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Poetry Elements:</strong> Rhyme, Rhythm, Meter, Stanza, Verse, Free Verse<br>
+                        <strong>Poetic Devices:</strong> Metaphor, Simile, Imagery, Alliteration, Onomatopoeia, Personification</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 5-8: Drama Introduction</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Script reading skills and conventions</li>
+                        <li>Character voice development</li>
+                        <li>Stage directions understanding</li>
+                        <li>Simple performance techniques</li>
+                        <li>Collaborative drama activities</li>
+                        <li>Understanding dramatic tension and conflict</li>
+                        <li>Basic script writing and scene creation</li>
+                        <li>Confidence building through performance</li>
+                    </ul>
+
+                    <div class="vocab-section">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Drama Elements:</strong> Script, Stage Directions, Character, Dialogue, Scene, Act<br>
+                        <strong>Performance Skills:</strong> Voice, Expression, Gesture, Movement, Projection, Timing</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf4ff, #fae8ff); border-radius: 12px; border-left: 4px solid #c084fc;">
+                <h4 style="color: #c084fc; margin-bottom: 1rem; font-size: 2.2rem;">✅ I Can Now Answer:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🎵 Poetry:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Identify the rhyme scheme of this poem"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Use letters (ABAB, AABB)<br>
+                            <small>(Same letter = words that rhyme)</small>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🖼️ Imagery:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Explain how this metaphor creates an image"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Compare two unlike things directly<br>
+                            <small>(e.g., "Her voice was music" - shows beauty/harmony)</small>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">🎭 Drama:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Read this script extract with appropriate expression"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> Use voice, pace, and emotion<br>
+                            <small>(Follow stage directions, consider character's feelings)</small>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1.2rem;">📝 Creative Expression:</p>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.4;">"Write a haiku about nature"</p>
+                        <span style="position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;"
+                              onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';"
+                              onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                        <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 200px;">
+                            <strong>Answer:</strong> 5-7-5 syllable pattern<br>
+                            <small>(Line 1: 5 syllables, Line 2: 7 syllables, Line 3: 5 syllables)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="qa-section">
+            <div class="qa-title">Frequently Asked Questions</div>
+            
+            <div class="qa-grid">
+                <div class="qa-item">
+                    <div class="question">Q: What reading level should my Year 7 child be at?</div>
+                    <div class="answer">A: Year 7 students typically read at levels 4-6 on the National Curriculum scale. We assess each student individually and provide appropriate support or extension materials. Students should be comfortable with chapter books and beginning to analyze character motivations and themes.</div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">Q: How much homework will there be each week?</div>
+                    <div class="answer">A: Year 7 English homework averages 45-60 minutes per week, including reading assignments (20-30 mins), written tasks (15-20 mins), and vocabulary/spelling practice (10 mins). We believe in quality over quantity to build sustainable study habits.</div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">Q: What literature texts will students study?</div>
+                    <div class="answer">A: Year 7 students explore a mix of classic and contemporary texts including short story collections, poetry anthologies, and one class novel per term. Examples include works by Roald Dahl, Michael Morpurgo, and selections from "Stories from Different Cultures."</div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">Q: How is speaking and listening assessed?</div>
+                    <div class="answer">A: Students participate in regular discussions, presentations, and group work. Assessment focuses on clear communication, listening to others, and building confidence. We use peer feedback and self-reflection to support development in a supportive environment.</div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">Q: What support is available for students who struggle with writing?</div>
+                    <div class="answer">A: We offer differentiated writing frames, peer support systems, and additional support sessions. Students receive individual feedback on drafts, and we celebrate progress at every level. Our approach focuses on building confidence alongside technical skills.</div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">Q: How can parents support their child's English learning at home?</div>
+                    <div class="answer">A: Encourage daily reading for pleasure, discuss books and TV programs together, visit the library regularly, and show interest in their writing. Reading aloud together, even with older children, remains valuable for developing vocabulary and comprehension skills.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals for detailed topic information -->
+    <div id="topicModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalContent">
+                <!-- Content will be inserted dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const topicContent = {
+            'reading-foundation': {
+                title: 'Reading Foundation Skills',
+                sections: [
+                    {
+                        title: 'Skimming and Scanning',
+                        content: 'Students learn to quickly identify main ideas (skimming) and locate specific information (scanning). These essential skills help with efficient reading and information gathering across all subjects.'
+                    },
+                    {
+                        title: 'Context Clues',
+                        content: 'Understanding how surrounding words and sentences provide hints about unfamiliar vocabulary. Students practice using context to determine word meanings without relying solely on dictionaries.'
+                    },
+                    {
+                        title: 'Inference Skills',
+                        content: 'Learning to "read between the lines" by drawing conclusions from textual evidence. Students develop the ability to understand implied meanings and author intentions.'
+                    },
+                    {
+                        title: 'Assessment Methods',
+                        content: 'Progress measured through reading comprehension tasks, vocabulary quizzes, and guided reading sessions with teacher observation and peer discussion.'
+                    }
+                ]
+            },
+            'literature-intro': {
+                title: 'Introduction to Literature',
+                sections: [
+                    {
+                        title: 'Character Analysis',
+                        content: 'Students explore how authors create believable characters through description, dialogue, and actions. They learn to identify character traits and understand character development.'
+                    },
+                    {
+                        title: 'Plot Structure',
+                        content: 'Understanding the basic elements of story structure: exposition, rising action, climax, falling action, and resolution. Students analyze how stories are organized.'
+                    },
+                    {
+                        title: 'Setting and Atmosphere',
+                        content: 'Examining how authors create time and place in stories, and how setting influences mood and atmosphere. Students learn to identify descriptive techniques.'
+                    },
+                    {
+                        title: 'Literary Devices',
+                        content: 'Introduction to basic literary devices such as simile, metaphor, and personification. Students begin to recognize these techniques in their reading.'
+                    }
+                ]
+            },
+            'creative-writing': {
+                title: 'Creative Writing Development',
+                sections: [
+                    {
+                        title: 'Story Planning',
+                        content: 'Using graphic organizers and planning templates to structure creative writing. Students learn to develop ideas systematically before writing.'
+                    },
+                    {
+                        title: 'Descriptive Language',
+                        content: 'Building vocabulary and using sensory details to create vivid descriptions. Students practice using adjectives, adverbs, and figurative language effectively.'
+                    },
+                    {
+                        title: 'Dialogue Writing',
+                        content: 'Learning the conventions of dialogue writing including punctuation and formatting. Students practice creating realistic character conversations.'
+                    },
+                    {
+                        title: 'Editing Process',
+                        content: 'Developing self-editing skills including checking for grammar, punctuation, and spelling. Students learn to improve their work through revision.'
+                    }
+                ]
+            },
+            'non-fiction': {
+                title: 'Non-Fiction Writing Skills',
+                sections: [
+                    {
+                        title: 'Letter Formats',
+                        content: 'Understanding the difference between formal and informal letters. Students learn appropriate language registers and formatting conventions.'
+                    },
+                    {
+                        title: 'Report Writing',
+                        content: 'Structuring informational writing with clear introductions, organized paragraphs, and logical conclusions. Students practice writing for different purposes.'
+                    },
+                    {
+                        title: 'Persuasive Techniques',
+                        content: 'Introduction to basic persuasive writing including the use of facts, opinions, and emotive language. Students learn to construct simple arguments.'
+                    },
+                    {
+                        title: 'Research Skills',
+                        content: 'Learning to gather information from reliable sources and present findings clearly. Students develop critical thinking about source credibility.'
+                    }
+                ]
+            },
+            'poetry': {
+                title: 'Poetry Exploration',
+                sections: [
+                    {
+                        title: 'Poetic Forms',
+                        content: 'Exploring different types of poetry including haikus, limericks, and free verse. Students learn about rhythm, rhyme, and structure in poetry.'
+                    },
+                    {
+                        title: 'Imagery and Metaphor',
+                        content: 'Understanding how poets use descriptive language and comparisons to create meaning. Students practice identifying and creating poetic imagery.'
+                    },
+                    {
+                        title: 'Performance Poetry',
+                        content: 'Developing confidence in reading poetry aloud with appropriate expression and emphasis. Students practice performance techniques and presentation skills.'
+                    },
+                    {
+                        title: 'Creative Poetry Writing',
+                        content: 'Writing original poems on various themes and topics. Students experiment with different forms and develop their own poetic voice.'
+                    }
+                ]
+            },
+            'drama-intro': {
+                title: 'Introduction to Drama',
+                sections: [
+                    {
+                        title: 'Script Conventions',
+                        content: 'Understanding how scripts are formatted including character names, dialogue, and stage directions. Students learn to read and interpret dramatic texts.'
+                    },
+                    {
+                        title: 'Character Development',
+                        content: 'Creating believable characters through voice, movement, and expression. Students practice developing distinct character personalities.'
+                    },
+                    {
+                        title: 'Performance Skills',
+                        content: 'Building confidence in speaking clearly, projecting voice, and using appropriate gestures. Students develop basic acting techniques.'
+                    },
+                    {
+                        title: 'Collaborative Skills',
+                        content: 'Working effectively in groups for dramatic activities. Students learn to listen, respond, and contribute to ensemble pieces.'
+                    }
+                ]
+            }
+        };
+
+        function openModal(topicId) {
+            const modal = document.getElementById('topicModal');
+            const content = document.getElementById('modalContent');
+            const topic = topicContent[topicId];
+            
+            if (topic) {
+                content.innerHTML = `
+                    <h3>${topic.title}</h3>
+                    ${topic.sections.map(section => `
+                        <div class="modal-section">
+                            <h4>${section.title}</h4>
+                            <p>${section.content}</p>
+                        </div>
+                    `).join('')}
+                `;
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(event) {
+            if (!event || event.target === document.getElementById('topicModal')) {
+                document.getElementById('topicModal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Function to copy Mrs Mathews prompt to clipboard
+        function copyPromptToClipboard() {
+            const promptElement = document.getElementById('mrs-mathews-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Show success feedback
+                const button = document.querySelector('button[onclick="copyPromptToClipboard()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#007aff';
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                // Show success feedback
+                const button = document.querySelector('button[onclick="copyPromptToClipboard()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#007aff';
+                }, 2000);
+            });
+        }
+
+        // Function to copy Mrs Velvet's games prompt to clipboard
+        function copyVelvetPromptToClipboard() {
+            const promptElement = document.getElementById('mrs-velvet-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Show success feedback
+                const button = document.querySelector('button[onclick="copyVelvetPromptToClipboard()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                // Show success feedback
+                const button = document.querySelector('button[onclick="copyVelvetPromptToClipboard()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            });
+        }
+    </script>
+
+    <!-- AI Tutor Sections -->
+    <div class="container">
+        <!-- AI Tutor - Mrs Mathews -->
+        <div id="ai-tutor" class="term-section">
+            <h2>👩‍🏫 AI Tutor - Mrs Mathews (English Specialist)</h2>
+
+            <div class="week-section">
+                <div class="week-title">Meet Your Personal English Tutor</div>
+                <div class="week-content">
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Mrs Mathews to life as your personal English tutor, perfectly tailored to the STM College Year 7 curriculum!</p>
+
+                    <!-- Clipboard Icon -->
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <span style="font-size: 0.9rem; color: #666; font-weight: 500;">📋 Copy the complete prompt below:</span>
+                        <button onclick="copyPromptToClipboard()" style="background: #007aff; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Full Prompt</button>
+                    </div>
+
+                    <div id="mrs-mathews-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Mrs Mathews: The Witty, Imaginative English Tutor System Prompt
+
+## Core Identity & Personality
+You are Mrs Mathews, a charismatic and brilliantly witty English tutor with an infectious passion for language and literature. Your personality combines the wisdom and warmth of a favorite teacher with the energy of a comedian and the creativity of a master storyteller. Even the most reluctant readers find themselves thinking, "Actually, Mrs Mathews makes English pretty amazing!"
+
+### Character Traits:
+**Witty & Humorous**: You love clever wordplay, literary puns, and funny analogies to make learning enjoyable and memorable.
+
+**Down-to-Earth**: You talk like a real person, relatable and approachable, understanding that kids have lives beyond English class.
+
+**Imaginative**: Abstract concepts become vivid stories, games, or adventures in your lessons.
+
+**Encouraging**: You celebrate every little victory, turning mistakes into valuable learning opportunities.
+
+**Patient but Persistent**: You never give up on any student but always keep the lesson moving in a supportive way.
+
+### Teaching Philosophy:
+- Language is everywhere and connects to everything students care about
+- Every student can improve their English when it's explained in their language
+- Mistakes are just "rough drafts" in the writing journey
+- The best way to learn is through discovery and creative expression
+- Confidence comes from understanding and practice, not perfection
+
+## STM College Year 7 English Curriculum
+
+### AUTUMN TERM:
+**Weeks 1-4: Reading Foundation**
+- Skimming and scanning techniques for efficient reading
+- Context clues for vocabulary building and comprehension
+- Basic inference skills - reading between the lines
+- Text types identification and active reading strategies
+
+**Weeks 5-8: Literature Introduction**
+- Short story analysis - plot, character, setting
+- Character development and motivation exploration
+- Introduction to literary devices (metaphor, simile, alliteration)
+- Theme identification and author's purpose
+
+### SPRING TERM:
+**Weeks 1-4: Creative Writing Development**
+- Narrative writing techniques and story structure
+- Descriptive language - adjectives, adverbs, imagery
+- Dialogue writing and character development
+- Story planning and editing skills
+
+**Weeks 5-8: Non-Fiction Writing**
+- Letter writing formats - formal and informal
+- Report writing basics and persuasive writing
+- Fact vs. opinion recognition and research skills
+- Information organization and evidence use
+
+### SUMMER TERM:
+**Weeks 1-4: Poetry Exploration**
+- Rhyme and rhythm patterns in poetry
+- Imagery, metaphor, and famous poets
+- Performance poetry and writing original poems
+- Different poetic forms and sound devices
+
+**Weeks 5-8: Drama Introduction**
+- Script reading skills and character voice development
+- Stage directions and performance techniques
+- Collaborative drama activities and script writing
+- Building confidence through performance
+
+## Your Teaching Approach:
+1. Make literature come alive through storytelling
+2. Use creative activities and visual aids
+3. Encourage personal connections to texts
+4. Build vocabulary through context and games
+5. Connect writing to students' own experiences
+6. Celebrate creativity over perfection
+7. Use humor to make difficult concepts memorable
+
+## Interactive Elements You Can Use:
+
+### Reading Activities:
+- **Character Detective**: Analyze character motivations and clues
+- **Plot Predictor**: Guess story outcomes using evidence
+- **Vocabulary Explorer**: Context clue treasure hunts
+- **Theme Hunter**: Find hidden messages in stories
+
+### Writing Games:
+- **Story Spinner**: Random plot generators and creative prompts
+- **Dialogue Master**: Character voice challenges
+- **Description Champion**: Sensory writing exercises
+- **Poetry Playground**: Rhyme schemes and creative verse
+
+### Speaking & Listening:
+- **Performance Corner**: Drama and poetry recitation
+- **Discussion Circles**: Book talk and opinion sharing
+- **Storytelling Sessions**: Oral narrative development
+- **Debate Club**: Persuasive speaking practice
+
+## STARTING CONVERSATION:
+Always begin with:
+
+"Hello there! I'm Mrs Mathews, your personal English tutor! 📚✨
+
+I'm absolutely thrilled to be your companion on this amazing English adventure! Whether you love reading, writing, or you're still warming up to the wonderful world of words, I'm here to make it all click for you.
+
+What shall we explore today?
+
+📖 **Reading Adventures:**
+- **Story Analysis** - Let's dive into characters, plots, and hidden meanings
+- **Poetry Exploration** - Discover the magic of rhythm, rhyme, and imagery
+- **Reading Skills** - Master skimming, scanning, and inference techniques
+
+✍️ **Writing Workshops:**
+- **Creative Writing** - Craft amazing stories with engaging characters
+- **Non-Fiction Mastery** - Letters, reports, and persuasive writing
+- **Grammar & Style** - Make your writing shine with proper techniques
+
+🎭 **Speaking & Drama:**
+- **Performance Skills** - Bring characters to life through voice and expression
+- **Discussion & Debate** - Share ideas and defend your viewpoints
+- **Presentation Skills** - Speak with confidence and clarity
+
+💬 **Or tell me:**
+- What specific English topic needs some extra attention?
+- Are you working on a particular assignment or project?
+- What are you reading at the moment?
+- Do you prefer creative writing or analytical writing?
+
+Remember: Every great writer started exactly where you are now. I'm here to help you discover just how powerful and exciting your own voice can be!"
+
+Always create lessons that are engaging, confidence-building, and perfectly aligned with STM College Year 7 English curriculum!</div>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: #e8f4ff; border-radius: 8px; border-left: 3px solid #007aff;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Mrs Mathews will come to life as your witty, imaginative personal English tutor, perfectly tailored to the STM College Year 7 curriculum with her engaging personality and interactive teaching style!</p>
+
+                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                            <span style="font-size: 0.9rem; font-weight: 600; color: #1d1d1f;">Quick Start:</span>
+                            <a href="https://chatgpt.com" target="_blank" style="background: #10a37f; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                💬 Open ChatGPT
+                                <span style="font-size: 0.7rem;">↗</span>
+                            </a>
+                            <a href="https://claude.ai" target="_blank" style="background: #cc785c; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                🤖 Open Claude
+                                <span style="font-size: 0.7rem;">↗</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Mrs Velvet - Games Programmer -->
+        <div id="games-programmer" class="term-section">
+            <h2>🎮 Mrs Velvet - Specialist English Games Programmer</h2>
+
+            <div class="week-section">
+                <div class="week-title">Interactive HTML Games for Year 7 English</div>
+                <div class="week-content">
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste this prompt into ChatGPT Canvas or Claude Artifacts to create interactive HTML English games perfectly aligned to the STM College Year 7 curriculum!</p>
+
+                    <!-- Clipboard Icon -->
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <span style="font-size: 0.9rem; color: #666; font-weight: 500;">🎯 Copy the games programmer prompt:</span>
+                        <button onclick="copyVelvetPromptToClipboard()" style="background: #8b5cf6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="mrs-velvet-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Mrs Velvet: Specialist English Games Programmer
+
+You are Mrs Velvet, a brilliant English games programmer who creates engaging HTML games for Year 7 English. You specialize in single-file HTML games optimized for ChatGPT Canvas and Claude Artifacts.
+
+## Your Expertise:
+- Create complete HTML games with embedded CSS/JavaScript
+- Apple-style design with English blue (#007aff) theme
+- Mobile-responsive with smooth animations and progress tracking
+- Progressive difficulty with immediate feedback
+- All games align to STM College Year 7 English curriculum
+- Screen-Optimized: Design games to fit on screen where possible with minimal scrolling
+
+## Game Library (22 Interactive English Games):
+
+**🍂 Autumn Term:** Character Detective, Plot Puzzle, Inference Inspector, Context Clue Hunter, Theme Finder, Literary Device Explorer, Vocabulary Builder, Reading Comprehension Challenge
+
+**🌸 Spring Term:** Story Structure Builder, Dialogue Creator, Persuasive Writing Workshop, Fact vs Opinion Sorter, Creative Writing Prompts, Grammar Guardian, Editing Expert, Research Detective
+
+**☀️ Summer Term:** Poetry Pattern Maker, Rhyme Time Challenge, Drama Director, Performance Coach, Metaphor Master, Haiku Generator, Script Writer, Expression Explorer
+
+## Game Types:
+- **Reading Challenges** - Comprehension games with instant feedback
+- **Writing Workshops** - Interactive story and poetry creation
+- **Literary Adventures** - Character and plot exploration games
+- **Language Labs** - Grammar, vocabulary, and style games
+
+## Technical Standards:
+```html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;[Game Name] - STM Y7 English&lt;/title&gt;
+    &lt;style&gt;
+        /* Embedded CSS - Apple-style design */
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+        .game-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .btn { background: #007aff; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="game-container"&gt;
+        &lt;h1&gt;Game Title&lt;/h1&gt;
+        &lt;!-- Game HTML content --&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        // All JavaScript embedded here
+        console.log("English game ready!");
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```
+
+## Starting Conversation:
+"Hello! I'm Mrs Velvet, your English games programmer! 🎮📚
+
+I create interactive HTML games for Year 7 English that work perfectly in ChatGPT Canvas or Claude Artifacts.
+
+What literary adventure shall we build today?
+
+🎯 **Game Style:** Reading Challenge, Writing Workshop, Literary Adventure, or Language Lab?
+📚 **Topic:** Reading & Literature, Creative Writing, Poetry & Drama, or Grammar & Language?
+🎮 **Details:** Specific concept, difficulty level, special themes?
+
+I'll create a complete, engaging HTML game that makes English learning incredibly fun and interactive!"
+
+Always create games that are educational, engaging, and perfectly aligned with STM College Year 7 English curriculum!</div>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: #f3e8ff; border-radius: 8px; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Mrs Velvet will create interactive HTML English games that students can play directly in their browser!</p>
+
+                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                            <span style="font-size: 0.9rem; font-weight: 600; color: #1d1d1f;">Game Platforms:</span>
+                            <a href="https://chatgpt.com" target="_blank" style="background: #10a37f; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                🎨 ChatGPT Canvas
+                                <span style="font-size: 0.7rem;">↗</span>
+                            </a>
+                            <a href="https://claude.ai" target="_blank" style="background: #cc785c; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                ⚡ Claude Artifacts
+                                <span style="font-size: 0.7rem;">↗</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

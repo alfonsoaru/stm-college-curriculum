@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 7 French - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .game-link {
+            background: #6366f1;
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .game-link:hover {
+            background: #4f46e5;
+            color: white !important;
+            transform: scale(1.05);
+        }
+
+        .term-game-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .term-game-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white !important;
+            transform: scale(1.05);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: #6366f1;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .term-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .term-subtitle {
+            font-size: 1.25rem;
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .module-card {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .module-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .module-french {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .module-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .module-grammar {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .skills-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #6366f1;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skill-description {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .assessment-section {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .assessment-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
+        }
+
+        .download-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .vocabulary-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .vocab-list {
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #6366f1;
+        }
+
+        .vocab-list h4 {
+            color: #6366f1;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .vocab-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .vocab-column {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #1d1d1f;
+        }
+
+        .module-card .vocab-column {
+            color: white;
+        }
+
+        .vocab-column strong {
+            color: #374151;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .module-card .vocab-column strong {
+            color: white;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .vocab-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 4px solid #6366f1;
+        }
+
+        .vocab-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #6366f1;
+            margin-bottom: 1rem;
+        }
+
+        .vocab-column {
+            color: #1d1d1f;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .modules-grid, .skills-grid, .vocab-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .nav-button {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="french.html">← Back to French Overview</a>
+        <div>
+            <a href="../french-pairs-game.html" class="game-link">🎮 French Game</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>🇫🇷 Year 7 French</h1>
+        <p>Beginning your French journey through engaging topics, essential grammar, and cultural exploration</p>
+    </div>
+
+    <div class="container">
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="scrollToTerm('autumn')">Autumn Term</button>
+            <button class="nav-button" onclick="scrollToTerm('spring')">Spring Term</button>
+            <button class="nav-button" onclick="scrollToTerm('summer')">Summer Term</button>
+            <button class="nav-button" onclick="scrollToTerm('skills')">Language Skills</button>
+            <button class="nav-button" onclick="scrollToTerm('assessment')">Assessment</button>
+        </div>
+
+        <div id="autumn" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🍂 Autumn Term</h2>
+                <p class="term-subtitle">Terms 1a & 1b - Personal Introduction & School Life</p>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-french">Term 1a - La rentrée</div>
+                    <h3 class="module-title">Getting to Know You</h3>
+                    <p class="module-description">
+                        Introducing yourself in French including name, age, family members, opinions, classroom objects, and describing personality traits. Building confidence in basic conversational French.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Present tense of -er verbs, adjective agreement, infinitive forms
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 1a Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Greetings & Introductions:</strong><br>
+                                bonjour - hello<br>
+                                bonsoir - good evening<br>
+                                salut - hi/bye<br>
+                                au revoir - goodbye<br>
+                                je m'appelle Marie - my name is Marie<br>
+                                je suis française - I am French<br>
+                                comment tu t'appelles? - what's your name?<br>
+                                comment allez-vous? - how are you?<br>
+                                ça va bien, merci - I'm fine, thank you<br>
+                                très bien, et vous? - very well, and you?<br>
+                                enchanté(e) - pleased to meet you<br>
+                                d'où venez-vous? - where are you from?<br>
+                                je viens de Londres - I come from London
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Numbers & Age:</strong><br>
+                                un, deux, trois - one, two, three<br>
+                                quatre, cinq, six - four, five, six<br>
+                                sept, huit, neuf, dix - seven, eight, nine, ten<br>
+                                j'ai douze ans - I am twelve years old<br>
+                                j'ai treize ans - I am thirteen years old<br>
+                                quel âge as-tu? - how old are you?<br>
+                                mon anniversaire est le... - my birthday is on...<br>
+                                c'est quand ton anniversaire? - when is your birthday?<br>
+                                je suis né(e) en... - I was born in...<br>
+                                il/elle a quinze ans - he/she is fifteen years old<br>
+                                nous avons le même âge - we are the same age
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Family & Personality:</strong><br>
+                                j'ai une grande famille - I have a big family<br>
+                                ma mère s'appelle... - my mother is called...<br>
+                                mon père travaille comme... - my father works as...<br>
+                                j'ai un frère et deux sœurs - I have one brother and two sisters<br>
+                                je suis fils/fille unique - I am an only child<br>
+                                je suis très sympa - I am very nice<br>
+                                elle est intelligente - she is intelligent<br>
+                                il est amusant - he is funny<br>
+                                je ne suis pas timide - I am not shy<br>
+                                nous sommes sportifs - we are sporty<br>
+                                comment est ta famille? - what is your family like?
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../french-pairs-game.html" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-french">Term 1b - En classe</div>
+                    <h3 class="module-title">School & Learning</h3>
+                    <p class="module-description">
+                        Exploring school life through colours, telling time, school subjects, uniforms, likes and dislikes. Understanding the French education system and daily school routines.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Colour adjective agreement, -er verb conjugation, sequencing words
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 1b Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>School Subjects:</strong><br>
+                                j'aime les maths - I like maths<br>
+                                l'anglais est facile - English is easy<br>
+                                je déteste le français - I hate French<br>
+                                l'histoire est intéressante - history is interesting<br>
+                                nous étudions la géographie - we study geography<br>
+                                les sciences sont difficiles - science is difficult<br>
+                                j'adore l'art dramatique - I love drama<br>
+                                l'informatique est utile - IT is useful<br>
+                                l'EPS est amusante - PE is fun<br>
+                                quelle est ta matière préférée? - what is your favourite subject?
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Colors & Descriptions:</strong><br>
+                                ma couleur préférée est rouge - my favourite colour is red<br>
+                                j'ai les yeux bleus - I have blue eyes<br>
+                                sa voiture est verte - his/her car is green<br>
+                                le soleil est jaune - the sun is yellow<br>
+                                mon chat est noir - my cat is black<br>
+                                la neige est blanche - snow is white<br>
+                                elle porte une robe rose - she wears a pink dress<br>
+                                de quelle couleur est...? - what colour is...?<br>
+                                c'est orange et gris - it's orange and grey<br>
+                                j'aime toutes les couleurs - I like all colours
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Time & School Objects:</strong><br>
+                                quelle heure est-il? - what time is it?<br>
+                                il est deux heures - it is two o'clock<br>
+                                il est trois heures et quart - it's quarter past three<br>
+                                il est quatre heures et demie - it's half past four<br>
+                                il est cinq heures moins le quart - it's quarter to five<br>
+                                j'ai oublié mon stylo - I forgot my pen<br>
+                                peux-tu me prêter un crayon? - can you lend me a pencil?<br>
+                                ma trousse est pleine - my pencil case is full<br>
+                                ce livre est intéressant - this book is interesting<br>
+                                à quelle heure commence l'école? - what time does school start?
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../french-pairs-game.html" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="spring" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🌸 Spring Term</h2>
+                <p class="term-subtitle">Terms 2a & 2b - Hobbies & Family Life</p>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-french">Term 2a - Mon temps libre</div>
+                    <h3 class="module-title">Free Time & Sports</h3>
+                    <p class="module-description">
+                        Discussing weather, seasons, sports activities, and personal preferences. Learning about sport in French-speaking countries and creating celebrity interviews.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Jouer and faire conjugation, negatives, adjective position, infinitives, aimer/adorer/détester
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 2a Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Sports & Activities:</strong><br>
+                                je joue au football le samedi - I play football on Saturday<br>
+                                elle fait du tennis depuis cinq ans - she's been playing tennis for five years<br>
+                                nous aimons regarder le basket - we like watching basketball<br>
+                                je fais de la natation à la piscine - I go swimming at the pool<br>
+                                le cyclisme est bon pour la santé - cycling is good for health<br>
+                                mon frère fait de l'équitation - my brother does horse riding<br>
+                                quel sport pratiques-tu? - what sport do you play?<br>
+                                je ne fais pas de sport - I don't do any sports<br>
+                                j'adore tous les sports - I love all sports<br>
+                                c'est mon loisir préféré - it's my favourite hobby
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Weather & Seasons:</strong><br>
+                                quel temps fait-il? - what's the weather like?<br>
+                                il fait beau aujourd'hui - it's nice today<br>
+                                il fait mauvais ce matin - it's bad this morning<br>
+                                il pleut beaucoup en automne - it rains a lot in autumn<br>
+                                il neige en hiver - it snows in winter<br>
+                                il fait très chaud en été - it's very hot in summer<br>
+                                il fait froid en décembre - it's cold in December<br>
+                                j'aime le printemps - I like spring<br>
+                                l'été est ma saison préférée - summer is my favourite season<br>
+                                en hiver je porte un manteau - in winter I wear a coat
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Preferences & Opinions:</strong><br>
+                                c'est très amusant - it's very fun<br>
+                                je trouve ça ennuyeux - I find it boring<br>
+                                c'est trop difficile pour moi - it's too difficult for me<br>
+                                l'exercice est assez facile - the exercise is quite easy<br>
+                                le film était formidable - the film was great<br>
+                                ce livre est vraiment nul - this book is really rubbish<br>
+                                l'histoire est très intéressante - the story is very interesting<br>
+                                j'aime ça parce que c'est amusant - I like it because it's fun<br>
+                                qu'est-ce que tu penses de...? - what do you think of...?<br>
+                                à mon avis, c'est génial - in my opinion, it's brilliant
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../french-pairs-game.html" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-french">Term 2b - Ma vie de famille</div>
+                    <h3 class="module-title">Family & Home Life</h3>
+                    <p class="module-description">
+                        Talking about animals, describing family members, home locations, and breakfast preferences. Cultural exploration including Bastille Day celebrations.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Plural nouns (-s and -x), possessive adjectives (mon, ma, mes, ton, ta, tes), partitive articles
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 2b Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Family Members:</strong><br>
+                                mes grands-parents habitent en France - my grandparents live in France<br>
+                                mon grand-père a soixante-dix ans - my grandfather is seventy years old<br>
+                                ma grand-mère fait de délicieux gâteaux - my grandmother makes delicious cakes<br>
+                                j'ai un oncle qui vit en Amérique - I have an uncle who lives in America<br>
+                                ma tante est médecin - my aunt is a doctor<br>
+                                mes cousins viennent nous voir - my cousins come to visit us<br>
+                                combien de personnes y a-t-il dans ta famille? - how many people are in your family?<br>
+                                nous sommes une famille recomposée - we are a blended family<br>
+                                j'aime passer du temps en famille - I like spending time with family
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Animals & Pets:</strong><br>
+                                j'adore les animaux - I love animals<br>
+                                mon chien s'appelle Rex - my dog is called Rex<br>
+                                notre chat est très paresseux - our cat is very lazy<br>
+                                j'ai un petit lapin blanc - I have a little white rabbit<br>
+                                mes poissons nagent dans l'aquarium - my fish swim in the aquarium<br>
+                                l'oiseau chante le matin - the bird sings in the morning<br>
+                                le hamster court dans sa roue - the hamster runs in its wheel<br>
+                                as-tu des animaux domestiques? - do you have any pets?<br>
+                                je voudrais avoir un chien - I would like to have a dog<br>
+                                nous n'avons pas d'animaux - we don't have any animals
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Food & Breakfast:</strong><br>
+                                je prends le petit déjeuner à sept heures - I have breakfast at seven o'clock<br>
+                                j'aime le pain avec du beurre - I like bread with butter<br>
+                                ma confiture préférée est à la fraise - my favourite jam is strawberry<br>
+                                les céréales sont bonnes pour la santé - cereal is good for health<br>
+                                je bois du chocolat chaud en hiver - I drink hot chocolate in winter<br>
+                                mes parents boivent du café le matin - my parents drink coffee in the morning<br>
+                                préfères-tu le thé ou le café? - do you prefer tea or coffee?<br>
+                                je bois toujours du jus d'orange - I always drink orange juice<br>
+                                j'ai très faim ce matin - I'm very hungry this morning<br>
+                                qu'est-ce que tu prends au petit déjeuner? - what do you have for breakfast?
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../french-pairs-game.html" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="summer" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">☀️ Summer Term</h2>
+                <p class="term-subtitle">Terms 3a & 3b - Town Life & Future Plans</p>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-french">Term 3a - En ville</div>
+                    <h3 class="module-title">Around Town</h3>
+                    <p class="module-description">
+                        Exploring places in town, weekend activities, making invitations, ordering in cafés, and discussing future plans. Practical language for real-world situations.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Il y a un/une/des, il n'y a pas de, aller + definite article, vouloir conjugation, tu/vous, near future tense
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 3a Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Places in Town:</strong><br>
+                                la ville - town<br>
+                                le magasin - shop<br>
+                                le supermarché - supermarket<br>
+                                la piscine - swimming pool<br>
+                                le cinéma - cinema<br>
+                                le parc - park<br>
+                                l'hôpital - hospital<br>
+                                la bibliothèque - library<br>
+                                le restaurant - restaurant<br>
+                                le café - café<br>
+                                il y a - there is/are<br>
+                                il n'y a pas de - there isn't/aren't
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Weekend Activities:</strong><br>
+                                le week-end - weekend<br>
+                                aller - to go<br>
+                                je vais - I go/am going<br>
+                                tu vas - you go<br>
+                                nous allons - we go<br>
+                                vouloir - to want<br>
+                                je voudrais - I would like<br>
+                                tu veux - you want<br>
+                                faire les magasins - to go shopping<br>
+                                voir un film - to see a film<br>
+                                rencontrer des amis - to meet friends
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Café & Future Plans:</strong><br>
+                                commander - to order<br>
+                                une boisson - a drink<br>
+                                un coca - a coke<br>
+                                une limonade - lemonade<br>
+                                un sandwich - sandwich<br>
+                                une pizza - pizza<br>
+                                l'addition - the bill<br>
+                                demain - tomorrow<br>
+                                ce soir - tonight<br>
+                                plus tard - later<br>
+                                bientôt - soon
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../french-pairs-game.html" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-french">Term 3b - Révision</div>
+                    <h3 class="module-title">Review & Assessment</h3>
+                    <p class="module-description">
+                        Comprehensive review of all Year 7 topics with project work. Consolidating grammar points and vocabulary through creative tasks and formal assessments.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Focus:</strong> Consolidation of all key grammar points and vocabulary, present and near future tenses
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 3b Vocabulary Review</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Essential Verbs:</strong><br>
+                                être - to be<br>
+                                avoir - to have<br>
+                                aller - to go<br>
+                                faire - to do/make<br>
+                                jouer - to play<br>
+                                aimer - to like<br>
+                                habiter - to live<br>
+                                manger - to eat<br>
+                                regarder - to watch<br>
+                                écouter - to listen
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Question Words:</strong><br>
+                                qui? - who?<br>
+                                quoi? - what?<br>
+                                où? - where?<br>
+                                quand? - when?<br>
+                                comment? - how?<br>
+                                pourquoi? - why?<br>
+                                combien? - how much/many?<br>
+                                quel/quelle? - which?<br>
+                                qu'est-ce que? - what?<br>
+                                est-ce que? - (question marker)
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Useful Phrases:</strong><br>
+                                excusez-moi - excuse me<br>
+                                s'il vous plaît - please<br>
+                                merci (beaucoup) - thank you<br>
+                                de rien - you're welcome<br>
+                                je ne sais pas - I don't know<br>
+                                je ne comprends pas - I don't understand<br>
+                                pouvez-vous répéter? - can you repeat?<br>
+                                comment dit-on...? - how do you say...?<br>
+                                à bientôt - see you soon<br>
+                                bonne chance - good luck
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../french-pairs-game.html" class="term-game-btn">🎮 Practice All Vocabulary</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="skills" class="skills-section">
+            <h2>Language Skills Development</h2>
+            <p>Year 7 French develops essential language skills through engaging topics and systematic grammar progression, building confidence for future language learning.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🗣️</div>
+                    <h3 class="skill-title">Speaking & Pronunciation</h3>
+                    <p class="skill-description">Building confidence in spoken French through role-plays, interviews, and authentic communication activities.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">👂</div>
+                    <h3 class="skill-title">Listening Comprehension</h3>
+                    <p class="skill-description">Understanding authentic French through varied listening activities, developing skills to comprehend different accents and speeds.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📖</div>
+                    <h3 class="skill-title">Reading Skills</h3>
+                    <p class="skill-description">Reading and understanding a range of French texts from simple descriptions to cultural information about French-speaking countries.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">✍️</div>
+                    <h3 class="skill-title">Writing Communication</h3>
+                    <p class="skill-description">Developing writing skills from basic descriptions to creative tasks, focusing on accuracy and personal expression.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🏛️</div>
+                    <h3 class="skill-title">Cultural Awareness</h3>
+                    <p class="skill-description">Exploring French and Francophone cultures through festivals, traditions, school systems, and daily life comparisons.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">⚙️</div>
+                    <h3 class="skill-title">Grammar Foundation</h3>
+                    <p class="skill-description">Building essential grammar knowledge systematically through present tense verbs, adjectives, and basic sentence structures.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="vocabulary-section">
+            <h2>Key Vocabulary Themes</h2>
+            <p>Year 7 French vocabulary is organized around practical themes that connect to students' everyday experiences and interests:</p>
+
+            <div class="vocab-grid">
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Personal Information</h3>
+                    <p class="vocab-list">Frères et sœurs (brothers and sisters), Ma salle de classe (my classroom), Tu es comment? (What are you like?), Tu aimes ça? (Do you like that?)</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">School Life</h3>
+                    <p class="vocab-list">Quelle heure (what time), Les matières (subjects), Les vêtements (clothes), Journée scolaire (school day)</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Activities & Weather</h3>
+                    <p class="vocab-list">Le temps (weather), Les sports (sports), Les opinions (opinions), Les pays (countries)</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Family & Home</h3>
+                    <p class="vocab-list">La famille (family), Où habites-tu? (Where do you live?), Le petit déjeuner (breakfast)</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Town & Social Life</h3>
+                    <p class="vocab-list">Le weekend (weekend), Les invitations (invitations), Vous désirez (what would you like), Le verbe aller (verb to go)</p>
+                </div>
+
+                <div class="vocab-card">
+                    <h3 class="vocab-title">Language Tools</h3>
+                    <p class="vocab-list">Opinions, Linking words, Descriptions, Reasons, Adjectives, Tenses</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="assessment" class="assessment-section">
+            <h2 class="assessment-title">Assessment & Progress Tracking</h2>
+            <p class="assessment-description">
+                Year 7 French assessment covers all four language skills through module-based testing, ongoing speaking assessment, and formal end-of-year examinations. Students progress through reading comprehension, listening tasks, and communication-focused writing activities.
+            </p>
+            <a href="../stm_curriculum_downloads/mfl/French%2520Long%2520Term%2520Plan.pdf" class="download-btn" target="_blank">
+                View Complete French Framework
+            </a>
+        </div>
+
+        <div class="section">
+            <h2>🤖 AI French Tutor Prompt</h2>
+            <p>Copy and paste this prompt into any AI chatbot to create your personal French Year 7 tutor:</p>
+
+            <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; margin: 2rem 0; border-left: 4px solid #6366f1;">
+                <div style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.6; white-space: pre-wrap;">You are an expert French tutor for Year 7 students (ages 11-12) at STM College. You follow the STM curriculum exactly and are enthusiastic, encouraging, and age-appropriate.
+
+**YOUR CURRICULUM COVERAGE:**
+
+**AUTUMN TERM:**
+- Term 1a: Personal introductions, greetings, family, personality, numbers 1-16, age
+- Term 1b: School subjects, colors, time, school objects, likes/dislikes
+
+**SPRING TERM:**
+- Term 2a: Sports, weather, seasons, preferences, opinions with justifications
+- Term 2b: Extended family, pets, food, breakfast, cultural topics (Bastille Day)
+
+**SUMMER TERM:**
+- Term 3a: Places in town, weekend activities, café ordering, invitations, near future tense
+- Term 3b: Comprehensive revision, project work, consolidation of all topics
+
+**KEY GRAMMAR FOCUS:**
+- Present tense -er verbs, être, avoir, aller
+- Adjective agreement (colors, personality)
+- Possessive adjectives (mon, ma, mes, ton, ta, tes)
+- Modal verbs (aimer, adorer, détester)
+- Question formation
+- Negatives (ne...pas)
+- Time expressions
+- Near future (aller + infinitive)
+
+**YOUR TEACHING STYLE:**
+1. Always respond in English but use French phrases naturally
+2. Give lots of encouragement and praise effort
+3. Provide clear explanations with examples
+4. Suggest fun practice activities and games
+5. Connect learning to real French culture
+6. Correct mistakes gently and positively
+7. Use age-appropriate topics (school, family, hobbies, pets)
+
+**SAMPLE INTERACTIONS YOU CAN HELP WITH:**
+- Explain grammar points with clear examples
+- Practice conversations and dialogues
+- Help with homework and pronunciation
+- Create vocabulary games and quizzes
+- Discuss French culture and traditions
+- Prepare for assessments
+- Answer questions about lessons
+
+**QUIZ & GAME IDEAS YOU CAN SUGGEST:**
+- French spelling bees with vocabulary
+- Role-play conversations (ordering in café, introducing family)
+- "Guess the Season" weather descriptions
+- Family tree presentations in French
+- School timetable comparisons France vs UK
+- French color scavenger hunts
+- Time-telling practice games
+- French breakfast café simulation
+- Sports commentary in French
+- French pet description competitions
+
+Start every conversation by asking what specific topic they'd like to explore or practice!</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Cultural Connections</h2>
+            <p>Year 7 French learning is enriched through cultural exploration and real-world connections:</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3 class="skill-title">French Education System</h3>
+                    <p class="skill-description">Comparing French and UK schools, understanding different educational approaches and daily routines in French schools.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3 class="skill-title">Francophone Countries</h3>
+                    <p class="skill-description">Exploring French-speaking countries and their cultures, particularly through sports and leisure activities.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3 class="skill-title">French Celebrations</h3>
+                    <p class="skill-description">Learning about Bastille Day and other French cultural celebrations, understanding their historical and social significance.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3 class="skill-title">Practical Communication</h3>
+                    <p class="skill-description">Developing real-world language skills for traveling, ordering food, and interacting in French-speaking environments.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToTerm(termId) {
+            const element = document.getElementById(termId);
+            const offset = 100;
+            const elementPosition = element.offsetTop - offset;
+
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

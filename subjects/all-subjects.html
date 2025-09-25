@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Subjects - STM College</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .content {
+            padding-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 70px);
+        }
+
+        .subjects-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .subject-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            padding: 1.5rem;
+            border-radius: 16px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .subject-link:hover {
+            background: #007aff;
+            color: white;
+            transform: scale(1.05);
+            border-color: #007aff;
+        }
+
+        .subject-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subject-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            text-align: center;
+        }
+
+        .subject-link:hover .subject-name {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .subjects-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .subject-link {
+                padding: 1rem;
+            }
+
+            .subject-emoji {
+                font-size: 2rem;
+            }
+
+            .subject-name {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .subjects-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white;">
+    </iframe>
+
+    <div class="content">
+        <div class="subjects-container">
+        <a href="mathematics.html" class="subject-link">
+            <span class="subject-emoji">🔢</span>
+            <span class="subject-name">Mathematics</span>
+        </a>
+
+        <a href="english.html" class="subject-link">
+            <span class="subject-emoji">📚</span>
+            <span class="subject-name">English</span>
+        </a>
+
+        <a href="science.html" class="subject-link">
+            <span class="subject-emoji">🧪</span>
+            <span class="subject-name">Science</span>
+        </a>
+
+        <a href="computer-science.html" class="subject-link">
+            <span class="subject-emoji">💻</span>
+            <span class="subject-name">Computer Science</span>
+        </a>
+
+        <a href="french.html" class="subject-link">
+            <span class="subject-emoji">🇫🇷</span>
+            <span class="subject-name">French</span>
+        </a>
+
+        <a href="german.html" class="subject-link">
+            <span class="subject-emoji">🇩🇪</span>
+            <span class="subject-name">German</span>
+        </a>
+
+        <a href="history.html" class="subject-link">
+            <span class="subject-emoji">🏛️</span>
+            <span class="subject-name">History</span>
+        </a>
+
+        <a href="geography.html" class="subject-link">
+            <span class="subject-emoji">🌍</span>
+            <span class="subject-name">Geography</span>
+        </a>
+
+        <a href="art.html" class="subject-link">
+            <span class="subject-emoji">🎨</span>
+            <span class="subject-name">Art</span>
+        </a>
+
+        <a href="music.html" class="subject-link">
+            <span class="subject-emoji">🎵</span>
+            <span class="subject-name">Music</span>
+        </a>
+
+        <a href="pe.html" class="subject-link">
+            <span class="subject-emoji">⚽</span>
+            <span class="subject-name">PE</span>
+        </a>
+
+        <a href="re.html" class="subject-link">
+            <span class="subject-emoji">✝️</span>
+            <span class="subject-name">RE</span>
+        </a>
+
+        <a href="design-technology.html" class="subject-link">
+            <span class="subject-emoji">🔧</span>
+            <span class="subject-name">D&T</span>
+        </a>
+        </div>
+    </div>
+</body>
+</html>

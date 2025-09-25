@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physical Education - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav a {
+            color: #007aff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ea580c, #fb923c);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .document-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .document-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #007aff;
+        }
+
+        .document-description {
+            color: #86868b;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #007aff;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+        }
+
+        .year-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .year-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            cursor: pointer;
+        }
+
+        .year-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .year-card h4 {
+            color: #007aff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .year-card p {
+            color: #86868b;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .explore-btn {
+            background: #f8f9fa;
+            color: #007aff;
+            padding: 10px 20px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 122, 255, 0.2);
+        }
+
+        .explore-btn:hover {
+            background: #007aff;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 5rem 0;
+            padding: 3rem;
+            background: #f8f9fa;
+            border-radius: 18px;
+        }
+
+        .cta-section h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .documents-grid, .year-breakdown {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="../index.html">← Back to All Subjects</a>
+    </nav>
+
+    <div class="hero">
+        <h1>⚽ Physical Education</h1>
+        <p>Promoting fitness, teamwork, and healthy lifestyles through diverse sporting activities and physical challenges</p>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Curriculum Documents</h2>
+            <p>Access comprehensive PE curriculum documentation including core PE and specialist pathways.</p>
+            <div class="documents-grid">
+                <div class="document-card">
+                    <div class="document-title">📅 PE Core Long Term Plan</div>
+                    <div class="document-description">
+                        Core PE curriculum covering fundamental movement skills, sport-specific techniques, and fitness development across all year groups.
+                    </div>
+                    <a href="../stm_curriculum_downloads/pe/PE%2520Core%2520Long%2520Term%2520Plan2.pdf" class="download-btn" target="_blank">
+                        View Core Plan
+                    </a>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">🏃 Sport Long Term Plan</div>
+                    <div class="document-description">
+                        Specialist sport curriculum pathway for students pursuing advanced sporting excellence and leadership opportunities.
+                    </div>
+                    <a href="../stm_curriculum_downloads/pe/Sport%2520Long%2520Term%2520Plan.pdf" class="download-btn" target="_blank">
+                        View Sport Plan
+                    </a>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">🎯 GCSE PE Planning</div>
+                    <div class="document-description">
+                        GCSE Physical Education curriculum covering theoretical knowledge, practical assessment, and coursework requirements.
+                    </div>
+                    <a href="../stm_curriculum_downloads/pe/GCSE%2520PE%2520Long%2520Term%2520Plan.pdf" class="download-btn" target="_blank">
+                        View GCSE Plan
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Year-by-Year Physical Development</h2>
+            <p>Explore detailed curriculum content, sporting activities, and fitness development for each year group.</p>
+
+            <div class="year-breakdown">
+                <div class="year-card" onclick="window.open('pe-year-7.html', '_blank')">
+                    <h4>Year 7 - Movement Foundations</h4>
+                    <p>Fundamental movement skills, introduction to diverse sports, fitness testing, and development of teamwork and cooperation skills.</p>
+                    <span class="explore-btn">Explore Year 7 →</span>
+                </div>
+
+                <div class="year-card">
+                    <h4>Year 8 - Skill Development</h4>
+                    <p>Advanced sporting techniques, tactical awareness, leadership opportunities, and personal fitness planning with sport specialization options.</p>
+                    <span class="explore-btn">Explore Year 8 →</span>
+                </div>
+
+                <div class="year-card">
+                    <h4>Year 9 - Performance Excellence</h4>
+                    <p>Competitive performance, advanced tactics, sports analysis, and preparation for GCSE PE with leadership and coaching opportunities.</p>
+                    <span class="explore-btn">Explore Year 9 →</span>
+                </div>
+
+                <div class="year-card">
+                    <h4>Years 10-11 - GCSE PE</h4>
+                    <p>Theoretical knowledge, practical assessment, coursework completion, and advanced performance analysis with specialization pathways.</p>
+                    <span class="explore-btn">Explore GCSE Years →</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Physical Excellence</h3>
+            <p>Our PE curriculum develops physical literacy, teamwork skills, and lifelong healthy habits through diverse sporting opportunities.</p>
+            <a href="../stm_curriculum_downloads/pe/Sport%2520Assessment%2520Information.pdf"
+               class="download-btn"
+               target="_blank">
+                View Assessment Framework
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Year 7 - STM College</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #8B4513;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .curriculum-arrow-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .curriculum-text {
+            padding-right: 20px;
+        }
+
+        .curriculum-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .curriculum-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .pdf-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        .curriculum-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .curriculum-arrow {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .curriculum-arrow:hover {
+            transform: scale(1.05);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .term-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .term-card:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .term-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .term-card .duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .term-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .skills-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 0.9rem;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .assessment-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .assessment-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .assessment-section p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .weekly-breakdown {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .weekly-breakdown h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .week-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .faq-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-arrow-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .curriculum-text {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .curriculum-text h2 {
+                font-size: 2rem;
+            }
+
+            .term-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="history.html">← Back to History</a>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>History Year 7</h1>
+            <p>Journey through time from Ancient Rome to the Renaissance - developing critical historical thinking skills</p>
+        </div>
+
+        <div class="curriculum-arrow-section">
+            <div class="curriculum-text">
+                <h2>Your Historical Journey</h2>
+                <p>Year 7 History takes you from the ancient world to medieval times, developing essential historical skills through chronological study and source analysis.</p>
+                <a href="../stm_curriculum_downloads/history/Curriculum%2520Arrow%2520History.pdf" class="pdf-link" target="_blank">
+                    View Full Curriculum Arrow →
+                </a>
+            </div>
+            <div class="curriculum-image">
+                <img src="../images/curriculum-arrows/history-arrow-page-1.png" alt="History Curriculum Arrow" class="curriculum-arrow">
+            </div>
+        </div>
+
+        <div class="terms-grid">
+            <div class="term-card">
+                <h3>Autumn Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>BC to AD & Rome: City to Empire</strong> - Foundation historical skills and Roman expansion</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: BC/AD dating systems and chronological skills</div>
+                    <div class="week-item">Weeks 3-4: Roman Republic and early government</div>
+                    <div class="week-item">Weeks 5-6: Military expansion and conquest strategies</div>
+                    <div class="week-item">Week 7: Transition from Republic to Empire</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Chronology</span>
+                        <span class="skill-tag">Source analysis</span>
+                        <span class="skill-tag">Interpretation</span>
+                        <span class="skill-tag">Cause and consequence</span>
+                        <span class="skill-tag">Historical evidence</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Evaluate evidence to make judgements about Roman expansion and empire-building processes.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Autumn Term 2</h3>
+                <div class="duration">Weeks 8-14</div>
+                <p><strong>Roman Britain & Dark Ages</strong> - Roman occupation and post-Roman Britain</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Roman invasion and conquest of Britain</div>
+                    <div class="week-item">Weeks 10-11: Romanisation and cultural change</div>
+                    <div class="week-item">Weeks 12-13: Roman withdrawal and collapse</div>
+                    <div class="week-item">Week 14: Anglo-Saxon settlement period</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Chronology</span>
+                        <span class="skill-tag">Source analysis</span>
+                        <span class="skill-tag">Change and continuity</span>
+                        <span class="skill-tag">Cultural impact</span>
+                        <span class="skill-tag">Archaeological evidence</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Full assessment including keyword spellings, content knowledge, and source analysis examining factors of Romanisation.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Spring Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Anglo-Saxon England & Norman Invasion</strong> - Medieval foundations and conquest</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Anglo-Saxon kingdoms and culture</div>
+                    <div class="week-item">Weeks 3-4: Edward the Confessor and succession crisis</div>
+                    <div class="week-item">Weeks 5-6: 1066 - battles and claimants to throne</div>
+                    <div class="week-item">Week 7: Norman victory and immediate consequences</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Chronology</span>
+                        <span class="skill-tag">Source analysis</span>
+                        <span class="skill-tag">Cause and consequence</span>
+                        <span class="skill-tag">Change and continuity</span>
+                        <span class="skill-tag">Multiple perspectives</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Source analysis with provenance examination and evaluation of factors leading to Norman conquest.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Spring Term 2</h3>
+                <div class="duration">Weeks 8-13</div>
+                <p><strong>Norman Conquest & Control</strong> - Establishing Norman rule in England</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Motte and bailey castles and fortification</div>
+                    <div class="week-item">Weeks 10-11: Domesday Book and administrative control</div>
+                    <div class="week-item">Weeks 12-13: Feudal system implementation</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Political control</span>
+                        <span class="skill-tag">Administrative systems</span>
+                        <span class="skill-tag">Source evaluation</span>
+                        <span class="skill-tag">Change and continuity</span>
+                        <span class="skill-tag">Social structures</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Analysis of Norman control methods and evaluation of their effectiveness in establishing lasting rule.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Summer Term 1</h3>
+                <div class="duration">Weeks 1-7</div>
+                <p><strong>Life in the Middle Ages</strong> - Medieval society and culture</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 1-2: Medieval social hierarchy and daily life</div>
+                    <div class="week-item">Weeks 3-4: Role of the Church in medieval society</div>
+                    <div class="week-item">Weeks 5-6: Black Death impact and consequences</div>
+                    <div class="week-item">Week 7: Economic and social changes</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Social analysis</span>
+                        <span class="skill-tag">Religious influence</span>
+                        <span class="skill-tag">Economic impact</span>
+                        <span class="skill-tag">Cultural understanding</span>
+                        <span class="skill-tag">Cause and consequence</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Comprehensive analysis of medieval life and evaluation of Black Death's transformative impact on society.</p>
+                </div>
+            </div>
+
+            <div class="term-card">
+                <h3>Summer Term 2</h3>
+                <div class="duration">Weeks 8-12</div>
+                <p><strong>Islamic Empires & Crusades - Introduction to Tudors</strong> - Global medieval world and early modern transition</p>
+
+                <div class="weekly-breakdown">
+                    <h4>Weekly Focus</h4>
+                    <div class="week-item">Weeks 8-9: Islamic Golden Age and achievements</div>
+                    <div class="week-item">Weeks 10-11: Crusades - causes, events, and consequences</div>
+                    <div class="week-item">Week 12: Wars of the Roses and Tudor emergence</div>
+                </div>
+
+                <div class="skills-section">
+                    <h4>Key Skills</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Global perspectives</span>
+                        <span class="skill-tag">Religious conflict</span>
+                        <span class="skill-tag">Cultural exchange</span>
+                        <span class="skill-tag">Political transition</span>
+                        <span class="skill-tag">Historical significance</span>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h4>Assessment</h4>
+                    <p>Evaluation of change/continuity, cause/consequence, and significance across medieval to early modern transition.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>History Year 7 Q&A</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">How does Year 7 History develop analytical skills?</div>
+                <div class="faq-answer">Students learn to analyse historical sources, evaluate evidence, and make judgements about significance. They develop chronological understanding and learn to identify cause and consequence relationships, building essential foundations for historical thinking.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What time periods are covered in Year 7?</div>
+                <div class="faq-answer">The curriculum spans from ancient Rome (BC/AD) through to the early Tudor period (c.1500), covering Roman Britain, Anglo-Saxon England, Norman Conquest, medieval life, Islamic empires, and the Crusades.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How are historical skills assessed?</div>
+                <div class="faq-answer">Assessment includes source analysis with provenance, keyword knowledge, content understanding, and analytical writing. Students learn to evaluate factors, make judgements on significance, and explain cause and consequence relationships.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What cross-curricular connections are made?</div>
+                <div class="faq-answer">History connects with Geography (volcanoes, population), Mathematics (negative numbers), CPSHE (democracy), Science (cell biology), and RE (Holy Land, Islam), providing broader educational context and reinforcing learning across subjects.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

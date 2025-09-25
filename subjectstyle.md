@@ -1,0 +1,361 @@
+# STM College Subject Page Style Guide
+
+This document defines the standardized format and structure for all STM College subject pages to ensure consistency across the curriculum website.
+
+## Reference Implementation
+
+**📋 Primary Example**: `subjects/mathematics-year-7.html` - Use this as the definitive reference for structure, spacing, and formatting when creating new subject pages.
+
+**📋 Secondary Example**: `subjects/english-year-7.html` - Shows adaptation of the standard format with subject-specific content and colors.
+
+## Page Structure Overview
+
+Each subject page follows this exact structure:
+1. **Shared Navigation** (iframe)
+2. **Hero Section** with subject title, description, and year navigation buttons
+3. **Overview Section** with skills grid
+4. **Term Sections** (separate container) with detailed curriculum content
+5. **FAQ Section** (optional)
+
+## Required Navigation
+
+### Shared Navigation
+```html
+<iframe src="../shared-nav.html"
+        style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block;">
+</iframe>
+```
+
+## Hero Section Format
+
+### Structure
+```html
+<div class="hero">
+    <h1>[EMOJI] [Subject Name]</h1>
+    <p>[Subject description and learning objectives]</p>
+
+    <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+        <a href="[subject]-year-7.html" class="year-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">[EMOJI] Year 7</a>
+        <a href="[subject]-year-8.html" class="year-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">[EMOJI] Year 8</a>
+        <span style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: not-allowed;">[EMOJI] Year 9</span>
+        <span style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: not-allowed;">[EMOJI] Year 10</span>
+        <span style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: not-allowed;">[EMOJI] Year 11</span>
+    </div>
+</div>
+```
+
+### Hero CSS Requirements
+```css
+.hero {
+    background: linear-gradient(135deg, [COLOR1], [COLOR2]);
+    padding: 5rem 2rem;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.003em;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+```
+
+## Subject Color Schemes
+
+| Subject | Primary Color | Secondary Color | Term Header Color |
+|---------|---------------|-----------------|-------------------|
+| Mathematics | `#3b82f6` | `#93c5fd` | `#3b82f6` |
+| English | `#a78bfa` | `#c4b5fd` | `#a78bfa` |
+| Science | `#ff6b35` | `#f7931e` | `#ff6b35` |
+| Geography | `#06b6d4` | `#67e8f9` | `#06b6d4` |
+| History | `#8b4513` | `#cd853f` | `#8b4513` |
+| Computer Science | `#95a5a6` | `#7f8c8d` | `#95a5a6` |
+
+## Curriculum Documents Section
+
+### Structure
+```html
+<div class="container">
+    <!-- Curriculum Documents Section -->
+    <div class="section">
+        <h2>Curriculum Documents</h2>
+        <p>Access comprehensive [Subject] curriculum documentation including detailed planning and assessment approaches.</p>
+        <div class="documents-grid">
+            <div class="document-card">
+                <div class="document-title">📅 Long Term Plan</div>
+                <div class="document-description">
+                    [Description of the long term plan document]
+                </div>
+                <a href="../stm_curriculum_downloads/[subject]/[filename].pdf" class="download-btn" target="_blank">
+                    View Long Term Plan
+                </a>
+            </div>
+
+            <div class="document-card">
+                <div class="document-title">✅ Assessment Information</div>
+                <div class="document-description">
+                    [Description of assessment framework]
+                </div>
+                <a href="../stm_curriculum_downloads/[subject]/[filename].pdf" class="download-btn" target="_blank">
+                    View Assessment Details
+                </a>
+            </div>
+
+            <div class="document-card" style="padding: 1rem;">
+                <img src="../images/curriculum-arrows/[subject]-arrow-page-1.png"
+                     alt="[Subject] Curriculum Pathway"
+                     onclick="window.open('../stm_curriculum_downloads/[subject]/[filename].pdf', '_blank')"
+                     style="width: 100%; height: auto; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;"
+                     onmouseover="this.style.transform='scale(1.02)'; this.style.opacity='0.9';"
+                     onmouseout="this.style.transform='scale(1)'; this.style.opacity='1';">
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+## Year-by-Year Journey Section
+
+```html
+<div class="section">
+    <h2>Year-by-Year [Subject] Journey</h2>
+    <p>Explore detailed curriculum content, learning objectives, and interactive concepts for each year group.</p>
+
+    <div class="year-breakdown">
+        <div class="year-card" onclick="window.open('[subject]-year-7.html', '_blank')">
+            <h4>Year 7 - [Subtitle]</h4>
+            <p>[Description of Year 7 curriculum focus]</p>
+            <span class="explore-btn">Explore Year 7 →</span>
+        </div>
+
+        <div class="year-card" onclick="window.open('[subject]-year-8.html', '_blank')">
+            <h4>Year 8 - [Subtitle]</h4>
+            <p>[Description of Year 8 curriculum focus]</p>
+            <span class="explore-btn">Explore Year 8 →</span>
+        </div>
+
+        <div class="year-card">
+            <h4>Year 9 - [Subtitle]</h4>
+            <p>[Description of Year 9 curriculum focus]</p>
+            <span class="explore-btn">Coming Soon →</span>
+        </div>
+
+        <div class="year-card">
+            <h4>Year 10 - [Subtitle]</h4>
+            <p>[Description of Year 10 curriculum focus]</p>
+            <span class="explore-btn">Coming Soon →</span>
+        </div>
+
+        <div class="year-card">
+            <h4>Year 11 - [Subtitle]</h4>
+            <p>[Description of Year 11 curriculum focus]</p>
+            <span class="explore-btn">Coming Soon →</span>
+        </div>
+    </div>
+</div>
+```
+
+---
+
+# Year 7 Subject Page Style Guide
+
+## Page Structure for Year 7 Pages
+
+### Navigation and Hero
+```html
+<iframe src="../shared-nav.html"
+        style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block;">
+</iframe>
+
+<div class="hero">
+    <h1>[EMOJI] [Subject] Year 7</h1>
+    <p>[Year 7 specific description and learning focus]</p>
+
+    <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+        <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+        <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+        <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+    </div>
+</div>
+```
+
+### Required CSS for Term Sections
+```css
+.term-section {
+    margin: 4rem 0;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 3rem;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.term-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: [SUBJECT_COLOR];
+    letter-spacing: -0.003em;
+}
+```
+
+### Term Section Structure
+```html
+<!-- Term Sections -->
+<div class="container">
+    <!-- Autumn Term -->
+    <div id="autumn-term" class="term-section">
+        <h2>🍂 Autumn Term - [Subtitle]</h2>
+
+        <div class="week-section">
+            <div class="week-title">Weeks 1-4: [Topic Name]</div>
+            <div class="week-content">
+                <ul>
+                    <li>[Learning objective 1]</li>
+                    <li>[Learning objective 2]</li>
+                    <li>[Learning objective 3]</li>
+                    <li>[Learning objective 4]</li>
+                    <li>[Learning objective 5]</li>
+                    <li>[Learning objective 6]</li>
+                    <li>[Learning objective 7]</li>
+                    <li>[Learning objective 8]</li>
+                </ul>
+
+                <div class="vocab-section">
+                    <h4>Key Vocabulary</h4>
+                    <p><strong>[Category 1]:</strong> [Terms separated by commas]<br>
+                    <strong>[Category 2]:</strong> [Terms separated by commas]</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="week-section">
+            <div class="week-title">Weeks 5-8: [Topic Name]</div>
+            <div class="week-content">
+                <ul>
+                    <li>[Learning objective 1]</li>
+                    <li>[Learning objective 2]</li>
+                    <li>[Learning objective 3]</li>
+                    <li>[Learning objective 4]</li>
+                    <li>[Learning objective 5]</li>
+                    <li>[Learning objective 6]</li>
+                    <li>[Learning objective 7]</li>
+                    <li>[Learning objective 8]</li>
+                </ul>
+
+                <div class="vocab-section">
+                    <h4>Key Vocabulary</h4>
+                    <p><strong>[Category 1]:</strong> [Terms separated by commas]<br>
+                    <strong>[Category 2]:</strong> [Terms separated by commas]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spring Term -->
+    <div id="spring-term" class="term-section">
+        <h2>❄️ Spring Term - [Subtitle]</h2>
+
+        [Same structure as Autumn Term with 2 week-sections]
+    </div>
+
+    <!-- Summer Term -->
+    <div id="summer-term" class="term-section">
+        <h2>🌸 Summer Term - [Subtitle]</h2>
+
+        [Same structure as Autumn Term with 2 week-sections]
+    </div>
+</div>
+```
+
+## Content Requirements
+
+### Learning Objectives
+- **8 learning objectives per week section** (total of 6 sections per year = 48 objectives)
+- Written as clear, actionable statements
+- Subject-specific and age-appropriate
+- Progressive difficulty throughout the year
+
+### Vocabulary Sections
+- **2 categories per vocabulary section**
+- **Subject-specific terminology**
+- **Terms separated by commas**
+- **Bold category headers**
+
+### Term Emojis
+- **Autumn Term**: 🍂
+- **Spring Term**: ❄️ or 🌸
+- **Summer Term**: ☀️ or 🌻
+
+### Week Ranges
+- **Autumn**: Weeks 1-4, Weeks 5-8
+- **Spring**: Weeks 1-4, Weeks 5-8
+- **Summer**: Weeks 1-4, Weeks 5-8
+
+## Subject-Specific Adaptations
+
+### Mathematics
+- Focus on mathematical skills and concepts
+- Include problem-solving and reasoning
+- Reference to sequences, algebra, geometry, etc.
+
+### English
+- Focus on reading, writing, speaking, listening
+- Include literature, creative writing, language analysis
+- Reference to genres, literary devices, etc.
+
+### Science
+- Focus on biology, chemistry, physics concepts
+- Include practical investigation skills
+- Reference to scientific method, experiments, etc.
+
+## Quality Standards
+
+1. **Consistency**: All pages must follow identical structure
+2. **Accessibility**: Proper heading hierarchy (h1 > h2 > h3 > h4)
+3. **Mobile Responsive**: All elements must work on mobile devices
+4. **Color Coordination**: Each subject has consistent color scheme
+5. **Content Quality**: All learning objectives must be curriculum-aligned
+6. **Navigation**: Term navigation buttons must link to correct anchors
+7. **Typography**: Consistent font sizes and spacing throughout
+
+## File Naming Convention
+
+- Main subject page: `[subject].html`
+- Year 7 page: `[subject]-year-7.html`
+- Year 8 page: `[subject]-year-8.html`
+- PDF documents: Follow existing STM folder structure
+- Images: `[subject]-arrow-page-1.png` in `images/curriculum-arrows/`
+
+## Testing Checklist
+
+- [ ] Navigation iframe loads correctly
+- [ ] All term navigation buttons work (scroll to anchors)
+- [ ] Year navigation buttons work (link to year pages)
+- [ ] All PDF links work and open in new tab
+- [ ] All images load and have proper alt text
+- [ ] Mobile responsive design works
+- [ ] Color scheme is consistent throughout
+- [ ] Typography matches the standard format
+- [ ] All sections have proper spacing and layout
+- [ ] **Compare side-by-side with `mathematics-year-7.html` to verify identical layout**
+
+## Implementation Notes
+
+When creating new subject pages:
+
+1. **Start with the Mathematics Year 7 template**: Copy `subjects/mathematics-year-7.html` as your base
+2. **Replace content systematically**: Update subject name, colors, content while preserving all structure
+3. **Validate against the reference**: Load both pages side-by-side to ensure identical formatting
+4. **Test all functionality**: Verify navigation, links, and responsive behavior match the reference
+
+The Mathematics Year 7 page represents the "gold standard" - all other subject pages should be visually and structurally indistinguishable when viewed at the same screen size.

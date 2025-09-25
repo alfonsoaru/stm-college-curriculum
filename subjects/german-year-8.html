@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Year 8 - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f59e0b 0%, #fcd34d 100%);
+            min-height: 100vh;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #ffffff;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,1);
+            color: #000000;
+        }
+
+        .navigation {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 1);
+            color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .term-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #1a1a1a;
+        }
+
+        .term-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .term-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .term-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+
+        .module-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .module-german {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .module-title {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .module-description {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .module-grammar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .term-game-btn {
+            background: rgba(245, 158, 11, 0.8);
+            color: #1a1a1a;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .term-game-btn:hover {
+            background: rgba(245, 158, 11, 1);
+            color: #000000;
+            transform: scale(1.05);
+        }
+
+        .vocab-list {
+            background: rgba(245, 158, 11, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .vocab-list h4 {
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .vocab-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .vocab-column {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .vocab-column strong {
+            color: #1a1a1a;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .vocab-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Subject Overview</a>
+
+        <div class="header">
+            <h1>🇩🇪 German Year 8</h1>
+            <p>Expanding German language skills through cultural exploration, advanced grammar, and practical communication</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button" onclick="scrollToTerm('autumn')">Autumn Term</button>
+            <button class="nav-button" onclick="scrollToTerm('spring')">Spring Term</button>
+            <button class="nav-button" onclick="scrollToTerm('summer')">Summer Term</button>
+        </div>
+
+        <div id="autumn" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🍂 Autumn Term</h2>
+                <p class="term-subtitle">Terms 1a & 1b - Travel & Entertainment</p>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-german">Term 1a - Reisen und Verkehr</div>
+                    <h3 class="module-title">Travel & Transport</h3>
+                    <p class="module-description">
+                        Exploring different modes of transport, planning journeys, and understanding German-speaking countries. Learning to discuss travel preferences and experiences.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Modal verbs (können, müssen, wollen), prepositions with dative, time expressions
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 1a Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Transport:</strong><br>
+                                das Auto - car<br>
+                                der Zug - train<br>
+                                das Flugzeug - plane<br>
+                                der Bus - bus<br>
+                                das Fahrrad - bicycle<br>
+                                das Schiff - ship<br>
+                                die U-Bahn - underground<br>
+                                zu Fuß gehen - to walk<br>
+                                fahren - to drive/travel<br>
+                                reisen - to travel
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Directions & Places:</strong><br>
+                                rechts - right<br>
+                                links - left<br>
+                                geradeaus - straight ahead<br>
+                                der Bahnhof - train station<br>
+                                der Flughafen - airport<br>
+                                die Haltestelle - bus stop<br>
+                                das Hotel - hotel<br>
+                                die Karte - map/ticket<br>
+                                die Reise - journey<br>
+                                das Gepäck - luggage
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Modal Verbs:</strong><br>
+                                können - can/to be able to<br>
+                                müssen - must/to have to<br>
+                                wollen - to want to<br>
+                                sollen - should<br>
+                                dürfen - may/to be allowed<br>
+                                ich kann - I can<br>
+                                du musst - you must<br>
+                                er will - he wants<br>
+                                wir sollen - we should<br>
+                                sie dürfen - they may
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-german">Term 1b - Medien und Unterhaltung</div>
+                    <h3 class="module-title">Media & Entertainment</h3>
+                    <p class="module-description">
+                        Discussing TV programs, films, music, and digital media. Expressing opinions about entertainment and understanding German media culture.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Perfect tense with haben and sein, separable verbs, comparative adjectives
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 1b Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Media & Technology:</strong><br>
+                                das Fernsehen - television<br>
+                                der Film - film<br>
+                                die Musik - music<br>
+                                das Radio - radio<br>
+                                das Internet - internet<br>
+                                das Handy - mobile phone<br>
+                                der Computer - computer<br>
+                                die Zeitung - newspaper<br>
+                                die Zeitschrift - magazine<br>
+                                das Buch - book
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Entertainment:</strong><br>
+                                der Krimi - crime drama<br>
+                                die Komödie - comedy<br>
+                                der Horror - horror<br>
+                                die Nachrichten - news<br>
+                                die Sendung - program<br>
+                                das Konzert - concert<br>
+                                das Theater - theatre<br>
+                                das Kino - cinema<br>
+                                spannend - exciting<br>
+                                langweilig - boring
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Perfect Tense:</strong><br>
+                                ich habe gesehen - I have seen<br>
+                                du hast gehört - you have heard<br>
+                                er hat gemacht - he has done<br>
+                                wir sind gegangen - we have gone<br>
+                                ihr seid gekommen - you have come<br>
+                                sie haben gespielt - they have played<br>
+                                gestern - yesterday<br>
+                                schon - already<br>
+                                noch nicht - not yet<br>
+                                nie - never
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="spring" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🌸 Spring Term</h2>
+                <p class="term-subtitle">Terms 2a & 2b - Health & Future Plans</p>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-german">Term 2a - Gesundheit und Fitness</div>
+                    <h3 class="module-title">Health & Fitness</h3>
+                    <p class="module-description">
+                        Learning about healthy lifestyles, sports, illnesses, and visiting the doctor. Understanding German healthcare system and wellness culture.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Reflexive verbs, dative pronouns, wenn clauses, adjective endings
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 2a Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Health & Body Parts:</strong><br>
+                                die Gesundheit - health<br>
+                                der Kopf - head<br>
+                                die Kopfschmerzen - headache<br>
+                                der Bauch - stomach<br>
+                                die Bauchschmerzen - stomach ache<br>
+                                der Arm - arm<br>
+                                das Bein - leg<br>
+                                der Rücken - back<br>
+                                krank - ill<br>
+                                gesund - healthy
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Sports & Fitness:</strong><br>
+                                der Sport - sport<br>
+                                das Training - training<br>
+                                laufen - to run<br>
+                                schwimmen - to swim<br>
+                                Rad fahren - to cycle<br>
+                                das Fitnessstudio - gym<br>
+                                sich bewegen - to move<br>
+                                sich entspannen - to relax<br>
+                                sich fit halten - to keep fit<br>
+                                sich wohl fühlen - to feel well
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Reflexive Verbs:</strong><br>
+                                sich waschen - to wash oneself<br>
+                                sich duschen - to shower<br>
+                                sich anziehen - to get dressed<br>
+                                sich ausziehen - to get undressed<br>
+                                sich setzen - to sit down<br>
+                                sich freuen - to be pleased<br>
+                                sich ärgern - to be annoyed<br>
+                                sich beeilen - to hurry<br>
+                                sich vorstellen - to introduce oneself<br>
+                                sich interessieren - to be interested
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-german">Term 2b - Zukunftspläne</div>
+                    <h3 class="module-title">Future Plans & Careers</h3>
+                    <p class="module-description">
+                        Discussing future aspirations, career choices, and educational pathways. Learning about the German education and employment system.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Future tense (werden), conditional sentences, relative pronouns
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 2b Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Jobs & Careers:</strong><br>
+                                der Beruf - profession<br>
+                                der Arzt/die Ärztin - doctor<br>
+                                der Lehrer/die Lehrerin - teacher<br>
+                                der Ingenieur - engineer<br>
+                                der Polizist - police officer<br>
+                                der Friseur - hairdresser<br>
+                                der Koch/die Köchin - cook<br>
+                                der Verkäufer - salesperson<br>
+                                arbeiten - to work<br>
+                                verdienen - to earn
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Education & Skills:</strong><br>
+                                die Universität - university<br>
+                                das Studium - studies<br>
+                                der Abschluss - qualification<br>
+                                die Ausbildung - training<br>
+                                lernen - to learn<br>
+                                studieren - to study (at university)<br>
+                                die Erfahrung - experience<br>
+                                die Sprache - language<br>
+                                kreativ - creative<br>
+                                praktisch - practical
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Future Tense:</strong><br>
+                                ich werde - I will<br>
+                                du wirst - you will<br>
+                                er wird - he will<br>
+                                wir werden - we will<br>
+                                ihr werdet - you will (plural)<br>
+                                sie werden - they will<br>
+                                in der Zukunft - in the future<br>
+                                später - later<br>
+                                nächstes Jahr - next year<br>
+                                hoffentlich - hopefully
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="summer" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">☀️ Summer Term</h2>
+                <p class="term-subtitle">Terms 3a & 3b - Environment & Global Issues</p>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-german">Term 3a - Umwelt und Natur</div>
+                    <h3 class="module-title">Environment & Nature</h3>
+                    <p class="module-description">
+                        Exploring environmental issues, nature conservation, and sustainable living. Understanding German perspectives on climate change and green technology.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Key Grammar:</strong> Passive voice, subordinate clauses with dass, environmental vocabulary
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 3a Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Environment:</strong><br>
+                                die Umwelt - environment<br>
+                                die Natur - nature<br>
+                                der Wald - forest<br>
+                                der Baum - tree<br>
+                                das Tier - animal<br>
+                                die Luft - air<br>
+                                das Wasser - water<br>
+                                der Müll - rubbish<br>
+                                die Verschmutzung - pollution<br>
+                                der Klimawandel - climate change
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Actions & Solutions:</strong><br>
+                                recyceln - to recycle<br>
+                                sparen - to save<br>
+                                schützen - to protect<br>
+                                vermeiden - to avoid<br>
+                                verwenden - to use<br>
+                                die Energie - energy<br>
+                                erneuerbar - renewable<br>
+                                umweltfreundlich - environmentally friendly<br>
+                                nachhaltig - sustainable<br>
+                                biologisch - organic
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Problems & Solutions:</strong><br>
+                                das Problem - problem<br>
+                                die Lösung - solution<br>
+                                gefährlich - dangerous<br>
+                                wichtig - important<br>
+                                notwendig - necessary<br>
+                                möglich - possible<br>
+                                unmöglich - impossible<br>
+                                die Zukunft - future<br>
+                                die Erde - earth<br>
+                                der Planet - planet
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-german">Term 3b - Internationale Themen</div>
+                    <h3 class="module-title">Global Issues & Culture</h3>
+                    <p class="module-description">
+                        Examining global challenges, cultural differences, and international cooperation. Developing advanced discussion skills and cultural awareness.
+                    </p>
+                    <p class="module-grammar">
+                        <strong>Focus:</strong> Complex sentence structures, subjunctive mood introduction, advanced vocabulary
+                    </p>
+                    <div class="vocab-list">
+                        <h4>📚 Term 3b Vocabulary</h4>
+                        <div class="vocab-columns">
+                            <div class="vocab-column">
+                                <strong>Countries & Cultures:</strong><br>
+                                das Land - country<br>
+                                die Kultur - culture<br>
+                                die Tradition - tradition<br>
+                                die Sprache - language<br>
+                                der Unterschied - difference<br>
+                                die Gemeinsamkeit - similarity<br>
+                                international - international<br>
+                                global - global<br>
+                                europäisch - European<br>
+                                weltweit - worldwide
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Social Issues:</strong><br>
+                                die Gesellschaft - society<br>
+                                die Gleichberechtigung - equality<br>
+                                die Armut - poverty<br>
+                                der Frieden - peace<br>
+                                der Krieg - war<br>
+                                die Menschenrechte - human rights<br>
+                                die Demokratie - democracy<br>
+                                die Politik - politics<br>
+                                fair - fair<br>
+                                gerecht - just
+                            </div>
+                            <div class="vocab-column">
+                                <strong>Opinion Expressions:</strong><br>
+                                meiner Meinung nach - in my opinion<br>
+                                ich denke, dass... - I think that...<br>
+                                ich glaube, dass... - I believe that...<br>
+                                ich bin der Ansicht - I am of the view<br>
+                                einerseits...andererseits - on one hand...on the other<br>
+                                trotzdem - nevertheless<br>
+                                außerdem - furthermore<br>
+                                deshalb - therefore<br>
+                                jedoch - however<br>
+                                schließlich - finally
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="term-game-btn">🎮 Practice All Vocabulary</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 40px; margin-bottom: 40px; backdrop-filter: blur(10px); border: 1px solid rgba(0, 0, 0, 0.1);">
+                <h2 style="color: #1a1a1a; font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">🤖 AI German Tutor Prompt</h2>
+                <p style="color: #1a1a1a; font-size: 1.1rem; margin-bottom: 2rem; text-align: center;">Copy and paste this prompt into any AI chatbot to create your personal German Year 8 tutor:</p>
+
+                <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; margin: 2rem 0; border-left: 4px solid #f59e0b;">
+                    <div style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.6; white-space: pre-wrap; color: #1a1a1a;">You are an expert German tutor for Year 8 students (ages 12-13) at STM College. You follow the STM curriculum exactly and make German learning engaging, practical, and culturally rich.
+
+**YOUR CURRICULUM COVERAGE:**
+
+**AUTUMN TERM:**
+- Term 1a: Travel & Transport (modal verbs, prepositions with dative, time expressions)
+- Term 1b: Media & Entertainment (perfect tense with haben/sein, separable verbs, comparatives)
+
+**SPRING TERM:**
+- Term 2a: Health & Fitness (reflexive verbs, dative pronouns, wenn clauses, adjective endings)
+- Term 2b: Future Plans & Careers (future tense with werden, conditional sentences, relative pronouns)
+
+**SUMMER TERM:**
+- Term 3a: Environment & Nature (passive voice, subordinate clauses with dass, environmental vocabulary)
+- Term 3b: Global Issues & Culture (complex sentence structures, subjunctive mood introduction, advanced vocabulary)
+
+**KEY GRAMMAR FOCUS:**
+- Modal verbs (können, müssen, wollen, sollen, dürfen)
+- Perfect tense formation with haben and sein
+- Reflexive verbs and dative pronouns
+- Future tense (werden + infinitive)
+- Passive voice introduction
+- Complex sentence structures with conjunctions
+- Adjective endings and comparative forms
+
+**YOUR TEACHING STYLE:**
+1. Use German phrases naturally while explaining in English
+2. Connect learning to German-speaking cultures (Germany, Austria, Switzerland)
+3. Emphasize practical communication skills
+4. Provide cultural context for language use
+5. Encourage German expression and build confidence
+6. Correct errors constructively with positive reinforcement
+7. Use age-appropriate topics (travel, technology, health, environment, careers)
+
+**SAMPLE INTERACTIONS YOU EXCEL AT:**
+- Explain complex grammar with clear examples and practice
+- Help with pronunciation and intonation patterns
+- Create dialogue practice for real-world situations
+- Discuss German culture, traditions, and current events
+- Provide homework support and exam preparation
+- Develop listening and reading comprehension skills
+- Build vocabulary through thematic connections
+
+**QUIZ & GAME IDEAS YOU CAN SUGGEST:**
+- Modal verb scenario challenges
+- Perfect tense storytelling games
+- Reflexive verb daily routine descriptions
+- Future plans interview activities
+- Environmental action plan presentations
+- German media review projects
+- Travel itinerary planning in German
+- Health and fitness advice role-plays
+- Career interview simulations
+- Cultural comparison discussions
+- German music and film analysis
+- Current events debates in simple German
+
+**CULTURAL CONNECTIONS YOU PROVIDE:**
+- German education and career systems
+- Environmental initiatives in German-speaking countries
+- German media, music, and entertainment
+- Regional differences between Germany, Austria, Switzerland
+- German history and contemporary society
+- Traditional and modern German lifestyle
+
+**DIFFERENTIATION STRATEGIES:**
+- Visual learners: Use diagrams, charts, and infographics
+- Auditory learners: Include pronunciation practice and listening activities
+- Kinesthetic learners: Role-play and movement-based activities
+- Advanced students: Additional cultural exploration and complex discussions
+- Struggling students: Break down grammar into smaller steps with extra practice
+
+Start by asking what specific German topic, grammar point, or cultural aspect they'd like to explore today!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToTerm(termId) {
+            document.getElementById(termId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

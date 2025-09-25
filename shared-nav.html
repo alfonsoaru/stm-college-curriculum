@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STM Navigation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border-bottom: 3px solid #ffc107;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            background: rgba(255, 193, 7, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: #ffc107;
+            color: #1a1a1a;
+            transform: scale(1.05);
+            border-color: #ffc107;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .nav-divider {
+            width: 2px;
+            height: 25px;
+            background: #ffc107;
+            margin: 0 15px;
+            border-radius: 2px;
+        }
+
+
+        .nav-link.active {
+            background: #ffc107;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .nav-link.active:hover {
+            background: #ffdb4d;
+            transform: scale(1.05);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-menu {
+                justify-content: center;
+                gap: 0.4rem;
+            }
+
+            .nav-link {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+
+            .nav-divider {
+                width: 1px;
+                height: 20px;
+                margin: 0 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-menu">
+            <a href="#" onclick="navigateHome()" class="nav-link" id="nav-index">🏠 Index</a>
+
+            <div class="nav-divider"></div>
+
+            <a href="#" onclick="navigateToSubject('mathematics.html')" class="nav-link" id="nav-mathematics">🔢 Mathematics</a>
+            <a href="#" onclick="navigateToSubject('english.html')" class="nav-link" id="nav-english">📚 English</a>
+            <a href="#" onclick="navigateToSubject('science.html')" class="nav-link" id="nav-science">🧪 Science</a>
+            <a href="#" onclick="navigateToSubject('computer-science.html')" class="nav-link" id="nav-computer-science">💻 Computer Science</a>
+
+            <a href="#" onclick="navigateToAllSubjects()" class="nav-link" id="nav-all-subjects">📋 All Subjects</a>
+        </div>
+    </nav>
+
+    <script>
+        function navigateHome() {
+            // Detect if we're in a subdirectory
+            if (window.location.href.includes('/subjects/')) {
+                window.parent.location.href = '../index.html';
+            } else {
+                window.parent.location.href = 'index.html';
+            }
+        }
+
+        function navigateToSubject(subjectFile) {
+            // Detect if we're in a subdirectory
+            if (window.location.href.includes('/subjects/')) {
+                window.parent.location.href = subjectFile;
+            } else {
+                window.parent.location.href = 'subjects/' + subjectFile;
+            }
+        }
+
+        function navigateToAllSubjects() {
+            // Detect if we're in a subdirectory
+            if (window.location.href.includes('/subjects/')) {
+                window.parent.location.href = 'all-subjects.html';
+            } else {
+                window.parent.location.href = 'subjects/all-subjects.html';
+            }
+        }
+
+        // Since file:// protocol blocks cross-frame access,
+        // we'll keep all nav items with default styling
+        // The active highlighting would work on a web server but not with file:// protocol
+    </script>
+</body>
+</html>
