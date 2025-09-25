@@ -56,6 +56,78 @@ Each subject page follows this exact structure:
 
 ❌ **NEVER MIX**: Do not put year buttons on year-specific pages or term/AI buttons on subject index pages.
 
+## AI Tutor & Games Section Format
+
+### Required Structure for Year-Specific Pages
+Both AI Tutor and Games sections must follow the exact **term-section** format used in Mathematics Year 7:
+
+```html
+<!-- AI Tutor Section -->
+<div id="ai-tutor" class="term-section">
+    <h2>👩‍🏫 AI [Subject] Tutor - [Tutor Name]</h2>
+    <div class="week-section">
+        <div class="week-title">Meet Your Personal [Subject] Tutor</div>
+        <div class="week-content">
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring [Tutor Name] to life as your personal [subject] tutor, perfectly tailored to the STM College Year 7 curriculum!</p>
+            <!-- Clipboard Icon -->
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                <span style="font-size: 0.9rem; color: #666; font-weight: 500;">📋 Copy the complete prompt below:</span>
+                <button onclick="copyToClipboard('[tutor-prompt-id]')" style="background: [SUBJECT_COLOR]; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Full Prompt</button>
+            </div>
+            <div id="[tutor-prompt-id]" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">[COMPLETE AI TUTOR PROMPT TEXT]</div>
+        </div>
+    </div>
+</div>
+
+<!-- Games Section -->
+<div id="games-programmer" class="term-section">
+    <h2>🎮 [Subject] Games Programmer - [Games Developer Name]</h2>
+    <div class="week-section">
+        <div class="week-title">Meet Your Creative Games Developer</div>
+        <div class="week-content">
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring [Games Developer Name] to life as your personal [subject] games programmer, ready to create interactive learning experiences!</p>
+            <!-- Clipboard Icon -->
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                <span style="font-size: 0.9rem; color: #666; font-weight: 500;">📋 Copy the complete prompt below:</span>
+                <button onclick="copyToClipboard('[games-prompt-id]')" style="background: #8b5cf6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Full Prompt</button>
+            </div>
+            <div id="[games-prompt-id]" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">[COMPLETE GAMES DEVELOPER PROMPT TEXT]</div>
+        </div>
+    </div>
+</div>
+```
+
+### Key Styling Requirements
+
+1. **Use `term-section` class**: Maintains consistency with curriculum term sections
+2. **Clean prompt box**: White background with monospace font and subtle border
+3. **Compact copy button**: Small, inline button matching subject color
+4. **Readable typography**: SF Mono font family, 0.85rem size, proper line height
+5. **Scrollable content**: 400px max height with vertical scroll for long prompts
+6. **Professional spacing**: Consistent padding and margins throughout
+
+### ❌ WRONG Format (Gradient Background)
+```html
+<!-- DON'T USE THIS - Hard to read -->
+<div style="background: linear-gradient(135deg, #colors); color: white; padding: 3rem;">
+    <div style="background: rgba(255,255,255,0.95); color: #1d1d1f; padding: 2rem;">
+        [Prompt text - hard to read with complex backgrounds]
+    </div>
+</div>
+```
+
+### ✅ CORRECT Format (Clean Term Section)
+```html
+<!-- USE THIS - Clean and readable -->
+<div class="term-section">
+    <div class="week-section">
+        <div style="background: white; font-family: 'SF Mono', Monaco, monospace;">
+            [Prompt text - easy to read and copy]
+        </div>
+    </div>
+</div>
+```
+
 ## Hero Section Format
 
 ### Structure
