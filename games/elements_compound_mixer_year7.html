@@ -428,7 +428,12 @@
             { symbol: 'Cl', name: 'Chlorine', type: 'nonmetal' },
             { symbol: 'Ar', name: 'Argon', type: 'noble' },
             { symbol: 'K', name: 'Potassium', type: 'metal' },
-            { symbol: 'Ca', name: 'Calcium', type: 'metal' }
+            { symbol: 'Ca', name: 'Calcium', type: 'metal' },
+            { symbol: 'Fe', name: 'Iron', type: 'metal' },
+            { symbol: 'Cu', name: 'Copper', type: 'metal' },
+            { symbol: 'Zn', name: 'Zinc', type: 'metal' },
+            { symbol: 'Br', name: 'Bromine', type: 'nonmetal' },
+            { symbol: 'I', name: 'Iodine', type: 'nonmetal' }
         ];
 
         const compounds = {
@@ -442,10 +447,20 @@
                 elements: ['C', 'O', 'O'],
                 info: 'A greenhouse gas that plants use for photosynthesis! Humans breathe out CO₂, and plants take it in to make food and release oxygen. It\'s also what makes fizzy drinks bubbly.'
             },
+            'CO': {
+                name: 'Carbon Monoxide',
+                elements: ['C', 'O'],
+                info: 'A dangerous poisonous gas! Carbon monoxide is colorless and odorless, which makes it very dangerous. It\'s produced when there isn\'t enough oxygen for complete combustion. Always ensure good ventilation when burning fuels!'
+            },
             'NaCl': {
                 name: 'Sodium Chloride (Salt)',
                 elements: ['Na', 'Cl'],
                 info: 'Common table salt! This compound is essential for life and has been used to preserve food for thousands of years. Your body needs small amounts of sodium and chloride to function properly.'
+            },
+            'HCl': {
+                name: 'Hydrochloric Acid',
+                elements: ['H', 'Cl'],
+                info: 'A strong acid found in your stomach! Your stomach produces hydrochloric acid to help digest food and kill harmful bacteria. In laboratories, it\'s used for many chemical reactions and cleaning.'
             },
             'CaCO3': {
                 name: 'Calcium Carbonate',
@@ -461,6 +476,41 @@
                 name: 'Ammonia',
                 elements: ['N', 'H', 'H', 'H'],
                 info: 'Used in cleaning products and fertilizers! Ammonia has a strong smell and is very useful in agriculture to help plants grow by providing nitrogen.'
+            },
+            'H2SO4': {
+                name: 'Sulfuric Acid',
+                elements: ['H', 'H', 'S', 'O', 'O', 'O', 'O'],
+                info: 'One of the most important industrial chemicals! Sulfuric acid is used in car batteries and to make many other chemicals. It\'s a very strong acid and must be handled with extreme care.'
+            },
+            'CaO': {
+                name: 'Calcium Oxide (Quicklime)',
+                elements: ['Ca', 'O'],
+                info: 'Also called quicklime! This compound is made by heating limestone and is used in construction to make cement and mortar. When water is added to it, it gets very hot!'
+            },
+            'MgO': {
+                name: 'Magnesium Oxide',
+                elements: ['Mg', 'O'],
+                info: 'Forms when magnesium burns! Magnesium oxide creates a brilliant white light when magnesium burns in oxygen. It\'s also used in making cement and as an antacid medicine.'
+            },
+            'FeO': {
+                name: 'Iron(II) Oxide',
+                elements: ['Fe', 'O'],
+                info: 'One type of rust! When iron reacts with oxygen, it can form different oxides. This black powder is used in making glass and ceramics.'
+            },
+            'KCl': {
+                name: 'Potassium Chloride',
+                elements: ['K', 'Cl'],
+                info: 'Salt substitute and fertilizer! Potassium chloride is used instead of regular salt for people who need less sodium. It\'s also an important fertilizer for plants.'
+            },
+            'CaCl2': {
+                name: 'Calcium Chloride',
+                elements: ['Ca', 'Cl', 'Cl'],
+                info: 'Road salt for icy conditions! Calcium chloride is used to melt ice on roads because it lowers the freezing point of water. It\'s also used to dry out wet spaces.'
+            },
+            'NO2': {
+                name: 'Nitrogen Dioxide',
+                elements: ['N', 'O', 'O'],
+                info: 'A brown, toxic gas! Nitrogen dioxide is produced by car engines and power plants. It contributes to air pollution and acid rain, which is why we need cleaner energy sources.'
             }
         };
 
