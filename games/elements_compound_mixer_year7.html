@@ -639,10 +639,10 @@
                 `;
             }
 
-            // Auto-clear the selection after mixing
+            // Auto-clear the selection after mixing (give time to read the result)
             setTimeout(() => {
                 clearSelection();
-            }, 100);
+            }, 3000);
         }
 
         function formatChemicalFormula(formula) {
