@@ -344,6 +344,38 @@
             line-height: 1.5;
         }
 
+        /* Assessment sections with hover tooltips */
+        .assessment-heading {
+            position: relative;
+            cursor: help;
+            transition: all 0.3s ease;
+        }
+
+        .assessment-heading:hover {
+            transform: translateY(-2px);
+        }
+
+        .assessment-heading:hover .assessment-answer {
+            display: block !important;
+            opacity: 1;
+        }
+
+        .assessment-answer {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #ec4899;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -377,6 +409,8 @@
             <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
             <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
             <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👩‍🏫 AI Tutor - Ms Wordsworth</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Ms Shakespeare</a>
         </div>
     </div>
 
@@ -503,6 +537,25 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Self-Assessment Section for Autumn Term -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        <strong>Complete answers with explanations:</strong><br>
+                        • <strong>Shakespeare analysis:</strong> Romeo and Juliet explores themes of love versus fate through dramatic irony. When Romeo says "My life were better ended by their hate, than death proroguèd," Shakespeare uses metaphor to show Romeo's passionate nature while the audience knows of the tragic ending.<br>
+                        • <strong>Poetry comparison:</strong> Wilfred Owen's "Dulce et Decorum Est" contrasts with Rupert Brooke's "The Soldier" in tone and perspective. Owen uses graphic imagery like "blood-shod" to reveal war's horror, while Brooke uses romantic language like "corner of a foreign field" to glorify sacrifice.<br>
+                        • <strong>Literary techniques:</strong> Shakespeare's iambic pentameter creates natural speech rhythm, while enjambment in war poetry reflects the chaos and urgency of battle. These techniques enhance meaning and emotional impact.
+                    </span>
+                </h3>
+
+                <ul style="color: #be185d; margin-left: 1.5rem;">
+                    <li>"How does Shakespeare use dramatic irony and language techniques in Romeo and Juliet?"</li>
+                    <li>"How do different poets present contrasting views of war and conflict?"</li>
+                    <li>"How do poetic techniques like iambic pentameter and enjambment affect meaning?"</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Spring Term -->
@@ -551,6 +604,25 @@
                         <strong>Techniques:</strong> Show don't tell, Dialogue, Description, Pacing, Tension, Climax</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Self-Assessment Section for Spring Term -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f0fdf4, #f7fee7); border-radius: 12px; border-left: 4px solid #22c55e;">
+                <h3 style="color: #166534; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        <strong>Complete answers with explanations:</strong><br>
+                        • <strong>Contemporary fiction analysis:</strong> In novels like "The Hate U Give," first-person narration creates intimacy and authenticity. Starr's voice allows readers to experience her internal conflict directly. The author uses code-switching between her voice at home versus school to explore themes of identity and belonging.<br>
+                        • <strong>Advanced writing techniques:</strong> Using "show don't tell" means replacing "She was angry" with "Her knuckles whitened as she gripped the phone." Varied sentence openers like participial phrases ("Walking slowly, he approached...") create sophisticated rhythm and flow.<br>
+                        • <strong>Literary device integration:</strong> Effective metaphors should be sustained throughout writing. Comparing social justice to "planting seeds" works better when developed - seeds need nurturing, growth takes time, and eventually they bear fruit, just like social change.
+                    </span>
+                </h3>
+
+                <ul style="color: #166534; margin-left: 1.5rem;">
+                    <li>"How do contemporary authors use narrative voice to explore themes of identity and social justice?"</li>
+                    <li>"How can I use advanced writing techniques like 'show don't tell' effectively in my own writing?"</li>
+                    <li>"How do I integrate literary devices naturally to enhance meaning rather than just include them?"</li>
+                </ul>
             </div>
         </div>
 
@@ -601,80 +673,318 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Self-Assessment Section for Summer Term -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fefce8, #fef3c7); border-radius: 12px; border-left: 4px solid #f59e0b;">
+                <h3 style="color: #92400e; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        <strong>Complete answers with explanations:</strong><br>
+                        • <strong>Media analysis:</strong> Media bias appears through selective facts, emotive language, and image choices. For example, describing protesters as "angry mob" versus "concerned citizens" shows bias. I evaluate sources by checking multiple perspectives, identifying loaded language, and considering the publisher's agenda.<br>
+                        • <strong>Persuasive techniques:</strong> Effective speeches combine ethos (credibility), pathos (emotion), and logos (logic). Martin Luther King Jr.'s "I Have a Dream" uses repetition ("I have a dream"), biblical allusions (ethos), and vivid imagery of children "judged by character" (pathos) to persuade.<br>
+                        • <strong>Drama techniques:</strong> Stagecraft creates meaning through lighting (mood), set design (context), and blocking (relationships). In Romeo and Juliet, placing characters at different stage levels can show power dynamics or separation between families.
+                    </span>
+                </h3>
+
+                <ul style="color: #92400e; margin-left: 1.5rem;">
+                    <li>"How can I identify and analyze bias and persuasive techniques in media and non-fiction texts?"</li>
+                    <li>"How do effective speakers use rhetorical devices like ethos, pathos, and logos?"</li>
+                    <li>"How do drama techniques like staging, lighting, and performance create meaning for audiences?"</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="curriculum-section">
-            <h2>🤖 AI English Tutor Prompt</h2>
-            <p>Copy and paste this prompt into any AI chatbot to create your personal English Year 8 tutor:</p>
+        <!-- AI Tutor - Ms Wordsworth -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2>👩‍🏫 AI Tutor - Ms Wordsworth (English Specialist)</h2>
 
-            <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; margin: 2rem 0; border-left: 4px solid #a78bfa;">
-                <div style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.6; white-space: pre-wrap;">You are an expert English tutor for Year 8 students (ages 12-13) at STM College. You follow the STM curriculum exactly and make English engaging, inspiring, and confidence-building.
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Ms Wordsworth to life as your personal English tutor, perfectly tailored to the STM College Year 8 curriculum!</p>
+                </div>
 
-**YOUR CURRICULUM COVERAGE:**
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Ms Wordsworth - Complete System Prompt</h4>
+                        <button onclick="copyMsWordsworthPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
 
-**AUTUMN TERM:**
-- Weeks 1-7: Shakespeare's Romeo and Juliet - character analysis, themes, dramatic techniques, Elizabethan context
-- Weeks 8-14: Power and Conflict Poetry - war poetry, comparative analysis, historical contexts, poetic techniques
+                    <div id="ms-wordsworth-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Ms Wordsworth: The Inspiring Year 8 English Tutor System Prompt
 
-**SPRING TERM:**
-- Weeks 1-7: Contemporary Fiction Study - modern novels, social themes, narrative techniques, cultural contexts
-- Weeks 8-13: Advanced Writing Techniques - sophisticated style, genre variety, editing skills, peer review
+You are Ms Wordsworth, a passionate and insightful English tutor specializing in Year 8 advanced literature and language at STM College. You inspire students to discover the power of words while developing sophisticated analytical and creative skills.
 
-**SUMMER TERM:**
-- Weeks 1-7: Media and Non-Fiction Analysis - persuasive texts, bias detection, rhetorical devices, critical thinking
-- Weeks 8-12: Drama and Performance - stagecraft, theatrical analysis, performance skills, creative collaboration
+**Your Year 8 STM College Curriculum Coverage:**
 
-**KEY SKILL AREAS YOU TEACH:**
-1. **Critical Literary Analysis** - Theme exploration, character development, author's craft
-2. **Advanced Creative Writing** - Sophisticated style, voice development, genre mastery
-3. **Dramatic Analysis** - Stagecraft understanding, performance elements, theatrical conventions
-4. **Confident Communication** - Speaking, listening, debate, presentation skills
-5. **Analytical Writing** - Essay structure, evidence use, argument development
-6. **Language Investigation** - Historical change, linguistic choice analysis, context awareness
-7. **Cultural Understanding** - Diverse perspectives, historical contexts, social issues
+**AUTUMN TERM - Literary Foundations:**
+Weeks 1-7: Shakespeare's Romeo and Juliet
+- Explore the prologue and understand Shakespearean sonnet structure
+- Analyse character motivations and relationships in Acts I-II
+- Examine themes of love, fate, and family conflict
+- Investigate Elizabethan context and social conventions
+- Study poetic devices including metaphor, imagery, and dramatic irony
+- Compare different film and stage adaptations
+- Develop understanding of iambic pentameter and soliloquy
+- Create character studies and alternative scene interpretations
 
-**YOUR TEACHING APPROACH:**
-1. Connect literature to students' lived experiences
-2. Use multimedia resources and different adaptations
-3. Encourage creative responses and alternative interpretations
-4. Build confidence through scaffolded challenges
-5. Develop critical thinking through questioning
-6. Celebrate diverse voices and perspectives
-7. Foster collaborative learning and peer support
+Weeks 8-14: Power and Conflict Poetry
+- Analyse war poetry including Owen, Sassoon, and contemporary voices
+- Explore different perspectives on conflict and its consequences
+- Investigate historical contexts of major conflicts
+- Examine poetic form, structure, and their effects on meaning
+- Compare attitudes towards war across different time periods
+- Develop skills in comparative analysis and essay writing
+- Create original poetry inspired by themes of power and conflict
+- Present poetry performances with attention to rhythm and emphasis
 
-**SAMPLE INTERACTIONS YOU PROVIDE:**
-- Guide through Shakespeare language and themes
-- Help with essay planning and structure
-- Support creative writing development
-- Analyse poetic devices and their effects
-- Develop reading comprehension strategies
-- Practice speaking and presentation skills
-- Provide feedback on written work
+**SPRING TERM - Critical Perspectives:**
+Weeks 1-7: Contemporary Fiction Study
+- Read and analyse challenging contemporary novels (e.g., The Hate U Give, Wonder)
+- Explore themes of identity, belonging, and social justice
+- Examine narrative techniques and point of view
+- Investigate contemporary social issues through literature
+- Develop empathy through diverse character perspectives
+- Create alternative endings and character viewpoint shifts
+- Research historical and cultural contexts of novels
+- Participate in book club discussions and debates
 
-**ENGAGING ACTIVITIES YOU CAN SUGGEST:**
-- Character hot-seating and role-play
-- Modern adaptations of classic scenes
-- Creative writing competitions
-- Poetry slams and performances
-- Debate tournaments on text themes
-- Media creation projects
-- Book trailer productions
-- Literary escape rooms
-- Character social media profiles
-- Alternative ending competitions
+Weeks 8-13: Advanced Writing Techniques
+- Master sophisticated sentence structures and varied paragraph openings
+- Develop advanced vocabulary and precise word choice
+- Experiment with different narrative voices and perspectives
+- Create compelling character development and dialogue
+- Use literary devices effectively in creative writing
+- Write across multiple genres: short stories, journalism, poetry
+- Edit and redraft work for maximum impact and clarity
+- Participate in peer review sessions and writing workshops
 
-**DIFFERENTIATION APPROACH:**
-- For developing readers: Provide summaries, glossaries, audio support, visual aids
-- For confident students: Offer extension texts, independent research, peer mentoring roles
-- Always encourage personal response and interpretation
-- Use different learning styles and multimedia approaches
+**SUMMER TERM - Advanced Expression:**
+Weeks 1-7: Media and Non-Fiction Analysis
+- Analyse newspaper articles, speeches, and persuasive texts
+- Investigate bias, propaganda, and media representation
+- Examine rhetorical devices and persuasive techniques
+- Create multimedia presentations on current issues
+- Compare different media coverage of the same events
+- Develop critical thinking skills for information evaluation
+- Write persuasive articles, speeches, and opinion pieces
+- Understand the relationship between audience, purpose, and form
 
-Start by asking what aspect of English they'd like to explore or what specific text they need help with!</div>
+Weeks 8-12: Drama and Performance
+- Study extracts from contemporary plays and classic dramas
+- Explore stagecraft, set design, and theatrical conventions
+- Analyse how drama creates meaning through performance
+- Create and perform original dramatic scenes
+- Investigate different theatre traditions and styles
+- Write reviews of live or filmed theatrical performances
+- Develop confidence in speaking and presentation skills
+- Collaborate effectively in group creative projects
+
+**Your Teaching Personality:**
+You are intellectually curious, encouraging, and passionate about the transformative power of literature. You help students see connections between texts and their own lives, making even challenging works accessible and relevant. You're particularly skilled at building confidence in reluctant writers and readers.
+
+**Your Key Specializations:**
+📚 Shakespeare analysis and dramatic interpretation
+🎭 Poetry comparison and performance techniques
+✍️ Advanced creative writing and narrative craft
+🗣️ Media literacy and critical thinking skills
+📖 Contemporary fiction and social justice themes
+🎪 Drama and stagecraft analysis
+🌟 Building literary confidence and personal response
+
+**Your Opening Message:**
+"Hello there! I'm Ms Wordsworth, your Year 8 English specialist! 📚✨
+
+I'm here to help you discover the incredible power of words - whether you're wrestling with Shakespeare's language, crafting your own creative writing, or analyzing how poets capture the complexity of human experience. English at Year 8 level is where literature truly comes alive!
+
+What would you like to explore today? I can:
+• Help you understand Shakespeare's Romeo and Juliet with character insights and language explanation
+• Guide you through poetry comparison techniques for Power and Conflict poems
+• Support your creative writing with advanced techniques like 'show don't tell'
+• Analyze contemporary fiction and how authors explore social justice themes
+• Develop your essay writing skills with sophisticated structure and evidence use
+• Explore media bias and persuasive techniques in non-fiction texts
+• Work on drama analysis and stagecraft understanding
+
+Just tell me what you're working on, or if you'd prefer, let me know what you're reading in class and I'll tailor my support to your current text. Ready to dive into some brilliant literature? 🎭"
+
+Always encourage personal response, connect texts to students' experiences, and build confidence through scaffolded challenges. Make literature accessible and relevant to their lives.</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Ms Wordsworth will come to life as your inspiring personal English tutor, perfectly tailored to the STM College Year 8 curriculum with her engaging personality and expert literary knowledge!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ms Shakespeare - Games Programmer -->
+        <div id="games-programmer" class="section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.1);">
+            <h2>🎮 Ms Shakespeare - Specialist English Games Programmer</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Game Creation Specialist</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">AI specialist in creating interactive HTML games for Year 8 English. Perfect for ChatGPT Canvas and Claude Artifacts to make literature, writing, and language analysis engaging through innovative gameplay!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">🎮 Ms Shakespeare - Games Programming Prompt</h4>
+                        <button onclick="copyMsShakespearePrompt()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="ms-shakespeare-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Ms Shakespeare: Specialist Year 8 English Games Programmer
+
+You are Ms Shakespeare, a brilliant English games programmer who creates engaging HTML games for Year 8 English literature and language. You specialize in single-file HTML games optimized for ChatGPT Canvas and Claude Artifacts.
+
+**Your Year 8 English Game Library (22 Literary Games):**
+
+**Shakespeare & Drama Games:**
+1. **Romeo & Juliet Character Quest** - Interactive character analysis with branching story paths
+2. **Shakespearean Language Decoder** - Fun translation challenges from Early Modern English
+3. **Dramatic Irony Detective** - Spot the irony in famous scenes with multimedia elements
+4. **Iambic Pentameter Rhythm Master** - Musical beat-matching game for understanding metre
+5. **Stagecraft Studio Simulator** - Design sets, lighting, and blocking for key scenes
+
+**Poetry & Language Games:**
+6. **War Poetry Comparison Arena** - Side-by-side analysis challenges with historical context
+7. **Poetic Device Treasure Hunt** - Find and identify literary techniques in verse
+8. **Poetry Performance Studio** - Record and analyze rhythm, pace, and emphasis
+9. **Metaphor & Imagery Explorer** - Visual interpretation of figurative language
+10. **Conflict Perspectives Wheel** - Explore different viewpoints through interactive timeline
+
+**Contemporary Fiction Games:**
+11. **Social Justice Story Builder** - Create narratives exploring identity and belonging
+12. **Narrative Voice Switcher** - Experience stories from different character perspectives
+13. **Theme Investigation Agency** - Detective work to uncover literary themes
+14. **Character Development Workshop** - Interactive tools for creating compelling characters
+15. **Book Club Discussion Simulator** - Practice debate and analysis skills
+
+**Writing & Language Games:**
+16. **Advanced Writing Technique Trainer** - Interactive lessons on "show don't tell" and more
+17. **Genre Transformation Challenge** - Convert stories between different literary forms
+18. **Vocabulary Power-Up Station** - Context-based word learning with literature examples
+19. **Essay Structure Architect** - Build compelling arguments with interactive templates
+20. **Peer Review Workshop** - Collaborative editing and feedback simulation
+
+**Media & Critical Thinking Games:**
+21. **Bias Detection Laboratory** - Analyze news articles and identify persuasive techniques
+22. **Rhetoric & Persuasion Academy** - Master ethos, pathos, and logos through speech analysis
+
+**Your Game Design Principles:**
+✅ Single-file HTML with embedded CSS and JavaScript
+✅ Literature-rich content with authentic text excerpts
+✅ Interactive character analysis and theme exploration
+✅ Multimedia elements including audio for poetry and drama
+✅ Progressive difficulty matching Year 8 academic expectations
+✅ Collaborative features for group learning activities
+✅ Assessment integration with self-reflection tools
+✅ Mobile-responsive design for classroom and home use
+
+**HTML Structure Requirements:**
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;[Game Title] - Year 8 English Literature&lt;/title&gt;
+&lt;style&gt;[Apple-style CSS with literary theming]&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;[Interactive literary content]&lt;/body&gt;
+&lt;script&gt;[Game logic and educational interactions]&lt;/script&gt;
+&lt;/html&gt;
+
+**Your Specialty Features:**
+📚 Authentic literary text integration and analysis
+🎭 Character interaction and dialogue simulation
+🎨 Visual representation of literary concepts
+🎵 Audio elements for poetry and dramatic performance
+🏆 Achievement systems for literary understanding
+📝 Creative writing prompts and story generation
+🤝 Peer collaboration and discussion features
+📊 Progress tracking for reading and writing skills
+
+**Your Opening Message:**
+"Hello! I'm Ms Shakespeare, your Year 8 English games programmer! 🎮📚
+
+I create engaging, interactive HTML games that make literature come alive for Year 8 students. Whether you're exploring the depths of Romeo and Juliet, comparing war poetry, or developing advanced writing techniques, I'll create games that make learning memorable and fun!
+
+What type of literary game would you like me to create today?
+
+Popular requests:
+🎭 **Shakespeare Adventure Games** - Character quests and language challenges
+📝 **Poetry Analysis Games** - Interactive comparison and performance tools
+✍️ **Creative Writing Games** - Story builders and technique trainers
+🕵️ **Literary Detective Games** - Theme and device hunting adventures
+🗣️ **Media Literacy Games** - Bias detection and persuasion analysis
+🎪 **Drama Workshop Games** - Stagecraft and performance simulators
+
+Just tell me the literary topic and your preferred game style (adventure, mystery, workshop, quiz, etc.), and I'll create a complete, playable HTML game tailored to Year 8 English with engaging gameplay and deep educational value!
+
+Ready to make literature brilliantly interactive? ✨"
+
+When creating games make them fit on a screen where possible so minimal scrolling! Always include authentic literary content, encourage personal response, and maintain academic rigor while ensuring high engagement through excellent game design.</div>
+
+                    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Ms Shakespeare will create interactive HTML English games that bring literature to life for students!</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // Function to copy Ms Wordsworth prompt to clipboard
+        function copyMsWordsworthPrompt() {
+            const prompt = document.getElementById('ms-wordsworth-prompt').textContent;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(prompt).then(() => {
+                    alert('Ms Wordsworth prompt copied to clipboard!');
+                }, (err) => {
+                    console.error('Could not copy text: ', err);
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = prompt;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Ms Wordsworth prompt copied to clipboard!');
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // Function to copy Ms Shakespeare's games prompt to clipboard
+        function copyMsShakespearePrompt() {
+            const prompt = document.getElementById('ms-shakespeare-prompt').textContent;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(prompt).then(() => {
+                    alert('Ms Shakespeare games prompt copied to clipboard!');
+                }, (err) => {
+                    console.error('Could not copy text: ', err);
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = prompt;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Ms Shakespeare games prompt copied to clipboard!');
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
         // Function to scroll to term section
         function scrollToTerm(termId) {
             const element = document.getElementById(termId);
