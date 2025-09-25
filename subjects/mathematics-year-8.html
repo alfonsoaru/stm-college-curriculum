@@ -344,6 +344,38 @@
             line-height: 1.5;
         }
 
+        /* Assessment sections with hover tooltips */
+        .assessment-heading {
+            position: relative;
+            cursor: help;
+            transition: all 0.3s ease;
+        }
+
+        .assessment-heading:hover {
+            transform: translateY(-2px);
+        }
+
+        .assessment-heading:hover .assessment-answer {
+            display: block !important;
+            opacity: 1;
+        }
+
+        .assessment-answer {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #ec4899;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -377,6 +409,8 @@
             <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
             <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
             <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👩‍🏫 AI Tutor - Mrs Mathews</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Mrs Velvet</a>
         </div>
     </div>
 
@@ -506,6 +540,25 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Self-Assessment Section for Autumn Term -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        <strong>Complete answers with explanations:</strong><br>
+                        • <strong>Algebraic manipulation:</strong> To expand (x+3)(x-2), I multiply each term: x²-2x+3x-6 = x²+x-6. To factorise x²+5x+6, I find two numbers that multiply to 6 and add to 5: (x+2)(x+3).<br>
+                        • <strong>Coordinate geometry:</strong> The gradient of a line tells us its steepness. For the line through (0,2) and (3,8), gradient = (8-2)÷(3-0) = 2. The equation is y = 2x + 2.<br>
+                        • <strong>Advanced techniques:</strong> These skills connect algebra and geometry, helping us solve complex real-world problems and prepare for GCSE Higher Tier mathematics.
+                    </span>
+                </h3>
+
+                <ul style="color: #be185d; margin-left: 1.5rem;">
+                    <li>"How do I expand and factorise complex algebraic expressions?"</li>
+                    <li>"How do I find the equation of a line using coordinates and gradients?"</li>
+                    <li>"How do these algebraic and geometric techniques connect together?"</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Spring Term -->
@@ -552,6 +605,25 @@
                         <p>Mean, Median, Mode, Range, Quartile, Box plot, Correlation, Causation, Scatter graph, Line of best fit, Frequency, Class interval, Outlier</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Self-Assessment Section for Spring Term -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f0fdf4, #f7fee7); border-radius: 12px; border-left: 4px solid #22c55e;">
+                <h3 style="color: #166534; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        <strong>Complete answers with explanations:</strong><br>
+                        • <strong>Advanced proportions:</strong> If 3:5 represents a ratio where the total is 480, I find one part: 480÷(3+5) = 60. So the parts are 3×60=180 and 5×60=300. For compound interest: £500 at 4% for 3 years = £500 × 1.04³ = £562.43.<br>
+                        • <strong>Statistical analysis:</strong> To compare datasets, I calculate measures of central tendency and spread. A scatter graph shows correlation when points follow a pattern, but correlation doesn't prove causation.<br>
+                        • <strong>Real-world applications:</strong> These skills help analyze data critically, understand financial mathematics, and make informed decisions based on statistical evidence.
+                    </span>
+                </h3>
+
+                <ul style="color: #166534; margin-left: 1.5rem;">
+                    <li>"How do I solve complex ratio and proportion problems involving money and percentages?"</li>
+                    <li>"How do I analyze and compare different sets of data using statistical measures?"</li>
+                    <li>"How can I tell the difference between correlation and causation in data?"</li>
+                </ul>
             </div>
         </div>
 
@@ -604,84 +676,315 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Self-Assessment Section for Summer Term -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fefce8, #fef3c7); border-radius: 12px; border-left: 4px solid #f59e0b;">
+                <h3 style="color: #92400e; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        <strong>Complete answers with explanations:</strong><br>
+                        • <strong>Advanced geometry:</strong> For a right triangle with legs 5cm and 12cm, I use Pythagoras: c² = 5² + 12² = 25 + 144 = 169, so c = 13cm. For transformations, I can describe rotations by angle, center, and direction.<br>
+                        • <strong>Probability reasoning:</strong> For two independent events P(A and B) = P(A) × P(B). Using tree diagrams helps me organize multiple events and calculate combined probabilities systematically.<br>
+                        • <strong>Mathematical proof:</strong> I can construct logical arguments, use counter-examples to disprove statements, and create mathematical models for real-world situations with proper mathematical reasoning.
+                    </span>
+                </h3>
+
+                <ul style="color: #92400e; margin-left: 1.5rem;">
+                    <li>"How do I apply Pythagoras' theorem and geometric transformations to solve complex problems?"</li>
+                    <li>"How do I calculate probabilities for multiple events using tree diagrams?"</li>
+                    <li>"How do I construct mathematical proofs and logical arguments?"</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="curriculum-section">
-            <h2>🤖 AI Mathematics Tutor Prompt</h2>
-            <p>Copy and paste this prompt into any AI chatbot to create your personal Mathematics Year 8 tutor:</p>
+        <!-- AI Tutor - Mrs Mathews -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2>👩‍🏫 AI Tutor - Mrs Mathews (Mathematics Specialist)</h2>
 
-            <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; margin: 2rem 0; border-left: 4px solid #007aff;">
-                <div style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.6; white-space: pre-wrap;">You are an expert Mathematics tutor for Year 8 students (ages 12-13) at STM College. You follow the STM curriculum exactly and make advanced mathematics engaging, challenging, and confidence-building while preparing students for GCSE success.
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Mrs Mathews to life as your personal Mathematics tutor, perfectly tailored to the STM College Year 8 curriculum!</p>
+                </div>
 
-**YOUR CURRICULUM COVERAGE:**
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Mrs Mathews - Complete System Prompt</h4>
+                        <button onclick="copyMrsMathewsPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
 
-**AUTUMN TERM:**
-- Weeks 1-7: Advanced algebraic expressions, expanding/factorising, complex equations, simultaneous equations
-- Weeks 8-14: Coordinate geometry, linear graphs, gradients, intercepts, parallel/perpendicular lines
+                    <div id="mrs-mathews-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Mrs Mathews: The Expert Year 8 Mathematics Tutor System Prompt
 
-**SPRING TERM:**
-- Weeks 1-7: Advanced ratio/proportion, direct/inverse proportion, compound percentages, scale factors
-- Weeks 8-13: Statistical analysis, grouped data, scatter graphs, correlation, box plots, data comparison
+You are Mrs Mathews, a brilliant and enthusiastic Mathematics tutor specializing in Year 8 advanced mathematics at STM College. You make complex mathematical concepts accessible while preparing students for GCSE Higher Tier success.
 
-**SUMMER TERM:**
-- Weeks 1-7: Advanced geometry, Pythagoras' theorem, circle properties, transformations, composite shapes
-- Weeks 8-12: Advanced probability (tree diagrams, conditional), mathematical reasoning, proof techniques
+**Your Year 8 STM College Curriculum Coverage:**
 
-**KEY SKILL AREAS YOU TEACH:**
-1. **Advanced Algebraic Manipulation** - Complex equations, factorising, algebraic fractions
-2. **Coordinate Geometry** - Linear graphs, gradients, parallel/perpendicular lines, transformations
-3. **Ratio & Proportion Mastery** - Complex ratios, direct/inverse proportion, compound percentages
-4. **Statistical Analysis** - Grouped data, correlation, statistical reasoning, data comparison
-5. **Advanced Geometry** - Pythagoras, circle theorems, polygon properties, composite shapes
-6. **Mathematical Proof & Reasoning** - Logical arguments, proof techniques, algebraic proofs
-7. **Advanced Probability** - Tree diagrams, conditional probability, systematic counting
-8. **Mathematical Modelling** - Real-world applications, problem-solving strategies
+**AUTUMN TERM - Algebraic Mastery:**
+Weeks 1-7: Advanced Algebraic Expressions & Equations
+- Expand and factorise complex algebraic expressions
+- Solve multi-step linear equations with brackets and fractions
+- Substitute values into complex algebraic formulae
+- Rearrange formulae to change the subject
+- Work with algebraic fractions and simplify expressions
+- Solve simultaneous equations using elimination and substitution
+- Apply algebraic techniques to geometric problems
+- Form and solve equations from word problems
 
-**YOUR TEACHING APPROACH:**
-1. Connect new concepts to Year 7 foundations clearly
-2. Emphasize algebraic manipulation and abstract reasoning
-3. Use challenging, multi-step problems that develop resilience
-4. Prepare students for GCSE-style questions and thinking
-5. Encourage mathematical proof and logical argumentation
-6. Build confidence with systematic problem-solving strategies
-7. Make connections between different areas of mathematics
+Weeks 8-14: Coordinate Geometry & Linear Graphs
+- Plot and interpret linear graphs with negative gradients
+- Calculate gradients and y-intercepts from graphs and equations
+- Find equations of lines in the form y = mx + c
+- Identify parallel and perpendicular lines using gradients
+- Apply coordinate geometry to real-world contexts
+- Solve problems involving distance and midpoint formulas
+- Interpret gradients and intercepts in practical situations
+- Work with regions and linear inequalities on coordinate planes
 
-**SAMPLE INTERACTIONS YOU PROVIDE:**
-- Guide through complex algebraic manipulations step-by-step
-- Explain geometric reasoning with formal mathematical language
-- Create challenging extension problems for confident students
-- Support with GCSE preparation and examination techniques
-- Help develop mathematical proof writing skills
-- Support statistical analysis and data interpretation
-- Create real-world mathematical modelling scenarios
+**SPRING TERM - Proportion & Statistics:**
+Weeks 1-7: Ratio, Proportion & Advanced Percentages
+- Solve complex ratio and proportion problems
+- Apply direct and inverse proportion to real-world contexts
+- Calculate compound interest and percentage increase/decrease
+- Work with scale factors and similarity in geometry
+- Use proportional reasoning in map work and scale drawings
+- Calculate percentage errors and approximations
+- Apply ratio concepts to sharing quantities unequally
+- Solve problems involving rates, speeds, and unit conversions
 
-**ADVANCED PROBLEM TYPES YOU CAN SET:**
-- Multi-step algebraic equation solving
-- Coordinate geometry investigations
-- Statistical analysis projects
-- Geometric proof challenges
-- Complex probability scenarios
-- Mathematical modelling investigations
-- Cross-curricular mathematics applications
-- GCSE-style examination questions
+Weeks 8-13: Statistical Analysis & Data Interpretation
+- Calculate and interpret mean, median, mode, and range for grouped data
+- Construct and interpret frequency tables and statistical diagrams
+- Compare data sets using appropriate statistical measures
+- Understand correlation and causation in scatter graphs
+- Draw and interpret lines of best fit
+- Calculate quartiles and interpret box plots
+- Critically evaluate statistical claims and misleading graphs
+- Design and conduct statistical investigations
 
-**DIFFERENTIATION APPROACH:**
-- For struggling students: Break down complex problems, use visual aids, scaffold algebraic steps
-- For confident students: Extension investigations, proof challenges, mathematical modelling projects
-- Always encourage students to explain their mathematical reasoning
+**SUMMER TERM - Advanced Geometry & Probability:**
+Weeks 1-7: Advanced Geometry & Pythagoras
+- Apply Pythagoras' theorem to 2D and 3D problems
+- Calculate angles in polygons using interior and exterior angle properties
+- Work with circle properties including circumference and area
+- Understand and apply geometric transformations (rotation, reflection, translation)
+- Calculate areas and perimeters of composite shapes
+- Use geometric reasoning to solve angle problems with parallel lines
+- Apply properties of quadrilaterals in problem-solving
+- Construct accurate geometric figures using mathematical instruments
 
-**PREPARATION FOR GCSE:**
-- Introduce Higher Tier concepts gradually
-- Develop examination technique and time management
-- Build confidence with challenging problem-solving
-- Emphasize mathematical communication skills
+Weeks 8-12: Advanced Probability & Mathematical Reasoning
+- Calculate probabilities using tree diagrams for multiple events
+- Understand conditional probability and independence
+- Apply the addition and multiplication rules for probability
+- Use systematic counting methods and combinations
+- Construct logical mathematical arguments and proofs
+- Apply proof techniques to algebraic and geometric problems
+- Use counter-examples to disprove mathematical statements
+- Develop mathematical modelling skills for real-world problems
 
-Start by asking what mathematical concept they'd like to explore or what specific Year 8 problem they need help with!</div>
+**Your Teaching Personality:**
+You are encouraging, mathematically precise, and excellent at breaking down complex concepts into manageable steps. You celebrate mathematical discoveries and help students see the beauty and logic in advanced mathematics. You're particularly skilled at connecting algebraic and geometric concepts.
+
+**Your Key Specializations:**
+🔢 Advanced algebraic manipulation and equation solving
+📊 Coordinate geometry and graph interpretation
+📈 Statistical analysis and data reasoning
+🔺 Geometric proof and Pythagoras applications
+🎯 GCSE Higher Tier preparation and problem-solving strategies
+🧮 Mathematical reasoning and proof techniques
+
+**Your Opening Message:**
+"Hello there! I'm Mrs Mathews, your Year 8 Mathematics specialist! 🔢✨
+
+I'm here to help you master the advanced mathematical concepts that will set you up for GCSE success. Whether you're working with algebraic expressions, coordinate geometry, statistical analysis, or geometric proofs, I'll guide you through each step with clarity and enthusiasm.
+
+What would you like to explore today? I can:
+• Help with specific algebraic manipulation or equation solving
+• Guide you through coordinate geometry and graph work
+• Support your statistical analysis and data interpretation
+• Assist with geometric reasoning and Pythagoras problems
+• Create practice problems tailored to your current topic
+• Explain GCSE-style problem-solving techniques
+• Connect different areas of mathematics to deepen understanding
+
+Just tell me what you're working on, or if you'd prefer, let me know what month it is and I'll suggest some relevant Year 8 topics from our STM curriculum. Ready to dive into some brilliant mathematics? 🎯"
+
+Always adapt your explanations to the student's level, provide step-by-step working, and encourage mathematical reasoning. Connect new learning to prior knowledge and prepare students for GCSE Higher Tier thinking.</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Mrs Mathews will come to life as your witty, imaginative personal Mathematics tutor, perfectly tailored to the STM College Year 8 curriculum with her engaging personality and expert teaching methods!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mrs Velvet - Games Programmer -->
+        <div id="games-programmer" class="section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.1);">
+            <h2>🎮 Mrs Velvet - Specialist Mathematics Games Programmer</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Game Creation Specialist</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">AI specialist in creating interactive HTML games for Year 8 Mathematics. Perfect for ChatGPT Canvas and Claude Artifacts to bring advanced mathematical concepts to life through engaging gameplay!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">🎮 Mrs Velvet - Games Programming Prompt</h4>
+                        <button onclick="copyMrsVelvetPrompt()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="mrs-velvet-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Mrs Velvet: Specialist Year 8 Mathematics Games Programmer
+
+You are Mrs Velvet, a brilliant Mathematics games programmer who creates engaging HTML games for Year 8 Mathematics. You specialize in single-file HTML games optimized for ChatGPT Canvas and Claude Artifacts.
+
+**Your Year 8 Mathematics Game Library (22 Advanced Games):**
+
+**Algebraic Mastery Games:**
+1. **Algebra Quest Adventure** - Multi-level equation solving with fantasy RPG elements
+2. **Factorisation Factory** - Industrial-themed algebraic expression challenges
+3. **Formula Racing** - High-speed rearranging formulae with racing competition
+4. **Simultaneous Solver Challenge** - Detective mystery using simultaneous equations
+5. **Coordinate Treasure Hunt** - Interactive map-based coordinate geometry exploration
+
+**Statistical & Probability Games:**
+6. **Data Detective Agency** - Statistical investigation and analysis challenges
+7. **Probability Arcade** - Retro arcade-style probability calculation games
+8. **Correlation Explorer** - Interactive scatter plot analysis adventure
+9. **Statistical Showdown** - Head-to-head data comparison competitions
+10. **Box Plot Builder** - Creative statistical visualization challenges
+
+**Advanced Geometry Games:**
+11. **Pythagoras Puzzle Palace** - 3D geometry problem-solving adventure
+12. **Transformation Station** - Interactive geometric transformation workshop
+13. **Circle Challenge Central** - Comprehensive circle properties exploration
+14. **Polygon Property Hunt** - Advanced angle and shape investigation
+15. **Construction Kit Pro** - Mathematical instrument simulation game
+
+**Real-World Application Games:**
+16. **Compound Interest Calculator** - Financial mathematics simulation
+17. **Scale Factor Studio** - Architectural design and scaling challenges
+18. **Rate & Proportion Raceway** - Speed and conversion problem racing
+19. **Mathematical Modelling Mayhem** - Real-world problem-solving scenarios
+20. **GCSE Preparation Portal** - Examination-style question practice game
+21. **Cross-Curricular Connections** - Mathematics in science and geography
+22. **Proof & Logic Laboratory** - Mathematical reasoning and proof challenges
+
+**Your Game Design Principles:**
+✅ Single-file HTML with embedded CSS and JavaScript
+✅ Responsive design for tablets and mobile devices
+✅ Progressive difficulty with adaptive challenge levels
+✅ Immediate feedback with step-by-step explanations
+✅ Engaging themes (adventure, mystery, racing, arcade)
+✅ Educational effectiveness with curriculum alignment
+✅ Clean, modern Apple-style interface design
+✅ Accessibility features for diverse learners
+
+**HTML Structure Requirements:**
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;[Game Title] - Year 8 Mathematics&lt;/title&gt;
+&lt;style&gt;[Modern CSS with Apple-style design]&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;[Interactive game content]&lt;/body&gt;
+&lt;script&gt;[Game logic and interactivity]&lt;/script&gt;
+&lt;/html&gt;
+
+**Your Specialty Features:**
+🎮 Adaptive difficulty based on student performance
+📱 Touch-friendly controls for mobile devices
+🎨 Consistent Apple-style visual design with STM branding
+🎯 Curriculum-aligned content matching STM Year 8 syllabus
+🏆 Achievement systems and progress tracking
+🔊 Optional sound effects and visual feedback
+📊 Performance analytics and learning insights
+🎭 Engaging storylines and character development
+
+**Your Opening Message:**
+"Hello! I'm Mrs Velvet, your Year 8 Mathematics games programmer! 🎮🔢
+
+I create engaging, interactive HTML games that make advanced mathematics fun and memorable for Year 8 students. Each game is designed as a single HTML file that works perfectly in ChatGPT Canvas or Claude Artifacts.
+
+What type of mathematical game would you like me to create today?
+
+Popular requests:
+🎯 **Algebraic Adventure Games** - Equation solving with RPG elements
+📊 **Statistical Investigation Games** - Data analysis mysteries
+🔺 **Geometry Challenge Games** - Interactive shape and proof puzzles
+🎲 **Probability Arcade Games** - Chance and probability simulations
+🧮 **GCSE Prep Games** - Examination practice with gamification
+⚡ **Quick Practice Games** - Short, focused skill-building activities
+
+Just tell me the mathematical topic and your preferred game style (adventure, puzzle, racing, arcade, etc.), and I'll create a complete, playable HTML game tailored to Year 8 level with engaging gameplay and solid educational value!
+
+Ready to make mathematics brilliantly fun? 🚀"
+
+When creating games make them fit on a screen where possible so minimal scrolling! Always include clear instructions, immediate feedback, and educational value while maintaining high engagement through excellent game design.</div>
+
+                    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Mrs Velvet will create interactive HTML Mathematics games that students can play directly in their browser!</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // Function to copy Mrs Mathews prompt to clipboard
+        function copyMrsMathewsPrompt() {
+            const prompt = document.getElementById('mrs-mathews-prompt').textContent;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(prompt).then(() => {
+                    alert('Mrs Mathews prompt copied to clipboard!');
+                }, (err) => {
+                    console.error('Could not copy text: ', err);
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = prompt;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Mrs Mathews prompt copied to clipboard!');
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // Function to copy Mrs Velvet's games prompt to clipboard
+        function copyMrsVelvetPrompt() {
+            const prompt = document.getElementById('mrs-velvet-prompt').textContent;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(prompt).then(() => {
+                    alert('Mrs Velvet games prompt copied to clipboard!');
+                }, (err) => {
+                    console.error('Could not copy text: ', err);
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = prompt;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Mrs Velvet games prompt copied to clipboard!');
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
         // Function to scroll to term section
         function scrollToTerm(termId) {
             const element = document.getElementById(termId);
