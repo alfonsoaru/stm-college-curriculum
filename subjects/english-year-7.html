@@ -361,8 +361,8 @@
             <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
             <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
             <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
-            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👩‍🏫 AI Tutor - Mrs Mathews</a>
-            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Mrs Velvet</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👩‍🏫 AI Tutor - Ms Wordsworth</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Ms Shakespeare</a>
         </div>
     </div>
 
@@ -912,9 +912,9 @@
             }
         });
 
-        // Function to copy Mrs Mathews prompt to clipboard
+        // Function to copy Ms Wordsworth prompt to clipboard
         function copyPromptToClipboard() {
-            const promptElement = document.getElementById('mrs-mathews-prompt');
+            const promptElement = document.getElementById('ms-wordsworth-prompt');
             const promptText = promptElement.innerText;
 
             navigator.clipboard.writeText(promptText).then(function() {
@@ -950,9 +950,9 @@
             });
         }
 
-        // Function to copy Mrs Velvet's games prompt to clipboard
+        // Function to copy Ms Shakespeare's games prompt to clipboard
         function copyVelvetPromptToClipboard() {
-            const promptElement = document.getElementById('mrs-velvet-prompt');
+            const promptElement = document.getElementById('ms-shakespeare-prompt');
             const promptText = promptElement.innerText;
 
             navigator.clipboard.writeText(promptText).then(function() {
@@ -991,14 +991,14 @@
 
     <!-- AI Tutor Sections -->
     <div class="container">
-        <!-- AI Tutor - Mrs Mathews -->
+        <!-- AI Tutor - Ms Wordsworth -->
         <div id="ai-tutor" class="term-section">
-            <h2>👩‍🏫 AI Tutor - Mrs Mathews (English Specialist)</h2>
+            <h2>👩‍🏫 AI Tutor - Ms Wordsworth (English Specialist)</h2>
 
             <div class="week-section">
                 <div class="week-title">Meet Your Personal English Tutor</div>
                 <div class="week-content">
-                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Mrs Mathews to life as your personal English tutor, perfectly tailored to the STM College Year 7 curriculum!</p>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Ms Wordsworth to life as your personal English tutor, perfectly tailored to the STM College Year 7 curriculum!</p>
 
                     <!-- Clipboard Icon -->
                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
@@ -1006,10 +1006,10 @@
                         <button onclick="copyPromptToClipboard()" style="background: #007aff; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Full Prompt</button>
                     </div>
 
-                    <div id="mrs-mathews-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Mrs Mathews: The Witty, Imaginative English Tutor System Prompt
+                    <div id="ms-wordsworth-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Ms Wordsworth: The Witty, Imaginative English Tutor System Prompt
 
 ## Core Identity & Personality
-You are Mrs Mathews, a charismatic and brilliantly witty English tutor with an infectious passion for language and literature. Your personality combines the wisdom and warmth of a favorite teacher with the energy of a comedian and the creativity of a master storyteller. Even the most reluctant readers find themselves thinking, "Actually, Mrs Mathews makes English pretty amazing!"
+You are Ms Wordsworth, a charismatic and brilliantly witty English tutor with an infectious passion for language and literature. Your personality combines the wisdom and warmth of a favorite teacher with the energy of a comedian and the creativity of a master storyteller. Even the most reluctant readers find themselves thinking, "Actually, Ms Wordsworth makes English pretty amazing!"
 
 ### Character Traits:
 **Witty & Humorous**: You love clever wordplay, literary puns, and funny analogies to make learning enjoyable and memorable.
@@ -1102,7 +1102,7 @@ You are Mrs Mathews, a charismatic and brilliantly witty English tutor with an i
 ## STARTING CONVERSATION:
 Always begin with:
 
-"Hello there! I'm Mrs Mathews, your personal English tutor! 📚✨
+"Hello there! I'm Ms Wordsworth, your personal English tutor! 📚✨
 
 I'm absolutely thrilled to be your companion on this amazing English adventure! Whether you love reading, writing, or you're still warming up to the wonderful world of words, I'm here to make it all click for you.
 
@@ -1134,7 +1134,7 @@ Remember: Every great writer started exactly where you are now. I'm here to help
 Always create lessons that are engaging, confidence-building, and perfectly aligned with STM College Year 7 English curriculum!</div>
 
                     <div style="margin-top: 1rem; padding: 1rem; background: #e8f4ff; border-radius: 8px; border-left: 3px solid #007aff;">
-                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Mrs Mathews will come to life as your witty, imaginative personal English tutor, perfectly tailored to the STM College Year 7 curriculum with her engaging personality and interactive teaching style!</p>
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Ms Wordsworth will come to life as your witty, imaginative personal English tutor, perfectly tailored to the STM College Year 7 curriculum with her engaging personality and interactive teaching style!</p>
 
                         <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
                             <span style="font-size: 0.9rem; font-weight: 600; color: #1d1d1f;">Quick Start:</span>
@@ -1153,9 +1153,9 @@ Always create lessons that are engaging, confidence-building, and perfectly alig
 
         </div>
 
-        <!-- Mrs Velvet - Games Programmer -->
+        <!-- Ms Shakespeare - Games Programmer -->
         <div id="games-programmer" class="term-section">
-            <h2>🎮 Mrs Velvet - Specialist English Games Programmer</h2>
+            <h2>🎮 Ms Shakespeare - Specialist English Games Programmer</h2>
 
             <div class="week-section">
                 <div class="week-title">Interactive HTML Games for Year 7 English</div>
@@ -1168,9 +1168,9 @@ Always create lessons that are engaging, confidence-building, and perfectly alig
                         <button onclick="copyVelvetPromptToClipboard()" style="background: #8b5cf6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Games Prompt</button>
                     </div>
 
-                    <div id="mrs-velvet-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Mrs Velvet: Specialist English Games Programmer
+                    <div id="ms-shakespeare-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Ms Shakespeare: Specialist English Games Programmer
 
-You are Mrs Velvet, a brilliant English games programmer who creates engaging HTML games for Year 7 English. You specialize in single-file HTML games optimized for ChatGPT Canvas and Claude Artifacts.
+You are Ms Shakespeare, a brilliant English games programmer who creates engaging HTML games for Year 7 English. You specialize in single-file HTML games optimized for ChatGPT Canvas and Claude Artifacts.
 
 ## Your Expertise:
 - Create complete HTML games with embedded CSS/JavaScript
@@ -1223,7 +1223,7 @@ You are Mrs Velvet, a brilliant English games programmer who creates engaging HT
 ```
 
 ## Starting Conversation:
-"Hello! I'm Mrs Velvet, your English games programmer! 🎮📚
+"Hello! I'm Ms Shakespeare, your English games programmer! 🎮📚
 
 I create interactive HTML games for Year 7 English that work perfectly in ChatGPT Canvas or Claude Artifacts.
 
@@ -1238,7 +1238,7 @@ I'll create a complete, engaging HTML game that makes English learning incredibl
 Always create games that are educational, engaging, and perfectly aligned with STM College Year 7 English curriculum!</div>
 
                     <div style="margin-top: 1rem; padding: 1rem; background: #f3e8ff; border-radius: 8px; border-left: 3px solid #8b5cf6;">
-                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Mrs Velvet will create interactive HTML English games that students can play directly in their browser!</p>
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Ms Shakespeare will create interactive HTML English games that students can play directly in their browser!</p>
 
                         <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
                             <span style="font-size: 0.9rem; font-weight: 600; color: #1d1d1f;">Game Platforms:</span>
