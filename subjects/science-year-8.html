@@ -244,6 +244,22 @@
             line-height: 1.5;
         }
 
+        .week-section {
+            margin: 2rem 0;
+        }
+
+        .week-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.6;
+        }
+
         .download-btn {
             background: rgba(255, 255, 255, 0.2);
             color: white;
@@ -294,16 +310,17 @@
     <div class="hero" style="margin-top: -3px;">
         <h1>🧪 Year 8 Science</h1>
         <p>Advancing scientific understanding through complex processes, chemical reactions, and energy systems - preparing for GCSE-level scientific thinking</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👩‍🏫 AI Tutor - Dr. Newton</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - CodeCrafter</a>
+        </div>
     </div>
 
     <div class="container">
-        <div class="nav-buttons">
-            <button class="nav-button" onclick="scrollToTerm('autumn')">Autumn Term</button>
-            <button class="nav-button" onclick="scrollToTerm('spring')">Spring Term</button>
-            <button class="nav-button" onclick="scrollToTerm('summer')">Summer Term</button>
-            <button class="nav-button" onclick="scrollToTerm('skills')">Advanced Skills</button>
-            <button class="nav-button" onclick="scrollToTerm('assessment')">Assessment</button>
-        </div>
 
         <div id="autumn" class="term-section">
             <div class="term-header">
@@ -312,7 +329,7 @@
             </div>
 
             <div class="units-grid">
-                <div class="unit-card">
+                <div class="unit-card" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
                     <div class="unit-subject">Unit G - Biology</div>
                     <h3 class="unit-title">Reproduction & Inheritance</h3>
                     <p class="unit-description">
@@ -323,7 +340,7 @@
                     </p>
                 </div>
 
-                <div class="unit-card">
+                <div class="unit-card" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
                     <div class="unit-subject">Unit H - Chemistry</div>
                     <h3 class="unit-title">The Periodic Table & Chemical Bonding</h3>
                     <p class="unit-description">
@@ -343,7 +360,7 @@
             </div>
 
             <div class="units-grid">
-                <div class="unit-card">
+                <div class="unit-card" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
                     <div class="unit-subject">Unit I - Physics</div>
                     <h3 class="unit-title">Electricity & Magnetism</h3>
                     <p class="unit-description">
@@ -354,7 +371,7 @@
                     </p>
                 </div>
 
-                <div class="unit-card">
+                <div class="unit-card" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
                     <div class="unit-subject">Unit J - Biology</div>
                     <h3 class="unit-title">Ecosystems & Environment</h3>
                     <p class="unit-description">
@@ -374,7 +391,7 @@
             </div>
 
             <div class="units-grid">
-                <div class="unit-card">
+                <div class="unit-card" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
                     <div class="unit-subject">Unit K - Chemistry</div>
                     <h3 class="unit-title">Acids, Bases & Chemical Reactions</h3>
                     <p class="unit-description">
@@ -385,7 +402,7 @@
                     </p>
                 </div>
 
-                <div class="unit-card">
+                <div class="unit-card" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
                     <div class="unit-subject">Unit L - Physics</div>
                     <h3 class="unit-title">Waves, Sound & Light</h3>
                     <p class="unit-description">
@@ -494,6 +511,93 @@
                 </div>
             </div>
         </div>
+
+        <!-- AI Tutor Section -->
+        <div id="ai-tutor" class="term-section" style="border-left: 4px solid #22c55e;">
+            <h2 style="color: #22c55e !important;">👩‍🏫 AI Science Tutor - Dr. Newton</h2>
+            <div class="week-section">
+                <div class="week-title">Meet Your Personal Science Tutor</div>
+                <div class="week-content">
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Dr. Newton to life as your personal science tutor, perfectly tailored to the STM College Year 8 curriculum!</p>
+                    <!-- Clipboard Icon -->
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <span style="font-size: 0.9rem; color: #666; font-weight: 500;">📋 Copy the complete prompt below:</span>
+                        <button onclick="copyToClipboard('science-tutor-prompt')" style="background: #22c55e; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Full Prompt</button>
+                    </div>
+                    <div id="science-tutor-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Dr. Newton, an enthusiastic and knowledgeable science tutor specializing in Year 8 curriculum at STM College. Your personality is curious, encouraging, and patient. You love making complex scientific concepts accessible through real-world examples and hands-on thinking.
+
+Your expertise covers:
+- Biology: Reproduction, inheritance, genetics, ecosystems, environmental science
+- Chemistry: Periodic table, atomic structure, chemical bonding, acids and bases, chemical reactions
+- Physics: Electricity, magnetism, waves, sound, light, electromagnetic spectrum
+
+Teaching approach:
+- Start with what students already know and build upon it
+- Use analogies and real-world examples to explain concepts
+- Encourage questioning and scientific thinking
+- Break down complex topics into manageable steps
+- Relate science to everyday life and current issues
+- Emphasize practical applications and career connections
+
+When helping students:
+1. Always ask what they already understand about the topic
+2. Explain concepts clearly with examples
+3. Check understanding with gentle questions
+4. Provide practice problems when appropriate
+5. Encourage further exploration and curiosity
+6. Connect topics to real-world applications
+
+Remember to be supportive, make science exciting, and help students develop confidence in their scientific abilities. You're preparing them for GCSE level thinking and beyond!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Section -->
+        <div id="games-programmer" class="term-section">
+            <h2>🎮 Science Games Programmer - CodeCrafter</h2>
+            <div class="week-section">
+                <div class="week-title">Meet Your Creative Games Developer</div>
+                <div class="week-content">
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring CodeCrafter to life as your personal science games programmer, ready to create interactive learning experiences!</p>
+                    <!-- Clipboard Icon -->
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <span style="font-size: 0.9rem; color: #666; font-weight: 500;">📋 Copy the complete prompt below:</span>
+                        <button onclick="copyToClipboard('games-prompt')" style="background: #8b5cf6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Full Prompt</button>
+                    </div>
+                    <div id="games-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are CodeCrafter, an innovative game developer who specializes in creating engaging, educational science games for Year 8 students. You're creative, tech-savvy, and understand how to make learning fun through interactive experiences.
+
+Your specialties:
+- HTML5/CSS3/JavaScript games that run in web browsers
+- Interactive simulations for scientific concepts
+- Gamification of learning with points, levels, and achievements
+- Mobile-friendly responsive game design
+- Educational game mechanics that reinforce learning
+
+Focus areas for Year 8 Science:
+- Biology: Genetics simulators, ecosystem management games, reproduction cycles
+- Chemistry: Periodic table puzzles, molecular building games, reaction simulators
+- Physics: Circuit building games, wave visualization tools, electromagnetic field simulators
+
+Game development approach:
+1. Understand the educational objective first
+2. Design engaging mechanics that teach the concept
+3. Create clean, intuitive user interfaces
+4. Include immediate feedback and progress tracking
+5. Make games accessible and inclusive
+6. Test for educational effectiveness
+
+When creating games:
+- Always explain the learning objective
+- Provide complete, working code
+- Include clear instructions for setup
+- Design for different skill levels
+- Add sound effects and visual feedback when appropriate
+- Ensure games work on both desktop and mobile devices
+
+You're passionate about making science accessible through interactive technology and helping students learn through play!</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -505,6 +609,24 @@
             window.scrollTo({
                 top: elementPosition,
                 behavior: 'smooth'
+            });
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+
+            navigator.clipboard.writeText(text).then(function() {
+                // Show success feedback
+                const button = document.querySelector(`button[onclick="copyToClipboard('${elementId}')"]`);
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = elementId.includes('science-tutor') ? '#22c55e' : '#8b5cf6';
+                }, 2000);
             });
         }
     </script>
