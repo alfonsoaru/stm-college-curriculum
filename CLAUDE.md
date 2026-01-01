@@ -7,8 +7,11 @@ This project contains a comprehensive Apple-style HTML curriculum interface for 
 
 ### 📁 Main Files
 - `index.html` - Main subject overview interface with Apple-style design
+- `subjects/all-subjects.html` - Consolidated subject listing with shared navigation
 - `subjects/` - Individual subject pages and Year 7 detailed curriculum pages
 - `games/` - Interactive mathematics learning games
+- `mathematics-year-7-template.md` - Authoring template for new Year 7 subject pages
+- `games/PARKOUR_GAME_TEMPLATE.md` - Reference template for creating new parkour quiz runners
 - `images/curriculum-arrows/` - Converted PNG curriculum arrows
 - `stm_curriculum_downloads/` - Original scraped curriculum documents
 
@@ -176,23 +179,37 @@ Complete Year 7 curriculum implementation with detailed weekly breakdowns for:
 </div>
 ```
 
-## Current AI Tutor Names by Subject
+## Current AI Tutor & Games Programmer Names
 
-### Mathematics Year 7
-- **AI Tutor**: Mrs Mathews
-- **Games Programmer**: Mrs Velvet
+### Year 7
+- **Art**: AI Tutor - Ms Palette; Games - Mr Canvas
+- **Computer Science**: AI Tutor - Mr Codington; Games - Ms Pixel
+- **Design & Technology**: AI Tutor - Mr Maker; Games - Ms Inventor
+- **English**: AI Tutor - Ms Wordsworth; Games - Ms Shakespeare
+- **French**: AI Tutor - Mme Dubois; Games - M. Leclair
+- **Geography**: AI Tutor - Miss Atlas; Games - Mr Globe
+- **German**: AI Tutor - Frau Schmidt; Games - Herr Spielmeister
+- **History**: AI Tutor - Mr Chronicler; Games - Ms Timeline
+- **Mathematics**: AI Tutor - Mrs Mathews; Games - Mrs Velvet
+- **Music**: AI Tutor - Ms Melody; Games - Mr Harmony
+- **PE**: AI Tutor - Coach Turner; Games - Coach Champion
+- **Religious Education**: AI Tutor - Sister Faith; Games - Brother Thomas
+- **Science**: AI Tutor - Dr. Newton; Games - Prof. Einstein
 
-### English Year 7
-- **AI Tutor**: Ms Wordsworth
-- **Games Programmer**: Ms Shakespeare
-
-### German Year 7
-- **AI Tutor**: Frau Schmidt
-- **Games Programmer**: Herr Spielmeister
-
-### Science Year 7
-- **AI Tutor**: Dr. Newton
-- **Games Programmer**: (To be added)
+### Year 8
+- **Art**: AI Tutor - Mr. Da Vinci; Games - Ms. Picasso
+- **Computer Science**: AI Tutor - Professor Binary; Games - ByteBuilder
+- **Design & Technology**: AI Tutor - Mr. Workshop; Games - Ms. PixelSmith
+- **English**: AI Tutor - Ms Wordsworth; Games - Ms Shakespeare
+- **French**: AI Tutor - Monsieur Rousseau; Games - Madame Pixel
+- **Geography**: AI Tutor - Mr. Atlas; Games - GeoGameDev
+- **German**: AI Tutor - Frau Muller; Games - Herr Spielmeister
+- **History**: AI Tutor - Professor Tudor; Games - Ms. Temporal
+- **Mathematics**: AI Tutor - Mrs Mathews; Games - Mrs Velvet
+- **Music**: AI Tutor - Maestro Harmony; Games - Mr. Soundwave
+- **PE**: AI Tutor - Coach Williams; Games - Ms Phoenix
+- **Religious Education**: AI Tutor - Sister Grace; Games - Ms. Sophia
+- **Science**: AI Tutor - Dr. Einstein; Games - CodeCrafter
 
 ## CSS Classes Used
 
@@ -331,6 +348,11 @@ Side-scrolling endless runner format with:
 - Q1/12 progress tracking
 - Keyboard (Space/ABCD) and Gamepad support
 - Subject-themed visuals and obstacles
+
+### Parkour Game Template
+- See `games/PARKOUR_GAME_TEMPLATE.md` for a reusable design brief based on `paris_parkour_french_year8.html`.
+- Template highlights theme swaps (collectibles, obstacles, background landmarks), TTS language detection, and question array structure.
+- Copy the French runner, rename it for the new subject/year, replace the question bank, adjust TTS language codes, and retheme collectibles/obstacles for the subject.
 
 ### Space Shooter Games (Cosmic Scholar format)
 Top-down space shooter format with:
