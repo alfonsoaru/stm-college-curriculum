@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cosmic Scholar: The Knowledge Run</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff41;
+            --neon-red: #ff3131;
+            --bg-dark: #050510;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: var(--bg-dark);
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            touch-action: none; /* Prevent scroll on mobile */
+        }
+
+        #gameCanvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* HUD */
+        .hud-top {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .score-box {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+        }
+
+        .level-box {
+            font-size: 1.5rem;
+            color: var(--neon-pink);
+        }
+
+        .bar-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .knowledge-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green);
+            transition: width 0.2s;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--neon-green);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+
+        /* Modals */
+        .modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 16, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Z-Index fixed to ensure it sits on top of everything */
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Feedback Overlay */
+        .feedback-msg {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            font-size: 4rem;
+            font-weight: 900;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.27); /* Bouncy effect */
+            z-index: 200;
+            white-space: pre-line; /* Allows new lines */
+            text-transform: uppercase;
+        }
+
+        .feedback-msg.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .feedback-correct {
+            color: var(--neon-green);
+            text-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-green);
+        }
+
+        .feedback-incorrect {
+            color: var(--neon-red);
+            text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--neon-red);
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--neon-blue);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .btn:hover {
+            background: var(--neon-blue);
+            color: black;
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+
+        /* Quiz Specifics */
+        .quiz-content {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border: 2px solid var(--neon-pink);
+            border-radius: 20px;
+            max-width: 90%;
+            width: 600px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.2);
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--neon-green);
+            padding: 15px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .option-btn:hover {
+            background: var(--neon-green);
+            color: black;
+        }
+
+        .warp-text {
+            color: var(--neon-pink);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .quiz-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="ui-layer">
+        <div class="hud-top">
+            <div class="score-box">SCORE: <span id="scoreVal">0</span></div>
+            <div class="level-box">LEVEL: <span id="levelVal">1</span></div>
+        </div>
+        
+        <div class="bar-label">DATA UPLOAD STATUS</div>
+        <div class="bar-container">
+            <div id="knowledgeBar" class="knowledge-bar"></div>
+        </div>
+        
+        <!-- New Feedback Message Element -->
+        <div id="feedbackMsg" class="feedback-msg"></div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="modal active">
+        <h1>Cosmic Scholar</h1>
+        <p style="color: #aaa; margin-bottom: 30px; text-align: center; max-width: 500px; line-height: 1.5;">
+            Pilot the Neural-Ship through the asteroid fields of ignorance.<br><br>
+            Collect <strong>Data Orbs (Green)</strong> to power up.<br>
+            Shoot <strong>Asteroids (Red)</strong> to survive.<br>
+            Complete the <strong>Upload</strong> to take the Quiz and warp to the next sector!
+        </p>
+        <button class="btn" onclick="startGame()">Initialize Systems</button>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="modal">
+        <div class="quiz-content">
+            <div class="warp-text">PREPARING JUMP COORDINATES</div>
+            <h2 id="quizQuestion" class="question-text">Question goes here?</h2>
+            <div id="quizOptions" class="options-grid">
+                <!-- Options injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+        <h1 style="color: var(--neon-red)">CRITICAL FAILURE</h1>
+        <p style="font-size: 1.5rem; margin-bottom: 20px;">Final Score: <span id="finalScore">0</span></p>
+        <button class="btn" onclick="resetGame()">Reboot System</button>
+    </div>
+
+<script>
+    /**
+     * EDUCATIONAL CONTENT CONFIGURATION
+     * Edit this array to change the questions!
+     */
+    const questionBank = [
+        // --- MATH ---
+        {
+            q: "Solve for x: 2x + 4 = 12",
+            options: ["x = 2", "x = 4", "x = 6", "x = 8"],
+            a: 1
+        },
+        {
+            q: "What is 15% of 200?",
+            options: ["20", "25", "30", "35"],
+            a: 2
+        },
+        // --- SCIENCE ---
+        {
+            q: "Which state of matter has no fixed shape or volume?",
+            options: ["Solid", "Liquid", "Gas", "Plasma"],
+            a: 2
+        },
+        {
+            q: "In biology, what part of the plant absorbs water?",
+            options: ["Leaves", "Stem", "Roots", "Flower"],
+            a: 2
+        },
+        {
+            q: "What is the standard unit of Force?",
+            options: ["Joule", "Watt", "Newton", "Pascal"],
+            a: 2
+        },
+        // --- ENGLISH ---
+        {
+            q: "What figure of speech uses 'like' or 'as'?",
+            options: ["Metaphor", "Simile", "Alliteration", "Personification"],
+            a: 1
+        },
+        {
+            q: "Which word in this sentence is a verb? 'The cat runs fast.'",
+            options: ["The", "Cat", "Runs", "Fast"],
+            a: 2
+        },
+        // --- HISTORY ---
+        {
+            q: "Which ancient civilization built the Pyramids of Giza?",
+            options: ["Romans", "Greeks", "Egyptians", "Mayans"],
+            a: 2
+        },
+        {
+            q: "Who is credited with discovering America in 1492?",
+            options: ["Magellan", "Columbus", "Cook", "Vespucci"],
+            a: 1
+        },
+        // --- GEOGRAPHY ---
+        {
+            q: "Lines running parallel to the Equator are lines of...?",
+            options: ["Longitude", "Latitude", "Altitude", "Magnitude"],
+            a: 1
+        }
+    ];
+
+    // --- GAME ENGINE SETUP ---
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // UI Elements
+    const startScreen = document.getElementById('startScreen');
+    const quizModal = document.getElementById('quizModal');
+    const gameOverModal = document.getElementById('gameOverModal');
+    const scoreEl = document.getElementById('scoreVal');
+    const levelEl = document.getElementById('levelVal');
+    const finalScoreEl = document.getElementById('finalScore');
+    const knowledgeBar = document.getElementById('knowledgeBar');
+    const quizQuestionEl = document.getElementById('quizQuestion');
+    const quizOptionsEl = document.getElementById('quizOptions');
+    const feedbackEl = document.getElementById('feedbackMsg');
+
+    // State
+    let gameLoopId;
+    let score = 0;
+    let level = 1;
+    let knowledge = 0;
+    const knowledgeMax = 100; // Points needed to trigger quiz
+    let isGameRunning = false;
+    let isPaused = false;
+    let isWarping = false; // New state for hyperspace
+    let frames = 0;
+
+    // Entities
+    let player;
+    let projectiles = [];
+    let enemies = [];
+    let particles = [];
+    let powerups = [];
+    let stars = [];
+
+    // Screen Dimensions
+    let canvasWidth = window.innerWidth;
+    let canvasHeight = window.innerHeight;
+
+    function resize() {
+        canvasWidth = window.innerWidth;
+        canvasHeight = window.innerHeight;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // --- INPUT HANDLING ---
+    const keys = {
+        ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false,
+        w: false, a: false, s: false, d: false, " ": false
+    };
+
+    const mouse = { x: canvasWidth / 2, y: canvasHeight / 2, isDown: false };
+
+    window.addEventListener('keydown', (e) => {
+        if(keys.hasOwnProperty(e.key)) keys[e.key] = true;
+        if(e.key === " " && isGameRunning && !isPaused) player.shoot();
+    });
+
+    window.addEventListener('keyup', (e) => {
+        if(keys.hasOwnProperty(e.key)) keys[e.key] = false;
+    });
+
+    // Touch/Mouse Controls
+    window.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+        mouse.isDown = true;
+    }, { passive: false });
+
+    window.addEventListener('touchstart', (e) => {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+        mouse.isDown = true;
+        if(isGameRunning && !isPaused) player.shoot();
+    });
+
+    window.addEventListener('touchend', () => mouse.isDown = false);
+    
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    // --- CLASSES ---
+
+    class Player {
+        constructor() {
+            this.x = canvasWidth / 2;
+            this.y = canvasHeight - 100;
+            this.radius = 20;
+            this.color = '#00f3ff';
+            this.velocity = { x: 0, y: 0 };
+            this.speed = 7;
+            this.friction = 0.92;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            
+            // Draw Ship
+            ctx.beginPath();
+            ctx.moveTo(0, -this.radius);
+            ctx.lineTo(this.radius, this.radius);
+            ctx.lineTo(0, this.radius - 5);
+            ctx.lineTo(-this.radius, this.radius);
+            ctx.closePath();
+            
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = this.color;
+            ctx.fillStyle = this.color;
+            ctx.fill();
+
+            // Engine Flame
+            if (Math.random() > 0.5) {
+                ctx.beginPath();
+                ctx.moveTo(-5, this.radius - 2);
+                ctx.lineTo(0, this.radius + 15 + Math.random() * 10);
+                ctx.lineTo(5, this.radius - 2);
+                ctx.fillStyle = isWarping ? '#00f3ff' : '#ff9900'; // Blue flame in warp
+                ctx.fill();
+            }
+
+            ctx.restore();
+        }
+
+        update() {
+            // Keyboard Movement
+            if (keys.ArrowLeft || keys.a) this.velocity.x -= 1;
+            if (keys.ArrowRight || keys.d) this.velocity.x += 1;
+            if (keys.ArrowUp || keys.w) this.velocity.y -= 1;
+            if (keys.ArrowDown || keys.s) this.velocity.y += 1;
+
+            // Mouse/Touch Follow (if active interaction)
+            if (mouse.isDown) {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                // Only move if far enough away to avoid jitter
+                if (Math.abs(dx) > 5) this.velocity.x += dx * 0.05;
+                if (Math.abs(dy) > 5) this.velocity.y += dy * 0.05;
+            }
+
+            // Apply Physics
+            this.x += this.velocity.x;
+            this.y += this.velocity.y;
+            this.velocity.x *= this.friction;
+            this.velocity.y *= this.friction;
+
+            // Boundaries
+            if (this.x < this.radius) this.x = this.radius;
+            if (this.x > canvasWidth - this.radius) this.x = canvasWidth - this.radius;
+            if (this.y < this.radius) this.y = this.radius;
+            if (this.y > canvasHeight - this.radius) this.y = canvasHeight - this.radius;
+
+            this.draw();
+        }
+
+        shoot() {
+            projectiles.push(new Projectile(this.x, this.y - this.radius));
+        }
+    }
+
+    class Projectile {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.radius = 4;
+            this.color = '#fff';
+            this.velocity = 15;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = this.color;
+            ctx.fill();
+        }
+
+        update() {
+            this.y -= this.velocity;
+            this.draw();
+        }
+    }
+
+    class Enemy {
+        constructor() {
+            this.radius = Math.random() * 20 + 15;
+            this.x = Math.random() * (canvasWidth - this.radius * 2) + this.radius;
+            this.y = -this.radius;
+            this.color = '#ff3131';
+            this.velocity = Math.random() * 2 + 2 + (level * 0.5); // Speed increases with level
+            this.vertices = Math.floor(Math.random() * 5) + 3; // Random polygon
+            this.angle = 0;
+            this.spin = (Math.random() - 0.5) * 0.1;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.strokeStyle = this.color;
+            ctx.lineWidth = 2;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = this.color;
+            
+            ctx.beginPath();
+            for (let i = 0; i < this.vertices; i++) {
+                const theta = (i / this.vertices) * Math.PI * 2;
+                const rx = Math.cos(theta) * this.radius;
+                const ry = Math.sin(theta) * this.radius;
+                if (i === 0) ctx.moveTo(rx, ry);
+                else ctx.lineTo(rx, ry);
+            }
+            ctx.closePath();
+            ctx.stroke();
+            
+            // Inner core
+            ctx.fillStyle = 'rgba(255, 49, 49, 0.2)';
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        update() {
+            this.y += this.velocity;
+            this.angle += this.spin;
+            this.draw();
+        }
+    }
+
+    class PowerUp {
+        constructor() {
+            this.radius = 12;
+            this.x = Math.random() * (canvasWidth - this.radius * 2) + this.radius;
+            this.y = -this.radius;
+            this.color = '#00ff41'; // Green for knowledge
+            this.velocity = 2;
+            this.pulse = 0;
+        }
+
+        draw() {
+            this.pulse += 0.1;
+            const glow = Math.sin(this.pulse) * 5 + 10;
+
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.shadowBlur = glow;
+            ctx.shadowColor = this.color;
+            ctx.fill();
+
+            // Inner symbol (simplistic 'plus' or bit)
+            ctx.fillStyle = 'white';
+            ctx.fillRect(this.x - 2, this.y - 6, 4, 12);
+            ctx.fillRect(this.x - 6, this.y - 2, 12, 4);
+        }
+
+        update() {
+            this.y += this.velocity;
+            this.draw();
+        }
+    }
+
+    class Particle {
+        constructor(x, y, color) {
+            this.x = x;
+            this.y = y;
+            this.radius = Math.random() * 3;
+            this.color = color;
+            this.velocity = {
+                x: (Math.random() - 0.5) * 8,
+                y: (Math.random() - 0.5) * 8
+            };
+            this.alpha = 1;
+            this.decay = Math.random() * 0.03 + 0.01;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        update() {
+            this.x += this.velocity.x;
+            this.y += this.velocity.y;
+            this.alpha -= this.decay;
+            this.draw();
+        }
+    }
+
+    class Star {
+        constructor() {
+            this.x = Math.random() * canvasWidth;
+            this.y = Math.random() * canvasHeight;
+            this.size = Math.random() * 2;
+            this.speed = Math.random() * 1 + 0.5;
+        }
+
+        update() {
+            // HYPERSPACE WARP MODE
+            if (isWarping) {
+                this.y += 60; // Ultra fast
+                if (this.y > canvasHeight) {
+                    this.y = 0;
+                    this.x = Math.random() * canvasWidth;
+                }
+                // Draw Streak
+                ctx.fillStyle = `rgba(${150 + Math.random()*100}, 255, 255, 0.8)`; // Cyan/White streaks
+                ctx.fillRect(this.x, this.y - 40, this.size, 80); // Long vertical streak
+                return;
+            }
+
+            // QUIZ MODE (Slow drift)
+            if (isPaused) {
+                this.y += 0.2; // Very slow drift
+                if (this.y > canvasHeight) {
+                    this.y = 0;
+                    this.x = Math.random() * canvasWidth;
+                }
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+                return;
+            }
+
+            // NORMAL GAMEPLAY
+            this.y += this.speed * (1 + (level * 0.1));
+            
+            if (this.y > canvasHeight) {
+                this.y = 0;
+                this.x = Math.random() * canvasWidth;
+            }
+
+            ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3})`;
+            ctx.fillRect(this.x, this.y, this.size, this.size);
+        }
+    }
+
+    // --- GAME FUNCTIONS ---
+
+    function spawnEnemies() {
+        // Spawn rate based on level
+        if (frames % Math.max(20, 80 - (level * 5)) === 0) {
+            enemies.push(new Enemy());
+        }
+    }
+
+    function spawnPowerUps() {
+        if (frames % 200 === 0) {
+            powerups.push(new PowerUp());
+        }
+    }
+
+    function createExplosion(x, y, color) {
+        for (let i = 0; i < 15; i++) {
+            particles.push(new Particle(x, y, color));
+        }
+    }
+
+    function updateScore(val) {
+        score += val;
+        scoreEl.innerText = score;
+    }
+
+    function updateKnowledge(val) {
+        knowledge += val;
+        if (knowledge > knowledgeMax) knowledge = knowledgeMax;
+        
+        // Update Bar Width
+        const percentage = (knowledge / knowledgeMax) * 100;
+        knowledgeBar.style.width = `${percentage}%`;
+
+        if (knowledge >= knowledgeMax) {
+            triggerQuiz();
+        }
+    }
+
+    function triggerQuiz() {
+        isPaused = true;
+        // Find a question (randomly for now)
+        const qIndex = Math.floor(Math.random() * questionBank.length);
+        const qData = questionBank[qIndex];
+
+        quizQuestionEl.innerText = `LEVEL ${level} SECURITY CHECK:\n` + qData.q;
+        quizOptionsEl.innerHTML = '';
+
+        qData.options.forEach((opt, index) => {
+            const btn = document.createElement('div');
+            btn.className = 'option-btn';
+            btn.innerText = opt;
+            btn.onclick = () => handleQuizAnswer(index === qData.a);
+            quizOptionsEl.appendChild(btn);
+        });
+
+        quizModal.classList.add('active');
+    }
+
+    function showFeedback(text, isGood) {
+        feedbackEl.innerText = text;
+        feedbackEl.className = isGood ? 'feedback-msg feedback-correct show' : 'feedback-msg feedback-incorrect show';
+        
+        // Hide after 1.5 seconds (or longer if warping)
+        setTimeout(() => {
+            feedbackEl.className = 'feedback-msg'; 
+        }, 1500);
+    }
+
+    function handleQuizAnswer(isCorrect) {
+        quizModal.classList.remove('active');
+        
+        if (isCorrect) {
+            showFeedback("CORRECT!\nINITIATING WARP...", true);
+            isWarping = true; // Trigger Warp Effect
+            
+            // Wait 2.5 seconds for warp effect to play before starting next level
+            setTimeout(() => {
+                isWarping = false;
+                level++;
+                levelEl.innerText = level;
+                updateScore(1000);
+                
+                // Reset Game State for new level
+                enemies = [];     // Clear enemies so we don't crash instantly
+                projectiles = [];
+                powerups = [];
+                
+                knowledge = 0;
+                knowledgeBar.style.width = '0%';
+                
+                isPaused = false; // Resume game
+            }, 2500);
+
+        } else {
+            showFeedback("INCORRECT\nSYSTEM DAMAGED", false);
+
+            // Penalty
+            updateScore(-500);
+            knowledge = Math.max(0, knowledge - 30); // Lose progress
+            knowledgeBar.style.width = `${(knowledge/knowledgeMax)*100}%`;
+            
+            // Shake screen effect
+            canvas.style.transform = "translateX(5px)";
+            setTimeout(() => canvas.style.transform = "translateX(0)", 100);
+            
+            isPaused = false;
+        }
+    }
+
+    function checkCollisions() {
+        // Projectiles hitting Enemies
+        projectiles.forEach((proj, pIndex) => {
+            enemies.forEach((enemy, eIndex) => {
+                const dist = Math.hypot(proj.x - enemy.x, proj.y - enemy.y);
+                if (dist - enemy.radius - proj.radius < 1) {
+                    // Hit
+                    createExplosion(enemy.x, enemy.y, enemy.color);
+                    setTimeout(() => {
+                        enemies.splice(eIndex, 1);
+                        projectiles.splice(pIndex, 1);
+                    }, 0);
+                    updateScore(100);
+                }
+            });
+        });
+
+        // Player hitting Enemies
+        enemies.forEach((enemy) => {
+            const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
+            if (dist - enemy.radius - player.radius < 1) {
+                gameOver();
+            }
+        });
+
+        // Player hitting PowerUps
+        powerups.forEach((p, index) => {
+            const dist = Math.hypot(player.x - p.x, player.y - p.y);
+            if (dist - p.radius - player.radius < 1) {
+                powerups.splice(index, 1);
+                updateKnowledge(20); // 20% per orb
+                updateScore(50);
+                createExplosion(p.x, p.y, p.color);
+            }
+        });
+    }
+
+    function gameOver() {
+        isGameRunning = false;
+        finalScoreEl.innerText = score;
+        gameOverModal.classList.add('active');
+    }
+
+    function resetGame() {
+        score = 0;
+        level = 1;
+        knowledge = 0;
+        frames = 0;
+        scoreEl.innerText = "0";
+        levelEl.innerText = "1";
+        knowledgeBar.style.width = "0%";
+        isWarping = false;
+        
+        player = new Player();
+        projectiles = [];
+        enemies = [];
+        particles = [];
+        powerups = [];
+        
+        gameOverModal.classList.remove('active');
+        startScreen.classList.remove('active');
+        
+        isGameRunning = true;
+        isPaused = false;
+        animate();
+    }
+
+    function startGame() {
+        // Initialize Stars
+        stars = [];
+        for(let i=0; i<100; i++) stars.push(new Star());
+        
+        resetGame();
+    }
+
+    function animate() {
+        if (!isGameRunning) return;
+        
+        gameLoopId = requestAnimationFrame(animate);
+        
+        // Clear Screen (Darker trails during warp for speed effect)
+        ctx.fillStyle = isWarping ? 'rgba(0, 0, 0, 0.2)' : 'rgba(5, 5, 16, 0.4)'; 
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+        // Update Stars (They handle their own warp logic)
+        stars.forEach(star => star.update());
+
+        // WARP MODE LOGIC
+        if (isWarping) {
+            // Shake player ship slightly to simulate high speed
+            player.x += (Math.random() - 0.5) * 5; 
+            player.draw();
+            return; // Skip enemy/projectile updates during warp
+        }
+
+        // PAUSE MODE (Quiz)
+        if (isPaused) {
+            player.draw();
+            enemies.forEach(e => e.draw());
+            powerups.forEach(p => p.draw());
+            return; 
+        }
+
+        frames++;
+
+        // Update Entities
+        player.update();
+        
+        projectiles.forEach((p, index) => {
+            p.update();
+            if (p.y + p.radius < 0) projectiles.splice(index, 1);
+        });
+
+        enemies.forEach((e, index) => {
+            e.update();
+            if (e.y - e.radius > canvasHeight) enemies.splice(index, 1);
+        });
+
+        powerups.forEach((p, index) => {
+            p.update();
+            if (p.y - p.radius > canvasHeight) powerups.splice(index, 1);
+        });
+
+        particles.forEach((p, index) => {
+            p.update();
+            if (p.alpha <= 0) particles.splice(index, 1);
+        });
+
+        spawnEnemies();
+        spawnPowerUps();
+        checkCollisions();
+    }
+
+    // Initialize stars for the title screen background
+    stars = [];
+    for(let i=0; i<100; i++) stars.push(new Star());
+    
+    // Simple title screen loop
+    function titleLoop() {
+        if(isGameRunning) return;
+        ctx.fillStyle = 'rgba(5, 5, 16, 0.4)';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        stars.forEach(star => star.update());
+        requestAnimationFrame(titleLoop);
+    }
+    titleLoop();
+
+</script>
+</body>
+</html>

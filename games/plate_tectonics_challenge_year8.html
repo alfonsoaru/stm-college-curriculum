@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Plate Tectonics Challenge - Geography Year 8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-canvas {
+            display: block;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .hud-item {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        #question-overlay {
+            display: block;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        .question-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 3px solid #dc2626;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .checkpoint-badge {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .answer-btn {
+            background: #f5f5f7;
+            border: 2px solid #e5e5e5;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e8e8ed;
+            border-color: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #16a34a;
+            color: white;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        #start-screen, #gameover-screen, #win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #gameover-screen, #win-screen {
+            display: none;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .instructions em {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .instructions p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .theme-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback-text.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #166534;
+            display: block;
+        }
+
+        .feedback-text.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        #mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .jump-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #mobile-controls {
+                display: block;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="hud">
+            <div class="hud-item">🌋 Level: <span id="level">1</span>/3</div>
+            <div class="hud-item">💎 <span id="crystals">0</span></div>
+            <div class="hud-item">⭐ <span id="score">0</span></div>
+            <div class="hud-item">❤️ <span id="lives">3</span></div>
+        </div>
+
+        <div id="mobile-controls">
+            <button class="jump-btn" id="jump-btn">⬆️</button>
+        </div>
+
+        <div id="question-overlay">
+            <div class="question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div class="checkpoint-badge">🌋 Q<span id="checkpoint-num">1</span>/<span id="total-questions">12</span></div>
+                    <button id="read-again-btn" onclick="rereadQuestion()" style="background: #dc2626; color: white; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">🔊 Read Again</button>
+                </div>
+                <div class="question-text" id="q-text">Loading...</div>
+                <div class="question-context" id="q-context">Plate Tectonics</div>
+                <div class="answers-grid" id="answers"></div>
+                <div class="feedback-text" id="feedback"></div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <div class="theme-emoji">🌋</div>
+            <h1 class="title">Plate Tectonics Challenge</h1>
+            <p class="subtitle">Run, Jump & Master Earth Science!<br><em style="font-size: 0.9em; opacity: 0.8;">Navigate volcanic terrain and learn about our dynamic planet!</em></p>
+
+            <div class="instructions">
+                <h3>How to Play</h3>
+                <p>🏃 <strong>RUN</strong> across volcanic tectonic plates!</p>
+                <p>🌋 Learn about <strong>EARTHQUAKES & VOLCANOES</strong>!</p>
+                <p>💎 Collect crystals for bonus points!</p>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p><strong>⌨️ Keyboard:</strong> SPACE = Jump | A B C D = Answer</p>
+                    <p><strong>🎮 Xbox:</strong> RT/LT = Jump | X Y A B = Answer</p>
+                </div>
+
+                <p style="margin-top: 1rem;">✅ Correct = +1 Life | Learn about Earth's structure!</p>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">Start Exploring! 🌍</button>
+        </div>
+
+        <div id="gameover-screen">
+            <div class="result-icon">💔</div>
+            <h1 class="title">Game Over!</h1>
+            <p class="subtitle">The lava got you!</p>
+            <div class="stats">
+                <p>Level: <span id="final-level">1</span></p>
+                <p>Score: <span id="final-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Try Again! 🔄</button>
+        </div>
+
+        <div id="win-screen">
+            <div class="result-icon">🏆</div>
+            <h1 class="title">Congratulations!</h1>
+            <p class="subtitle">You're a Plate Tectonics Expert!</p>
+            <div class="stats">
+                <p>💎 Crystals: <span id="win-crystals">0</span></p>
+                <p>⭐ Score: <span id="win-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Play Again! 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let gameRunning = false;
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let distance = 0;
+        let checkpointDistance = 22000;
+        let gameSpeed = 4;
+        let baseSpeed = 4;
+        let isSpeakingFeedback = false;
+
+        // Collectibles
+        let crystals = [];
+        let crystalCount = 0;
+
+        // Power-ups
+        let powerUps = [];
+        let isInvincible = false;
+        let invincibleTimer = 0;
+
+        // Player
+        let player = {
+            x: 100,
+            y: 0,
+            width: 50,
+            height: 70,
+            velocityY: 0,
+            jumping: false,
+            grounded: true
+        };
+
+        // Physics
+        const gravity = 0.8;
+        const jumpForce = -16;
+
+        // Obstacles
+        let obstacles = [];
+        let obstacleTimer = 0;
+
+        // Background
+        let bgOffset = 0;
+        let volcanos = [];
+        let smokeClouds = [];
+        let lavaParticles = [];
+
+        // Plate Tectonics Questions - Year 8 Geography
+        const questions = [
+            // Structure of Earth
+            {
+                text: "What are the four layers of the Earth?",
+                context: "Earth's Structure",
+                answers: ["Crust, Mantle, Outer Core, Inner Core", "Crust, Magma, Lava, Core", "Surface, Middle, Bottom, Center", "Rock, Fire, Metal, Iron"],
+                correct: 0,
+                english: "The Earth has four distinct layers: the thin outer crust, the semi-solid mantle, the liquid outer core, and the solid inner core made of iron and nickel."
+            },
+            {
+                text: "What drives tectonic plates to move?",
+                context: "Plate Movement",
+                answers: ["Convection currents in the mantle", "Ocean waves", "Wind patterns", "The Moon's gravity"],
+                correct: 0,
+                english: "Heat from the Earth's core creates convection currents in the mantle - hot material rises, spreads, cools, and sinks, dragging tectonic plates along at 2-10cm per year."
+            },
+            {
+                text: "What is the lithosphere?",
+                context: "Earth's Structure",
+                answers: ["The rigid outer shell (crust + upper mantle)", "The liquid outer core", "The atmosphere", "The ocean floor only"],
+                correct: 0,
+                english: "The lithosphere is the rigid outer layer made of the crust and upper mantle, broken into tectonic plates that float on the softer asthenosphere below."
+            },
+            // Plate boundaries
+            {
+                text: "At a DIVERGENT boundary, plates move...",
+                context: "Plate Boundaries",
+                answers: ["Apart from each other", "Towards each other", "Alongside each other", "In circles"],
+                correct: 0,
+                english: "At divergent (constructive) boundaries, plates move apart and new crust forms from rising magma. Example: Mid-Atlantic Ridge where new ocean floor is created."
+            },
+            {
+                text: "What happens at a CONVERGENT boundary?",
+                context: "Plate Boundaries",
+                answers: ["Plates collide, one may subduct", "Plates move apart", "Plates slide past each other", "Nothing happens"],
+                correct: 0,
+                english: "At convergent (destructive) boundaries, plates collide. Oceanic crust subducts under continental crust, creating deep trenches, explosive volcanoes, and powerful earthquakes."
+            },
+            {
+                text: "At a TRANSFORM boundary, plates...",
+                context: "Plate Boundaries",
+                answers: ["Slide past each other sideways", "Move apart", "Collide together", "Stack on top of each other"],
+                correct: 0,
+                english: "At transform (conservative) boundaries, plates slide past each other horizontally. This causes earthquakes but no volcanoes. Example: San Andreas Fault in California."
+            },
+            // Earthquakes
+            {
+                text: "What is the FOCUS of an earthquake?",
+                context: "Earthquake Terminology",
+                answers: ["The point underground where it starts", "The point on the surface above", "The fault line", "The seismic wave"],
+                correct: 0,
+                english: "The focus (or hypocenter) is the point inside the Earth where the earthquake originates - where rocks first break and release energy."
+            },
+            {
+                text: "What is the EPICENTRE?",
+                context: "Earthquake Terminology",
+                answers: ["The point on the surface directly above the focus", "Where the earthquake ends", "The deepest point", "The fault line"],
+                correct: 0,
+                english: "The epicentre is the point on Earth's surface directly above the focus. This is usually where the most damage occurs and shaking is strongest."
+            },
+            {
+                text: "What instrument measures earthquake magnitude?",
+                context: "Measuring Earthquakes",
+                answers: ["Seismometer/Seismograph", "Barometer", "Thermometer", "Anemometer"],
+                correct: 0,
+                english: "A seismometer (or seismograph) detects and records ground vibrations from earthquakes, measuring their magnitude on scales like the Richter or Moment Magnitude Scale."
+            },
+            // Volcanoes
+            {
+                text: "What is MAGMA called when it reaches the surface?",
+                context: "Volcanic Terms",
+                answers: ["Lava", "Ash", "Pyroclastic flow", "Tephra"],
+                correct: 0,
+                english: "Magma is molten rock beneath Earth's surface. When it erupts and reaches the surface, it's called lava. It can range from runny (basaltic) to thick and sticky (rhyolitic)."
+            },
+            {
+                text: "What is a PYROCLASTIC FLOW?",
+                context: "Volcanic Hazards",
+                answers: ["A deadly fast-moving cloud of hot gas and rock", "A slow lava river", "A volcanic earthquake", "A type of volcano"],
+                correct: 0,
+                english: "A pyroclastic flow is an extremely dangerous, fast-moving (up to 700 km/h) current of hot gas, ash, and rock fragments that flows down a volcano's slopes, destroying everything in its path."
+            },
+            // Ring of Fire
+            {
+                text: "What is the Pacific Ring of Fire?",
+                context: "Global Patterns",
+                answers: ["Zone around Pacific with 75% of world's volcanoes", "A volcanic island", "An earthquake in the Pacific", "A type of lava"],
+                correct: 0,
+                english: "The Pacific Ring of Fire is a 40,000km horseshoe-shaped zone around the Pacific Ocean where 75% of the world's volcanoes and 90% of earthquakes occur due to multiple plate boundaries."
+            }
+        ];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 150 - player.height;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        function generateVolcanos() {
+            volcanos = [];
+            for (let i = 0; i < 5; i++) {
+                volcanos.push({
+                    x: i * 400 + Math.random() * 150,
+                    height: 150 + Math.random() * 100,
+                    smoking: Math.random() > 0.3
+                });
+            }
+        }
+
+        function generateSmokeClouds() {
+            smokeClouds = [];
+            for (let i = 0; i < 8; i++) {
+                smokeClouds.push({
+                    x: i * 200 + Math.random() * 100,
+                    y: 30 + Math.random() * 50,
+                    size: 20 + Math.random() * 25,
+                    opacity: 0.3 + Math.random() * 0.4
+                });
+            }
+        }
+
+        function spawnLavaParticle() {
+            if (Math.random() < 0.1) {
+                lavaParticles.push({
+                    x: Math.random() * canvas.width,
+                    y: canvas.height - 140,
+                    vy: -3 - Math.random() * 5,
+                    vx: (Math.random() - 0.5) * 3,
+                    size: 3 + Math.random() * 5,
+                    life: 60
+                });
+            }
+        }
+
+        function drawBackground() {
+            // Sky gradient - volcanic, smoky atmosphere
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.6);
+            skyGradient.addColorStop(0, '#1f1f1f');
+            skyGradient.addColorStop(0.5, '#4a1a1a');
+            skyGradient.addColorStop(1, '#7f1d1d');
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height * 0.6);
+
+            // Dim sun through smoke
+            ctx.fillStyle = 'rgba(251, 146, 60, 0.4)';
+            ctx.beginPath();
+            ctx.arc(canvas.width - 120, 80, 50, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = 'rgba(251, 191, 36, 0.3)';
+            ctx.beginPath();
+            ctx.arc(canvas.width - 120, 80, 35, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Smoke clouds
+            smokeClouds.forEach(cloud => {
+                const cloudX = ((cloud.x - bgOffset * 0.15) % (canvas.width + 300)) - 100;
+                ctx.fillStyle = `rgba(80, 80, 80, ${cloud.opacity})`;
+                drawSmokeCloud(cloudX, cloud.y, cloud.size);
+            });
+
+            // Distant mountains/volcanos
+            volcanos.forEach(v => {
+                const vX = ((v.x - bgOffset * 0.4) % (canvas.width + 600)) - 200;
+                drawVolcano(vX, canvas.height * 0.6 - v.height + 50, v.height, v.smoking);
+            });
+
+            // Tectonic plate ground (dark rocky terrain)
+            const groundGradient = ctx.createLinearGradient(0, canvas.height - 150, 0, canvas.height);
+            groundGradient.addColorStop(0, '#374151');
+            groundGradient.addColorStop(0.3, '#1f2937');
+            groundGradient.addColorStop(1, '#111827');
+            ctx.fillStyle = groundGradient;
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 150);
+
+            // Lava cracks in ground
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 3;
+            for (let x = -bgOffset % 80; x < canvas.width; x += 80) {
+                ctx.beginPath();
+                ctx.moveTo(x, canvas.height - 140);
+                ctx.lineTo(x + 20, canvas.height - 120);
+                ctx.lineTo(x + 10, canvas.height - 100);
+                ctx.stroke();
+            }
+
+            // Glowing lava effect at base
+            const lavaGlow = ctx.createLinearGradient(0, canvas.height - 50, 0, canvas.height);
+            lavaGlow.addColorStop(0, 'rgba(239, 68, 68, 0)');
+            lavaGlow.addColorStop(1, 'rgba(239, 68, 68, 0.4)');
+            ctx.fillStyle = lavaGlow;
+            ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
+
+            // Lava particles
+            spawnLavaParticle();
+            lavaParticles.forEach((p, i) => {
+                p.x += p.vx - gameSpeed * 0.3;
+                p.y += p.vy;
+                p.vy += 0.15;
+                p.life--;
+
+                if (p.life > 0) {
+                    const alpha = p.life / 60;
+                    ctx.fillStyle = `rgba(251, 146, 60, ${alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+            lavaParticles = lavaParticles.filter(p => p.life > 0);
+        }
+
+        function drawSmokeCloud(x, y, size) {
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.arc(x + size * 0.8, y - 5, size * 1.1, 0, Math.PI * 2);
+            ctx.arc(x + size * 1.6, y, size * 0.9, 0, Math.PI * 2);
+            ctx.arc(x + size * 0.8, y + 6, size * 0.7, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawVolcano(x, y, height, smoking) {
+            // Volcano mountain
+            ctx.fillStyle = '#374151';
+            ctx.beginPath();
+            ctx.moveTo(x - height * 0.8, y + height);
+            ctx.lineTo(x - 25, y);
+            ctx.lineTo(x + 25, y);
+            ctx.lineTo(x + height * 0.8, y + height);
+            ctx.closePath();
+            ctx.fill();
+
+            // Crater
+            ctx.fillStyle = '#1f2937';
+            ctx.beginPath();
+            ctx.ellipse(x, y + 10, 25, 12, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Lava glow in crater
+            ctx.fillStyle = 'rgba(239, 68, 68, 0.8)';
+            ctx.beginPath();
+            ctx.ellipse(x, y + 10, 18, 8, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Smoke from volcano
+            if (smoking) {
+                for (let i = 0; i < 3; i++) {
+                    const smokeY = y - 20 - i * 30 + Math.sin(Date.now() / 500 + i) * 10;
+                    const smokeX = x + Math.sin(Date.now() / 800 + i * 2) * 15;
+                    ctx.fillStyle = `rgba(100, 100, 100, ${0.4 - i * 0.1})`;
+                    ctx.beginPath();
+                    ctx.arc(smokeX, smokeY, 15 + i * 8, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+
+        function drawPlayer() {
+            // Geologist outfit
+            // Body - safety vest
+            ctx.fillStyle = '#f97316';
+            ctx.fillRect(player.x, player.y + 20, player.width - 10, 35);
+
+            // Reflective stripes
+            ctx.fillStyle = '#fcd34d';
+            ctx.fillRect(player.x + 5, player.y + 30, player.width - 20, 4);
+            ctx.fillRect(player.x + 5, player.y + 40, player.width - 20, 4);
+
+            // Head
+            ctx.fillStyle = '#fcd5b8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 12, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Hard hat
+            ctx.fillStyle = '#fbbf24';
+            ctx.beginPath();
+            ctx.ellipse(player.x + 20, player.y + 5, 20, 8, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 2, 14, Math.PI, 0);
+            ctx.fill();
+
+            // Safety goggles
+            ctx.fillStyle = '#1f2937';
+            ctx.fillRect(player.x + 10, player.y + 10, 8, 5);
+            ctx.fillRect(player.x + 22, player.y + 10, 8, 5);
+            ctx.strokeStyle = '#374151';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(player.x + 10, player.y + 10, 8, 5);
+            ctx.strokeRect(player.x + 22, player.y + 10, 8, 5);
+
+            // Legs - work pants
+            ctx.fillStyle = '#1e40af';
+            if (player.grounded) {
+                ctx.fillRect(player.x + 5, player.y + 55, 12, 15);
+                ctx.fillRect(player.x + 22, player.y + 55, 12, 15);
+            } else {
+                ctx.fillRect(player.x + 5, player.y + 50, 12, 20);
+                ctx.fillRect(player.x + 22, player.y + 50, 12, 20);
+            }
+
+            // Invincibility effect
+            if (isInvincible) {
+                ctx.strokeStyle = 'rgba(251, 191, 36, 0.8)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(player.x + 25, player.y + 35, 45, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        function spawnObstacle() {
+            const types = [
+                { width: 50, height: 50, emoji: '🌋' },
+                { width: 45, height: 45, emoji: '🪨' },
+                { width: 55, height: 40, emoji: '🔥' },
+                { width: 40, height: 50, emoji: '💨' },
+                { width: 50, height: 55, emoji: '⚠️' },
+                { width: 45, height: 45, emoji: '🧱' },
+                { width: 50, height: 40, emoji: '🌡️' }
+            ];
+            const type = types[Math.floor(Math.random() * types.length)];
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - type.height,
+                width: type.width,
+                height: type.height,
+                emoji: type.emoji
+            });
+
+            if (Math.random() < 0.15 && level > 1) {
+                const type2 = types[Math.floor(Math.random() * types.length)];
+                obstacles.push({
+                    x: canvas.width + 150,
+                    y: canvas.height - 150 - type2.height,
+                    width: type2.width,
+                    height: type2.height,
+                    emoji: type2.emoji
+                });
+            }
+        }
+
+        function spawnCrystal() {
+            const heights = [80, 120, 160];
+            crystals.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - heights[Math.floor(Math.random() * heights.length)],
+                collected: false
+            });
+        }
+
+        function spawnPowerUp() {
+            const types = ['shield', 'magnet', 'slow'];
+            powerUps.push({
+                x: canvas.width + 50,
+                y: canvas.height - 280,
+                type: types[Math.floor(Math.random() * types.length)],
+                collected: false
+            });
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obs => {
+                ctx.font = `${obs.height}px Arial`;
+                ctx.fillText(obs.emoji, obs.x, obs.y + obs.height - 5);
+            });
+        }
+
+        function drawCrystals() {
+            crystals.forEach(c => {
+                if (!c.collected) {
+                    ctx.font = '35px Arial';
+                    const bob = Math.sin(Date.now() / 200 + c.x) * 5;
+                    ctx.fillText('💎', c.x, c.y + bob);
+                }
+            });
+        }
+
+        function drawPowerUps() {
+            powerUps.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '40px Arial';
+                    const bob = Math.sin(Date.now() / 150) * 8;
+                    let emoji = p.type === 'shield' ? '⭐' : p.type === 'magnet' ? '🧲' : '⏱️';
+                    ctx.fillText(emoji, p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawProgressBar() {
+            const barWidth = 200;
+            const barHeight = 10;
+            const barX = canvas.width / 2 - barWidth / 2;
+            const barY = 70;
+            const progress = Math.min(distance / checkpointDistance, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            ctx.fillStyle = '#22c55e';
+            ctx.fillRect(barX, barY, barWidth * progress, barHeight);
+
+            ctx.fillStyle = 'white';
+            ctx.font = '12px Arial';
+            ctx.fillText('🏁', barX + barWidth - 15, barY + 10);
+        }
+
+        let crystalSpawnTimer = 0;
+        let powerUpSpawnTimer = 0;
+        let comboCount = 0;
+        let comboTimer = 0;
+
+        function update() {
+            if (!gameRunning) return;
+
+            gameSpeed = Math.min(baseSpeed + 5, baseSpeed + (distance / 5000));
+
+            bgOffset += gameSpeed;
+            distance += gameSpeed;
+
+            if (!player.grounded) {
+                player.velocityY += gravity;
+                player.y += player.velocityY;
+
+                if (player.y >= canvas.height - 150 - player.height) {
+                    player.y = canvas.height - 150 - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                    player.jumping = false;
+                }
+            }
+
+            obstacleTimer++;
+            const obstacleFreq = Math.max(80, 180 - gameSpeed * 15);
+            if (obstacleTimer > obstacleFreq + Math.random() * 60) {
+                spawnObstacle();
+                obstacleTimer = 0;
+            }
+
+            crystalSpawnTimer++;
+            if (crystalSpawnTimer > 40 + Math.random() * 30) {
+                spawnCrystal();
+                crystalSpawnTimer = 0;
+            }
+
+            powerUpSpawnTimer++;
+            if (powerUpSpawnTimer > 400 + Math.random() * 200) {
+                spawnPowerUp();
+                powerUpSpawnTimer = 0;
+            }
+
+            obstacles.forEach(obs => { obs.x -= gameSpeed; });
+            crystals.forEach(c => { c.x -= gameSpeed; });
+            powerUps.forEach(p => { p.x -= gameSpeed; });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+            crystals = crystals.filter(c => c.x > -100);
+            powerUps = powerUps.filter(p => p.x > -100);
+
+            if (!isInvincible) {
+                obstacles.forEach(obs => {
+                    if (player.x < obs.x + obs.width - 10 &&
+                        player.x + player.width - 10 > obs.x &&
+                        player.y + player.height > obs.y &&
+                        player.y < obs.y + obs.height) {
+                        hitObstacle();
+                    }
+                });
+            }
+
+            crystals.forEach(c => {
+                if (!c.collected &&
+                    player.x < c.x + 35 &&
+                    player.x + player.width > c.x &&
+                    player.y < c.y + 35 &&
+                    player.y + player.height > c.y - 20) {
+                    c.collected = true;
+                    crystalCount++;
+                    score += 50;
+                    comboCount++;
+                    comboTimer = 60;
+                    if (comboCount >= 3) score += comboCount * 20;
+                }
+            });
+
+            powerUps.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 40 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 20 &&
+                    player.y + player.height > p.y - 30) {
+                    p.collected = true;
+                    activatePowerUp(p.type);
+                }
+            });
+
+            if (comboTimer > 0) comboTimer--;
+            else comboCount = 0;
+
+            if (isInvincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) isInvincible = false;
+            }
+
+            if (distance >= checkpointDistance) reachCheckpoint();
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('crystals').textContent = crystalCount;
+        }
+
+        function activatePowerUp(type) {
+            if (type === 'shield') {
+                isInvincible = true;
+                invincibleTimer = 180;
+            } else if (type === 'slow') {
+                gameSpeed = Math.max(3, gameSpeed - 2);
+                setTimeout(() => { gameSpeed = baseSpeed; }, 3000);
+            } else if (type === 'magnet') {
+                crystals.forEach(c => {
+                    if (!c.collected && c.x < player.x + 300) {
+                        c.x = player.x + 30;
+                        c.y = player.y + 20;
+                    }
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawCrystals();
+            drawPowerUps();
+            drawObstacles();
+            drawPlayer();
+            drawProgressBar();
+
+            if (comboCount >= 3) {
+                ctx.fillStyle = '#fbbf24';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText(`COMBO x${comboCount}!`, player.x - 20, player.y - 30);
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.velocityY = jumpForce;
+                player.grounded = false;
+                player.jumping = true;
+            }
+        }
+
+        function hitObstacle() {
+            lives--;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                obstacles = [];
+                distance = Math.max(0, distance - 200);
+                canvas.style.filter = 'brightness(2)';
+                setTimeout(() => canvas.style.filter = 'none', 100);
+            }
+        }
+
+        function reachCheckpoint() {
+            distance = 0;
+            level++;
+
+            if (level > 3) {
+                winGame();
+                return;
+            }
+
+            checkpointDistance = 22000 + level * 2000;
+            baseSpeed = 4 + level * 0.5;
+            gameSpeed = baseSpeed;
+            document.getElementById('level').textContent = level;
+        }
+
+        // TTS Functions
+        function speak(text, lang = 'en-GB') {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                const voices = speechSynthesis.getVoices();
+                const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+                if (voice) utterance.voice = voice;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[questionCount % questions.length];
+            currentQuestion = question;
+
+            const questionInCycle = (questionCount % questions.length) + 1;
+            document.getElementById('checkpoint-num').textContent = questionInCycle;
+            document.getElementById('total-questions').textContent = questions.length;
+            document.getElementById('q-text').textContent = question.text;
+            document.getElementById('q-context').textContent = question.context;
+
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+
+            const shuffledAnswers = question.answers.map((ans, i) => ({ text: ans, isCorrect: i === question.correct }));
+            shuffledAnswers.sort(() => Math.random() - 0.5);
+            currentAnswers = shuffledAnswers;
+
+            const labels = ['A', 'B', 'C', 'D'];
+            shuffledAnswers.forEach((ans, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.onclick = () => handleAnswer(btn, ans.isCorrect, question.english);
+                btn.innerHTML = `<strong>${labels[i]}</strong> ${ans.text}`;
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback-text';
+
+            readQuestionAndAnswers(question.text, shuffledAnswers, labels);
+        }
+
+        function readQuestionAndAnswers(questionText, answers, labels) {
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeakingFeedback) return;
+
+            speechSynthesis.cancel();
+
+            const voices = speechSynthesis.getVoices();
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+
+            const queue = [];
+
+            // Question in English
+            const qUtterance = new SpeechSynthesisUtterance(questionText);
+            qUtterance.lang = 'en-GB';
+            qUtterance.rate = 0.9;
+            if (englishVoice) qUtterance.voice = englishVoice;
+            queue.push(qUtterance);
+
+            // Answers
+            answers.forEach((ans, i) => {
+                const labelUtterance = new SpeechSynthesisUtterance(labels[i]);
+                labelUtterance.lang = 'en-GB';
+                labelUtterance.rate = 1.0;
+                if (englishVoice) labelUtterance.voice = englishVoice;
+                queue.push(labelUtterance);
+
+                const ansUtterance = new SpeechSynthesisUtterance(ans.text);
+                ansUtterance.lang = 'en-GB';
+                ansUtterance.rate = 0.85;
+                if (englishVoice) ansUtterance.voice = englishVoice;
+                queue.push(ansUtterance);
+            });
+
+            let i = 0;
+            function playNext() {
+                if (i < queue.length) {
+                    queue[i].onend = playNext;
+                    speechSynthesis.speak(queue[i]);
+                    i++;
+                }
+            }
+            playNext();
+        }
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.getVoices();
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        let questionCount = 0;
+        let currentQuestion = null;
+        let currentAnswers = null;
+        const answerLabels = ['A', 'B', 'C', 'D'];
+
+        function rereadQuestion() {
+            if (currentQuestion && currentAnswers) {
+                readQuestionAndAnswers(currentQuestion.text, currentAnswers, answerLabels);
+            }
+        }
+
+        function handleAnswer(btn, isCorrect, explanation) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('feedback');
+            const question = questions[questionCount % questions.length];
+            const correctAnswer = question.answers[question.correct];
+
+            speechSynthesis.cancel();
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                lives++;
+                score += 200;
+                document.getElementById('lives').textContent = lives;
+                document.getElementById('score').textContent = score;
+
+                feedback.textContent = '✅ +1 ❤️ Correct!';
+                feedback.className = 'feedback-text correct';
+
+                speakFeedback("Correct!", 'en-GB', () => {
+                    speakFeedback(explanation, 'en-GB', () => {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    });
+                });
+            } else {
+                btn.classList.add('wrong');
+
+                feedback.textContent = '❌ ' + correctAnswer;
+                feedback.className = 'feedback-text wrong';
+
+                speakFeedback("Wrong! The answer is:", 'en-GB', () => {
+                    speakFeedback(correctAnswer, 'en-GB', () => {
+                        speakFeedback(explanation, 'en-GB', () => {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        });
+                    });
+                });
+            }
+        }
+
+        function speakFeedback(text, lang, callback, isLast = false) {
+            isSpeakingFeedback = true;
+            const voices = speechSynthesis.getVoices();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 1.0;
+
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+            if (englishVoice) utterance.voice = englishVoice;
+
+            utterance.onend = () => {
+                if (isLast) isSpeakingFeedback = false;
+                if (callback) callback();
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'flex';
+            document.getElementById('final-level').textContent = level;
+            document.getElementById('final-score').textContent = score;
+        }
+
+        function winGame() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'flex';
+            document.getElementById('win-score').textContent = score;
+            document.getElementById('win-crystals').textContent = crystalCount;
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('question-overlay').style.display = 'block';
+
+            level = 1;
+            score = 0;
+            lives = 3;
+            distance = 0;
+            checkpointDistance = 22000;
+            gameSpeed = 4;
+            baseSpeed = 4;
+            isSpeakingFeedback = false;
+            obstacles = [];
+            crystals = [];
+            powerUps = [];
+            crystalCount = 0;
+            isInvincible = false;
+            invincibleTimer = 0;
+            comboCount = 0;
+            comboTimer = 0;
+            obstacleTimer = 0;
+            crystalSpawnTimer = 0;
+            powerUpSpawnTimer = 0;
+            questionCount = 0;
+            lavaParticles = [];
+
+            document.getElementById('level').textContent = level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            document.getElementById('crystals').textContent = crystalCount;
+
+            player.y = canvas.height - 150 - player.height;
+            player.velocityY = 0;
+            player.grounded = true;
+
+            generateVolcanos();
+            generateSmokeClouds();
+            gameRunning = true;
+
+            showQuestion();
+        }
+
+        // Gamepad support
+        let gamepadConnected = false;
+        let lastButtonStates = {};
+
+        window.addEventListener('gamepadconnected', () => { gamepadConnected = true; });
+        window.addEventListener('gamepaddisconnected', () => { gamepadConnected = false; });
+
+        function pollGamepad() {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads) return;
+
+            for (const gamepad of gamepads) {
+                if (!gamepad) continue;
+
+                const buttons = gamepad.buttons;
+
+                if ((buttons[7]?.pressed || buttons[6]?.pressed) && !lastButtonStates['jump']) {
+                    jump();
+                    lastButtonStates['jump'] = true;
+                } else if (!buttons[7]?.pressed && !buttons[6]?.pressed) {
+                    lastButtonStates['jump'] = false;
+                }
+
+                const answerMap = [
+                    { btn: 2, answer: 0, key: 'X' },
+                    { btn: 3, answer: 1, key: 'Y' },
+                    { btn: 0, answer: 2, key: 'A' },
+                    { btn: 1, answer: 3, key: 'B' }
+                ];
+
+                answerMap.forEach(({ btn, answer, key }) => {
+                    if (buttons[btn]?.pressed && !lastButtonStates[key]) {
+                        const answerBtns = document.querySelectorAll('.answer-btn');
+                        if (answerBtns[answer] && !answerBtns[answer].disabled) {
+                            answerBtns[answer].click();
+                        }
+                        lastButtonStates[key] = true;
+                    } else if (!buttons[btn]?.pressed) {
+                        lastButtonStates[key] = false;
+                    }
+                });
+            }
+            requestAnimationFrame(pollGamepad);
+        }
+        pollGamepad();
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+
+            const keyMap = { 'KeyA': 0, 'KeyB': 1, 'KeyC': 2, 'KeyD': 3 };
+            if (keyMap.hasOwnProperty(e.code)) {
+                const btns = document.querySelectorAll('.answer-btn');
+                if (btns[keyMap[e.code]] && !btns[keyMap[e.code]].disabled) {
+                    btns[keyMap[e.code]].click();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+        document.getElementById('jump-btn').addEventListener('click', jump);
+        document.getElementById('jump-btn').addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+
+        // Initialize
+        resizeCanvas();
+        generateVolcanos();
+        generateSmokeClouds();
+        gameLoop();
+    </script>
+</body>
+</html>

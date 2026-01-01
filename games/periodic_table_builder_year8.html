@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic Table Builder - Year 8 Chemistry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #1a1a1a;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .game-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .game-container {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            align-items: flex-start;
+        }
+
+        .elements-bank {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            min-width: 250px;
+        }
+
+        .elements-bank h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .element-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .element-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: grab;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .element-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .element-card.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .element-card.used {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .element-symbol {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 5px;
+        }
+
+        .element-name {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .element-number {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .periodic-table {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .periodic-table h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .table-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .table-slot {
+            aspect-ratio: 1;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+            min-height: 60px;
+        }
+
+        .table-slot.drag-over {
+            border-color: #fbbf24;
+            background: rgba(251, 191, 36, 0.2);
+            transform: scale(1.1);
+        }
+
+        .table-slot.filled {
+            border: 2px solid #22c55e;
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .table-slot.wrong {
+            border: 2px solid #ef4444;
+            background: rgba(239, 68, 68, 0.2);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .slot-label {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+            position: absolute;
+            top: 2px;
+            left: 4px;
+        }
+
+        .dropped-element {
+            background: white;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dropped-element .element-symbol {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .dropped-element .element-name {
+            font-size: 0.7rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #3b82f6;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            min-height: 30px;
+        }
+
+        .success {
+            color: #fbbf24;
+            font-size: 1.5rem;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 1024px) {
+            .game-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .elements-bank {
+                width: 100%;
+                max-width: 600px;
+            }
+
+            .element-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .table-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚛️ Periodic Table Builder</h1>
+        <p>Drag elements to their correct positions in the periodic table!</p>
+    </div>
+
+    <div class="game-stats">
+        <div class="stat">
+            <div>Placed</div>
+            <div id="placed">0 / 12</div>
+        </div>
+        <div class="stat">
+            <div>Correct</div>
+            <div id="correct">0</div>
+        </div>
+        <div class="stat">
+            <div>Score</div>
+            <div id="score">0</div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div class="elements-bank">
+            <h3>🧪 Elements Bank</h3>
+            <div class="element-list" id="elementsList"></div>
+        </div>
+
+        <div class="periodic-table">
+            <h3>🔬 Periodic Table (Groups 1, 2, 7, 0)</h3>
+            <div class="table-grid" id="tableGrid"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="newGame()">🔄 New Game</button>
+        <button class="btn" onclick="showHints()">💡 Show Hints</button>
+        <button class="btn" onclick="checkAnswers()">✅ Check All</button>
+    </div>
+
+    <div class="message" id="message"></div>
+
+    <script>
+        class PeriodicTableBuilder {
+            constructor() {
+                this.elements = [
+                    // Group 1 - Alkali Metals
+                    { symbol: 'H', name: 'Hydrogen', number: 1, group: 1, period: 1, position: 0 },
+                    { symbol: 'Li', name: 'Lithium', number: 3, group: 1, period: 2, position: 8 },
+                    { symbol: 'Na', name: 'Sodium', number: 11, group: 1, period: 3, position: 16 },
+
+                    // Group 2 - Alkaline Earth Metals
+                    { symbol: 'Be', name: 'Beryllium', number: 4, group: 2, period: 2, position: 9 },
+                    { symbol: 'Mg', name: 'Magnesium', number: 12, group: 2, period: 3, position: 17 },
+                    { symbol: 'Ca', name: 'Calcium', number: 20, group: 2, period: 4, position: 25 },
+
+                    // Group 7 - Halogens
+                    { symbol: 'F', name: 'Fluorine', number: 9, group: 7, period: 2, position: 14 },
+                    { symbol: 'Cl', name: 'Chlorine', number: 17, group: 7, period: 3, position: 22 },
+                    { symbol: 'Br', name: 'Bromine', number: 35, group: 7, period: 4, position: 30 },
+
+                    // Group 0 - Noble Gases
+                    { symbol: 'He', name: 'Helium', number: 2, group: 0, period: 1, position: 7 },
+                    { symbol: 'Ne', name: 'Neon', number: 10, group: 0, period: 2, position: 15 },
+                    { symbol: 'Ar', name: 'Argon', number: 18, group: 0, period: 3, position: 23 }
+                ];
+
+                this.tableSlots = [];
+                this.placedElements = 0;
+                this.correctPlacements = 0;
+                this.score = 0;
+                this.hintsShown = false;
+
+                this.init();
+            }
+
+            init() {
+                this.createElementsBank();
+                this.createPeriodicTable();
+                this.updateStats();
+                this.showMessage("Drag elements from the bank to their correct positions! 🧪");
+            }
+
+            createElementsBank() {
+                const elementsList = document.getElementById('elementsList');
+                elementsList.innerHTML = '';
+
+                // Shuffle elements for random order
+                const shuffledElements = [...this.elements].sort(() => Math.random() - 0.5);
+
+                shuffledElements.forEach(element => {
+                    const elementCard = document.createElement('div');
+                    elementCard.className = 'element-card';
+                    elementCard.draggable = true;
+                    elementCard.dataset.symbol = element.symbol;
+                    elementCard.innerHTML = `
+                        <div class="element-symbol">${element.symbol}</div>
+                        <div class="element-name">${element.name}</div>
+                        <div class="element-number">${element.number}</div>
+                    `;
+
+                    elementCard.addEventListener('dragstart', (e) => this.handleDragStart(e, element));
+                    elementCard.addEventListener('dragend', (e) => this.handleDragEnd(e));
+
+                    elementsList.appendChild(elementCard);
+                });
+            }
+
+            createPeriodicTable() {
+                const tableGrid = document.getElementById('tableGrid');
+                tableGrid.innerHTML = '';
+
+                // Create 4 periods × 8 groups grid (simplified)
+                const periods = 4;
+                const groups = 8;
+
+                for (let period = 1; period <= periods; period++) {
+                    for (let group = 1; group <= groups; group++) {
+                        const slot = document.createElement('div');
+                        slot.className = 'table-slot';
+                        slot.dataset.period = period;
+                        slot.dataset.group = group;
+
+                        const position = (period - 1) * 8 + (group - 1);
+                        slot.dataset.position = position;
+
+                        // Add group labels for reference
+                        if (period === 1) {
+                            const groupLabel = group === 1 ? '1' : group === 2 ? '2' : group === 7 ? '7' : group === 8 ? '0' : '';
+                            if (groupLabel) {
+                                slot.innerHTML = `<div class="slot-label">G${groupLabel}</div>`;
+                            }
+                        }
+
+                        slot.addEventListener('dragover', (e) => this.handleDragOver(e));
+                        slot.addEventListener('drop', (e) => this.handleDrop(e, slot));
+                        slot.addEventListener('dragleave', (e) => this.handleDragLeave(e));
+
+                        tableGrid.appendChild(slot);
+                        this.tableSlots.push(slot);
+                    }
+                }
+            }
+
+            handleDragStart(e, element) {
+                e.dataTransfer.setData('text/plain', JSON.stringify(element));
+                e.target.classList.add('dragging');
+            }
+
+            handleDragEnd(e) {
+                e.target.classList.remove('dragging');
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                e.currentTarget.classList.add('drag-over');
+            }
+
+            handleDragLeave(e) {
+                e.currentTarget.classList.remove('drag-over');
+            }
+
+            handleDrop(e, slot) {
+                e.preventDefault();
+                slot.classList.remove('drag-over');
+
+                const element = JSON.parse(e.dataTransfer.getData('text/plain'));
+                const slotPosition = parseInt(slot.dataset.position);
+
+                // Check if slot is already filled
+                if (slot.classList.contains('filled')) {
+                    this.showMessage("This position is already filled! 🤔");
+                    return;
+                }
+
+                // Create dropped element display
+                const droppedElement = document.createElement('div');
+                droppedElement.className = 'dropped-element';
+                droppedElement.innerHTML = `
+                    <div class="element-symbol">${element.symbol}</div>
+                    <div class="element-name">${element.name}</div>
+                `;
+
+                slot.appendChild(droppedElement);
+                slot.classList.add('filled');
+
+                // Mark original element as used
+                const originalElement = document.querySelector(`[data-symbol="${element.symbol}"]`);
+                originalElement.classList.add('used');
+                originalElement.draggable = false;
+
+                this.placedElements++;
+
+                // Check if placement is correct
+                if (slotPosition === element.position) {
+                    slot.classList.add('correct');
+                    this.correctPlacements++;
+                    this.score += 10;
+                    this.showMessage(`✅ Correct! ${element.name} is in Group ${element.group}!`);
+                } else {
+                    slot.classList.add('wrong');
+                    this.showMessage(`❌ ${element.name} belongs in Group ${element.group}, not here!`);
+                }
+
+                this.updateStats();
+
+                if (this.placedElements === this.elements.length) {
+                    this.gameComplete();
+                }
+            }
+
+            gameComplete() {
+                const percentage = Math.round((this.correctPlacements / this.elements.length) * 100);
+                let message = `🎉 Game Complete! You got ${this.correctPlacements}/${this.elements.length} correct (${percentage}%)`;
+
+                if (percentage === 100) {
+                    message += " - Perfect Score! You're a chemistry genius! 🏆";
+                } else if (percentage >= 80) {
+                    message += " - Great job! You understand periodic trends! 🌟";
+                } else if (percentage >= 60) {
+                    message += " - Good effort! Keep learning about groups and periods! 📚";
+                } else {
+                    message += " - Keep practicing! Remember groups have similar properties! 💪";
+                }
+
+                this.showMessage(message, 'success');
+            }
+
+            updateStats() {
+                document.getElementById('placed').textContent = `${this.placedElements} / ${this.elements.length}`;
+                document.getElementById('correct').textContent = this.correctPlacements;
+                document.getElementById('score').textContent = this.score;
+            }
+
+            showMessage(text, className = '') {
+                const messageElement = document.getElementById('message');
+                messageElement.textContent = text;
+                messageElement.className = `message ${className}`;
+
+                if (className !== 'success') {
+                    setTimeout(() => {
+                        if (messageElement.textContent === text) {
+                            messageElement.textContent = '';
+                        }
+                    }, 4000);
+                }
+            }
+
+            showHints() {
+                if (this.hintsShown) {
+                    this.showMessage("Hints are already showing! Look at the group patterns! 🔍");
+                    return;
+                }
+
+                this.showMessage("💡 Hints: Group 1 (left), Group 2 (second), Group 7 (seventh), Group 0 (right edge)");
+                this.hintsShown = true;
+
+                // Add visual hints
+                this.tableSlots.forEach((slot, index) => {
+                    const correctElement = this.elements.find(el => el.position === index);
+                    if (correctElement && !slot.classList.contains('filled')) {
+                        const hint = document.createElement('div');
+                        hint.className = 'slot-label';
+                        hint.style.cssText = 'bottom: 2px; right: 4px; color: #fbbf24; font-weight: bold;';
+                        hint.textContent = correctElement.symbol;
+                        slot.appendChild(hint);
+
+                        setTimeout(() => {
+                            if (slot.contains(hint)) {
+                                slot.removeChild(hint);
+                            }
+                        }, 5000);
+                    }
+                });
+            }
+
+            checkAnswers() {
+                let correctCount = 0;
+                this.tableSlots.forEach((slot, index) => {
+                    if (slot.classList.contains('filled')) {
+                        const correctElement = this.elements.find(el => el.position === index);
+                        if (correctElement && slot.classList.contains('correct')) {
+                            correctCount++;
+                        }
+                    }
+                });
+
+                const total = this.placedElements;
+                if (total === 0) {
+                    this.showMessage("Place some elements first! 🧪");
+                } else {
+                    this.showMessage(`📊 Current Score: ${correctCount}/${total} correct placements`);
+                }
+            }
+
+            newGame() {
+                this.placedElements = 0;
+                this.correctPlacements = 0;
+                this.score = 0;
+                this.hintsShown = false;
+
+                // Reset all slots
+                this.tableSlots.forEach(slot => {
+                    slot.className = 'table-slot';
+                    slot.innerHTML = '';
+
+                    // Re-add group labels for first row
+                    if (slot.dataset.period === '1') {
+                        const group = parseInt(slot.dataset.group);
+                        const groupLabel = group === 1 ? '1' : group === 2 ? '2' : group === 7 ? '7' : group === 8 ? '0' : '';
+                        if (groupLabel) {
+                            slot.innerHTML = `<div class="slot-label">G${groupLabel}</div>`;
+                        }
+                    }
+                });
+
+                // Reset element cards
+                document.querySelectorAll('.element-card').forEach(card => {
+                    card.classList.remove('used');
+                    card.draggable = true;
+                });
+
+                this.updateStats();
+                this.showMessage("New game started! Drag elements to build the periodic table! ⚛️");
+            }
+        }
+
+        // Initialize game
+        let game;
+
+        function newGame() {
+            game = new PeriodicTableBuilder();
+        }
+
+        function showHints() {
+            game.showHints();
+        }
+
+        function checkAnswers() {
+            game.checkAnswers();
+        }
+
+        // Start the game
+        window.onload = () => {
+            game = new PeriodicTableBuilder();
+        };
+    </script>
+</body>
+</html>

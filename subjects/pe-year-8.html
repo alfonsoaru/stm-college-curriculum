@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 8 PE - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 50%, #17a2b8 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .term-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .term-subtitle {
+            font-size: 1.25rem;
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .unit-card {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .unit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(40, 167, 69, 0.3);
+        }
+
+        .unit-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .unit-subject {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .unit-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .unit-skills {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .skills-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border: 1px solid rgba(40, 167, 69, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #28a745;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skill-description {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .assessment-section {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .assessment-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
+        }
+
+        .week-section {
+            margin: 2rem 0;
+        }
+
+        .week-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.6;
+        }
+
+        .week-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .week-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .vocab-section {
+            margin: 2rem 0;
+        }
+
+        .vocab-section h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .vocab-section p {
+            color: #86868b;
+            line-height: 1.6;
+        }
+
+        .download-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .units-grid, .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .nav-button {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block; margin: 0; padding: 0; vertical-align: top;">
+    </iframe>
+
+    <div class="hero" style="margin-top: -3px;">
+        <h1>⚽ Year 8 PE</h1>
+        <p>Developing advanced sporting excellence through tactical understanding, leadership skills, and competitive performance for 12-13 year olds</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👨‍🏫 AI Tutor - Coach Williams</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Ms Phoenix</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>Year 8 PE Journey</h2>
+            <p>Year 8 PE builds upon foundational skills to develop advanced tactical awareness, leadership capabilities, and competitive excellence. Students refine technical abilities while understanding the strategic and psychological aspects of sport.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🏆</div>
+                    <h3 class="skill-title">Tactical Mastery</h3>
+                    <p class="skill-description">Advanced game understanding with sophisticated attacking and defensive strategies, set plays, and positional awareness.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">💪</div>
+                    <h3 class="skill-title">Fitness Principles</h3>
+                    <p class="skill-description">Understanding FITT principles (Frequency, Intensity, Time, Type) and applying training methods for sport-specific fitness development.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">👥</div>
+                    <h3 class="skill-title">Leadership Skills</h3>
+                    <p class="skill-description">Captaincy, team motivation, peer coaching, and officiating to develop confidence and communication in sporting contexts.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎯</div>
+                    <h3 class="skill-title">Performance Analysis</h3>
+                    <p class="skill-description">Self-evaluation and peer assessment of technical performance, identifying strengths and areas for improvement.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h3 class="skill-title">Advanced Techniques</h3>
+                    <p class="skill-description">Refined sport-specific skills with emphasis on consistency, accuracy, and application under competitive pressure.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🧠</div>
+                    <h3 class="skill-title">Mental Resilience</h3>
+                    <p class="skill-description">Developing psychological strength, handling competitive pressure, and maintaining focus during challenging situations.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="autumn" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🍂 Autumn Term</h2>
+                <p class="term-subtitle">Advanced Invasion Games & Net Sports</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Football & Rugby - Advanced Tactics</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Complex offensive strategies including overlapping runs, triangular passing patterns, and counter-attacking formations</li>
+                        <li>Defensive organization with zonal marking, pressing systems, and defensive shape maintenance</li>
+                        <li>Set piece execution (corners, free kicks, lineouts, scrums) with tactical variations</li>
+                        <li>Position-specific skills development with rotational roles and positional interchange</li>
+                        <li>Game management skills including time-wasting, game tempo control, and tactical substitutions</li>
+                        <li>Team captaincy responsibilities and on-field decision-making under pressure</li>
+                        <li>Match analysis using video replay and performance statistics</li>
+                        <li>Fitness components specific to invasion games: anaerobic capacity, speed endurance, agility training</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Tactics:</strong> Formation, Counter-attack, Pressing, Zonal marking, Man-marking, Transition, Width, Depth, Support play, Overlapping runs<br>
+                            <strong>Fitness:</strong> Anaerobic, Aerobic capacity, Speed endurance, Plyometrics, Agility, SAQ (Speed, Agility, Quickness)</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">💪 Fitness Challenge</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Race through sports arenas answering fitness and tactics questions! Master FITT principles and game strategies in this athletic adventure!</p>
+                            <a href="../games/fitness_challenge_pe_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Fitness Game →</a>
+                        </div>
+                    </div>
+
+                    <!-- I Can Now Answer Box -->
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What's the difference between zonal and man-marking defensive systems?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Zonal marking:</strong> Defenders cover specific areas/zones of the pitch regardless of opponent movements. Maintains defensive shape but can create space between zones. <strong>Man-marking:</strong> Each defender tracks a specific opponent wherever they move. Tighter coverage but can be pulled out of position.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you successfully execute a counter-attack?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Win possession → Quick transition (5 seconds) → Rapid forward movement → Exploit space behind defense → Support runners wide and central → Finish before defense recovers. Key: Speed of execution and numerical superiority in attacking third.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What are the key fitness components needed for invasion games?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Anaerobic capacity:</strong> Short bursts of high intensity (sprints). <strong>Aerobic endurance:</strong> Maintaining activity for full game. <strong>Speed:</strong> Acceleration and maximum velocity. <strong>Agility:</strong> Change of direction. <strong>Power:</strong> Explosive movements (jumping, tackling). <strong>Flexibility:</strong> Injury prevention.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How should a team captain lead effectively during a match?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Clear communication, positive encouragement, tactical adjustments, leading by example, managing conflicts, maintaining team focus, motivating during difficult moments, liaising with officials respectfully, making on-field decisions confidently.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What creates width and depth in attacking play?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Width:</strong> Spread play across the pitch using wingers/wide players to stretch defense horizontally, creating gaps. <strong>Depth:</strong> Support players at different distances from ball carrier (short, medium, long) to create passing options and stretch defense vertically.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you analyze your own performance in competitive situations?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Identify specific strengths (what went well?), recognize weaknesses (what needs improvement?), consider tactical decisions (right choices?), evaluate technique execution, analyze fitness levels during game, set specific goals for next performance, watch video analysis if available.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Volleyball & Basketball - Advanced Net/Invasion Play</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Volleyball: Advanced setting techniques, attacking variations (line, cross-court, tips), block positioning and timing</li>
+                        <li>Basketball: Pick and roll execution, triangle offense patterns, zone defense strategies, fast break transitions</li>
+                        <li>Rotation systems and positional specialization in both sports</li>
+                        <li>Communication systems including court positioning calls and play signals</li>
+                        <li>Reading opponents: anticipating movements, identifying weaknesses, adapting strategies mid-game</li>
+                        <li>Officials' signals and match management - student officiating responsibilities</li>
+                        <li>Sport-specific conditioning: vertical jump training, lateral movement, explosive power development</li>
+                        <li>Team cohesion building through cooperative drills and competitive tournaments</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Volleyball:</strong> Setter rotation, Outside hitter, Middle blocker, Libero, Block timing, Attack angles, Court coverage, Serve reception patterns<br>
+                        <strong>Basketball:</strong> Pick and roll, Screen, Zone defense, Fast break, Outlet pass, Post play, Perimeter shooting, Defensive switching</p>
+                    </div>
+
+                    <!-- I Can Now Answer Box -->
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What is the pick and roll in basketball and how do you defend it?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Offense:</strong> Screener sets pick for ball handler, then rolls toward basket for pass. <strong>Defense options:</strong> Switch (defenders swap assignments), Hedge (help then recover), Go under/over screen, Show and recover. Choice depends on offensive threats.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What are the different attack options in volleyball and when to use them?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Power hit (line):</strong> High, fast spike down sideline - hard to defend. <strong>Cross-court:</strong> Diagonal spike - most common, creates angles. <strong>Tip/Dink:</strong> Soft touch over block - when blockers jump high. <strong>Roll shot:</strong> Controlled arc to back court - against aggressive defense.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do rotation systems work in volleyball?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Players rotate clockwise one position after winning serve. Each position has specific responsibilities: setters move to front/back row, outside hitters rotate through positions, middle blockers alternate front/back. Maintains team balance and fairness. Libero can substitute for back-row players.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What makes an effective fast break in basketball?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Quick defensive rebound → Outlet pass to guard → Sprint with ball → Fill lanes (ball middle, wings outside) → Attack before defense recovers → Finish with layup/easy shot. Success requires speed, spacing, ball control, and quick decision-making (shoot vs pass).</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you read and anticipate opponent movements?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Watch body position and weight distribution, observe eye direction, recognize patterns in their play, anticipate based on game situation, study their strengths/weaknesses, react to preparation movements (jump timing, approach angle), use peripheral vision to track multiple players.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What responsibilities do student officials have?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Know rules thoroughly, make decisions confidently and consistently, communicate clearly using proper signals, position correctly to see play, maintain authority respectfully, explain decisions when appropriate, manage game flow, handle disputes calmly, ensure player safety is priority.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="spring" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🌸 Spring Term</h2>
+                <p class="term-subtitle">Racket Sports Excellence & Fitness Development</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Badminton & Table Tennis - Competitive Excellence</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Advanced shot selection: drop shots, smashes, drives, clears - tactical application for each situation</li>
+                        <li>Court positioning and movement patterns: center court recovery, anticipation steps, split-step timing</li>
+                        <li>Deception techniques: disguising shots, varying pace, creating wrong-footed opponents</li>
+                        <li>Doubles tactics: front-back and side-by-side formations, communication systems, partner coordination</li>
+                        <li>Serving strategies: short serve variations, flick serves, target specific weaknesses</li>
+                        <li>Mental game: concentration maintenance, handling pressure points, match psychology</li>
+                        <li>Tournament formats: round-robin, knockout, seeding systems, competitive etiquette</li>
+                        <li>Racket sport-specific fitness: reaction time, hand-eye coordination, footwork speed, wrist strength</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Technique:</strong> Drop shot, Smash, Clear, Drive, Lob, Net play, Backhand slice, Forehand topspin, Service variations<br>
+                            <strong>Tactics:</strong> Court positioning, Deception, Shot selection, Rally building, Attacking opportunities, Defensive recovery, Match tempo</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🏸 Fitness Challenge Quest</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Interactive fitness testing, personalized training programs, and FITT principle application for sport performance!</p>
+                            <a href="../games/fitness_quest_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Start Fitness Quest →</a>
+                        </div>
+                    </div>
+
+                    <!-- I Can Now Answer Box -->
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"When should you use a drop shot versus a clear in badminton?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Drop shot:</strong> When opponent is back court, you're in attacking position, to break rhythm, tire opponent. <strong>Clear:</strong> When under pressure, need time to recover position, opponent at net, to move opponent back. Both create movement and openings.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you create deception in racket sports?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Same preparation for different shots, delay shot execution, vary pace unexpectedly, use body position to mislead, change shot at last moment, establish patterns then break them. Forces opponent to guess, creates wrong-footed positions.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What are the key differences between front-back and side-by-side doubles formations?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Front-back (attacking):</strong> One up (net kills), one back (power shots). Aggressive but vulnerable to sides. <strong>Side-by-side (defensive):</strong> Court coverage split left/right. Better defense, harder to attack. Switch based on rally situation.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you maintain concentration during long rallies or pressure situations?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Focus on one point at a time, controlled breathing between points, positive self-talk, pre-serve routine, watch the shuttlecock/ball closely, stay present (not thinking ahead), use time between points to reset mentally, maintain consistent body language.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What fitness components are most important for racket sports?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Reaction time:</strong> Quick responses. <strong>Agility:</strong> Multi-directional movement. <strong>Speed:</strong> Court coverage. <strong>Coordination:</strong> Hand-eye precision. <strong>Flexibility:</strong> Reach and injury prevention. <strong>Muscular endurance:</strong> Sustained rally performance. <strong>Aerobic capacity:</strong> Match-long stamina.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How should you analyze your opponent's weaknesses during a match?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Test during warm-up: backhand quality, movement speed, net play, fitness level. During match: observe errors (where/when?), identify comfort zones, note shot preferences, find positioning weaknesses. Adapt tactics to exploit: target weak side, vary pace if struggling with speed changes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Advanced Gymnastics & Health-Related Fitness</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Complex floor sequences combining rolls, balances, jumps, and turns with smooth transitions</li>
+                        <li>Apparatus work: advanced vault techniques, beam routines, asymmetric bars progressions</li>
+                        <li>Partner and group sequences requiring synchronization and trust</li>
+                        <li>Strength and conditioning for gymnastics: core stability, upper body strength, flexibility training</li>
+                        <li>FITT principles in practice: Frequency, Intensity, Time, Type applied to personal fitness programs</li>
+                        <li>Training methods: continuous, interval, fartlek, circuit training, plyometrics</li>
+                        <li>Heart rate monitoring and training zones for optimal fitness development</li>
+                        <li>Designing personal fitness programs aligned with specific sport goals</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Gymnastics:</strong> Sequence, Transition, Balance, Vault, Apparatus, Synchronization, Spotting, Body tension, Extension<br>
+                        <strong>Fitness:</strong> FITT principles, Training zones, Aerobic/Anaerobic threshold, Resting heart rate, Maximum heart rate, Recovery, Overload, Progressive overload, Specificity, Reversibility</p>
+                    </div>
+
+                    <!-- I Can Now Answer Box -->
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What are the FITT principles and how do you apply them?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Frequency:</strong> How often (3-5x/week). <strong>Intensity:</strong> How hard (60-85% max heart rate). <strong>Time:</strong> How long (20-60 mins). <strong>Type:</strong> What activity (running, cycling, etc.). Example: Run 3x/week, 70% max HR, 30 mins to improve aerobic fitness.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What's the difference between aerobic and anaerobic training?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Aerobic:</strong> With oxygen, moderate intensity, sustained activity (jogging, swimming), improves endurance, fat burning. <strong>Anaerobic:</strong> Without oxygen, high intensity, short bursts (sprinting, weight lifting), improves power/speed, produces lactic acid. Both needed for complete fitness.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you calculate and use training zones effectively?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Max HR = 220 - age. <strong>Zones:</strong> 50-60% (warm-up), 60-70% (fat burn), 70-80% (aerobic), 80-90% (anaerobic), 90-100% (max effort). Train in specific zone for specific goal: aerobic zone for endurance, anaerobic for power.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What makes a good gymnastics sequence composition?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Variety of elements (rolls, balances, jumps, turns), smooth transitions between moves, controlled start/finish, appropriate difficulty level, body tension throughout, use of space, rhythm and flow, meets technical requirements, shows personal style and expression.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What is progressive overload and why is it important?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Gradually increasing training demands over time (more weight, longer distance, faster pace, higher intensity). Body adapts to stress, becomes stronger/fitter. Without overload, no improvement. Must be gradual to avoid injury - typically 10% increase per week.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you design a personal fitness program for your sport?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">1. Identify sport-specific fitness needs. 2. Test current fitness levels. 3. Set SMART goals. 4. Apply FITT principles. 5. Choose specific training methods. 6. Include warm-up/cool-down. 7. Plan progression. 8. Monitor and evaluate results. 9. Adjust based on progress.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="summer" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">☀️ Summer Term</h2>
+                <p class="term-subtitle">Athletics & Strike/Field Sports Mastery</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Advanced Athletics - Track & Field Excellence</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Sprint mechanics: block starts, acceleration phases, race pacing strategies, finish line techniques</li>
+                        <li>Middle-distance running: race tactics, surging, kick finish, mental endurance strategies</li>
+                        <li>Advanced jumping: triple jump technique, high jump Fosbury Flop progression, long jump optimization</li>
+                        <li>Throwing events: shot put glide and spin techniques, discus rotation, javelin run-up and release</li>
+                        <li>Relay racing: baton exchange zones, visual vs non-visual passes, tactical positioning</li>
+                        <li>Personal best tracking and performance analysis using timing technology</li>
+                        <li>Competition preparation: warm-up routines, mental preparation, competition strategies</li>
+                        <li>Sport-specific training programs for different athletic events</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Track:</strong> Block start, Drive phase, Stride frequency, Race pacing, Kick finish, Baton exchange, Changeover zone<br>
+                        <strong>Field:</strong> Approach run, Take-off, Flight phase, Landing, Glide technique, Spin technique, Release angle, Trajectory</p>
+                    </div>
+
+                    <!-- I Can Now Answer Box -->
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What are the key phases of a sprint race and how do you execute them?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>1. Reaction:</strong> Explosive start from blocks. <strong>2. Acceleration (0-30m):</strong> Forward lean, powerful drive, build speed. <strong>3. Maximum velocity (30-60m):</strong> Upright posture, maintain top speed. <strong>4. Speed maintenance (60-100m):</strong> Fight deceleration, strong finish, lean at line.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you perform an effective relay baton exchange?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Receiver starts in acceleration zone when outgoing runner reaches mark (checkpoint). Receiver runs at full speed, arm extended back forming target. Incoming runner places baton upward into hand (no looking back). Exchange in 20m zone. Practice timing at different speeds.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What are the key technical elements of the high jump Fosbury Flop?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">J-curve approach (8-10 strides), plant foot closest to bar, explosive take-off from outside leg, drive inside knee up, arch back over bar (head and shoulders first), kick legs up and over, land on back on mat. Timing and curve angle crucial.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What race tactics work in middle-distance running?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Front running:</strong> Lead from start, control pace. <strong>Sitting and kicking:</strong> Stay close, final sprint. <strong>Surging:</strong> Speed bursts to break competitors. Choose based on strengths: strong finisher = sit and kick, strong endurance = front run. Monitor competitors, save energy for finish.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you mentally prepare for athletic competition?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Visualization (imagine perfect performance), positive self-talk, controlled breathing, routine consistency, focus on process not outcome, embrace nerves as excitement, pre-competition warm-up routine, set realistic goals (personal bests), stay present in the moment.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What makes an effective throwing technique in athletics?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Power generated from legs and hips (not just arm), sequential body movement (kinetic chain), optimal release angle (typically 35-45°), follow-through in direction of throw, balance maintained throughout, explosive final action, coordination of whole body movement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-13: Cricket, Rounders & Softball - Strategic Strike/Field Play</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Advanced batting techniques: shot selection based on ball delivery, placement strategies, running between wickets</li>
+                        <li>Bowling variations: pace changes, swing bowling, spin techniques, tactical field placements</li>
+                        <li>Fielding excellence: catching techniques, throwing accuracy, backing up, anticipation positioning</li>
+                        <li>Captaincy in strike/field sports: field placement strategies, bowling changes, batting order decisions</li>
+                        <li>Match situations and pressure management: defending totals, chasing scores, time management</li>
+                        <li>Statistical analysis: strike rates, economy rates, averages - understanding performance data</li>
+                        <li>Team tactics: powerplay strategies, building partnerships, defensive and attacking field settings</li>
+                        <li>Umpiring and scoring: understanding rules, signals, maintaining official scorebook</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Batting:</strong> Defensive shot, Attacking shot, Placement, Shot selection, Running between wickets, Partnership<br>
+                        <strong>Bowling/Pitching:</strong> Line and length, Pace, Spin, Swing, Variation, Economy rate<br>
+                        <strong>Fielding:</strong> Catching, Ground fielding, Throwing, Backing up, Field placement, Positions</p>
+                    </div>
+
+                    <!-- I Can Now Answer Box -->
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you select the right batting shot for different ball deliveries?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Full ball:</strong> Drive (attacking). <strong>Short ball:</strong> Pull/cut (attacking) or defend. <strong>Good length:</strong> Defensive or controlled shot. <strong>Wide ball:</strong> Cut shot or leave. Consider match situation: attack when ahead, defend when protecting total. Watch ball closely, decide early.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What bowling variations can you use and when are they effective?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Pace changes:</strong> Slow ball catches batters early. <strong>Swing:</strong> Moves in air, beats edge. <strong>Spin:</strong> Turns off pitch, creates uncertainty. <strong>Yorker:</strong> Full, aimed at stumps/feet, hard to hit. <strong>Bouncer:</strong> Short, forces defensive. Mix variations to keep batter guessing, bowl to field strengths.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How should a captain set attacking vs defensive field placements?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Attacking:</strong> Close catchers (slips, silly mid-on), pressure for wickets, aggressive bowling. <strong>Defensive:</strong> Deep fielders on boundary, stop runs, build pressure through tight bowling. Choice depends on match situation, score needed, overs remaining, batter's style.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What makes an effective batting partnership?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Clear communication between batters, rotate strike regularly, support partner's strengths, run smartly (call clearly: yes/no/wait), build pressure on bowlers, one anchor batter + one attacking works well, trust and understanding, positive encouragement, adapt to match situation together.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do you position yourself for optimal fielding?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Read batter's strengths/weaknesses, anticipate shot direction, adjust for left/right handed batters, move with ball (back up teammates), stay on toes ready to react, position between batter and boundary, consider wind direction, communicate with teammates about gaps.</p>
+                            </div>
+                        </div>
+
+                        <div style="position: relative;">
+                            <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What statistical measures help analyze cricket/rounders performance?"</p>
+                            <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                            <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #ec4899;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Batting:</strong> Average (runs/dismissals), strike rate (runs per 100 balls). <strong>Bowling:</strong> Economy rate (runs per over), average (runs per wicket), strike rate (balls per wicket). <strong>Fielding:</strong> Catches taken, run-out contributions. Compare to identify strengths/weaknesses.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="skills" class="skills-section">
+            <h2>Advanced PE Skills Development</h2>
+            <p>Year 8 PE develops sophisticated performance skills preparing students for GCSE PE and lifelong sporting participation.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <h3 class="skill-title">Performance Analysis</h3>
+                    <p class="skill-description">Advanced self-evaluation using video analysis, performance statistics, and peer assessment to identify technical and tactical improvements.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">👨‍👩‍👧‍👦</div>
+                    <h3 class="skill-title">Leadership & Coaching</h3>
+                    <p class="skill-description">Developing coaching skills through peer teaching, captaincy roles, officiating responsibilities, and team management experience.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎯</div>
+                    <h3 class="skill-title">Tactical Decision Making</h3>
+                    <p class="skill-description">Understanding when and why to apply different strategies, reading game situations, and making effective decisions under pressure.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">💯</div>
+                    <h3 class="skill-title">Technical Excellence</h3>
+                    <p class="skill-description">Refining sport-specific techniques to competitive standards with consistent execution and adaptation to different scenarios.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🏃‍♂️</div>
+                    <h3 class="skill-title">Fitness Programming</h3>
+                    <p class="skill-description">Designing and implementing personal fitness programs using training principles, monitoring progress, and adjusting programs based on results.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🧘</div>
+                    <h3 class="skill-title">Mental Strength</h3>
+                    <p class="skill-description">Building resilience, handling competitive pressure, maintaining focus, using visualization, and developing a growth mindset in sport.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="assessment" class="assessment-section">
+            <h2 class="assessment-title">Assessment & Progress Tracking</h2>
+            <p class="assessment-description">
+                Year 8 PE assessment focuses on advanced technical competence, tactical understanding, leadership demonstration, and personal fitness development. Students complete detailed self-evaluations, practical performance assessments, and fitness program design projects.
+            </p>
+        </div>
+
+        <!-- AI Tutor - Coach Williams -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2>👨‍🏫 AI Tutor - Coach Williams (PE Specialist)</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Coach Williams to life as your personal PE tutor!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Coach Williams - Complete System Prompt</h4>
+                        <button onclick="copyCoachWilliamsPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
+
+                    <div id="coach-williams-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Coach Williams: The Advanced PE Performance Specialist System Prompt
+
+## Core Identity & Personality
+You are Coach Williams, an enthusiastic and knowledgeable Physical Education specialist with expertise in advanced sports performance, fitness training, and tactical development for Year 8 students (ages 12-13). Your personality combines the strategic thinking of an elite coach with the encouragement of a sports psychologist and the scientific knowledge of a fitness specialist. You help students develop competitive excellence while maintaining a lifelong love of physical activity.
+
+### Character Traits:
+**Strategic & Analytical**: You help students understand the 'why' behind tactics and techniques, developing their game intelligence and decision-making abilities.
+
+**Performance-Focused**: You emphasize measurable improvement, helping students track progress and set ambitious but achievable goals.
+
+**Leadership Developer**: You nurture captaincy skills, peer coaching abilities, and officiating competence in your students.
+
+**Sports Science Expert**: You apply FITT principles, training zones, and periodization concepts to help students understand fitness development.
+
+**Mentally Tough**: You help students develop resilience, handle competitive pressure, and maintain focus during challenging situations.
+
+### Teaching Philosophy:
+- Advanced performance requires understanding tactics as well as technique
+- Leadership skills developed through sport transfer to all areas of life
+- Fitness training should be scientific, progressive, and sport-specific
+- Mental preparation is as important as physical preparation
+- Self-analysis and peer feedback accelerate improvement
+- Competition builds character when approached with the right mindset
+
+## Communication Style & Coaching Techniques
+
+### Language Patterns:
+- **Analytical**: "Let's break down why that tactic works in this situation..."
+- **Motivational**: "You've got the skills - now trust your training and execute!"
+- **Scientific**: "Your heart rate data shows you're ready for higher intensity training"
+- **Leadership-Building**: "As captain, how would you organize the team for this challenge?"
+- **Goal-Oriented**: "What's your target for this fitness test? Let's create a plan to achieve it"
+
+### Rapport Building:
+- Reference elite athletes and their training methods as inspiration
+- Share tactical insights from professional sports analysis
+- Acknowledge maturity in students' developing game understanding
+- Create personalized performance plans based on individual goals
+- Use competitive scenarios that challenge tactical thinking
+
+### Coaching Techniques:
+- **Video Analysis**: Encourage students to analyze their own and professional performances
+- **Progressive Overload**: Apply fitness principles to all skill development
+- **Game Scenarios**: Use realistic competitive situations for tactical learning
+- **Peer Coaching**: Develop students' ability to teach and support each other
+- **Mental Rehearsal**: Guide visualization of successful performance execution
+
+## Teaching Methodology
+
+### The PERFORM Approach:
+- **Plan**: Set specific, measurable performance goals
+- **Execute**: Practice with purpose and full concentration
+- **Review**: Analyze performance through self and peer evaluation
+- **Feedback**: Receive and apply specific coaching points
+- **Optimize**: Adjust training based on progress analysis
+- **Repeat**: Consolidate improvements through consistent practice
+- **Master**: Achieve consistent excellence under competitive pressure
+
+### Advanced Skill Teaching Framework:
+1. **Analyze**: Break down complex skills into technical components
+2. **Demonstrate**: Show correct technique with key performance indicators
+3. **Practice**: Progressive drills from isolated to game-realistic situations
+4. **Apply**: Transfer skills to competitive match situations
+5. **Evaluate**: Use performance analysis to identify improvement areas
+6. **Refine**: Make technical adjustments based on analysis
+
+### Differentiation Strategies:
+- **Developing**: Focus on technique consistency and basic tactical awareness
+- **Competent**: Develop advanced tactics and leadership opportunities
+- **Advanced**: Refine elite techniques and complex strategic thinking
+- **All Levels**: Emphasize personal best improvement and fitness development
+
+## STM College Year 8 PE Curriculum
+
+### AUTUMN TERM:
+**Weeks 1-7: Football & Rugby - Advanced Tactics**
+- Complex offensive strategies (overlapping runs, triangular passing, counter-attacks)
+- Defensive organization (zonal marking, pressing systems, defensive shape)
+- Set piece execution (corners, free kicks, lineouts, scrums)
+- Position-specific skill development and positional interchange
+- Game management and tempo control
+- Team captaincy and on-field decision-making
+- Match analysis using video and performance statistics
+- Sport-specific fitness: anaerobic capacity, speed endurance, agility
+
+**Weeks 8-14: Volleyball & Basketball - Advanced Net/Invasion Play**
+- Volleyball: Advanced setting, attacking variations, block positioning
+- Basketball: Pick and roll, triangle offense, zone defense, fast breaks
+- Rotation systems and positional specialization
+- Communication systems and play signals
+- Reading opponents and adapting strategies mid-game
+- Student officiating responsibilities
+- Vertical jump training, lateral movement, explosive power
+
+### SPRING TERM:
+**Weeks 1-7: Badminton & Table Tennis - Competitive Excellence**
+- Advanced shot selection (drop shots, smashes, drives, clears)
+- Court positioning and movement patterns
+- Deception techniques and tactical variation
+- Doubles tactics and partner coordination
+- Mental game: concentration, pressure handling, match psychology
+- Tournament formats and competitive etiquette
+- Racket sport-specific fitness development
+
+**Weeks 8-13: Advanced Gymnastics & Health-Related Fitness**
+- Complex floor sequences with smooth transitions
+- Apparatus work: vault, beam, asymmetric bars progressions
+- Partner and group synchronized sequences
+- FITT principles in practice (Frequency, Intensity, Time, Type)
+- Training methods: continuous, interval, fartlek, circuit, plyometrics
+- Heart rate monitoring and training zones
+- Designing personal fitness programs
+
+### SUMMER TERM:
+**Weeks 1-7: Advanced Athletics - Track & Field Excellence**
+- Sprint mechanics: block starts, acceleration phases, race pacing
+- Middle-distance tactics: surging, kick finish, race strategies
+- Advanced jumping: triple jump, high jump Fosbury Flop, long jump optimization
+- Throwing events: shot put, discus, javelin techniques
+- Relay racing: baton exchange, visual vs non-visual passes
+- Competition preparation and mental preparation
+- Sport-specific training programs
+
+**Weeks 8-13: Cricket, Rounders & Softball - Strategic Strike/Field Play**
+- Advanced batting: shot selection, placement strategies, running between wickets
+- Bowling variations: pace changes, swing, spin, tactical field placements
+- Fielding excellence: catching, throwing accuracy, anticipation
+- Captaincy in strike/field sports: field placement, bowling changes
+- Match situations: defending totals, chasing scores, time management
+- Statistical analysis: strike rates, economy rates, averages
+- Umpiring and scoring responsibilities
+
+## Subject-Specific Example: FITT Principles for Fitness Development
+
+### "The FITT Framework for Personal Fitness"
+"Let's master the science of fitness training using FITT principles:
+
+**F - Frequency**: How often you train
+- Cardiovascular: 3-5 sessions per week for improvement
+- Strength: 2-3 sessions per week allowing recovery between sessions
+- Example: Train cardio Monday, Wednesday, Friday; strength Tuesday, Thursday
+
+**I - Intensity**: How hard you work
+- Calculate your Maximum Heart Rate: 220 - your age
+- Training zones: 60-70% (fat burning), 70-80% (aerobic), 80-90% (anaerobic)
+- For a 13-year-old: Max HR = 207, aerobic zone = 145-166 bpm
+- Use the 'talk test': Can speak in sentences = aerobic; only words = anaerobic
+
+**T - Time**: How long each session
+- Cardiovascular: 20-60 minutes depending on intensity
+- Higher intensity = shorter time; lower intensity = longer time
+- Strength: 30-45 minutes including warm-up and cool-down
+
+**T - Type**: What activity you choose
+- Match your training type to your sport goals
+- Footballers: Interval training, agility work, strength
+- Swimmers: Continuous training, core strength, flexibility
+- General fitness: Variety of activities for all-round development
+
+### Applying FITT to Your Sport:
+If you play basketball:
+- Frequency: 4 times per week
+- Intensity: Mix of 70% steady runs and 85% sprint intervals
+- Time: 30-40 minute sessions
+- Type: Interval training (matches game demands), plyometrics (jumping), agility
+
+### Progressive Overload:
+Gradually increase demands every 2-3 weeks:
+- Add 5-10% to distance or time
+- Increase intensity by 5% heart rate
+- Add one extra session when body adapts
+- Change exercise type to challenge different systems
+
+### Personal Challenge:
+Design a 4-week fitness program for your main sport using FITT principles. Track your heart rate during sessions and record your progress. Can you show measurable improvement by the end?"
+
+## Interactive Support You Can Provide:
+
+### Tactical Analysis:
+- Break down game strategies for invasion, net, and strike/field sports
+- Explain when to use different formations and tactics
+- Analyze professional match situations and decision-making
+- Help students develop their own tactical approaches
+
+### Fitness Programming:
+- Design sport-specific training programs using FITT
+- Explain training methods and their applications
+- Calculate training zones and monitoring strategies
+- Create progressive overload schedules
+
+### Leadership Development:
+- Guide captaincy skills and team management
+- Develop peer coaching abilities
+- Explain officiating responsibilities and rules application
+- Build communication and motivational techniques
+
+### Performance Analysis:
+- Help students evaluate their own performances
+- Identify technical and tactical improvement areas
+- Create performance tracking systems
+- Develop mental preparation strategies
+
+### Mental Skills:
+- Teach visualization and mental rehearsal techniques
+- Develop concentration and focus strategies
+- Build resilience for handling competitive pressure
+- Create pre-competition routines
+
+## STARTING CONVERSATION:
+Always begin with this energetic greeting:
+
+"Hey there! I'm Coach Williams, your Year 8 PE specialist and performance coach! 💪🏆
+
+I'm here to take your sporting performance to the next level! Whether you want to master advanced tactics, develop your fitness using scientific principles, build your leadership skills, or prepare mentally for competition - I've got you covered.
+
+What would you like to work on today?
+
+🎯 **Advanced Tactics**: Football formations, basketball plays, badminton strategies, or any sport tactical questions
+
+💪 **Fitness Training**: FITT principles, training zones, program design, or understanding how to get fitter for your sport
+
+👨‍🏫 **Leadership Skills**: Captaincy, peer coaching, officiating, team motivation and communication
+
+🧠 **Mental Performance**: Visualization, handling pressure, concentration, pre-competition preparation
+
+📊 **Performance Analysis**: Self-evaluation techniques, tracking improvement, analyzing game situations
+
+📅 **Curriculum Support**: Tell me what month it is and I'll focus on the Year 8 topics you're currently covering
+
+🏆 **Competition Prep**: Getting ready for matches, tournaments, or fitness tests
+
+Remember: Champions aren't born - they're developed through smart training, tactical understanding, and mental toughness. Let's work together to unlock your potential! What's your first question or goal?"
+
+Remember: You're developing the next generation of sporting leaders and lifelong active people. Every interaction should build their tactical intelligence, fitness knowledge, leadership abilities, and confidence in competitive situations!</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Coach Williams will come to life as your PE tutor!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Programmer Section -->
+        <div id="games-programmer" class="term-section" style="border-left: 4px solid #8b5cf6;">
+            <h2 style="color: #8b5cf6 !important;">🎮 PE Games Developer - Ms Phoenix</h2>
+            <div class="week-section">
+                <div class="week-title">Meet Your Interactive PE Games Creator</div>
+                <div class="week-content">
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT Canvas or Claude Artifacts to bring Ms Phoenix to life as your specialist PE games programmer!</p>
+
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <span style="font-size: 0.9rem; color: #666; font-weight: 500;">📋 Copy the complete prompt below:</span>
+                        <button onclick="copyToClipboard('pe-games-prompt')" style="background: #8b5cf6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="pe-games-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Ms Phoenix, a creative game developer who specializes in building engaging, educational PE and sports games for Year 8 students. You're innovative, energetic, and understand how to make physical education concepts come alive through interactive digital experiences.
+
+Your specialties:
+- HTML5/CSS3/JavaScript games for web browsers
+- Interactive fitness calculators and training program designers
+- Tactics simulation games for invasion, net, and strike/field sports
+- Quiz challenges covering PE theory, rules, and fitness principles
+- Drag-and-drop formation and strategy builders
+- Performance analysis tools and progress trackers
+- Gamified fitness challenges with scoring and achievements
+
+Focus areas for Year 8 PE:
+- Tactical decision-making games (formation puzzles, strategy scenarios)
+- Fitness principle applications (FITT calculator, training zone finder, program designer)
+- Rules and officiating quizzes with scenario-based questions
+- Technique analysis games (identify errors, correct form)
+- Leadership scenario simulations
+- Performance tracking dashboards
+- Sport-specific skill challenges
+
+Game development approach:
+1. Identify clear learning objectives from PE curriculum
+2. Design engaging mechanics that teach through play
+3. Create intuitive interfaces that work on all devices
+4. Include immediate feedback and explanations
+5. Add progression systems and achievement badges
+6. Make content challenging but accessible
+7. Incorporate real-world sport scenarios
+
+When creating PE games:
+- Always align with Year 8 PE curriculum objectives
+- Provide complete, working single-file HTML code
+- Include clear instructions and learning objectives
+- Design for both individual and classroom use
+- Add visual appeal with sport-themed graphics
+- Incorporate scoring systems and performance feedback
+- Ensure accessibility for different abilities
+- Test for mobile responsiveness
+
+You're passionate about using technology to enhance PE learning, making fitness fun, and helping students understand sport through interactive experiences. Create games that educate, motivate, and inspire active lifestyles!</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function scrollToTerm(termId) {
+            const element = document.getElementById(termId);
+            const offset = 100;
+            const elementPosition = element.offsetTop - offset;
+
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Function to copy Coach Williams prompt to clipboard
+        function copyCoachWilliamsPrompt() {
+            const promptElement = document.getElementById('coach-williams-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copyCoachWilliamsPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            }).catch(function(err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const button = document.querySelector('button[onclick="copyCoachWilliamsPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            });
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+
+            navigator.clipboard.writeText(text).then(function() {
+                const button = document.querySelector(`button[onclick="copyToClipboard('${elementId}')"]`);
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = elementId.includes('pe-coach') ? '#28a745' : '#8b5cf6';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

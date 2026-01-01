@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Algorithm Detective: Code Breaker</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        :root {
+            --neon-gold: #ffd700;
+            --neon-purple: #a855f7;
+            --neon-green: #00ff41;
+            --neon-red: #ff3131;
+            --neon-cyan: #00f3ff;
+            --bg-dark: #0a0a1a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: var(--bg-dark);
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            touch-action: none;
+        }
+
+        #gameCanvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hud-top {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            text-shadow: 0 0 10px var(--neon-gold);
+        }
+
+        .score-box {
+            font-size: 1.5rem;
+            color: var(--neon-gold);
+        }
+
+        .level-box {
+            font-size: 1.5rem;
+            color: var(--neon-purple);
+        }
+
+        .bar-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--neon-gold);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .knowledge-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--neon-gold);
+            box-shadow: 0 0 15px var(--neon-gold);
+            transition: width 0.2s;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--neon-gold);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px var(--neon-gold);
+        }
+
+        .modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 26, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .feedback-msg {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.27);
+            z-index: 200;
+            white-space: pre-line;
+            text-transform: uppercase;
+        }
+
+        .feedback-msg.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .feedback-correct {
+            color: var(--neon-green);
+            text-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-green);
+        }
+
+        .feedback-incorrect {
+            color: var(--neon-red);
+            text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--neon-red);
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            background: linear-gradient(to right, var(--neon-gold), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--neon-gold);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px var(--neon-gold);
+        }
+
+        .btn:hover {
+            background: var(--neon-gold);
+            color: black;
+            box-shadow: 0 0 30px var(--neon-gold);
+        }
+
+        .quiz-content {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 40px;
+            border: 2px solid var(--neon-purple);
+            border-radius: 20px;
+            max-width: 90%;
+            width: 700px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(168, 85, 247, 0.3);
+        }
+
+        .question-badge {
+            background: linear-gradient(135deg, var(--neon-gold), var(--neon-purple));
+            color: black;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .question-context {
+            color: var(--neon-purple);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--neon-gold);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--neon-purple);
+            padding: 15px 20px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 10px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-btn:hover {
+            background: var(--neon-purple);
+            color: white;
+            border-color: var(--neon-gold);
+            transform: translateY(-2px);
+        }
+
+        .option-label {
+            background: var(--neon-gold);
+            color: black;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .option-text {
+            flex: 1;
+        }
+
+        .read-btn {
+            background: var(--neon-cyan);
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .read-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        .sound-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid var(--neon-gold);
+            color: var(--neon-gold);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 150;
+            pointer-events: auto;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .quiz-content { padding: 20px; }
+            .question-text { font-size: 1.1rem; }
+            .option-btn { font-size: 0.85rem; padding: 12px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="ui-layer">
+        <div class="hud-top">
+            <div class="score-box">SCORE: <span id="scoreVal">0</span></div>
+            <div class="level-box">CASE: <span id="levelVal">1</span></div>
+        </div>
+
+        <button class="sound-toggle" id="soundToggle" onclick="toggleSound()">🔊 SOUND ON</button>
+
+        <div class="bar-label">DECRYPTION PROGRESS</div>
+        <div class="bar-container">
+            <div id="knowledgeBar" class="knowledge-bar"></div>
+        </div>
+
+        <div id="feedbackMsg" class="feedback-msg"></div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="modal active">
+        <h1>🔍 Algorithm Detective</h1>
+        <p style="color: #aaa; margin-bottom: 30px; text-align: center; max-width: 550px; line-height: 1.6;">
+            You're a Code Breaker investigating the Digital Mystery!<br><br>
+            Collect <strong style="color: #ffd700;">Clue Orbs (Gold)</strong> to decode the case.<br>
+            Shoot <strong style="color: #ff3131;">Bug Asteroids (Red)</strong> to survive.<br>
+            Complete <strong style="color: #a855f7;">Algorithm Quizzes</strong> to crack each case!
+        </p>
+        <button class="btn" onclick="startGame()">Begin Investigation</button>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="modal">
+        <div class="quiz-content">
+            <div class="question-badge" id="questionBadge">Q1/12</div>
+            <div class="question-context" id="questionContext">COMPUTATIONAL THINKING</div>
+            <h2 id="quizQuestion" class="question-text">Loading question...</h2>
+            <div id="quizOptions" class="options-grid"></div>
+            <button class="read-btn" onclick="rereadQuestion()">🔊 Read Again</button>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+        <h1 style="color: var(--neon-red)">CASE FAILED</h1>
+        <p style="font-size: 1.5rem; margin-bottom: 20px;">Final Score: <span id="finalScore">0</span></p>
+        <button class="btn" onclick="resetGame()">Reopen Case</button>
+    </div>
+
+    <!-- Win Screen -->
+    <div id="winModal" class="modal">
+        <h1 style="color: var(--neon-green)">🏆 CASE CLOSED!</h1>
+        <p style="font-size: 1.3rem; margin-bottom: 10px;">You've mastered Algorithms & Programming!</p>
+        <p style="font-size: 1.5rem; margin-bottom: 20px;">Final Score: <span id="winScore">0</span></p>
+        <button class="btn" onclick="resetGame()">New Case</button>
+    </div>
+
+<script>
+    // =============================================
+    // ALGORITHM QUESTIONS - Year 7 CS Curriculum
+    // =============================================
+    const questionBank = [
+        {
+            q: "What is an ALGORITHM?",
+            context: "Computational Thinking",
+            options: ["Step-by-step instructions to solve a problem", "A type of computer hardware", "A programming language", "A social media platform"],
+            a: 0,
+            explanation: "An algorithm is a precise, step-by-step set of instructions designed to solve a problem or complete a task."
+        },
+        {
+            q: "In a flowchart, what shape represents a DECISION?",
+            context: "Algorithm Design",
+            options: ["Diamond", "Rectangle", "Oval", "Arrow"],
+            a: 0,
+            explanation: "A diamond shape in flowcharts represents a decision point - a yes/no question that determines which path to take."
+        },
+        {
+            q: "What shape represents START and STOP in a flowchart?",
+            context: "Flowchart Symbols",
+            options: ["Oval or rounded rectangle", "Square", "Diamond", "Triangle"],
+            a: 0,
+            explanation: "Oval or rounded rectangle shapes mark the beginning and end of a flowchart."
+        },
+        {
+            q: "What does SEQUENCE mean in programming?",
+            context: "Programming Concepts",
+            options: ["Instructions run in order, one after another", "Instructions run randomly", "Instructions run all at once", "Instructions run backwards"],
+            a: 0,
+            explanation: "Sequence means instructions are executed one after another in a specific order."
+        },
+        {
+            q: "What does SELECTION mean in programming?",
+            context: "Programming Concepts",
+            options: ["Making decisions with IF/THEN", "Selecting text on screen", "Choosing a colour", "Picking a file"],
+            a: 0,
+            explanation: "Selection means making decisions in code using IF/THEN statements."
+        },
+        {
+            q: "What does ITERATION mean in programming?",
+            context: "Programming Concepts",
+            options: ["Repeating instructions using loops", "Writing code once", "Deleting code", "Reading instructions"],
+            a: 0,
+            explanation: "Iteration means repeating a set of instructions multiple times using loops."
+        },
+        {
+            q: "What does DECOMPOSITION mean?",
+            context: "Computational Thinking",
+            options: ["Breaking a big problem into smaller parts", "Composing music", "Deleting old files", "Combining things together"],
+            a: 0,
+            explanation: "Decomposition means breaking down a complex problem into smaller, more manageable parts."
+        },
+        {
+            q: "What does ABSTRACTION mean?",
+            context: "Computational Thinking",
+            options: ["Focusing on important details, hiding complexity", "Creating art", "Adding more details", "Making things concrete"],
+            a: 0,
+            explanation: "Abstraction means focusing on important information and hiding unnecessary details."
+        },
+        {
+            q: "What is PATTERN RECOGNITION?",
+            context: "Computational Thinking",
+            options: ["Finding similarities in problems", "Designing fabric patterns", "Recording patterns", "Breaking patterns"],
+            a: 0,
+            explanation: "Pattern recognition is identifying similarities or regularities in data or problems."
+        },
+        {
+            q: "What does DEBUGGING mean?",
+            context: "Problem Solving",
+            options: ["Finding and fixing errors in code", "Adding insects to programs", "Removing features", "Writing new code"],
+            a: 0,
+            explanation: "Debugging is the process of finding and fixing errors (bugs) in your code."
+        },
+        {
+            q: "What is a VARIABLE in programming?",
+            context: "Programming Basics",
+            options: ["A named container that stores data", "A fixed number", "A type of loop", "A flowchart symbol"],
+            a: 0,
+            explanation: "A variable is like a labelled box that stores information which can change."
+        },
+        {
+            q: "What is the correct order for making a cup of tea?",
+            context: "Algorithm Sequencing",
+            options: ["Boil water, add teabag, pour water, remove bag", "Pour water, boil, add teabag, drink", "Drink tea, boil water, add milk", "Add milk, boil water, remove bag"],
+            a: 0,
+            explanation: "Algorithms must be in the correct sequence - boil water first, then add teabag, pour water, remove bag."
+        }
+    ];
+
+    // Shuffle answers for each question
+    questionBank.forEach(q => {
+        const correctAnswer = q.options[q.a];
+        const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+        q.options = shuffled;
+        q.a = shuffled.indexOf(correctAnswer);
+    });
+
+    // =============================================
+    // SOUND EFFECTS (Web Audio API)
+    // =============================================
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+    }
+
+    function playSound(type) {
+        if (!soundEnabled || !audioCtx) return;
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        switch(type) {
+            case 'shoot':
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+                break;
+            case 'collect':
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(659, audioCtx.currentTime + 0.1);
+                osc.frequency.setValueAtTime(784, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+                break;
+            case 'explosion':
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.2);
+                break;
+            case 'correct':
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(659, audioCtx.currentTime + 0.15);
+                osc.frequency.setValueAtTime(784, audioCtx.currentTime + 0.3);
+                osc.frequency.setValueAtTime(1047, audioCtx.currentTime + 0.45);
+                gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.6);
+                break;
+            case 'wrong':
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+                break;
+            case 'warp':
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(2000, audioCtx.currentTime + 1);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 1);
+                break;
+            case 'gameover':
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.8);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.8);
+                break;
+        }
+    }
+
+    function toggleSound() {
+        soundEnabled = !soundEnabled;
+        document.getElementById('soundToggle').textContent = soundEnabled ? '🔊 SOUND ON' : '🔇 SOUND OFF';
+    }
+
+    // =============================================
+    // TEXT-TO-SPEECH
+    // =============================================
+    let isSpeaking = false;
+    const answerLabels = ['A', 'B', 'C', 'D'];
+
+    function speak(text, callback) {
+        if (!('speechSynthesis' in window)) {
+            if (callback) callback();
+            return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+
+        const voices = speechSynthesis.getVoices();
+        const englishVoice = voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en'));
+        if (englishVoice) utterance.voice = englishVoice;
+
+        utterance.onend = () => { if (callback) callback(); };
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakQuestion(question) {
+        if (!('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        isSpeaking = true;
+
+        const queue = [];
+
+        // Question
+        queue.push({ text: question.q, rate: 0.9 });
+
+        // Options with A, B, C, D
+        question.options.forEach((opt, i) => {
+            queue.push({ text: answerLabels[i], rate: 1.0 });
+            queue.push({ text: opt, rate: 0.85 });
+        });
+
+        let i = 0;
+        function playNext() {
+            if (i < queue.length) {
+                const item = queue[i];
+                const utterance = new SpeechSynthesisUtterance(item.text);
+                utterance.lang = 'en-GB';
+                utterance.rate = item.rate;
+
+                const voices = speechSynthesis.getVoices();
+                const englishVoice = voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en'));
+                if (englishVoice) utterance.voice = englishVoice;
+
+                utterance.onend = () => { i++; playNext(); };
+                speechSynthesis.speak(utterance);
+            } else {
+                isSpeaking = false;
+            }
+        }
+        playNext();
+    }
+
+    function speakFeedback(text, callback) {
+        speechSynthesis.cancel();
+        speak(text, callback);
+    }
+
+    // Initialize voices
+    if ('speechSynthesis' in window) {
+        speechSynthesis.getVoices();
+        speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+    }
+
+    // =============================================
+    // GAME ENGINE
+    // =============================================
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // UI Elements
+    const startScreen = document.getElementById('startScreen');
+    const quizModal = document.getElementById('quizModal');
+    const gameOverModal = document.getElementById('gameOverModal');
+    const winModal = document.getElementById('winModal');
+    const scoreEl = document.getElementById('scoreVal');
+    const levelEl = document.getElementById('levelVal');
+    const finalScoreEl = document.getElementById('finalScore');
+    const winScoreEl = document.getElementById('winScore');
+    const knowledgeBar = document.getElementById('knowledgeBar');
+    const quizQuestionEl = document.getElementById('quizQuestion');
+    const quizOptionsEl = document.getElementById('quizOptions');
+    const questionBadgeEl = document.getElementById('questionBadge');
+    const questionContextEl = document.getElementById('questionContext');
+    const feedbackEl = document.getElementById('feedbackMsg');
+
+    // State
+    let gameLoopId;
+    let score = 0;
+    let level = 1;
+    let knowledge = 0;
+    const knowledgeMax = 100;
+    let isGameRunning = false;
+    let isPaused = false;
+    let isWarping = false;
+    let frames = 0;
+    let questionIndex = 0;
+    let currentQuestion = null;
+    const maxLevel = 3;
+
+    // Entities
+    let player;
+    let projectiles = [];
+    let enemies = [];
+    let particles = [];
+    let powerups = [];
+    let stars = [];
+
+    // Screen Dimensions
+    let canvasWidth = window.innerWidth;
+    let canvasHeight = window.innerHeight;
+
+    function resize() {
+        canvasWidth = window.innerWidth;
+        canvasHeight = window.innerHeight;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // =============================================
+    // INPUT HANDLING
+    // =============================================
+    const keys = {
+        ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false,
+        w: false, a: false, s: false, d: false, " ": false
+    };
+
+    const mouse = { x: canvasWidth / 2, y: canvasHeight / 2, isDown: false };
+
+    window.addEventListener('keydown', (e) => {
+        if(keys.hasOwnProperty(e.key)) keys[e.key] = true;
+        if(e.key === " " && isGameRunning && !isPaused) player.shoot();
+
+        // Answer keys A, B, C, D during quiz
+        if (isPaused && quizModal.classList.contains('active')) {
+            const keyMap = { 'a': 0, 'b': 1, 'c': 2, 'd': 3 };
+            if (keyMap.hasOwnProperty(e.key.toLowerCase())) {
+                const btns = document.querySelectorAll('.option-btn');
+                if (btns[keyMap[e.key.toLowerCase()]]) {
+                    btns[keyMap[e.key.toLowerCase()]].click();
+                }
+            }
+        }
+    });
+
+    window.addEventListener('keyup', (e) => {
+        if(keys.hasOwnProperty(e.key)) keys[e.key] = false;
+    });
+
+    // Touch/Mouse Controls
+    window.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+        mouse.isDown = true;
+    }, { passive: false });
+
+    window.addEventListener('touchstart', (e) => {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+        mouse.isDown = true;
+        if(isGameRunning && !isPaused) player.shoot();
+    });
+
+    window.addEventListener('touchend', () => mouse.isDown = false);
+
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    // =============================================
+    // CLASSES
+    // =============================================
+    class Player {
+        constructor() {
+            this.x = canvasWidth / 2;
+            this.y = canvasHeight - 100;
+            this.radius = 22;
+            this.color = '#ffd700';
+            this.velocity = { x: 0, y: 0 };
+            this.speed = 7;
+            this.friction = 0.92;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+
+            // Draw Detective Ship (magnifying glass shape)
+            ctx.beginPath();
+            ctx.arc(0, -5, 15, 0, Math.PI * 2);
+            ctx.strokeStyle = this.color;
+            ctx.lineWidth = 4;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = this.color;
+            ctx.stroke();
+
+            // Handle
+            ctx.beginPath();
+            ctx.moveTo(10, 10);
+            ctx.lineTo(18, 22);
+            ctx.lineWidth = 5;
+            ctx.stroke();
+
+            // Inner glow
+            ctx.beginPath();
+            ctx.arc(0, -5, 10, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
+            ctx.fill();
+
+            // Engine trail
+            if (Math.random() > 0.5) {
+                ctx.beginPath();
+                ctx.moveTo(-5, 20);
+                ctx.lineTo(0, 30 + Math.random() * 10);
+                ctx.lineTo(5, 20);
+                ctx.fillStyle = isWarping ? '#a855f7' : '#ff9900';
+                ctx.fill();
+            }
+
+            ctx.restore();
+        }
+
+        update() {
+            if (keys.ArrowLeft || keys.a) this.velocity.x -= 1;
+            if (keys.ArrowRight || keys.d) this.velocity.x += 1;
+            if (keys.ArrowUp || keys.w) this.velocity.y -= 1;
+            if (keys.ArrowDown || keys.s) this.velocity.y += 1;
+
+            if (mouse.isDown) {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                if (Math.abs(dx) > 5) this.velocity.x += dx * 0.05;
+                if (Math.abs(dy) > 5) this.velocity.y += dy * 0.05;
+            }
+
+            this.x += this.velocity.x;
+            this.y += this.velocity.y;
+            this.velocity.x *= this.friction;
+            this.velocity.y *= this.friction;
+
+            if (this.x < this.radius) this.x = this.radius;
+            if (this.x > canvasWidth - this.radius) this.x = canvasWidth - this.radius;
+            if (this.y < this.radius) this.y = this.radius;
+            if (this.y > canvasHeight - this.radius) this.y = canvasHeight - this.radius;
+
+            this.draw();
+        }
+
+        shoot() {
+            projectiles.push(new Projectile(this.x, this.y - this.radius));
+            playSound('shoot');
+        }
+    }
+
+    class Projectile {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.radius = 5;
+            this.color = '#ffd700';
+            this.velocity = 15;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = this.color;
+            ctx.fill();
+        }
+
+        update() {
+            this.y -= this.velocity;
+            this.draw();
+        }
+    }
+
+    class Enemy {
+        constructor() {
+            this.radius = Math.random() * 20 + 15;
+            this.x = Math.random() * (canvasWidth - this.radius * 2) + this.radius;
+            this.y = -this.radius;
+            this.color = '#ff3131';
+            this.velocity = Math.random() * 2 + 2 + (level * 0.5);
+            this.vertices = Math.floor(Math.random() * 5) + 3;
+            this.angle = 0;
+            this.spin = (Math.random() - 0.5) * 0.1;
+            this.label = ['BUG', 'ERR', '???', 'NULL'][Math.floor(Math.random() * 4)];
+        }
+
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.strokeStyle = this.color;
+            ctx.lineWidth = 2;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = this.color;
+
+            ctx.beginPath();
+            for (let i = 0; i < this.vertices; i++) {
+                const theta = (i / this.vertices) * Math.PI * 2;
+                const rx = Math.cos(theta) * this.radius;
+                const ry = Math.sin(theta) * this.radius;
+                if (i === 0) ctx.moveTo(rx, ry);
+                else ctx.lineTo(rx, ry);
+            }
+            ctx.closePath();
+            ctx.stroke();
+
+            ctx.fillStyle = 'rgba(255, 49, 49, 0.2)';
+            ctx.fill();
+
+            // Label
+            ctx.rotate(-this.angle);
+            ctx.fillStyle = this.color;
+            ctx.font = 'bold 10px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText(this.label, 0, 4);
+
+            ctx.restore();
+        }
+
+        update() {
+            this.y += this.velocity;
+            this.angle += this.spin;
+            this.draw();
+        }
+    }
+
+    class PowerUp {
+        constructor() {
+            this.radius = 14;
+            this.x = Math.random() * (canvasWidth - this.radius * 2) + this.radius;
+            this.y = -this.radius;
+            this.color = '#ffd700';
+            this.velocity = 2.5;
+            this.pulse = 0;
+        }
+
+        draw() {
+            this.pulse += 0.1;
+            const glow = Math.sin(this.pulse) * 5 + 12;
+
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.shadowBlur = glow;
+            ctx.shadowColor = this.color;
+            ctx.fill();
+
+            // Magnifying glass icon
+            ctx.strokeStyle = '#0a0a1a';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(this.x - 2, this.y - 2, 5, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(this.x + 2, this.y + 2);
+            ctx.lineTo(this.x + 5, this.y + 5);
+            ctx.stroke();
+        }
+
+        update() {
+            this.y += this.velocity;
+            this.draw();
+        }
+    }
+
+    class Particle {
+        constructor(x, y, color) {
+            this.x = x;
+            this.y = y;
+            this.radius = Math.random() * 3;
+            this.color = color;
+            this.velocity = {
+                x: (Math.random() - 0.5) * 8,
+                y: (Math.random() - 0.5) * 8
+            };
+            this.alpha = 1;
+            this.decay = Math.random() * 0.03 + 0.01;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        update() {
+            this.x += this.velocity.x;
+            this.y += this.velocity.y;
+            this.alpha -= this.decay;
+            this.draw();
+        }
+    }
+
+    class Star {
+        constructor() {
+            this.x = Math.random() * canvasWidth;
+            this.y = Math.random() * canvasHeight;
+            this.size = Math.random() * 2;
+            this.speed = Math.random() * 1 + 0.5;
+        }
+
+        update() {
+            if (isWarping) {
+                this.y += 60;
+                if (this.y > canvasHeight) {
+                    this.y = 0;
+                    this.x = Math.random() * canvasWidth;
+                }
+                ctx.fillStyle = `rgba(${200 + Math.random()*55}, 200, 255, 0.8)`;
+                ctx.fillRect(this.x, this.y - 50, this.size, 100);
+                return;
+            }
+
+            if (isPaused) {
+                this.y += 0.2;
+                if (this.y > canvasHeight) {
+                    this.y = 0;
+                    this.x = Math.random() * canvasWidth;
+                }
+                ctx.fillStyle = 'rgba(255, 215, 0, 0.2)';
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+                return;
+            }
+
+            this.y += this.speed * (1 + (level * 0.1));
+
+            if (this.y > canvasHeight) {
+                this.y = 0;
+                this.x = Math.random() * canvasWidth;
+            }
+
+            ctx.fillStyle = `rgba(255, 215, 0, ${Math.random() * 0.4 + 0.2})`;
+            ctx.fillRect(this.x, this.y, this.size, this.size);
+        }
+    }
+
+    // =============================================
+    // GAME FUNCTIONS
+    // =============================================
+    function spawnEnemies() {
+        if (frames % Math.max(25, 90 - (level * 8)) === 0) {
+            enemies.push(new Enemy());
+        }
+    }
+
+    function spawnPowerUps() {
+        if (frames % 150 === 0) {
+            powerups.push(new PowerUp());
+        }
+    }
+
+    function createExplosion(x, y, color) {
+        for (let i = 0; i < 15; i++) {
+            particles.push(new Particle(x, y, color));
+        }
+        playSound('explosion');
+    }
+
+    function updateScore(val) {
+        score += val;
+        if (score < 0) score = 0;
+        scoreEl.innerText = score;
+    }
+
+    function updateKnowledge(val) {
+        knowledge += val;
+        if (knowledge > knowledgeMax) knowledge = knowledgeMax;
+
+        const percentage = (knowledge / knowledgeMax) * 100;
+        knowledgeBar.style.width = `${percentage}%`;
+
+        if (knowledge >= knowledgeMax) {
+            triggerQuiz();
+        }
+    }
+
+    function triggerQuiz() {
+        isPaused = true;
+
+        currentQuestion = questionBank[questionIndex % questionBank.length];
+
+        questionBadgeEl.textContent = `Q${(questionIndex % questionBank.length) + 1}/${questionBank.length}`;
+        questionContextEl.textContent = currentQuestion.context.toUpperCase();
+        quizQuestionEl.textContent = currentQuestion.q;
+        quizOptionsEl.innerHTML = '';
+
+        currentQuestion.options.forEach((opt, index) => {
+            const btn = document.createElement('div');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span class="option-label">${answerLabels[index]}</span><span class="option-text">${opt}</span>`;
+            btn.onclick = () => handleQuizAnswer(index === currentQuestion.a, currentQuestion.explanation);
+            quizOptionsEl.appendChild(btn);
+        });
+
+        quizModal.classList.add('active');
+
+        // Speak the question
+        setTimeout(() => speakQuestion(currentQuestion), 300);
+    }
+
+    function rereadQuestion() {
+        if (currentQuestion) {
+            speakQuestion(currentQuestion);
+        }
+    }
+
+    function showFeedback(text, isGood) {
+        feedbackEl.innerText = text;
+        feedbackEl.className = isGood ? 'feedback-msg feedback-correct show' : 'feedback-msg feedback-incorrect show';
+
+        setTimeout(() => {
+            feedbackEl.className = 'feedback-msg';
+        }, 2000);
+    }
+
+    function handleQuizAnswer(isCorrect, explanation) {
+        quizModal.classList.remove('active');
+        speechSynthesis.cancel();
+
+        if (isCorrect) {
+            playSound('correct');
+            showFeedback("CORRECT!\nDECRYPTING...", true);
+
+            speakFeedback("Correct! " + explanation, () => {
+                speakFeedback("Next question!", null);
+            });
+
+            isWarping = true;
+            playSound('warp');
+
+            setTimeout(() => {
+                isWarping = false;
+                level++;
+                levelEl.innerText = level;
+                updateScore(1000);
+                questionIndex++;
+
+                if (level > maxLevel) {
+                    winGame();
+                    return;
+                }
+
+                enemies = [];
+                projectiles = [];
+                powerups = [];
+
+                knowledge = 0;
+                knowledgeBar.style.width = '0%';
+
+                isPaused = false;
+            }, 2500);
+
+        } else {
+            playSound('wrong');
+            showFeedback("INCORRECT\nSYSTEM DAMAGED", false);
+
+            const correctAnswer = currentQuestion.options[currentQuestion.a];
+            speakFeedback("Wrong! The answer is: " + correctAnswer + ". " + explanation, null);
+
+            updateScore(-500);
+            knowledge = Math.max(0, knowledge - 30);
+            knowledgeBar.style.width = `${(knowledge/knowledgeMax)*100}%`;
+
+            canvas.style.transform = "translateX(5px)";
+            setTimeout(() => canvas.style.transform = "translateX(0)", 100);
+
+            questionIndex++;
+            isPaused = false;
+        }
+    }
+
+    function checkCollisions() {
+        projectiles.forEach((proj, pIndex) => {
+            enemies.forEach((enemy, eIndex) => {
+                const dist = Math.hypot(proj.x - enemy.x, proj.y - enemy.y);
+                if (dist - enemy.radius - proj.radius < 1) {
+                    createExplosion(enemy.x, enemy.y, enemy.color);
+                    setTimeout(() => {
+                        enemies.splice(eIndex, 1);
+                        projectiles.splice(pIndex, 1);
+                    }, 0);
+                    updateScore(100);
+                }
+            });
+        });
+
+        enemies.forEach((enemy) => {
+            const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
+            if (dist - enemy.radius - player.radius < 1) {
+                gameOver();
+            }
+        });
+
+        powerups.forEach((p, index) => {
+            const dist = Math.hypot(player.x - p.x, player.y - p.y);
+            if (dist - p.radius - player.radius < 1) {
+                powerups.splice(index, 1);
+                updateKnowledge(25);
+                updateScore(50);
+                createExplosion(p.x, p.y, p.color);
+                playSound('collect');
+            }
+        });
+    }
+
+    function gameOver() {
+        isGameRunning = false;
+        speechSynthesis.cancel();
+        playSound('gameover');
+        finalScoreEl.innerText = score;
+        gameOverModal.classList.add('active');
+    }
+
+    function winGame() {
+        isGameRunning = false;
+        speechSynthesis.cancel();
+        playSound('correct');
+        winScoreEl.innerText = score;
+        winModal.classList.add('active');
+    }
+
+    function resetGame() {
+        score = 0;
+        level = 1;
+        knowledge = 0;
+        frames = 0;
+        questionIndex = 0;
+        scoreEl.innerText = "0";
+        levelEl.innerText = "1";
+        knowledgeBar.style.width = "0%";
+        isWarping = false;
+
+        player = new Player();
+        projectiles = [];
+        enemies = [];
+        particles = [];
+        powerups = [];
+
+        gameOverModal.classList.remove('active');
+        winModal.classList.remove('active');
+        startScreen.classList.remove('active');
+
+        isGameRunning = true;
+        isPaused = false;
+        animate();
+    }
+
+    function startGame() {
+        initAudio();
+        stars = [];
+        for(let i=0; i<100; i++) stars.push(new Star());
+        resetGame();
+    }
+
+    function animate() {
+        if (!isGameRunning) return;
+
+        gameLoopId = requestAnimationFrame(animate);
+
+        ctx.fillStyle = isWarping ? 'rgba(10, 10, 26, 0.2)' : 'rgba(10, 10, 26, 0.4)';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+        stars.forEach(star => star.update());
+
+        if (isWarping) {
+            player.x += (Math.random() - 0.5) * 5;
+            player.draw();
+            return;
+        }
+
+        if (isPaused) {
+            player.draw();
+            enemies.forEach(e => e.draw());
+            powerups.forEach(p => p.draw());
+            return;
+        }
+
+        frames++;
+
+        player.update();
+
+        projectiles.forEach((p, index) => {
+            p.update();
+            if (p.y + p.radius < 0) projectiles.splice(index, 1);
+        });
+
+        enemies.forEach((e, index) => {
+            e.update();
+            if (e.y - e.radius > canvasHeight) enemies.splice(index, 1);
+        });
+
+        powerups.forEach((p, index) => {
+            p.update();
+            if (p.y - p.radius > canvasHeight) powerups.splice(index, 1);
+        });
+
+        particles.forEach((p, index) => {
+            p.update();
+            if (p.alpha <= 0) particles.splice(index, 1);
+        });
+
+        spawnEnemies();
+        spawnPowerUps();
+        checkCollisions();
+    }
+
+    // Title screen animation
+    stars = [];
+    for(let i=0; i<100; i++) stars.push(new Star());
+
+    function titleLoop() {
+        if(isGameRunning) return;
+        ctx.fillStyle = 'rgba(10, 10, 26, 0.4)';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        stars.forEach(star => star.update());
+        requestAnimationFrame(titleLoop);
+    }
+    titleLoop();
+
+</script>
+</body>
+</html>

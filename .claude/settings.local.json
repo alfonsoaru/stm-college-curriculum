@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git filter-branch:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(timeout:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx playwright install:*)",
+      "Bash(npx playwright test:*)",
+      "Bash(dir /B \"C:\\\\dev\\\\stm\\\\subjects\\\\*year-7.html\")",
+      "Bash(ls:*)",
+      "mcp__sheldon__create_karaoke",
+      "Bash(dir /s /b C:devstm*karaoke*)",
+      "mcp__sheldon__text_to_speech",
+      "mcp__sheldon__transcribe",
+      "Bash(npx http-server -p 8234 --cors)",
+      "Bash(npx http-server -p 8765 --cors)",
+      "Bash(npx http-server -p 8847 -o games/map_explorer_geography_year7.html)",
+      "Bash(dir:*)",
+      "Bash(npx http-server:*)",
+      "Bash(ping:*)",
+      "Bash(findstr:*)",
+      "Bash(cmd /c \"type C:\\\\Users\\\\james\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--dev-stm\\\\tasks\\\\b13ccab.output\")",
+      "Bash(cmd /c \"netstat -an | findstr 8765\")",
+      "Bash(cmd /c \"type C:\\\\Users\\\\james\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--dev-stm\\\\tasks\\\\b6aa376.output\")",
+      "Bash(cmd /c \"netstat -an | findstr LISTENING | findstr :876\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

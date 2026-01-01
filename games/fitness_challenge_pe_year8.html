@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Fitness Challenge Runner - PE Year 8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-canvas {
+            display: block;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .hud-item {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        #question-overlay {
+            display: block;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        .question-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 3px solid #28a745;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .checkpoint-badge {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .answer-btn {
+            background: #f5f5f7;
+            border: 2px solid #e5e5e5;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e8e8ed;
+            border-color: #28a745;
+            transform: translateY(-2px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #16a34a;
+            color: white;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        #start-screen, #gameover-screen, #win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #gameover-screen, #win-screen {
+            display: none;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .instructions em {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .instructions p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .theme-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback-text.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #166534;
+            display: block;
+        }
+
+        .feedback-text.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        #mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .jump-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #mobile-controls {
+                display: block;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="hud">
+            <div class="hud-item">Level: <span id="level">1</span>/3</div>
+            <div class="hud-item">Reps: <span id="reps">0</span></div>
+            <div class="hud-item">Score: <span id="score">0</span></div>
+            <div class="hud-item">Energy: <span id="lives">3</span></div>
+        </div>
+
+        <div id="mobile-controls">
+            <button class="jump-btn" id="jump-btn">JUMP</button>
+        </div>
+
+        <div id="question-overlay">
+            <div class="question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div class="checkpoint-badge">Q<span id="checkpoint-num">1</span>/<span id="total-questions">12</span></div>
+                    <button id="read-again-btn" onclick="rereadQuestion()" style="background: #28a745; color: white; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">Read Again</button>
+                </div>
+                <div class="question-text" id="q-text">Loading...</div>
+                <div class="question-context" id="q-context">PE Year 8 - Training Principles</div>
+                <div class="answers-grid" id="answers"></div>
+                <div class="feedback-text" id="feedback"></div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <div class="theme-emoji">🏋️</div>
+            <h1 class="title">Fitness Challenge Runner</h1>
+            <p class="subtitle">Run, Jump & Master Training Principles!</p>
+
+            <div class="instructions">
+                <h3>How to Play</h3>
+                <p>🏃 <strong>RUN</strong> through the gym avoiding obstacles!</p>
+                <p>💪 Learn <strong>FITT PRINCIPLES</strong>, tactics & fitness!</p>
+                <p>🏆 Collect medals for bonus points!</p>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p><strong>Keyboard:</strong> SPACE = Jump | A B C D = Answer</p>
+                    <p><strong>Xbox Controller:</strong> RT/LT = Jump | X Y A B = Answer</p>
+                </div>
+
+                <p style="margin-top: 1rem;">Correct = +1 Energy | Learn fitness principles!</p>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">Start Training!</button>
+        </div>
+
+        <div id="gameover-screen">
+            <div class="result-icon">😰</div>
+            <h1 class="title">Out of Energy!</h1>
+            <p class="subtitle">Time to recover and try again!</p>
+            <div class="stats">
+                <p>Level: <span id="final-level">1</span></p>
+                <p>Score: <span id="final-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Try Again!</button>
+        </div>
+
+        <div id="win-screen">
+            <div class="result-icon">🏆</div>
+            <h1 class="title">Champion!</h1>
+            <p class="subtitle">You mastered the training principles!</p>
+            <div class="stats">
+                <p>Medals: <span id="win-reps">0</span></p>
+                <p>Score: <span id="win-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Play Again!</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let gameRunning = false;
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let distance = 0;
+        let checkpointDistance = 22000;
+        let gameSpeed = 4;
+        let baseSpeed = 4;
+        let isSpeakingFeedback = false;
+
+        // Collectibles (medals/reps)
+        let collectibles = [];
+        let repCount = 0;
+
+        // Power-ups
+        let powerUps = [];
+        let isInvincible = false;
+        let invincibleTimer = 0;
+
+        // Player
+        let player = {
+            x: 100,
+            y: 0,
+            width: 50,
+            height: 70,
+            velocityY: 0,
+            jumping: false,
+            grounded: true
+        };
+
+        // Physics
+        const gravity = 0.8;
+        const jumpForce = -16;
+
+        // Obstacles
+        let obstacles = [];
+        let obstacleTimer = 0;
+
+        // Background
+        let bgOffset = 0;
+        let equipmentItems = [];
+        let lights = [];
+
+        // PE Year 8 Autumn Term Questions - Training Principles, Tactics, Fitness
+        const questions = [
+            // FITT Principles
+            {
+                text: "What does the 'F' in FITT stand for?",
+                context: "FITT Training Principles",
+                answers: ["Frequency", "Flexibility", "Force", "Fatigue"],
+                correct: 0,
+                english: "Frequency means how often you train - like 3-5 times per week for cardiovascular fitness."
+            },
+            {
+                text: "What does the 'I' in FITT stand for?",
+                context: "FITT Training Principles",
+                answers: ["Intensity", "Interval", "Impact", "Increase"],
+                correct: 0,
+                english: "Intensity means how hard you work - measured by heart rate percentage like 60-85% of max HR."
+            },
+            {
+                text: "The first 'T' in FITT means...",
+                context: "FITT Training Principles",
+                answers: ["Time", "Training", "Type", "Technique"],
+                correct: 0,
+                english: "Time means how long each session lasts - typically 20-60 minutes for effective training."
+            },
+            {
+                text: "The second 'T' in FITT means...",
+                context: "FITT Training Principles",
+                answers: ["Type", "Time", "Tempo", "Target"],
+                correct: 0,
+                english: "Type means what kind of exercise - like running, swimming, or circuit training."
+            },
+            // Training Methods
+            {
+                text: "Which training method uses continuous exercise at the same pace?",
+                context: "Training Methods",
+                answers: ["Continuous training", "Interval training", "Fartlek training", "Circuit training"],
+                correct: 0,
+                english: "Continuous training maintains a steady pace throughout, like jogging for 30 minutes without stopping."
+            },
+            {
+                text: "Interval training involves...",
+                context: "Training Methods",
+                answers: ["Work periods and rest periods", "Only continuous work", "Slow steady pace", "Maximum effort only"],
+                correct: 0,
+                english: "Interval training alternates between high-intensity work and recovery periods, like sprinting then walking."
+            },
+            // Fitness Components
+            {
+                text: "Aerobic exercise uses...",
+                context: "Fitness Components",
+                answers: ["Oxygen for energy", "No oxygen", "Only protein", "Only carbs"],
+                correct: 0,
+                english: "Aerobic means 'with oxygen' - your body uses oxygen to produce energy for sustained activity."
+            },
+            {
+                text: "Anaerobic exercise is...",
+                context: "Fitness Components",
+                answers: ["High intensity, short bursts", "Low intensity, long duration", "Only stretching", "Walking slowly"],
+                correct: 0,
+                english: "Anaerobic means 'without oxygen' - used for explosive, short activities like sprinting or weightlifting."
+            },
+            // Heart Rate Training
+            {
+                text: "How do you calculate maximum heart rate?",
+                context: "Heart Rate Training Zones",
+                answers: ["220 minus your age", "200 plus your age", "100 times your age", "Age divided by 2"],
+                correct: 0,
+                english: "Maximum Heart Rate = 220 - age. So a 13 year old has max HR of 207 beats per minute."
+            },
+            // Tactics
+            {
+                text: "What is zonal marking in football?",
+                context: "Tactical Understanding",
+                answers: ["Defending specific areas", "Following one player", "All attacking", "No defending"],
+                correct: 0,
+                english: "Zonal marking means defenders cover specific areas of the pitch rather than individual opponents."
+            },
+            {
+                text: "A counter-attack happens when...",
+                context: "Tactical Understanding",
+                answers: ["You win the ball and attack quickly", "You defend slowly", "You pass backwards", "The game stops"],
+                correct: 0,
+                english: "Counter-attack: Win possession, transition quickly, exploit space before defense recovers."
+            },
+            // Progressive Overload
+            {
+                text: "Progressive overload means...",
+                context: "Training Principles",
+                answers: ["Gradually increasing training demands", "Always doing the same workout", "Training less each week", "Resting more"],
+                correct: 0,
+                english: "Progressive overload: Gradually increase weight, distance, or intensity to continue improving fitness."
+            }
+        ];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 150 - player.height;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        function generateEquipment() {
+            equipmentItems = [];
+            for (let i = 0; i < 10; i++) {
+                equipmentItems.push({
+                    x: i * 200 + Math.random() * 100,
+                    type: Math.floor(Math.random() * 4)
+                });
+            }
+        }
+
+        function generateLights() {
+            lights = [];
+            for (let i = 0; i < 8; i++) {
+                lights.push({
+                    x: i * 250 + Math.random() * 50,
+                    brightness: 0.5 + Math.random() * 0.5
+                });
+            }
+        }
+
+        function drawBackground() {
+            // Gym floor gradient
+            const floorGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            floorGradient.addColorStop(0, '#1a1a2e');
+            floorGradient.addColorStop(0.4, '#16213e');
+            floorGradient.addColorStop(1, '#0f0f1a');
+            ctx.fillStyle = floorGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Gym ceiling lights
+            lights.forEach(light => {
+                const lightX = ((light.x - bgOffset * 0.3) % (canvas.width + 400)) - 100;
+                ctx.fillStyle = `rgba(255, 255, 200, ${light.brightness * 0.3})`;
+                ctx.beginPath();
+                ctx.ellipse(lightX, 30, 40, 20, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Light beam
+                ctx.fillStyle = `rgba(255, 255, 200, ${light.brightness * 0.05})`;
+                ctx.beginPath();
+                ctx.moveTo(lightX - 40, 30);
+                ctx.lineTo(lightX - 80, canvas.height - 150);
+                ctx.lineTo(lightX + 80, canvas.height - 150);
+                ctx.lineTo(lightX + 40, 30);
+                ctx.closePath();
+                ctx.fill();
+            });
+
+            // Gym wall pattern
+            ctx.fillStyle = '#2d3436';
+            ctx.fillRect(0, 60, canvas.width, 10);
+
+            // Motivational banner
+            ctx.fillStyle = '#28a745';
+            ctx.fillRect(0, 80, canvas.width, 40);
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 20px Arial';
+            const bannerText = "PUSH YOUR LIMITS - TRAIN SMART - GET STRONGER";
+            const bannerOffset = -bgOffset * 0.5 % 800;
+            for (let i = -1; i < 3; i++) {
+                ctx.fillText(bannerText, bannerOffset + i * 800, 108);
+            }
+
+            // Gym equipment in background
+            equipmentItems.forEach(item => {
+                const itemX = ((item.x - bgOffset * 0.5) % (canvas.width + 500)) - 200;
+                drawGymEquipment(itemX, canvas.height - 200, item.type);
+            });
+
+            // Gym floor (rubber matting)
+            ctx.fillStyle = '#2d3436';
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 150);
+
+            // Floor texture lines
+            ctx.strokeStyle = '#3d3d3d';
+            ctx.lineWidth = 2;
+            for (let x = -bgOffset % 100; x < canvas.width; x += 100) {
+                ctx.beginPath();
+                ctx.moveTo(x, canvas.height - 150);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            // Red accent line
+            ctx.fillStyle = '#e74c3c';
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 5);
+        }
+
+        function drawGymEquipment(x, y, type) {
+            ctx.fillStyle = '#636e72';
+            switch(type) {
+                case 0: // Dumbbell rack
+                    ctx.fillRect(x, y, 60, 80);
+                    ctx.fillStyle = '#2d3436';
+                    for (let i = 0; i < 3; i++) {
+                        ctx.fillRect(x + 5, y + 10 + i * 25, 50, 20);
+                    }
+                    break;
+                case 1: // Bench
+                    ctx.fillRect(x, y + 40, 80, 40);
+                    ctx.fillStyle = '#e74c3c';
+                    ctx.fillRect(x + 5, y + 30, 70, 15);
+                    break;
+                case 2: // Weight plates
+                    ctx.fillStyle = '#2d3436';
+                    ctx.beginPath();
+                    ctx.arc(x + 30, y + 50, 35, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#636e72';
+                    ctx.beginPath();
+                    ctx.arc(x + 30, y + 50, 20, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+                case 3: // Treadmill
+                    ctx.fillRect(x, y + 20, 70, 60);
+                    ctx.fillStyle = '#2d3436';
+                    ctx.fillRect(x + 5, y + 35, 60, 40);
+                    ctx.fillStyle = '#28a745';
+                    ctx.fillRect(x + 10, y + 25, 20, 8);
+                    break;
+            }
+        }
+
+        function drawPlayer() {
+            // Athlete in workout gear
+            // Body - workout shirt
+            ctx.fillStyle = isInvincible ? '#fbbf24' : '#3498db';
+            ctx.fillRect(player.x, player.y + 20, player.width - 10, 35);
+
+            // Head
+            ctx.fillStyle = '#fcd5b8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 12, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Headband
+            ctx.fillStyle = '#e74c3c';
+            ctx.fillRect(player.x + 5, player.y + 5, 30, 6);
+
+            // Eyes
+            ctx.fillStyle = '#1d1d1f';
+            ctx.fillRect(player.x + 13, player.y + 10, 4, 4);
+            ctx.fillRect(player.x + 23, player.y + 10, 4, 4);
+
+            // Arms
+            ctx.fillStyle = '#fcd5b8';
+            if (player.grounded) {
+                ctx.fillRect(player.x - 5, player.y + 25, 10, 20);
+                ctx.fillRect(player.x + 35, player.y + 25, 10, 20);
+            } else {
+                // Arms up when jumping
+                ctx.fillRect(player.x - 5, player.y + 15, 10, 20);
+                ctx.fillRect(player.x + 35, player.y + 15, 10, 20);
+            }
+
+            // Shorts
+            ctx.fillStyle = '#2c3e50';
+            ctx.fillRect(player.x + 5, player.y + 52, 30, 15);
+
+            // Legs
+            ctx.fillStyle = '#fcd5b8';
+            if (player.grounded) {
+                ctx.fillRect(player.x + 8, player.y + 55, 10, 15);
+                ctx.fillRect(player.x + 22, player.y + 55, 10, 15);
+            } else {
+                ctx.fillRect(player.x + 5, player.y + 50, 12, 20);
+                ctx.fillRect(player.x + 23, player.y + 50, 12, 20);
+            }
+
+            // Sneakers
+            ctx.fillStyle = '#e74c3c';
+            ctx.fillRect(player.x + 5, player.y + 65, 14, 8);
+            ctx.fillRect(player.x + 21, player.y + 65, 14, 8);
+        }
+
+        function spawnObstacle() {
+            const types = [
+                { width: 50, height: 50, emoji: '🏋️' },
+                { width: 45, height: 55, emoji: '⚽' },
+                { width: 55, height: 45, emoji: '🏀' },
+                { width: 50, height: 50, emoji: '🎾' },
+                { width: 45, height: 45, emoji: '🏐' },
+                { width: 55, height: 50, emoji: '🏈' },
+                { width: 40, height: 40, emoji: '🥊' }
+            ];
+            const type = types[Math.floor(Math.random() * types.length)];
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - type.height,
+                width: type.width,
+                height: type.height,
+                emoji: type.emoji
+            });
+
+            if (Math.random() < 0.15 && level > 1) {
+                const type2 = types[Math.floor(Math.random() * types.length)];
+                obstacles.push({
+                    x: canvas.width + 150,
+                    y: canvas.height - 150 - type2.height,
+                    width: type2.width,
+                    height: type2.height,
+                    emoji: type2.emoji
+                });
+            }
+        }
+
+        function spawnCollectible() {
+            const heights = [80, 120, 160];
+            collectibles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - heights[Math.floor(Math.random() * heights.length)],
+                collected: false
+            });
+        }
+
+        function spawnPowerUp() {
+            const types = ['shield', 'magnet', 'slow'];
+            powerUps.push({
+                x: canvas.width + 50,
+                y: canvas.height - 280,
+                type: types[Math.floor(Math.random() * types.length)],
+                collected: false
+            });
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obs => {
+                ctx.font = `${obs.height}px Arial`;
+                ctx.fillText(obs.emoji, obs.x, obs.y + obs.height - 5);
+            });
+        }
+
+        function drawCollectibles() {
+            collectibles.forEach(c => {
+                if (!c.collected) {
+                    ctx.font = '35px Arial';
+                    const bob = Math.sin(Date.now() / 200 + c.x) * 5;
+                    ctx.fillText('🏅', c.x, c.y + bob);
+                }
+            });
+        }
+
+        function drawPowerUps() {
+            powerUps.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '40px Arial';
+                    const bob = Math.sin(Date.now() / 150) * 8;
+                    let emoji = p.type === 'shield' ? '⭐' : p.type === 'magnet' ? '🧲' : '⏱️';
+                    ctx.fillText(emoji, p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawProgressBar() {
+            const barWidth = 200;
+            const barHeight = 10;
+            const barX = canvas.width / 2 - barWidth / 2;
+            const barY = 70;
+            const progress = Math.min(distance / checkpointDistance, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            ctx.fillStyle = '#22c55e';
+            ctx.fillRect(barX, barY, barWidth * progress, barHeight);
+
+            ctx.fillStyle = 'white';
+            ctx.font = '12px Arial';
+            ctx.fillText('🏁', barX + barWidth - 15, barY + 10);
+        }
+
+        let collectibleSpawnTimer = 0;
+        let powerUpSpawnTimer = 0;
+        let comboCount = 0;
+        let comboTimer = 0;
+
+        function update() {
+            if (!gameRunning) return;
+
+            gameSpeed = Math.min(baseSpeed + 5, baseSpeed + (distance / 5000));
+
+            bgOffset += gameSpeed;
+            distance += gameSpeed;
+
+            if (!player.grounded) {
+                player.velocityY += gravity;
+                player.y += player.velocityY;
+
+                if (player.y >= canvas.height - 150 - player.height) {
+                    player.y = canvas.height - 150 - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                    player.jumping = false;
+                }
+            }
+
+            obstacleTimer++;
+            const obstacleFreq = Math.max(80, 180 - gameSpeed * 15);
+            if (obstacleTimer > obstacleFreq + Math.random() * 60) {
+                spawnObstacle();
+                obstacleTimer = 0;
+            }
+
+            collectibleSpawnTimer++;
+            if (collectibleSpawnTimer > 40 + Math.random() * 30) {
+                spawnCollectible();
+                collectibleSpawnTimer = 0;
+            }
+
+            powerUpSpawnTimer++;
+            if (powerUpSpawnTimer > 400 + Math.random() * 200) {
+                spawnPowerUp();
+                powerUpSpawnTimer = 0;
+            }
+
+            obstacles.forEach(obs => { obs.x -= gameSpeed; });
+            collectibles.forEach(c => { c.x -= gameSpeed; });
+            powerUps.forEach(p => { p.x -= gameSpeed; });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+            collectibles = collectibles.filter(c => c.x > -100);
+            powerUps = powerUps.filter(p => p.x > -100);
+
+            if (!isInvincible) {
+                obstacles.forEach(obs => {
+                    if (player.x < obs.x + obs.width - 10 &&
+                        player.x + player.width - 10 > obs.x &&
+                        player.y + player.height > obs.y &&
+                        player.y < obs.y + obs.height) {
+                        hitObstacle();
+                    }
+                });
+            }
+
+            collectibles.forEach(c => {
+                if (!c.collected &&
+                    player.x < c.x + 35 &&
+                    player.x + player.width > c.x &&
+                    player.y < c.y + 35 &&
+                    player.y + player.height > c.y - 20) {
+                    c.collected = true;
+                    repCount++;
+                    score += 50;
+                    comboCount++;
+                    comboTimer = 60;
+                    if (comboCount >= 3) score += comboCount * 20;
+                }
+            });
+
+            powerUps.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 40 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 20 &&
+                    player.y + player.height > p.y - 30) {
+                    p.collected = true;
+                    activatePowerUp(p.type);
+                }
+            });
+
+            if (comboTimer > 0) comboTimer--;
+            else comboCount = 0;
+
+            if (isInvincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) isInvincible = false;
+            }
+
+            if (distance >= checkpointDistance) reachCheckpoint();
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('reps').textContent = repCount;
+        }
+
+        function activatePowerUp(type) {
+            if (type === 'shield') {
+                isInvincible = true;
+                invincibleTimer = 180;
+            } else if (type === 'slow') {
+                gameSpeed = Math.max(3, gameSpeed - 2);
+                setTimeout(() => { gameSpeed = baseSpeed; }, 3000);
+            } else if (type === 'magnet') {
+                collectibles.forEach(c => {
+                    if (!c.collected && c.x < player.x + 300) {
+                        c.x = player.x + 30;
+                        c.y = player.y + 20;
+                    }
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawCollectibles();
+            drawPowerUps();
+            drawObstacles();
+            drawPlayer();
+            drawProgressBar();
+
+            if (comboCount >= 3) {
+                ctx.fillStyle = '#fbbf24';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText(`COMBO x${comboCount}!`, player.x - 20, player.y - 30);
+            }
+
+            if (isInvincible) {
+                ctx.strokeStyle = 'rgba(251, 191, 36, 0.8)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(player.x + 25, player.y + 35, 45, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.velocityY = jumpForce;
+                player.grounded = false;
+                player.jumping = true;
+            }
+        }
+
+        function hitObstacle() {
+            lives--;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                obstacles = [];
+                distance = Math.max(0, distance - 200);
+                canvas.style.filter = 'brightness(2)';
+                setTimeout(() => canvas.style.filter = 'none', 100);
+            }
+        }
+
+        function reachCheckpoint() {
+            distance = 0;
+            level++;
+
+            if (level > 3) {
+                winGame();
+                return;
+            }
+
+            checkpointDistance = 22000 + level * 2000;
+            baseSpeed = 4 + level * 0.5;
+            gameSpeed = baseSpeed;
+            document.getElementById('level').textContent = level;
+        }
+
+        // TTS Functions
+        function speak(text, lang = 'en-GB') {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                const voices = speechSynthesis.getVoices();
+                const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+                if (voice) utterance.voice = voice;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[questionCount % questions.length];
+            currentQuestion = question;
+
+            const questionInCycle = (questionCount % questions.length) + 1;
+            document.getElementById('checkpoint-num').textContent = questionInCycle;
+            document.getElementById('total-questions').textContent = questions.length;
+            document.getElementById('q-text').textContent = question.text;
+            document.getElementById('q-context').textContent = question.context;
+
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+
+            const shuffledAnswers = question.answers.map((ans, i) => ({ text: ans, isCorrect: i === question.correct }));
+            shuffledAnswers.sort(() => Math.random() - 0.5);
+            currentAnswers = shuffledAnswers;
+
+            const labels = ['A', 'B', 'C', 'D'];
+            shuffledAnswers.forEach((ans, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.onclick = () => handleAnswer(btn, ans.isCorrect, question.english);
+                btn.innerHTML = `<strong>${labels[i]}</strong> ${ans.text}`;
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback-text';
+
+            readQuestionAndAnswers(question.text, shuffledAnswers, labels);
+        }
+
+        function readQuestionAndAnswers(questionText, answers, labels) {
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeakingFeedback) return;
+
+            speechSynthesis.cancel();
+
+            const voices = speechSynthesis.getVoices();
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+
+            const queue = [];
+
+            // Question
+            const qUtterance = new SpeechSynthesisUtterance(questionText);
+            qUtterance.lang = 'en-GB';
+            qUtterance.rate = 0.9;
+            if (englishVoice) qUtterance.voice = englishVoice;
+            queue.push(qUtterance);
+
+            // Answers
+            answers.forEach((ans, i) => {
+                const labelUtterance = new SpeechSynthesisUtterance(labels[i]);
+                labelUtterance.lang = 'en-GB';
+                labelUtterance.rate = 1.0;
+                if (englishVoice) labelUtterance.voice = englishVoice;
+                queue.push(labelUtterance);
+
+                const ansUtterance = new SpeechSynthesisUtterance(ans.text);
+                ansUtterance.lang = 'en-GB';
+                ansUtterance.rate = 0.85;
+                if (englishVoice) ansUtterance.voice = englishVoice;
+                queue.push(ansUtterance);
+            });
+
+            let i = 0;
+            function playNext() {
+                if (i < queue.length) {
+                    queue[i].onend = playNext;
+                    speechSynthesis.speak(queue[i]);
+                    i++;
+                }
+            }
+            playNext();
+        }
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.getVoices();
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        let questionCount = 0;
+        let currentQuestion = null;
+        let currentAnswers = null;
+        const answerLabels = ['A', 'B', 'C', 'D'];
+
+        function rereadQuestion() {
+            if (currentQuestion && currentAnswers) {
+                readQuestionAndAnswers(currentQuestion.text, currentAnswers, answerLabels);
+            }
+        }
+
+        function handleAnswer(btn, isCorrect, explanation) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('feedback');
+            const question = questions[questionCount % questions.length];
+            const correctAnswer = question.answers[question.correct];
+
+            speechSynthesis.cancel();
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                lives++;
+                score += 200;
+                document.getElementById('lives').textContent = lives;
+                document.getElementById('score').textContent = score;
+
+                feedback.textContent = '+1 Energy! ' + explanation;
+                feedback.className = 'feedback-text correct';
+
+                speakFeedback("Correct!", 'en-GB', () => {
+                    speakFeedback(explanation, 'en-GB', () => {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    });
+                });
+            } else {
+                btn.classList.add('wrong');
+
+                feedback.textContent = 'The answer is: ' + correctAnswer + '. ' + explanation;
+                feedback.className = 'feedback-text wrong';
+
+                speakFeedback("Wrong! The answer is:", 'en-GB', () => {
+                    speakFeedback(correctAnswer, 'en-GB', () => {
+                        speakFeedback(explanation, 'en-GB', () => {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        });
+                    });
+                });
+            }
+        }
+
+        function speakFeedback(text, lang, callback, isLast = false) {
+            isSpeakingFeedback = true;
+            const voices = speechSynthesis.getVoices();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 1.0;
+
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+            if (englishVoice) utterance.voice = englishVoice;
+
+            utterance.onend = () => {
+                if (isLast) isSpeakingFeedback = false;
+                if (callback) callback();
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'flex';
+            document.getElementById('final-level').textContent = level;
+            document.getElementById('final-score').textContent = score;
+        }
+
+        function winGame() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'flex';
+            document.getElementById('win-score').textContent = score;
+            document.getElementById('win-reps').textContent = repCount;
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('question-overlay').style.display = 'block';
+
+            level = 1;
+            score = 0;
+            lives = 3;
+            distance = 0;
+            checkpointDistance = 22000;
+            gameSpeed = 4;
+            baseSpeed = 4;
+            isSpeakingFeedback = false;
+            obstacles = [];
+            collectibles = [];
+            powerUps = [];
+            repCount = 0;
+            isInvincible = false;
+            invincibleTimer = 0;
+            comboCount = 0;
+            comboTimer = 0;
+            obstacleTimer = 0;
+            collectibleSpawnTimer = 0;
+            powerUpSpawnTimer = 0;
+            questionCount = 0;
+
+            document.getElementById('level').textContent = level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            document.getElementById('reps').textContent = repCount;
+
+            player.y = canvas.height - 150 - player.height;
+            player.velocityY = 0;
+            player.grounded = true;
+
+            generateEquipment();
+            generateLights();
+            gameRunning = true;
+
+            showQuestion();
+        }
+
+        // Gamepad support
+        let gamepadConnected = false;
+        let lastButtonStates = {};
+
+        window.addEventListener('gamepadconnected', () => { gamepadConnected = true; });
+        window.addEventListener('gamepaddisconnected', () => { gamepadConnected = false; });
+
+        function pollGamepad() {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads) return;
+
+            for (const gamepad of gamepads) {
+                if (!gamepad) continue;
+
+                const buttons = gamepad.buttons;
+
+                // RT (7) or LT (6) for jump
+                if ((buttons[7]?.pressed || buttons[6]?.pressed) && !lastButtonStates['jump']) {
+                    jump();
+                    lastButtonStates['jump'] = true;
+                } else if (!buttons[7]?.pressed && !buttons[6]?.pressed) {
+                    lastButtonStates['jump'] = false;
+                }
+
+                // Answer buttons: X=0, Y=1, A=2, B=3 (Xbox layout)
+                const answerMap = [
+                    { btn: 2, answer: 0, key: 'X' },
+                    { btn: 3, answer: 1, key: 'Y' },
+                    { btn: 0, answer: 2, key: 'A' },
+                    { btn: 1, answer: 3, key: 'B' }
+                ];
+
+                answerMap.forEach(({ btn, answer, key }) => {
+                    if (buttons[btn]?.pressed && !lastButtonStates[key]) {
+                        const answerBtns = document.querySelectorAll('.answer-btn');
+                        if (answerBtns[answer] && !answerBtns[answer].disabled) {
+                            answerBtns[answer].click();
+                        }
+                        lastButtonStates[key] = true;
+                    } else if (!buttons[btn]?.pressed) {
+                        lastButtonStates[key] = false;
+                    }
+                });
+            }
+            requestAnimationFrame(pollGamepad);
+        }
+        pollGamepad();
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+
+            const keyMap = { 'KeyA': 0, 'KeyB': 1, 'KeyC': 2, 'KeyD': 3 };
+            if (keyMap.hasOwnProperty(e.code)) {
+                const btns = document.querySelectorAll('.answer-btn');
+                if (btns[keyMap[e.code]] && !btns[keyMap[e.code]].disabled) {
+                    btns[keyMap[e.code]].click();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+        document.getElementById('jump-btn').addEventListener('click', jump);
+        document.getElementById('jump-btn').addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+
+        // Initialize
+        resizeCanvas();
+        generateEquipment();
+        generateLights();
+        gameLoop();
+    </script>
+</body>
+</html>

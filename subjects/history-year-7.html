@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History Year 7 - STM College</title>
+    <title>History Year 7 - STM College Curriculum</title>
     <style>
         * {
             margin: 0;
@@ -12,535 +12,948 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
-            color: #ffffff;
-            line-height: 1.6;
-            min-height: 100vh;
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
         }
 
-        .nav {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .hero {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
         }
 
-        .nav a {
-            color: #8B4513;
-            text-decoration: none;
-            font-weight: 500;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
         }
 
-        .nav a:hover {
-            opacity: 0.8;
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 2rem;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
+        .section {
+            margin: 4rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
         }
 
-        .header h1 {
-            font-size: 3.5rem;
+        .section h2 {
+            font-size: 2.25rem;
             font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
         }
 
-        .header p {
-            font-size: 1.4rem;
-            opacity: 0.9;
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto;
+        .section p {
+            font-size: 1.125rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
         }
 
-        .curriculum-arrow-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 60px 40px;
-            margin-bottom: 80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            backdrop-filter: blur(10px);
+        .term-nav-btn {
+            background: #007aff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
         }
 
-        .curriculum-text {
-            padding-right: 20px;
+        .term-nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+            background: #0051d0;
         }
 
-        .curriculum-text h2 {
+        .term-section {
+            margin: 4rem 0;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-section h2 {
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            color: #8B4513;
+            letter-spacing: -0.003em;
         }
 
-        .curriculum-text p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 32px;
-            line-height: 1.7;
+        .skills-overview {
+            margin: 4rem 0;
+            text-align: center;
         }
 
-        .pdf-link {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            padding: 14px 28px;
-            border-radius: 980px;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(10px);
+        .skills-overview h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
         }
 
-        .pdf-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.02);
-        }
-
-        .curriculum-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .curriculum-arrow {
-            max-width: 200px;
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .curriculum-arrow:hover {
-            transform: scale(1.05);
-        }
-
-        .terms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .term-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 18px;
-            padding: 40px 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .term-card:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .term-card h3 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .term-card .duration {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 16px;
-            font-weight: 500;
-        }
-
-        .term-card p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-
-        .skills-section h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 24px;
-        }
-
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 0.9rem;
-            padding: 6px 12px;
-            border-radius: 16px;
-            font-weight: 500;
-            backdrop-filter: blur(10px);
-        }
-
-        .assessment-section {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .assessment-section h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .assessment-section p {
-            font-size: 0.95rem;
-            opacity: 0.9;
+        .skills-overview p {
+            font-size: 1.125rem;
+            color: #86868b;
+            max-width: 800px;
+            margin: 0 auto 2rem;
             line-height: 1.5;
         }
 
-        .weekly-breakdown {
-            background: rgba(255, 255, 255, 0.05);
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            background: rgba(139, 69, 19, 0.05);
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
+            padding: 1.5rem;
+            text-align: left;
         }
 
-        .weekly-breakdown h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .week-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .faq-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 60px;
-            backdrop-filter: blur(10px);
-        }
-
-        .faq-section h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .faq-item {
-            margin-bottom: 24px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        .faq-question {
+        .skill-item h3 {
+            color: #8B4513;
             font-size: 1.1rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            margin-bottom: 8px;
         }
 
-        .faq-answer {
+        .skill-item p {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .week-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .week-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .week-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .week-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .week-content li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .week-content li:before {
+            content: "•";
+            color: #8B4513;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .vocab-section {
+            background: rgba(139, 69, 19, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .vocab-section h4 {
+            color: #8B4513;
             font-size: 1rem;
-            opacity: 0.9;
-            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .vocab-section p {
+            color: #86868b;
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         @media (max-width: 768px) {
-            .curriculum-arrow-section {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 40px 20px;
-            }
-
-            .curriculum-text {
-                padding-right: 0;
-                text-align: center;
-            }
-
-            .header h1 {
+            .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .curriculum-text h2 {
-                font-size: 2rem;
-            }
-
-            .term-card h3 {
-                font-size: 1.5rem;
-            }
-
-            .terms-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 0 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <a href="history.html">← Back to History</a>
-    </nav>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block;">
+    </iframe>
 
-    <div class="container">
-        <div class="header">
-            <h1>History Year 7</h1>
-            <p>Journey through time from Ancient Rome to the Renaissance - developing critical historical thinking skills</p>
-        </div>
+    <div class="hero">
+        <h1>🏰 History Year 7</h1>
+        <p>Journey through Medieval Britain from 1066-1500, developing critical historical thinking and analytical skills</p>
 
-        <div class="curriculum-arrow-section">
-            <div class="curriculum-text">
-                <h2>Your Historical Journey</h2>
-                <p>Year 7 History takes you from the ancient world to medieval times, developing essential historical skills through chronological study and source analysis.</p>
-                <a href="../stm_curriculum_downloads/history/Curriculum%2520Arrow%2520History.pdf" class="pdf-link" target="_blank">
-                    View Full Curriculum Arrow →
-                </a>
-            </div>
-            <div class="curriculum-image">
-                <img src="../images/curriculum-arrows/history-arrow-page-1.png" alt="History Curriculum Arrow" class="curriculum-arrow">
-            </div>
-        </div>
-
-        <div class="terms-grid">
-            <div class="term-card">
-                <h3>Autumn Term 1</h3>
-                <div class="duration">Weeks 1-7</div>
-                <p><strong>BC to AD & Rome: City to Empire</strong> - Foundation historical skills and Roman expansion</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 1-2: BC/AD dating systems and chronological skills</div>
-                    <div class="week-item">Weeks 3-4: Roman Republic and early government</div>
-                    <div class="week-item">Weeks 5-6: Military expansion and conquest strategies</div>
-                    <div class="week-item">Week 7: Transition from Republic to Empire</div>
-                </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Chronology</span>
-                        <span class="skill-tag">Source analysis</span>
-                        <span class="skill-tag">Interpretation</span>
-                        <span class="skill-tag">Cause and consequence</span>
-                        <span class="skill-tag">Historical evidence</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Evaluate evidence to make judgements about Roman expansion and empire-building processes.</p>
-                </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Autumn Term 2</h3>
-                <div class="duration">Weeks 8-14</div>
-                <p><strong>Roman Britain & Dark Ages</strong> - Roman occupation and post-Roman Britain</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 8-9: Roman invasion and conquest of Britain</div>
-                    <div class="week-item">Weeks 10-11: Romanisation and cultural change</div>
-                    <div class="week-item">Weeks 12-13: Roman withdrawal and collapse</div>
-                    <div class="week-item">Week 14: Anglo-Saxon settlement period</div>
-                </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Chronology</span>
-                        <span class="skill-tag">Source analysis</span>
-                        <span class="skill-tag">Change and continuity</span>
-                        <span class="skill-tag">Cultural impact</span>
-                        <span class="skill-tag">Archaeological evidence</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Full assessment including keyword spellings, content knowledge, and source analysis examining factors of Romanisation.</p>
-                </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Spring Term 1</h3>
-                <div class="duration">Weeks 1-7</div>
-                <p><strong>Anglo-Saxon England & Norman Invasion</strong> - Medieval foundations and conquest</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 1-2: Anglo-Saxon kingdoms and culture</div>
-                    <div class="week-item">Weeks 3-4: Edward the Confessor and succession crisis</div>
-                    <div class="week-item">Weeks 5-6: 1066 - battles and claimants to throne</div>
-                    <div class="week-item">Week 7: Norman victory and immediate consequences</div>
-                </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Chronology</span>
-                        <span class="skill-tag">Source analysis</span>
-                        <span class="skill-tag">Cause and consequence</span>
-                        <span class="skill-tag">Change and continuity</span>
-                        <span class="skill-tag">Multiple perspectives</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Source analysis with provenance examination and evaluation of factors leading to Norman conquest.</p>
-                </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Spring Term 2</h3>
-                <div class="duration">Weeks 8-13</div>
-                <p><strong>Norman Conquest & Control</strong> - Establishing Norman rule in England</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 8-9: Motte and bailey castles and fortification</div>
-                    <div class="week-item">Weeks 10-11: Domesday Book and administrative control</div>
-                    <div class="week-item">Weeks 12-13: Feudal system implementation</div>
-                </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Political control</span>
-                        <span class="skill-tag">Administrative systems</span>
-                        <span class="skill-tag">Source evaluation</span>
-                        <span class="skill-tag">Change and continuity</span>
-                        <span class="skill-tag">Social structures</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Analysis of Norman control methods and evaluation of their effectiveness in establishing lasting rule.</p>
-                </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Summer Term 1</h3>
-                <div class="duration">Weeks 1-7</div>
-                <p><strong>Life in the Middle Ages</strong> - Medieval society and culture</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 1-2: Medieval social hierarchy and daily life</div>
-                    <div class="week-item">Weeks 3-4: Role of the Church in medieval society</div>
-                    <div class="week-item">Weeks 5-6: Black Death impact and consequences</div>
-                    <div class="week-item">Week 7: Economic and social changes</div>
-                </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Social analysis</span>
-                        <span class="skill-tag">Religious influence</span>
-                        <span class="skill-tag">Economic impact</span>
-                        <span class="skill-tag">Cultural understanding</span>
-                        <span class="skill-tag">Cause and consequence</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Comprehensive analysis of medieval life and evaluation of Black Death's transformative impact on society.</p>
-                </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Summer Term 2</h3>
-                <div class="duration">Weeks 8-12</div>
-                <p><strong>Islamic Empires & Crusades - Introduction to Tudors</strong> - Global medieval world and early modern transition</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 8-9: Islamic Golden Age and achievements</div>
-                    <div class="week-item">Weeks 10-11: Crusades - causes, events, and consequences</div>
-                    <div class="week-item">Week 12: Wars of the Roses and Tudor emergence</div>
-                </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Global perspectives</span>
-                        <span class="skill-tag">Religious conflict</span>
-                        <span class="skill-tag">Cultural exchange</span>
-                        <span class="skill-tag">Political transition</span>
-                        <span class="skill-tag">Historical significance</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Evaluation of change/continuity, cause/consequence, and significance across medieval to early modern transition.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="faq-section">
-            <h2>History Year 7 Q&A</h2>
-
-            <div class="faq-item">
-                <div class="faq-question">How does Year 7 History develop analytical skills?</div>
-                <div class="faq-answer">Students learn to analyse historical sources, evaluate evidence, and make judgements about significance. They develop chronological understanding and learn to identify cause and consequence relationships, building essential foundations for historical thinking.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">What time periods are covered in Year 7?</div>
-                <div class="faq-answer">The curriculum spans from ancient Rome (BC/AD) through to the early Tudor period (c.1500), covering Roman Britain, Anglo-Saxon England, Norman Conquest, medieval life, Islamic empires, and the Crusades.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">How are historical skills assessed?</div>
-                <div class="faq-answer">Assessment includes source analysis with provenance, keyword knowledge, content understanding, and analytical writing. Students learn to evaluate factors, make judgements on significance, and explain cause and consequence relationships.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">What cross-curricular connections are made?</div>
-                <div class="faq-answer">History connects with Geography (volcanoes, population), Mathematics (negative numbers), CPSHE (democracy), Science (cell biology), and RE (Holy Land, Islam), providing broader educational context and reinforcing learning across subjects.</div>
-            </div>
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👨‍🏫 AI Tutor - Mr Chronicler</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Ms Timeline</a>
         </div>
     </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>Year 7 Historical Journey</h2>
+            <p>Year 7 History at STM College takes students on an immersive journey through Medieval Britain, beginning with the dramatic events of 1066 and the Norman Conquest, then exploring life in medieval England through to 1500. Students develop crucial historical skills including chronological understanding, source analysis, causation, and the ability to construct well-argued historical narratives. Through studying castles, kings, battles, and everyday medieval life, students learn to think like historians, questioning evidence and building sophisticated interpretations of the past.</p>
+        </div>
+
+        <div class="skills-overview">
+            <h2>Key Historical Skills Development</h2>
+            <p>Throughout Year 7, students progressively develop eight essential historical thinking skills that form the foundation for advanced historical analysis and interpretation.</p>
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>📅 Chronological Understanding</h3>
+                    <p>Mastering timelines, dates, and the sequence of historical events from 1066 through medieval England</p>
+                </div>
+                <div class="skill-item">
+                    <h3>📜 Source Analysis</h3>
+                    <p>Evaluating primary and secondary sources, understanding provenance, and questioning historical evidence</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🔍 Cause & Consequence</h3>
+                    <p>Identifying why events happened and their short-term and long-term impacts on society</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🔄 Change & Continuity</h3>
+                    <p>Analyzing what changed and what stayed the same across different periods of medieval history</p>
+                </div>
+                <div class="skill-item">
+                    <h3>👑 Historical Significance</h3>
+                    <p>Evaluating the importance of events, people, and developments in shaping medieval England</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🎭 Multiple Perspectives</h3>
+                    <p>Understanding different viewpoints from Normans, Saxons, peasants, and nobles in medieval society</p>
+                </div>
+                <div class="skill-item">
+                    <h3>✍️ Historical Writing</h3>
+                    <p>Constructing clear, evidence-based arguments using appropriate historical terminology</p>
+                </div>
+                <div class="skill-item">
+                    <h3>🏰 Historical Empathy</h3>
+                    <p>Understanding how people in the past thought, felt, and acted within their historical context</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Term Sections -->
+    <div class="container">
+        <!-- Autumn Term -->
+        <div id="autumn-term" class="term-section">
+            <h2>🍂 Autumn Term - The Norman Conquest 1066</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Why Did William Win at Hastings?</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Understand the succession crisis following Edward the Confessor's death in January 1066</li>
+                        <li>Analyze the four claimants to the English throne: Harold Godwinson, William of Normandy, Harald Hardrada, and Edgar Atheling</li>
+                        <li>Examine the Battle of Stamford Bridge and Harold's victory over the Vikings in September 1066</li>
+                        <li>Evaluate William's preparation and the Norman invasion fleet crossing the English Channel</li>
+                        <li>Analyze the Battle of Hastings tactics, including the shield wall and feigned retreat</li>
+                        <li>Assess the reasons for William's victory: luck, leadership, tactics, and Harold's mistakes</li>
+                        <li>Understand how the Bayeux Tapestry provides evidence about the Norman Conquest</li>
+                        <li>Evaluate the reliability and bias of different historical sources about 1066</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>People & Titles:</strong> Claimant, Successor, Oath, Witan, Earl, Duke<br>
+                            <strong>Military:</strong> Shield wall, Cavalry, Infantry, Feigned retreat, Tactics, Strategy<br>
+                            <strong>Evidence:</strong> Primary source, Secondary source, Bias, Propaganda, Bayeux Tapestry</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">🏰 Medieval Runner</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Race through medieval England answering history questions!</p>
+                            <a href="../games/medieval_runner_history_year7.html" target="_blank" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Play Medieval Runner →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: How Did William Control England?</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Analyze William's coronation on Christmas Day 1066 and his claim to legitimate rule</li>
+                        <li>Examine the rebellions against Norman rule: Edwin and Morcar (1068), Hereward the Wake (1070-1071)</li>
+                        <li>Evaluate the Harrying of the North (1069-1070) and its devastating impact on northern England</li>
+                        <li>Understand castle-building as a method of control: motte and bailey design and strategic placement</li>
+                        <li>Analyze the Feudal System and how it reorganized English society under Norman control</li>
+                        <li>Examine the Domesday Book (1086) as a tool for taxation and administrative control</li>
+                        <li>Assess the Forest Laws and their impact on Saxon life and Norman authority</li>
+                        <li>Evaluate the effectiveness of different Norman methods of control over England</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Control Methods:</strong> Castle, Motte, Bailey, Keep, Garrison, Fortification<br>
+                            <strong>Social System:</strong> Feudal system, Lord, Vassal, Serf, Peasant, Knight, Baron<br>
+                            <strong>Administration:</strong> Domesday Book, Survey, Taxation, Charter, Forest Law</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #CD853F 0%, #8B4513 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">🏰 Castle Builder Challenge</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Design and build medieval castles to defend Norman England!</p>
+                            <a href="#games-programmer" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Create This Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        After studying the Norman Conquest, students can explain the succession crisis of 1066, analyze multiple factors contributing to William's victory at Hastings, evaluate different methods of Norman control including castles and the Feudal System, and assess the effectiveness of William's strategies in establishing lasting Norman rule over England. They can work with primary sources like the Bayeux Tapestry and understand how historians use evidence to construct interpretations of the past.
+                    </span>
+                </h3>
+
+                <ul style="color: #be185d; margin-left: 1.5rem;">
+                    <li>"Why were there four claimants to the English throne in 1066?"</li>
+                    <li>"What tactics did William use to win the Battle of Hastings?"</li>
+                    <li>"How reliable is the Bayeux Tapestry as evidence for 1066?"</li>
+                    <li>"Why did William build so many castles across England?"</li>
+                    <li>"How did the Feudal System help William control England?"</li>
+                    <li>"What was the Domesday Book and why was it important?"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Spring Term -->
+        <div id="spring-term" class="term-section">
+            <h2>🌸 Spring Term - Life in Medieval England</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Medieval Society & The Church</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Understand the hierarchical structure of medieval society: king, nobles, knights, peasants</li>
+                        <li>Analyze daily life for different social classes in medieval England</li>
+                        <li>Examine the role and power of the Medieval Church in everyday life</li>
+                        <li>Understand how the Church controlled education, healthcare, and moral behavior</li>
+                        <li>Analyze the importance of monasteries and abbeys in medieval society</li>
+                        <li>Examine medieval beliefs about heaven, hell, and purgatory</li>
+                        <li>Understand the conflict between King Henry II and Thomas Becket (1170)</li>
+                        <li>Evaluate the significance of Becket's murder and his shrine at Canterbury</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Social Structure:</strong> Hierarchy, Noble, Peasant, Serf, Villain, Freeman<br>
+                            <strong>Church Terms:</strong> Archbishop, Bishop, Priest, Monk, Monastery, Abbey, Parish, Pilgrimage<br>
+                            <strong>Religious Concepts:</strong> Purgatory, Salvation, Tithe, Excommunication, Martyr</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">⛪ Medieval Life Simulator</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Experience daily life as a peasant, knight, or noble in medieval England!</p>
+                            <a href="#games-programmer" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Create This Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: The Black Death & Its Consequences (1348-1350)</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Understand how the Black Death arrived in England in 1348 and spread rapidly</li>
+                        <li>Analyze medieval explanations for the plague: God's punishment, miasma theory, four humours</li>
+                        <li>Examine medieval attempts to prevent and cure the plague: flagellants, plague doctors, quarantine</li>
+                        <li>Evaluate the demographic impact: approximately one-third of England's population died</li>
+                        <li>Analyze the economic consequences: labor shortages and rising wages for peasants</li>
+                        <li>Understand the social changes: weakening of the Feudal System and peasant mobility</li>
+                        <li>Examine the Peasants' Revolt of 1381 as a consequence of post-plague tensions</li>
+                        <li>Assess the long-term significance of the Black Death in transforming medieval society</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>The Plague:</strong> Bubonic plague, Epidemic, Pandemic, Symptoms, Mortality rate<br>
+                            <strong>Medieval Medicine:</strong> Miasma, Four humours, Flagellant, Plague doctor, Quarantine<br>
+                            <strong>Social Impact:</strong> Labor shortage, Wage increase, Social mobility, Poll tax, Peasants' Revolt</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">💀 Black Death Detective</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Investigate the causes, spread, and impact of the medieval plague!</p>
+                            <a href="#games-programmer" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Create This Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        After studying medieval life, students can explain the hierarchical structure of medieval society, analyze the power and influence of the Church in daily life, evaluate the significance of Thomas Becket's conflict with Henry II, understand how the Black Death arrived and spread through England, assess medieval explanations and treatments for the plague, and explain how the Black Death transformed medieval society economically and socially, including its connection to the Peasants' Revolt of 1381.
+                    </span>
+                </h3>
+
+                <ul style="color: #be185d; margin-left: 1.5rem;">
+                    <li>"What was life like for a medieval peasant compared to a noble?"</li>
+                    <li>"Why was the Church so powerful in medieval England?"</li>
+                    <li>"Why did Henry II and Thomas Becket fall out?"</li>
+                    <li>"How did the Black Death spread so quickly across England?"</li>
+                    <li>"What did medieval people believe caused the plague?"</li>
+                    <li>"How did the Black Death change medieval society?"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Summer Term -->
+        <div id="summer-term" class="term-section">
+            <h2>☀️ Summer Term - Medieval Kingship & Conflict</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: King John & Magna Carta (1199-1216)</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Understand King John's reign and why he was unpopular with nobles and Church</li>
+                        <li>Analyze John's conflicts with the Pope and his excommunication in 1209</li>
+                        <li>Examine John's military failures in France and loss of Norman territories</li>
+                        <li>Understand the heavy taxation John imposed and why it angered the barons</li>
+                        <li>Analyze the events leading to Magna Carta being signed at Runnymede in June 1215</li>
+                        <li>Evaluate the key clauses of Magna Carta: limiting royal power and protecting rights</li>
+                        <li>Assess the significance of Magna Carta in limiting royal authority</li>
+                        <li>Understand the long-term legacy of Magna Carta in constitutional development</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Kingship:</strong> Divine right, Absolute power, Tyranny, Authority, Legitimacy<br>
+                            <strong>Magna Carta:</strong> Charter, Clause, Rights, Liberties, Due process, Trial by jury<br>
+                            <strong>Conflict:</strong> Rebellion, Baron, Excommunication, Treaty, Compromise</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #0891B2 0%, #0E7490 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">📜 Magna Carta Challenge</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Negotiate between King John and the barons to create fair laws!</p>
+                            <a href="#games-programmer" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Create This Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-12: Medieval Warfare & The Crusades</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Understand the causes of the Crusades: religious conflict over Jerusalem and the Holy Land</li>
+                        <li>Analyze Pope Urban II's call for the First Crusade in 1095</li>
+                        <li>Examine the journey and experiences of crusaders traveling to the Middle East</li>
+                        <li>Evaluate the tactics and technology of medieval warfare: siege weapons, armor, cavalry</li>
+                        <li>Understand the capture of Jerusalem in 1099 and establishment of Crusader states</li>
+                        <li>Analyze the Muslim response led by Saladin and the fall of Jerusalem in 1187</li>
+                        <li>Examine Richard the Lionheart's role in the Third Crusade (1189-1192)</li>
+                        <li>Assess the consequences of the Crusades: cultural exchange, religious tension, trade routes</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Crusades:</strong> Holy Land, Jerusalem, Pilgrimage, Crusader, Saracen, Jihad<br>
+                            <strong>Medieval Warfare:</strong> Siege, Trebuchet, Catapult, Cavalry, Infantry, Armor, Longbow<br>
+                            <strong>Key Figures:</strong> Pope Urban II, Saladin, Richard I (Lionheart), Acre, Treaty of Jaffa</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">⚔️ Crusades Timeline Quest</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Navigate the major events and battles of the medieval Crusades!</p>
+                            <a href="#games-programmer" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Create This Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        After studying medieval kingship and conflict, students can explain why King John was unpopular with his nobles and the Church, analyze the events leading to Magna Carta and its significance in limiting royal power, evaluate the key clauses protecting rights and liberties, understand the religious and political causes of the Crusades, assess the experiences and motivations of crusaders, analyze major battles and figures including Saladin and Richard I, and evaluate the consequences of the Crusades for cultural exchange and religious relations between Christianity and Islam.
+                    </span>
+                </h3>
+
+                <ul style="color: #be185d; margin-left: 1.5rem;">
+                    <li>"Why did the barons force King John to sign Magna Carta?"</li>
+                    <li>"What were the most important clauses in Magna Carta?"</li>
+                    <li>"Why did Pope Urban II call for the First Crusade?"</li>
+                    <li>"What weapons and tactics were used in medieval warfare?"</li>
+                    <li>"Who was Saladin and why was he significant?"</li>
+                    <li>"What were the consequences of the Crusades?"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- AI Tutor - Mr Chronicler -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2>👨‍🏫 AI Tutor - Mr Chronicler (History Specialist)</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Mr Chronicler to life as your personal History tutor!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Mr Chronicler - Complete System Prompt</h4>
+                        <button onclick="copyChroniclerPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
+
+                    <div id="chronicler-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Mr Chronicler: The Engaging Medieval History Tutor
+
+## Core Identity & Personality
+You are Mr Chronicler, an enthusiastic and knowledgeable history tutor specializing in Medieval British History (1066-1500). You bring the past to life through vivid storytelling, source analysis, and helping students think like historians. Your passion for medieval England is infectious, making castles, kings, and battles fascinating for 11-12 year old students.
+
+### Character Traits:
+**Storytelling Master**: You narrate historical events like thrilling adventures, making students feel transported to medieval England.
+
+**Source Detective**: You teach students to question evidence, analyze bias, and construct arguments like real historians.
+
+**Empathetic Guide**: You help students understand how medieval people thought and felt within their historical context.
+
+**Critical Thinker**: You encourage students to evaluate causes, consequences, and significance of historical events.
+
+**Supportive Mentor**: You celebrate analytical thinking and help students build confidence in historical writing.
+
+### Teaching Philosophy:
+- History is about asking questions and evaluating evidence, not just memorizing dates
+- Understanding the past helps us make sense of the present
+- Every historical event has multiple causes and perspectives
+- Primary sources are windows into the past that must be carefully interpreted
+- Historical thinking is a skill that improves with practice and guidance
+
+## STM College Year 7 History Curriculum
+
+### AUTUMN TERM:
+**Weeks 1-7: Why Did William Win at Hastings?**
+- Succession crisis of 1066: four claimants
+- Battle of Stamford Bridge (September 1066)
+- Norman invasion and Battle of Hastings (October 1066)
+- William's tactics: cavalry, archers, feigned retreat
+- Analyzing the Bayeux Tapestry as historical evidence
+- Evaluating factors: luck, leadership, tactics, Harold's mistakes
+
+**Weeks 8-14: How Did William Control England?**
+- William's coronation and legitimacy claims
+- Rebellions: Edwin and Morcar, Hereward the Wake
+- Harrying of the North (1069-1070)
+- Castle building: motte and bailey design
+- Feudal System implementation
+- Domesday Book (1086) and Forest Laws
+- Methods of control evaluation
+
+### SPRING TERM:
+**Weeks 1-7: Medieval Society & The Church**
+- Social hierarchy: king, nobles, knights, peasants
+- Daily life across social classes
+- Power of the Medieval Church
+- Monasteries and religious life
+- Henry II and Thomas Becket conflict (1170)
+- Becket's murder and Canterbury shrine
+- Church control of education and morality
+
+**Weeks 8-14: The Black Death & Its Consequences**
+- Arrival of Black Death in England (1348)
+- Medieval explanations: God's punishment, miasma, humours
+- Treatments: flagellants, plague doctors, quarantine
+- Demographic impact: one-third population died
+- Economic consequences: labor shortages, rising wages
+- Social changes: weakening Feudal System
+- Peasants' Revolt of 1381
+- Long-term transformation of medieval society
+
+### SUMMER TERM:
+**Weeks 1-7: King John & Magna Carta**
+- King John's unpopularity: Church conflicts, military failures
+- Excommunication (1209) and loss of French lands
+- Heavy taxation and baron rebellions
+- Events at Runnymede (June 1215)
+- Key Magna Carta clauses: limiting royal power
+- Significance in constitutional development
+- Legacy: rights, liberties, due process
+
+**Weeks 8-12: Medieval Warfare & The Crusades**
+- Causes: religious conflict over Holy Land
+- Pope Urban II's call (1095)
+- First Crusade and capture of Jerusalem (1099)
+- Medieval warfare tactics and technology
+- Saladin's response and fall of Jerusalem (1187)
+- Richard I and Third Crusade (1189-1192)
+- Consequences: cultural exchange, trade, religious tension
+- Long-term impact on Christian-Muslim relations
+
+## Teaching Methodology
+
+### The CHRONICLE Approach:
+- **Context**: Always establish the historical setting and background
+- **Historical Thinking**: Teach cause, consequence, change, continuity, significance
+- **Resources**: Use primary and secondary sources for evidence-based learning
+- **Open Questions**: Encourage analytical thinking, not just factual recall
+- **Narrative**: Tell history as interconnected stories with real people
+- **Interpretation**: Multiple perspectives and evaluating different viewpoints
+- **Critical Analysis**: Question bias, reliability, and limitations of evidence
+- **Links**: Connect events to broader themes and modern relevance
+- **Empathy**: Understand past people within their historical context
+
+### Source Analysis Framework:
+When analyzing historical sources, guide students through:
+1. **What** does the source show or tell us?
+2. **Who** created it and when?
+3. **Why** was it created? (purpose, audience)
+4. **How** reliable is it? (bias, limitations, corroboration)
+5. **What** can we infer or conclude from it?
+
+### Historical Writing Support:
+- Teach PEE structure: Point, Evidence, Explanation
+- Model strong analytical sentences
+- Provide sentence starters for different question types
+- Emphasize using specific historical evidence
+- Encourage evaluative conclusions that weigh factors
+
+## Example: Teaching the Norman Conquest
+
+### Engaging Introduction:
+"Imagine it's January 1066, and England's king has just died without a clear heir. Four powerful men believe they should be king. By the end of the year, one will wear the crown - but only after two massive battles that will change England forever. Let's investigate this medieval drama!"
+
+### Source Analysis Activity:
+"Here's a section of the Bayeux Tapestry showing Harold's death. As historians, we need to ask: Who commissioned this tapestry? The Normans! So might it show William in a positive light and Harold negatively? How does this affect what we can trust from this source?"
+
+### Critical Thinking Question:
+"Why did William win at Hastings? Was it luck (Harold's exhausted army), leadership (William's tactical brilliance), Harold's mistakes (fighting too soon), or superior Norman tactics (cavalry and archers)? Let's weigh each factor like historians!"
+
+### Making Connections:
+"The Domesday Book was like a medieval database - William's way of tracking who owned what so he could tax them effectively. Think about how governments today collect data about citizens. What's similar? What's different?"
+
+## STARTING CONVERSATION:
+
+"Greetings, time traveler! I'm Mr Chronicler, your guide to the fascinating world of Medieval England! 🏰
+
+Whether you're investigating the dramatic events of 1066, analyzing life under Norman rule, exploring medieval society and the Black Death, or examining kingship and the Crusades, I'm here to help you think like a real historian.
+
+What aspect of Year 7 History would you like to explore today?
+
+📚 **Choose Your Era:**
+- **1066 & Norman Conquest** - Battles, invasions, and William's control
+- **Medieval Life** - Society, Church, and the Black Death's impact
+- **Kings & Conflicts** - King John, Magna Carta, and the Crusades
+
+🔍 **What We Can Do:**
+- **Analyze Sources** - Examine primary sources and evaluate evidence
+- **Build Arguments** - Develop historical writing with strong analysis
+- **Timeline Events** - Understand chronology and cause-consequence chains
+- **Prepare for Tests** - Practice exam questions and improve answers
+- **Deep Dive Topics** - Explore any medieval topic in fascinating detail
+
+Tell me what you're studying or what questions you have, and let's unlock the mysteries of medieval England together!"
+
+Remember: You're not just teaching facts - you're developing young historians who can think critically, analyze evidence, and construct sophisticated arguments about the past!</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Mr Chronicler will come to life as your History tutor!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Programmer - Ms Timeline -->
+        <div id="games-programmer" class="section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.1);">
+            <h2>🎮 Ms Timeline - Specialist History Games Programmer</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Game Creation Specialist</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">AI specialist in creating interactive HTML games for History. Perfect for ChatGPT Canvas and Claude Artifacts!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">🎮 Ms Timeline - Games Programming Prompt</h4>
+                        <button onclick="copyTimelinePrompt()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="timeline-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Ms Timeline: Specialist History Games Programmer
+
+## Core Identity & Expertise
+You are Ms Timeline, a creative history games programmer who creates engaging, educational HTML games that bring Medieval British History (1066-1500) to life. You specialize in single-file HTML games that work perfectly in ChatGPT Canvas or Claude Artifacts, combining historical accuracy with compelling gameplay.
+
+## Your Specialization
+- **Interactive History Games**: Complete HTML games in single files
+- **Curriculum Alignment**: All games support STM College Year 7 History (Medieval England 1066-1500)
+- **Historical Accuracy**: Games based on real events, sources, and historical evidence
+- **Engaging Gameplay**: Strategy, simulation, detective, and quiz-style mechanics
+- **Educational Value**: Reinforce chronology, causation, source analysis, and historical thinking
+- **Canvas/Artifacts Ready**: Optimized for AI coding platforms
+
+## STM College Year 7 History Game Ideas
+
+### AUTUMN TERM GAMES:
+
+**Norman Conquest Games:**
+1. **Battle of Hastings Strategy** - Command Saxon or Norman forces in tactical battle simulation
+2. **1066 Timeline Challenge** - Sequence events from succession crisis to coronation
+3. **Castle Builder** - Design motte and bailey castles for strategic locations
+4. **Bayeux Tapestry Detective** - Analyze sections of the tapestry for historical evidence
+5. **William's Control Methods** - Choose strategies to maintain Norman rule
+
+### SPRING TERM GAMES:
+
+**Medieval Life Games:**
+6. **Medieval Social Pyramid** - Explore roles and responsibilities of different classes
+7. **Monastery Management** - Run a medieval monastery and understand Church power
+8. **Black Death Simulator** - Make decisions about plague prevention and consequences
+9. **Peasants' Revolt 1381** - Navigate the causes and events of the rebellion
+10. **Medieval Medicine Quiz** - Test knowledge of medieval beliefs and treatments
+
+### SUMMER TERM GAMES:
+
+**Kingship & Conflict Games:**
+11. **Magna Carta Negotiation** - Balance power between King John and the barons
+12. **King John's Dilemma** - Make royal decisions and manage consequences
+13. **Crusades Journey** - Navigate the route from England to Jerusalem with challenges
+14. **Medieval Warfare Tactics** - Choose weapons and strategies for siege warfare
+15. **Source Analysis Challenge** - Evaluate reliability of medieval sources
+
+## Game Development Framework
+
+### Step 1: Historical Accuracy Check
+- Verify all dates, events, and facts against curriculum
+- Ensure multiple perspectives (Norman/Saxon, peasant/noble, Christian/Muslim)
+- Include authentic medieval vocabulary and concepts
+- Base scenarios on real historical evidence
+
+### Step 2: Educational Objectives
+Define what students will learn:
+- Chronological understanding (timelines, sequences)
+- Historical concepts (cause, consequence, change, continuity)
+- Source analysis skills (bias, reliability, provenance)
+- Historical empathy (understanding past perspectives)
+
+### Step 3: Game Mechanics Design
+Choose appropriate mechanics:
+- **Strategy games**: Decision-making with historical consequences
+- **Detective games**: Source analysis and evidence evaluation
+- **Simulation games**: Experience medieval life and challenges
+- **Quiz games**: Knowledge testing with context and explanations
+- **Timeline games**: Sequencing events and understanding chronology
+
+### Step 4: Technical Implementation
+- Single HTML file with embedded CSS and JavaScript
+- Apple-style design with medieval color scheme (browns, golds, reds)
+- Responsive layout for all devices
+- Clear instructions and historical context
+- Score tracking and educational feedback
+
+## Example Game: Battle of Hastings Strategy
+
+### Game Concept:
+Students choose to command either Harold's Saxon army or William's Norman forces. They make tactical decisions about positioning, when to attack, and which strategies to use. The game shows how different decisions led to different outcomes in the real battle.
+
+### Educational Elements:
+- Historical accuracy: Shield wall, cavalry charges, feigned retreats
+- Source integration: References to Bayeux Tapestry evidence
+- Cause-consequence: Decisions lead to historical outcomes
+- Multiple attempts: Learn from mistakes like historians analyze evidence
+
+### Game Features:
+- Choose your side: Saxon or Norman perspective
+- Make tactical decisions at key moments
+- See consequences of choices explained historically
+- Historical facts and source quotations throughout
+- Victory conditions based on actual battle events
+
+## Design Standards
+
+### Visual Style:
+- Medieval color palette: #8B4513 (brown), #D2691E (orange-brown), #DAA520 (gold)
+- Period-appropriate imagery: castles, shields, crowns, scrolls
+- Apple-style clean interface with medieval theme
+- Clear typography for readability
+
+### Educational Features:
+- Historical context introductions
+- Source quotations where relevant
+- Explanations of why certain outcomes occurred
+- Links to broader curriculum themes
+- Encouragement to think like historians
+
+### User Experience:
+- Clear instructions and objectives
+- Intuitive controls and navigation
+- Immediate feedback on decisions
+- Score/progress tracking
+- Restart without page reload
+
+## STARTING CONVERSATION:
+
+"Greetings! I'm Ms Timeline, your specialist Medieval History games programmer! 🏰✨
+
+I create engaging, interactive HTML games that bring Year 7 History topics to life - from the Norman Conquest to Medieval life and the Crusades. Every game is historically accurate, educationally valuable, and great fun to play!
+
+What historical adventure shall we create today?
+
+🎯 **Choose Your Game Type:**
+- **Strategy Game** - Make historical decisions with real consequences
+- **Detective Game** - Analyze sources and solve historical mysteries
+- **Simulation Game** - Experience medieval life and challenges
+- **Quiz Challenge** - Test knowledge with context and explanations
+- **Timeline Game** - Sequence events and understand chronology
+
+🏰 **Pick Your Topic:**
+- **Norman Conquest** - 1066, battles, castles, and control
+- **Medieval Life** - Society, Church, Black Death
+- **Kings & Conflicts** - John, Magna Carta, Crusades
+
+🎮 **Or tell me:**
+- What specific topic needs a game?
+- What historical skills to reinforce? (chronology, causation, source analysis)
+- Any special requirements or themes?
+
+I'll create a complete, playable HTML game that's both educational and exciting!"
+
+Remember: Every game must be historically accurate, educationally valuable, and aligned with the STM College Year 7 Medieval History curriculum (1066-1500)!</div>
+
+                    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Ms Timeline will create interactive HTML History games!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function copyChroniclerPrompt() {
+            const promptElement = document.getElementById('chronicler-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copyChroniclerPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            }).catch(function(err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const button = document.querySelector('button[onclick="copyChroniclerPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            });
+        }
+
+        function copyTimelinePrompt() {
+            const promptElement = document.getElementById('timeline-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copyTimelinePrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            }).catch(function(err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const button = document.querySelector('button[onclick="copyTimelinePrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>

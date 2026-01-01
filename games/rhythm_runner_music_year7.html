@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Rhythm Runner - Music Year 7 Autumn Term</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-canvas {
+            display: block;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .hud-item {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        #question-overlay {
+            display: block;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        .question-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 3px solid #9C27B0;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .checkpoint-badge {
+            background: linear-gradient(135deg, #9C27B0, #673AB7);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .answer-btn {
+            background: #f5f5f7;
+            border: 2px solid #e5e5e5;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e8e8ed;
+            border-color: #9C27B0;
+            transform: translateY(-2px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #16a34a;
+            color: white;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        #start-screen, #gameover-screen, #win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #gameover-screen, #win-screen {
+            display: none;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .instructions em {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .instructions p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #E91E63, #C2185B);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(233, 30, 99, 0.5);
+        }
+
+        .theme-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback-text.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #166534;
+            display: block;
+        }
+
+        .feedback-text.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        #mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .jump-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #mobile-controls {
+                display: block;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="hud">
+            <div class="hud-item">🎵 Level: <span id="level">1</span>/3</div>
+            <div class="hud-item">🎼 <span id="notes">0</span></div>
+            <div class="hud-item">⭐ <span id="score">0</span></div>
+            <div class="hud-item">❤️ <span id="lives">3</span></div>
+        </div>
+
+        <div id="mobile-controls">
+            <button class="jump-btn" id="jump-btn">⬆️</button>
+        </div>
+
+        <div id="question-overlay">
+            <div class="question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div class="checkpoint-badge">🎵 Q<span id="checkpoint-num">1</span>/<span id="total-questions">12</span></div>
+                    <button id="read-again-btn" onclick="rereadQuestion()" style="background: #9C27B0; color: white; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">🔊 Read Again</button>
+                </div>
+                <div class="question-text" id="q-text">Loading...</div>
+                <div class="question-context" id="q-context">Musical Elements</div>
+                <div class="answers-grid" id="answers"></div>
+                <div class="feedback-text" id="feedback"></div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <div class="theme-emoji">🎵</div>
+            <h1 class="title">Rhythm Runner</h1>
+            <p class="subtitle">Run, Jump & Master Musical Elements!<br><em style="font-size: 0.9em; opacity: 0.8;">Learn tempo, dynamics, pitch, rhythm & texture!</em></p>
+
+            <div class="instructions">
+                <h3>How to Play</h3>
+                <p>🏃 <strong>RUN</strong> through the concert hall stage!</p>
+                <p>🎼 Learn <strong>MUSICAL ELEMENTS</strong> - tempo, dynamics, pitch & more!</p>
+                <p>🎵 Collect musical notes for bonus points!</p>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p><strong>⌨️ Keyboard:</strong> SPACE = Jump | A B C D = Answer</p>
+                    <p><strong>🎮 Xbox:</strong> RT/LT = Jump | X Y A B = Answer</p>
+                </div>
+
+                <p style="margin-top: 1rem;">✅ Correct = +1 Life | Learn the elements of music!</p>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">Let's Play! 🎶</button>
+        </div>
+
+        <div id="gameover-screen">
+            <div class="result-icon">💔</div>
+            <h1 class="title">Game Over!</h1>
+            <p class="subtitle">The music stopped!</p>
+            <div class="stats">
+                <p>Level: <span id="final-level">1</span></p>
+                <p>Score: <span id="final-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Try Again! 🔄</button>
+        </div>
+
+        <div id="win-screen">
+            <div class="result-icon">🏆</div>
+            <h1 class="title">Congratulations!</h1>
+            <p class="subtitle">You've mastered the musical elements!</p>
+            <div class="stats">
+                <p>🎵 Notes: <span id="win-notes">0</span></p>
+                <p>⭐ Score: <span id="win-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Play Again! 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let gameRunning = false;
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let distance = 0;
+        let checkpointDistance = 22000;
+        let gameSpeed = 4;
+        let baseSpeed = 4;
+        let isSpeakingFeedback = false;
+
+        // Collectibles
+        let notes = [];
+        let noteCount = 0;
+
+        // Power-ups
+        let powerUps = [];
+        let isInvincible = false;
+        let invincibleTimer = 0;
+
+        // Player
+        let player = {
+            x: 100,
+            y: 0,
+            width: 50,
+            height: 70,
+            velocityY: 0,
+            jumping: false,
+            grounded: true
+        };
+
+        // Physics
+        const gravity = 0.8;
+        const jumpForce = -16;
+
+        // Obstacles
+        let obstacles = [];
+        let obstacleTimer = 0;
+
+        // Background
+        let bgOffset = 0;
+        let stageLights = [];
+        let speakers = [];
+
+        // Music Year 7 Autumn Term Questions - Musical Elements Focus
+        const questions = [
+            // Tempo
+            {
+                text: "What does TEMPO mean in music?",
+                context: "Musical Elements - Tempo",
+                answers: ["The speed of the music", "How loud the music is", "The pitch of notes", "The number of instruments"],
+                correct: 0,
+                english: "Tempo refers to how fast or slow the music is played. For example, Allegro means fast, Adagio means slow."
+            },
+            {
+                text: "What Italian term means 'slow'?",
+                context: "Tempo Markings",
+                answers: ["Adagio", "Allegro", "Forte", "Piano"],
+                correct: 0,
+                english: "Adagio is an Italian tempo marking meaning slow. Other slow tempos include Lento and Largo."
+            },
+            {
+                text: "What does 'Allegro' tell a musician?",
+                context: "Tempo Markings",
+                answers: ["Play fast and lively", "Play quietly", "Play loudly", "Play sadly"],
+                correct: 0,
+                english: "Allegro means fast and lively. It comes from Italian and is one of the most common tempo markings."
+            },
+            // Dynamics
+            {
+                text: "What does DYNAMICS mean in music?",
+                context: "Musical Elements - Dynamics",
+                answers: ["How loud or quiet", "How fast or slow", "How high or low", "How long or short"],
+                correct: 0,
+                english: "Dynamics describe the volume of the music - how loud (forte) or quiet (piano) it should be played."
+            },
+            {
+                text: "What does 'Forte' mean?",
+                context: "Dynamic Markings",
+                answers: ["Loud", "Quiet", "Fast", "Slow"],
+                correct: 0,
+                english: "Forte (f) means loud. It comes from the Italian word for strong. Fortissimo (ff) means very loud."
+            },
+            {
+                text: "What does 'Piano' mean in dynamics?",
+                context: "Dynamic Markings",
+                answers: ["Quiet/Soft", "Loud", "Medium", "Very fast"],
+                correct: 0,
+                english: "Piano (p) means quiet or soft. The instrument 'pianoforte' was named because it could play both soft and loud."
+            },
+            // Pitch
+            {
+                text: "What does PITCH describe?",
+                context: "Musical Elements - Pitch",
+                answers: ["How high or low a note sounds", "How loud a note sounds", "How long a note lasts", "How many notes play"],
+                correct: 0,
+                english: "Pitch is how high or low a sound is. High notes are made by fast vibrations, low notes by slow vibrations."
+            },
+            {
+                text: "Where are high notes found on the treble clef?",
+                context: "Reading Pitch",
+                answers: ["At the top of the stave", "At the bottom of the stave", "In the middle only", "Outside the stave only"],
+                correct: 0,
+                english: "Higher pitches are written higher on the stave. The bottom line is E, going up to F at the top."
+            },
+            // Rhythm
+            {
+                text: "What does RHYTHM mean in music?",
+                context: "Musical Elements - Rhythm",
+                answers: ["The pattern of long and short sounds", "The speed of music", "The volume of music", "The type of instruments"],
+                correct: 0,
+                english: "Rhythm is the pattern of long and short notes that creates the 'beat' of the music we tap along to."
+            },
+            {
+                text: "How many beats does a CROTCHET last?",
+                context: "Note Values",
+                answers: ["1 beat", "2 beats", "4 beats", "Half a beat"],
+                correct: 0,
+                english: "A crotchet (quarter note) lasts for 1 beat. It's the most common note value you'll see in music."
+            },
+            {
+                text: "How many beats does a MINIM last?",
+                context: "Note Values",
+                answers: ["2 beats", "1 beat", "4 beats", "Half a beat"],
+                correct: 0,
+                english: "A minim (half note) lasts for 2 beats. It looks like a crotchet but with an empty (white) note head."
+            },
+            {
+                text: "How many beats does a QUAVER last?",
+                context: "Note Values",
+                answers: ["Half a beat", "1 beat", "2 beats", "4 beats"],
+                correct: 0,
+                english: "A quaver (eighth note) lasts for half a beat. Two quavers equal one crotchet."
+            },
+            // Texture
+            {
+                text: "What does TEXTURE describe in music?",
+                context: "Musical Elements - Texture",
+                answers: ["How thick or thin the sound is", "The speed of the music", "How loud it is", "The rhythm pattern"],
+                correct: 0,
+                english: "Texture describes how many layers of sound there are. One melody is thin; many parts together is thick."
+            },
+            {
+                text: "What is a CANON in music?",
+                context: "Vocal Technique",
+                answers: ["Same melody sung at different times", "A loud dynamic marking", "A type of instrument", "A slow tempo"],
+                correct: 0,
+                english: "A canon is when singers perform the same melody but start at different times, creating overlapping harmonies."
+            },
+            {
+                text: "What is HARMONY in music?",
+                context: "Musical Elements - Texture",
+                answers: ["Multiple notes sounding together", "A single melody line", "The speed of music", "A very quiet section"],
+                correct: 0,
+                english: "Harmony happens when two or more different notes sound at the same time, creating richer, fuller sound."
+            },
+            // Keyboard & Notation
+            {
+                text: "What clef do Year 7 students read for keyboard?",
+                context: "Musical Notation",
+                answers: ["Treble Clef", "Bass Clef", "Alto Clef", "Tenor Clef"],
+                correct: 0,
+                english: "The treble clef (also called G clef) is used for higher-pitched instruments and the right hand on piano."
+            },
+            {
+                text: "What do the lines EGBDF represent?",
+                context: "Treble Clef Lines",
+                answers: ["Line notes on treble clef", "Space notes on treble clef", "Dynamic markings", "Tempo markings"],
+                correct: 0,
+                english: "EGBDF are the notes on the lines of the treble clef, remembered as 'Every Good Boy Deserves Football'."
+            },
+            {
+                text: "What do the spaces FACE represent?",
+                context: "Treble Clef Spaces",
+                answers: ["Space notes on treble clef", "Line notes on treble clef", "Rhythm patterns", "Dynamic levels"],
+                correct: 0,
+                english: "FACE are the notes in the spaces of the treble clef, going from bottom to top: F, A, C, E."
+            },
+            // Vocal Technique
+            {
+                text: "Why is good POSTURE important for singing?",
+                context: "Vocal Technique",
+                answers: ["Allows lungs to expand fully", "Makes you look better", "Is required by teachers", "Makes notes quieter"],
+                correct: 0,
+                english: "Good posture lets your lungs expand fully for deep breaths, producing stronger, steadier tone and better projection."
+            },
+            {
+                text: "What is SOLFEGE used for?",
+                context: "Vocal Training",
+                answers: ["Teaching pitch and sight-singing", "Playing keyboard", "Writing lyrics", "Conducting an orchestra"],
+                correct: 0,
+                english: "Solfege uses syllables (Do, Re, Mi, Fa, Sol, La, Ti) to help singers learn pitch relationships and sight-read music."
+            },
+            {
+                text: "What are KODALY hand signs used for?",
+                context: "Vocal Training",
+                answers: ["Showing pitch relationships", "Counting rhythms", "Showing dynamics", "Conducting tempo"],
+                correct: 0,
+                english: "Kodaly hand signs are hand gestures that represent each solfege note, helping students visualize and feel pitch changes."
+            },
+            // Keyboard
+            {
+                text: "How many white keys make up one OCTAVE?",
+                context: "Keyboard Layout",
+                answers: ["8 keys (including both ends)", "7 keys", "12 keys", "5 keys"],
+                correct: 0,
+                english: "An octave spans 8 white keys from one note to the next same note (like C to C), covering all 7 letter names."
+            },
+            {
+                text: "What pattern do black keys follow on a keyboard?",
+                context: "Keyboard Layout",
+                answers: ["Groups of 2 and 3", "Groups of 3 and 4", "All evenly spaced", "Groups of 1 and 2"],
+                correct: 0,
+                english: "Black keys are grouped in twos and threes, which helps pianists find their position on the keyboard quickly."
+            },
+            {
+                text: "What does a BAR LINE do in written music?",
+                context: "Musical Notation",
+                answers: ["Divides music into equal sections", "Shows tempo changes", "Indicates loud passages", "Marks the end only"],
+                correct: 0,
+                english: "Bar lines are vertical lines that divide music into bars (measures) of equal beats, making it easier to read and count."
+            }
+        ];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 150 - player.height;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        function generateStageLights() {
+            stageLights = [];
+            for (let i = 0; i < 10; i++) {
+                stageLights.push({
+                    x: i * 200 + Math.random() * 100,
+                    color: ['#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3'][Math.floor(Math.random() * 5)],
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+        }
+
+        function generateSpeakers() {
+            speakers = [];
+            for (let i = 0; i < 6; i++) {
+                speakers.push({
+                    x: i * 350 + Math.random() * 100,
+                    size: 60 + Math.random() * 40
+                });
+            }
+        }
+
+        function drawBackground() {
+            // Concert hall gradient
+            const hallGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            hallGradient.addColorStop(0, '#1a1a2e');
+            hallGradient.addColorStop(0.5, '#16213e');
+            hallGradient.addColorStop(1, '#0f0f23');
+            ctx.fillStyle = hallGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Stage lights beams
+            stageLights.forEach(light => {
+                const lightX = ((light.x - bgOffset * 0.3) % (canvas.width + 400)) - 100;
+                const pulse = Math.sin(Date.now() / 300 + light.phase) * 0.3 + 0.7;
+
+                ctx.fillStyle = light.color;
+                ctx.globalAlpha = 0.15 * pulse;
+                ctx.beginPath();
+                ctx.moveTo(lightX, 0);
+                ctx.lineTo(lightX - 80, canvas.height);
+                ctx.lineTo(lightX + 80, canvas.height);
+                ctx.closePath();
+                ctx.fill();
+                ctx.globalAlpha = 1;
+
+                // Light fixture
+                ctx.fillStyle = '#333';
+                ctx.fillRect(lightX - 15, 0, 30, 20);
+                ctx.fillStyle = light.color;
+                ctx.beginPath();
+                ctx.arc(lightX, 25, 12, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Speakers in background
+            speakers.forEach(speaker => {
+                const speakerX = ((speaker.x - bgOffset * 0.5) % (canvas.width + 600)) - 200;
+                drawSpeaker(speakerX, canvas.height * 0.3, speaker.size);
+            });
+
+            // Stage floor
+            const stageGradient = ctx.createLinearGradient(0, canvas.height - 180, 0, canvas.height);
+            stageGradient.addColorStop(0, '#2d2d44');
+            stageGradient.addColorStop(1, '#1a1a2e');
+            ctx.fillStyle = stageGradient;
+            ctx.fillRect(0, canvas.height - 180, canvas.width, 180);
+
+            // Stage edge glow
+            ctx.fillStyle = '#9C27B0';
+            ctx.shadowColor = '#9C27B0';
+            ctx.shadowBlur = 20;
+            ctx.fillRect(0, canvas.height - 155, canvas.width, 5);
+            ctx.shadowBlur = 0;
+
+            // Floor pattern
+            ctx.strokeStyle = 'rgba(156, 39, 176, 0.2)';
+            ctx.lineWidth = 1;
+            for (let x = -bgOffset % 100; x < canvas.width; x += 100) {
+                ctx.beginPath();
+                ctx.moveTo(x, canvas.height - 150);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            // Musical staff lines on wall
+            ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 5; i++) {
+                const y = 150 + i * 20;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+
+            // Floating treble clef symbol
+            ctx.font = '60px Arial';
+            ctx.fillStyle = 'rgba(156, 39, 176, 0.3)';
+            const clefX = ((300 - bgOffset * 0.1) % (canvas.width + 200)) - 100;
+            ctx.fillText('𝄞', clefX, 200);
+        }
+
+        function drawSpeaker(x, y, size) {
+            // Speaker cabinet
+            ctx.fillStyle = '#1a1a2e';
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 3;
+            ctx.fillRect(x - size/2, y, size, size * 1.5);
+            ctx.strokeRect(x - size/2, y, size, size * 1.5);
+
+            // Speaker cone
+            ctx.fillStyle = '#2d2d44';
+            ctx.beginPath();
+            ctx.arc(x, y + size * 0.5, size * 0.35, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#3d3d5c';
+            ctx.beginPath();
+            ctx.arc(x, y + size * 0.5, size * 0.2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Woofer
+            ctx.fillStyle = '#2d2d44';
+            ctx.beginPath();
+            ctx.arc(x, y + size * 1.1, size * 0.25, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawPlayer() {
+            // Concert performer outfit
+            // Body - concert jacket
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(player.x, player.y + 20, player.width - 10, 35);
+
+            // Shirt underneath
+            ctx.fillStyle = '#9C27B0';
+            ctx.fillRect(player.x + 12, player.y + 22, 16, 15);
+
+            // Head
+            ctx.fillStyle = '#fcd5b8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 12, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Hair
+            ctx.fillStyle = '#4a3728';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 5, 14, Math.PI, 0);
+            ctx.fill();
+
+            // Headphones
+            ctx.fillStyle = '#333';
+            ctx.strokeStyle = '#555';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 5, 18, Math.PI, 0);
+            ctx.stroke();
+
+            // Ear cups
+            ctx.fillStyle = '#9C27B0';
+            ctx.beginPath();
+            ctx.ellipse(player.x + 3, player.y + 12, 8, 10, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(player.x + 37, player.y + 12, 8, 10, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Legs
+            ctx.fillStyle = '#1d1d1f';
+            if (player.grounded) {
+                ctx.fillRect(player.x + 5, player.y + 55, 12, 15);
+                ctx.fillRect(player.x + 22, player.y + 55, 12, 15);
+            } else {
+                ctx.fillRect(player.x + 5, player.y + 50, 12, 20);
+                ctx.fillRect(player.x + 22, player.y + 50, 12, 20);
+            }
+
+            // Invincibility glow
+            if (isInvincible) {
+                ctx.strokeStyle = 'rgba(156, 39, 176, 0.8)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(player.x + 25, player.y + 35, 45, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        function spawnObstacle() {
+            const types = [
+                { width: 50, height: 50, emoji: '🎹' },
+                { width: 45, height: 55, emoji: '🎸' },
+                { width: 40, height: 40, emoji: '🥁' },
+                { width: 50, height: 45, emoji: '🎺' },
+                { width: 45, height: 50, emoji: '🎻' },
+                { width: 40, height: 40, emoji: '📢' },
+                { width: 45, height: 45, emoji: '🎤' }
+            ];
+            const type = types[Math.floor(Math.random() * types.length)];
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - type.height,
+                width: type.width,
+                height: type.height,
+                emoji: type.emoji
+            });
+
+            if (Math.random() < 0.15 && level > 1) {
+                const type2 = types[Math.floor(Math.random() * types.length)];
+                obstacles.push({
+                    x: canvas.width + 150,
+                    y: canvas.height - 150 - type2.height,
+                    width: type2.width,
+                    height: type2.height,
+                    emoji: type2.emoji
+                });
+            }
+        }
+
+        function spawnNote() {
+            const noteEmojis = ['🎵', '🎶', '♪', '♫'];
+            const heights = [80, 120, 160];
+            notes.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - heights[Math.floor(Math.random() * heights.length)],
+                emoji: noteEmojis[Math.floor(Math.random() * noteEmojis.length)],
+                collected: false
+            });
+        }
+
+        function spawnPowerUp() {
+            const types = ['shield', 'magnet', 'slow'];
+            powerUps.push({
+                x: canvas.width + 50,
+                y: canvas.height - 280,
+                type: types[Math.floor(Math.random() * types.length)],
+                collected: false
+            });
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obs => {
+                ctx.font = `${obs.height}px Arial`;
+                ctx.fillText(obs.emoji, obs.x, obs.y + obs.height - 5);
+            });
+        }
+
+        function drawNotes() {
+            notes.forEach(n => {
+                if (!n.collected) {
+                    ctx.font = '35px Arial';
+                    const bob = Math.sin(Date.now() / 200 + n.x) * 5;
+                    ctx.fillText(n.emoji, n.x, n.y + bob);
+                }
+            });
+        }
+
+        function drawPowerUps() {
+            powerUps.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '40px Arial';
+                    const bob = Math.sin(Date.now() / 150) * 8;
+                    let emoji = p.type === 'shield' ? '⭐' : p.type === 'magnet' ? '🧲' : '⏱️';
+                    ctx.fillText(emoji, p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawProgressBar() {
+            const barWidth = 200;
+            const barHeight = 10;
+            const barX = canvas.width / 2 - barWidth / 2;
+            const barY = 70;
+            const progress = Math.min(distance / checkpointDistance, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            ctx.fillStyle = '#E91E63';
+            ctx.fillRect(barX, barY, barWidth * progress, barHeight);
+
+            ctx.fillStyle = 'white';
+            ctx.font = '12px Arial';
+            ctx.fillText('🏁', barX + barWidth - 15, barY + 10);
+        }
+
+        let noteSpawnTimer = 0;
+        let powerUpSpawnTimer = 0;
+        let comboCount = 0;
+        let comboTimer = 0;
+
+        function update() {
+            if (!gameRunning) return;
+
+            gameSpeed = Math.min(baseSpeed + 5, baseSpeed + (distance / 5000));
+
+            bgOffset += gameSpeed;
+            distance += gameSpeed;
+
+            if (!player.grounded) {
+                player.velocityY += gravity;
+                player.y += player.velocityY;
+
+                if (player.y >= canvas.height - 150 - player.height) {
+                    player.y = canvas.height - 150 - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                    player.jumping = false;
+                }
+            }
+
+            obstacleTimer++;
+            const obstacleFreq = Math.max(80, 180 - gameSpeed * 15);
+            if (obstacleTimer > obstacleFreq + Math.random() * 60) {
+                spawnObstacle();
+                obstacleTimer = 0;
+            }
+
+            noteSpawnTimer++;
+            if (noteSpawnTimer > 40 + Math.random() * 30) {
+                spawnNote();
+                noteSpawnTimer = 0;
+            }
+
+            powerUpSpawnTimer++;
+            if (powerUpSpawnTimer > 400 + Math.random() * 200) {
+                spawnPowerUp();
+                powerUpSpawnTimer = 0;
+            }
+
+            obstacles.forEach(obs => { obs.x -= gameSpeed; });
+            notes.forEach(n => { n.x -= gameSpeed; });
+            powerUps.forEach(p => { p.x -= gameSpeed; });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+            notes = notes.filter(n => n.x > -100);
+            powerUps = powerUps.filter(p => p.x > -100);
+
+            if (!isInvincible) {
+                obstacles.forEach(obs => {
+                    if (player.x < obs.x + obs.width - 10 &&
+                        player.x + player.width - 10 > obs.x &&
+                        player.y + player.height > obs.y &&
+                        player.y < obs.y + obs.height) {
+                        hitObstacle();
+                    }
+                });
+            }
+
+            notes.forEach(n => {
+                if (!n.collected &&
+                    player.x < n.x + 35 &&
+                    player.x + player.width > n.x &&
+                    player.y < n.y + 35 &&
+                    player.y + player.height > n.y - 20) {
+                    n.collected = true;
+                    noteCount++;
+                    score += 50;
+                    comboCount++;
+                    comboTimer = 60;
+                    if (comboCount >= 3) score += comboCount * 20;
+                }
+            });
+
+            powerUps.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 40 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 20 &&
+                    player.y + player.height > p.y - 30) {
+                    p.collected = true;
+                    activatePowerUp(p.type);
+                }
+            });
+
+            if (comboTimer > 0) comboTimer--;
+            else comboCount = 0;
+
+            if (isInvincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) isInvincible = false;
+            }
+
+            if (distance >= checkpointDistance) reachCheckpoint();
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('notes').textContent = noteCount;
+        }
+
+        function activatePowerUp(type) {
+            if (type === 'shield') {
+                isInvincible = true;
+                invincibleTimer = 180;
+            } else if (type === 'slow') {
+                gameSpeed = Math.max(3, gameSpeed - 2);
+                setTimeout(() => { gameSpeed = baseSpeed; }, 3000);
+            } else if (type === 'magnet') {
+                notes.forEach(n => {
+                    if (!n.collected && n.x < player.x + 300) {
+                        n.x = player.x + 30;
+                        n.y = player.y + 20;
+                    }
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawNotes();
+            drawPowerUps();
+            drawObstacles();
+            drawPlayer();
+            drawProgressBar();
+
+            if (comboCount >= 3) {
+                ctx.fillStyle = '#E91E63';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText(`COMBO x${comboCount}!`, player.x - 20, player.y - 30);
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.velocityY = jumpForce;
+                player.grounded = false;
+                player.jumping = true;
+            }
+        }
+
+        function hitObstacle() {
+            lives--;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                obstacles = [];
+                distance = Math.max(0, distance - 200);
+                canvas.style.filter = 'brightness(2)';
+                setTimeout(() => canvas.style.filter = 'none', 100);
+            }
+        }
+
+        function reachCheckpoint() {
+            distance = 0;
+            level++;
+
+            if (level > 3) {
+                winGame();
+                return;
+            }
+
+            checkpointDistance = 22000 + level * 2000;
+            baseSpeed = 4 + level * 0.5;
+            gameSpeed = baseSpeed;
+            document.getElementById('level').textContent = level;
+        }
+
+        // TTS Functions
+        function speak(text, lang = 'en-GB') {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                const voices = speechSynthesis.getVoices();
+                const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+                if (voice) utterance.voice = voice;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[questionCount % questions.length];
+            currentQuestion = question;
+
+            const questionInCycle = (questionCount % questions.length) + 1;
+            document.getElementById('checkpoint-num').textContent = questionInCycle;
+            document.getElementById('total-questions').textContent = questions.length;
+            document.getElementById('q-text').textContent = question.text;
+            document.getElementById('q-context').textContent = question.context;
+
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+
+            const shuffledAnswers = question.answers.map((ans, i) => ({ text: ans, isCorrect: i === question.correct }));
+            shuffledAnswers.sort(() => Math.random() - 0.5);
+            currentAnswers = shuffledAnswers;
+
+            const labels = ['A', 'B', 'C', 'D'];
+            shuffledAnswers.forEach((ans, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.onclick = () => handleAnswer(btn, ans.isCorrect, question.english);
+                btn.innerHTML = `<strong>${labels[i]}</strong> ${ans.text}`;
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback-text';
+
+            readQuestionAndAnswers(question.text, shuffledAnswers, labels);
+        }
+
+        function readQuestionAndAnswers(questionText, answers, labels) {
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeakingFeedback) return;
+
+            speechSynthesis.cancel();
+
+            const voices = speechSynthesis.getVoices();
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+
+            const queue = [];
+
+            // Question
+            const qUtterance = new SpeechSynthesisUtterance(questionText);
+            qUtterance.lang = 'en-GB';
+            qUtterance.rate = 0.9;
+            if (englishVoice) qUtterance.voice = englishVoice;
+            queue.push(qUtterance);
+
+            // Answers
+            answers.forEach((ans, i) => {
+                const labelUtterance = new SpeechSynthesisUtterance(labels[i]);
+                labelUtterance.lang = 'en-GB';
+                labelUtterance.rate = 1.0;
+                if (englishVoice) labelUtterance.voice = englishVoice;
+                queue.push(labelUtterance);
+
+                const ansUtterance = new SpeechSynthesisUtterance(ans.text);
+                ansUtterance.lang = 'en-GB';
+                ansUtterance.rate = 0.9;
+                if (englishVoice) ansUtterance.voice = englishVoice;
+                queue.push(ansUtterance);
+            });
+
+            let i = 0;
+            function playNext() {
+                if (i < queue.length) {
+                    queue[i].onend = playNext;
+                    speechSynthesis.speak(queue[i]);
+                    i++;
+                }
+            }
+            playNext();
+        }
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.getVoices();
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        let questionCount = 0;
+        let currentQuestion = null;
+        let currentAnswers = null;
+        const answerLabels = ['A', 'B', 'C', 'D'];
+
+        function rereadQuestion() {
+            if (currentQuestion && currentAnswers) {
+                readQuestionAndAnswers(currentQuestion.text, currentAnswers, answerLabels);
+            }
+        }
+
+        function handleAnswer(btn, isCorrect, explanation) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('feedback');
+            const question = questions[questionCount % questions.length];
+            const correctAnswer = question.answers[question.correct];
+
+            speechSynthesis.cancel();
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                lives++;
+                score += 200;
+                document.getElementById('lives').textContent = lives;
+                document.getElementById('score').textContent = score;
+
+                feedback.textContent = '✅ +1 ❤️ Correct!';
+                feedback.className = 'feedback-text correct';
+
+                speakFeedback("Correct!", 'en-GB', () => {
+                    speakFeedback(explanation, 'en-GB', () => {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    });
+                });
+            } else {
+                btn.classList.add('wrong');
+
+                feedback.textContent = '❌ ' + correctAnswer + ' - ' + explanation;
+                feedback.className = 'feedback-text wrong';
+
+                speakFeedback("Wrong! The answer is:", 'en-GB', () => {
+                    speakFeedback(correctAnswer, 'en-GB', () => {
+                        speakFeedback(explanation, 'en-GB', () => {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        });
+                    });
+                });
+            }
+        }
+
+        function speakFeedback(text, lang, callback, isLast = false) {
+            isSpeakingFeedback = true;
+            const voices = speechSynthesis.getVoices();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 1.0;
+
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+            if (englishVoice) utterance.voice = englishVoice;
+
+            utterance.onend = () => {
+                if (isLast) isSpeakingFeedback = false;
+                if (callback) callback();
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'flex';
+            document.getElementById('final-level').textContent = level;
+            document.getElementById('final-score').textContent = score;
+        }
+
+        function winGame() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'flex';
+            document.getElementById('win-score').textContent = score;
+            document.getElementById('win-notes').textContent = noteCount;
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('question-overlay').style.display = 'block';
+
+            level = 1;
+            score = 0;
+            lives = 3;
+            distance = 0;
+            checkpointDistance = 22000;
+            gameSpeed = 4;
+            baseSpeed = 4;
+            isSpeakingFeedback = false;
+            obstacles = [];
+            notes = [];
+            powerUps = [];
+            noteCount = 0;
+            isInvincible = false;
+            invincibleTimer = 0;
+            comboCount = 0;
+            comboTimer = 0;
+            obstacleTimer = 0;
+            noteSpawnTimer = 0;
+            powerUpSpawnTimer = 0;
+            questionCount = 0;
+
+            document.getElementById('level').textContent = level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            document.getElementById('notes').textContent = noteCount;
+
+            player.y = canvas.height - 150 - player.height;
+            player.velocityY = 0;
+            player.grounded = true;
+
+            generateStageLights();
+            generateSpeakers();
+            gameRunning = true;
+
+            showQuestion();
+        }
+
+        // Gamepad support
+        let gamepadConnected = false;
+        let lastButtonStates = {};
+
+        window.addEventListener('gamepadconnected', () => { gamepadConnected = true; });
+        window.addEventListener('gamepaddisconnected', () => { gamepadConnected = false; });
+
+        function pollGamepad() {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads) return;
+
+            for (const gamepad of gamepads) {
+                if (!gamepad) continue;
+
+                const buttons = gamepad.buttons;
+
+                if ((buttons[7]?.pressed || buttons[6]?.pressed) && !lastButtonStates['jump']) {
+                    jump();
+                    lastButtonStates['jump'] = true;
+                } else if (!buttons[7]?.pressed && !buttons[6]?.pressed) {
+                    lastButtonStates['jump'] = false;
+                }
+
+                const answerMap = [
+                    { btn: 2, answer: 0, key: 'X' },
+                    { btn: 3, answer: 1, key: 'Y' },
+                    { btn: 0, answer: 2, key: 'A' },
+                    { btn: 1, answer: 3, key: 'B' }
+                ];
+
+                answerMap.forEach(({ btn, answer, key }) => {
+                    if (buttons[btn]?.pressed && !lastButtonStates[key]) {
+                        const answerBtns = document.querySelectorAll('.answer-btn');
+                        if (answerBtns[answer] && !answerBtns[answer].disabled) {
+                            answerBtns[answer].click();
+                        }
+                        lastButtonStates[key] = true;
+                    } else if (!buttons[btn]?.pressed) {
+                        lastButtonStates[key] = false;
+                    }
+                });
+            }
+            requestAnimationFrame(pollGamepad);
+        }
+        pollGamepad();
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+
+            const keyMap = { 'KeyA': 0, 'KeyB': 1, 'KeyC': 2, 'KeyD': 3 };
+            if (keyMap.hasOwnProperty(e.code)) {
+                const btns = document.querySelectorAll('.answer-btn');
+                if (btns[keyMap[e.code]] && !btns[keyMap[e.code]].disabled) {
+                    btns[keyMap[e.code]].click();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+        document.getElementById('jump-btn').addEventListener('click', jump);
+        document.getElementById('jump-btn').addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+
+        // Initialize
+        resizeCanvas();
+        generateStageLights();
+        generateSpeakers();
+        gameLoop();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 8 History - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .term-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #8B4513;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .term-subtitle {
+            font-size: 1.25rem;
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .week-section {
+            margin: 2rem 0;
+        }
+
+        .week-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.6;
+        }
+
+        .week-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .week-content ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .week-content ul li:before {
+            content: "•";
+            color: #8B4513;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .vocab-section {
+            margin: 2rem 0;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .vocab-section h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .vocab-section p {
+            color: #86868b;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #8B4513;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skill-description {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block; margin: 0; padding: 0; vertical-align: top;">
+    </iframe>
+
+    <div class="hero" style="margin-top: -3px;">
+        <h1>📜 Year 8 History</h1>
+        <p>Exploring British History 1500-1900: Tudors, Stuarts, Industrial Revolution & Empire - developing advanced historical analysis for GCSE preparation</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👨‍🏫 AI Tutor - Professor Tudor</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Ms. Temporal</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>Year 8 History Journey</h2>
+            <p>Year 8 History focuses on British History from 1500-1900, exploring the transformative Tudor and Stuart periods, the Industrial Revolution, and the expansion of the British Empire. Students develop advanced analytical skills in source evaluation, causation, and historical interpretation preparing them for GCSE-level study.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">📖</div>
+                    <h3 class="skill-title">Advanced Source Analysis</h3>
+                    <p class="skill-description">Evaluating complex historical sources for reliability, utility, and bias. Understanding provenance and applying contextual knowledge to assess historical evidence.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">⚖️</div>
+                    <h3 class="skill-title">Historical Causation</h3>
+                    <p class="skill-description">Analyzing multiple causes of historical events, weighing short-term and long-term factors, and understanding how causes interact to create historical change.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🔄</div>
+                    <h3 class="skill-title">Change & Continuity</h3>
+                    <p class="skill-description">Evaluating the pace and nature of historical change, identifying what changed and what stayed the same across different historical periods.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎯</div>
+                    <h3 class="skill-title">Historical Significance</h3>
+                    <p class="skill-description">Assessing why events, people, and developments were significant in their own time and understanding their long-term historical impact.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">👥</div>
+                    <h3 class="skill-title">Multiple Perspectives</h3>
+                    <p class="skill-description">Understanding how different groups experienced historical events and why interpretations of the past vary between historians and communities.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">✍️</div>
+                    <h3 class="skill-title">Extended Writing</h3>
+                    <p class="skill-description">Constructing sophisticated historical arguments with evidence, developing analytical paragraphs, and writing coherent essays for GCSE preparation.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="autumn" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🍂 Autumn Term</h2>
+                <p class="term-subtitle">Tudor Dynasty: Power, Religion & Revolution 1485-1603</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Henry VIII and the English Reformation</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Henry VIII's consolidation of Tudor power and the Wars of the Roses legacy</li>
+                        <li>The "Great Matter" - Henry's quest for a male heir and divorce from Catherine of Aragon</li>
+                        <li>The Break with Rome: political, religious, and economic causes</li>
+                        <li>Dissolution of the Monasteries - impact on religion, society, and economy</li>
+                        <li>Thomas Cromwell's role in religious and political transformation</li>
+                        <li>Catherine Howard, Catherine Parr, and the politics of royal marriage</li>
+                        <li>Henry VIII's legacy: strengthened monarchy but religious division</li>
+                        <li>Source analysis: contemporary accounts of Henry VIII and the Reformation</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Political Terms:</strong> Reformation, Dissolution, Supremacy, Annulment, Succession<br>
+                            <strong>Religious Terms:</strong> Catholicism, Protestantism, Pope, Clergy, Monasteries, Pilgrimage<br>
+                            <strong>Historical Concepts:</strong> Causation, Consequence, Continuity, Legacy, Provenance</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #92400e 0%, #b45309 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">👑 Tudor Timeline Challenge</h4>
+                            <p style="margin-bottom: 1rem; opacity: 0.9;">Master the sequence of Tudor monarchs and key events in this interactive timeline game!</p>
+                            <a href="../games/tudor_timeline_challenge_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- I Can Now Answer Box -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #8B4513;">
+                <h3 style="color: #8B4513; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                </h3>
+                <ul style="color: #8B4513; margin-left: 1.5rem; list-style: none;">
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why did Henry VIII break from Rome?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Multiple causes: personal (needed male heir, Pope refused divorce), political (wanted supremacy over English Church), economic (desired wealth from monasteries), religious (influenced by Protestant ideas). The Break from Rome gave Henry control of Church and religion in England.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What was the impact of the Dissolution of the Monasteries?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Religious: ended monastic life, destroyed religious communities. Social: monks/nuns lost homes, poor lost charity. Economic: Crown gained massive wealth, new landowners emerged. Cultural: destruction of medieval art, manuscripts, buildings. This fundamentally changed English society and religion.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How do we evaluate the reliability of Tudor sources?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Check provenance (who created it, when, why), consider bias (personal interests, propaganda), cross-reference with other sources, understand context (social/political situation). Royal sources may exaggerate power; opponents may be biased against the king. No single source tells the whole story.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What was Thomas Cromwell's role in the English Reformation?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Henry's chief minister who organized the Break from Rome, managed the Dissolution of Monasteries, created efficient administrative systems, promoted Protestant reforms. His political skill made the Reformation possible but he fell from power in 1540 due to court politics and the Anne of Cleves marriage failure.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How did Henry VIII's reign change England permanently?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Established Protestant Church of England (ending Catholic dominance), strengthened royal power over religion and politics, redistributed monastic land (creating new nobility), increased state bureaucracy, left religious divisions that lasted centuries. England became permanently separate from Catholic Europe.
+                        </div>
+                    </li>
+                    <li style="position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why did Henry VIII have six wives?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Political necessity for male heir to secure Tudor dynasty. Catherine of Aragon: no male heir. Anne Boleyn: produced Elizabeth, executed for alleged treason. Jane Seymour: died after producing Edward VI. Anne of Cleves: political marriage annulled. Catherine Howard: executed for adultery. Catherine Parr: survived him. Marriage was political tool, not just personal.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="week-section" style="margin-top: 3rem;">
+                <div class="week-title">Weeks 8-14: Elizabeth I - The Golden Age?</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Elizabeth I's accession and the religious settlement - finding a "middle way"</li>
+                        <li>Catholic threats: plots, conspiracies, and Mary Queen of Scots</li>
+                        <li>Spanish Armada 1588 - causes, events, defeat, and significance</li>
+                        <li>Elizabethan exploration and the beginning of empire (Drake, Raleigh)</li>
+                        <li>Elizabethan society: rich and poor, town and country</li>
+                        <li>Cultural achievements: Shakespeare, theatre, and the "Golden Age"</li>
+                        <li>Evaluation: Was Elizabethan England really a "Golden Age" for everyone?</li>
+                        <li>Source work: propaganda images vs. reality in Elizabethan England</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Political Terms:</strong> Settlement, Excommunication, Succession, Treachery, Execution, Parliament<br>
+                        <strong>Military Terms:</strong> Armada, Navy, Defeat, Strategy, Fireships<br>
+                        <strong>Social Terms:</strong> Exploration, Colony, Theatre, Poverty, Vagrancy, Poor Laws</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- I Can Now Answer Box -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #8B4513;">
+                <h3 style="color: #8B4513; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                </h3>
+                <ul style="color: #8B4513; margin-left: 1.5rem; list-style: none;">
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How did Elizabeth I solve England's religious problems?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Religious Settlement 1559 created "middle way" - kept Protestant Church structure but Catholic-style ceremonies. Tried to satisfy both sides but pleased neither fully. Fined Catholics for not attending church, executed extreme Catholics and Protestants. Pragmatic compromise that maintained stability despite threats.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why was Mary Queen of Scots executed?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Catholic claimant to English throne, focus of Catholic plots (Ridolfi, Throckmorton, Babington). Elizabeth reluctant (killing anointed monarch dangerous) but Parliament pressured execution after Babington Plot 1586. Mary's execution removed Catholic figurehead but worsened relations with Catholic Europe, especially Spain.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why did the Spanish Armada fail?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Multiple reasons: English naval tactics (faster ships, longer-range guns), poor Spanish planning (Duke of Parma coordination failure), weather ("Protestant Wind"), fireships at Calais disrupted formation, Spanish ships built for boarding not long-range combat. Combination of English skill and Spanish mistakes, plus luck.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Was Elizabethan England really a 'Golden Age'?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Yes for: cultural achievements (Shakespeare, theatre), exploration and wealth, military success, strong female ruler. No for: most people poor, harsh treatment of vagrants, religious persecution, strict social hierarchy. "Golden" for wealthy and culturally elite, harsh for poor. Depends whose perspective you take.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How did Elizabethan exploration begin the British Empire?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Drake's circumnavigation (1577-80) proved wealth from raiding Spanish colonies. Raleigh's Virginia colony attempts (1580s) established colonization idea. Privateering brought wealth, challenged Spanish dominance. Trade companies formed (East India Company 1600). Laid foundations for 17th century colonial expansion and empire building.
+                        </div>
+                    </li>
+                    <li style="position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How do historians use different types of sources to understand Elizabethan England?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Portraits and propaganda: show how Elizabeth wanted to be seen. Government records: reveal real policies and problems. Letters and diaries: personal perspectives. Church records: religious changes. Archaeological evidence: how people actually lived. Must compare sources to separate propaganda from reality and understand different experiences.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="spring" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🌸 Spring Term</h2>
+                <p class="term-subtitle">Stuart Britain: Civil War, Revolution & Religious Conflict 1603-1714</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: English Civil War - King vs Parliament</div>
+                <div class="week-content">
+                    <ul>
+                        <li>James I and the Divine Right of Kings - tensions with Parliament</li>
+                        <li>Charles I's rule: Ship Money, religious conflicts, and constitutional crisis</li>
+                        <li>Long-term and short-term causes of the English Civil War</li>
+                        <li>Key battles: Edgehill, Marston Moor, Naseby - Royalists vs Parliamentarians</li>
+                        <li>Oliver Cromwell and the New Model Army - military innovation</li>
+                        <li>Trial and execution of Charles I 1649 - regicide and its significance</li>
+                        <li>The Interregnum: Commonwealth and Protectorate 1649-1660</li>
+                        <li>Source analysis: contemporary views on executing the king</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Political Terms:</strong> Divine Right, Parliament, Commonwealth, Protectorate, Regicide, Republic<br>
+                            <strong>Military Terms:</strong> Cavaliers, Roundheads, New Model Army, Siege<br>
+                            <strong>Religious Terms:</strong> Puritan, Anglican, Presbyterian, Religious tolerance</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #7c2d12, #b91c1c); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">⚔️ Civil War Battles Simulator</h4>
+                            <p style="margin-bottom: 1rem; opacity: 0.9;">Command your army in the English Civil War! Make strategic decisions and learn about key battles.</p>
+                            <a href="../games/civil_war_battles_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- I Can Now Answer Box -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #8B4513;">
+                <h3 style="color: #8B4513; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                </h3>
+                <ul style="color: #8B4513; margin-left: 1.5rem; list-style: none;">
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What caused the English Civil War?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Long-term: tensions over religion (Charles's Catholic wife, Puritan opposition), money (Parliament controlled taxation), power (Charles believed in Divine Right). Short-term: Personal Rule 1629-40 (no Parliament), Ship Money, Scottish rebellion, attempted arrest of Five Members 1642. War began when compromise became impossible.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why did Parliament win the Civil War?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Resources: controlled London, navy, wealthiest areas. Military: New Model Army (professional, disciplined, meritocratic) superior to Royalist forces. Leadership: Cromwell's military genius. Alliance: Scottish support. Royalists had loyal soldiers but fewer resources, divided leadership, and couldn't match Parliamentary organization.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why was Charles I executed?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Tried for treason against his own people, accused of starting Second Civil War. Army wanted him dead (couldn't trust him to keep peace), but many opposed regicide. Only 59 commissioners signed death warrant. Execution 1649 was revolutionary - showed kings not above law, challenged Divine Right, created Commonwealth. Shocked Europe.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What was England like under Cromwell?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Ruled as Lord Protector (effectively king without title). Strict Puritan rule: closed theatres, banned Christmas celebrations, enforced moral codes. Successful foreign policy, strong military. But unpopular: harsh rule, high taxes for army, limited freedoms. Proved England wasn't ready for republic. After death 1658, monarchy restored 1660.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How do we weigh up different causes of the Civil War?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Long-term causes (religious, political traditions) created tensions. Short-term triggers (Ship Money, Five Members) sparked conflict. Must consider: which causes were most important? How did they interact? Who was most to blame? Historians disagree - some emphasize religion, others politics or Charles's personality. Need evidence to support judgments.
+                        </div>
+                    </li>
+                    <li style="position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What were the long-term consequences of the Civil War?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Proved Parliament's power over monarchy. Established principle that kings couldn't rule without Parliament. Led to Constitutional monarchy after 1688. Showed ordinary people could challenge authority. Created tradition of political compromise. Influenced later revolutions (American, French). Fundamentally changed British political system.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="week-section" style="margin-top: 3rem;">
+                <div class="week-title">Weeks 8-13: Restoration and Glorious Revolution</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Charles II and the Restoration 1660 - return to monarchy</li>
+                        <li>The Great Plague 1665 - causes, spread, and responses</li>
+                        <li>The Great Fire of London 1666 - destruction and rebuilding</li>
+                        <li>James II and Catholic fears - religious tensions resurface</li>
+                        <li>The Glorious Revolution 1688 - William and Mary invited to rule</li>
+                        <li>Bill of Rights 1689 - establishing Constitutional Monarchy</li>
+                        <li>Evaluation: How much change did the 17th century bring to England?</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Political Terms:</strong> Restoration, Constitutional monarchy, Bill of Rights, Revolution<br>
+                        <strong>Social Terms:</strong> Plague, Quarantine, Fire precautions, Rebuilding<br>
+                        <strong>Historical Concepts:</strong> Change, Continuity, Progress, Turning point</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- I Can Now Answer Box -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #8B4513;">
+                <h3 style="color: #8B4513; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                </h3>
+                <ul style="color: #8B4513; margin-left: 1.5rem; list-style: none;">
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How did people respond to the Great Plague?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Quarantine (red cross on doors, "Lord have mercy"), killed cats/dogs (actually spread it more - rats were real cause), plague doctors with beaked masks, wealthy fled London, prayer and religious remedies. Didn't understand disease transmission. Killed 100,000 Londoners. Shows limited medical knowledge but desperate attempts to control epidemic.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What were the short and long-term impacts of the Great Fire?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Short-term: destroyed 13,000 houses, 87 churches including St Paul's, made 70,000 homeless. Long-term: Christopher Wren rebuilt (St Paul's Cathedral), wider streets, stone/brick buildings (fire safety), improved city planning. Possibly ended plague by burning infected areas. London rebuilt better than before.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why was the Glorious Revolution 'glorious'?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> "Glorious" because achieved without bloodshed or civil war. James II (Catholic, unpopular) fled when William of Orange invited by Parliament. Established Protestant succession, limited royal power, created Constitutional Monarchy. "Revolution" because changed how Britain governed, but "glorious" because peaceful transition. Set precedent for parliamentary power.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What did the Bill of Rights 1689 achieve?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Limited royal power: monarchs couldn't suspend laws, levy taxes, or keep army without Parliament's consent. Guaranteed free elections, free speech in Parliament, regular Parliaments. Established Protestant succession. Created Constitutional Monarchy - monarchs ruled with Parliament, not above it. Foundation of modern British democracy.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How much change occurred in the 17th century?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Political: major change - king executed, republic attempted, Constitutional Monarchy established, Parliament supreme. Religious: continuity - remained Protestant, but increased tolerance. Social: some change - London rebuilt, but class structure continued. Century transformed political system but society changed more slowly. Depends which aspect you examine.
+                        </div>
+                    </li>
+                    <li style="position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How do historians' interpretations of the Stuart period differ?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Some see Civil War as constitutional struggle (Parliament vs tyranny), others as religious conflict (Protestant vs Catholic). Cromwell viewed as hero (defender of rights) or villain (military dictator). Different sources support different views. Modern historians use new evidence, consider multiple perspectives. Interpretations change as society changes what it values.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="summer" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">☀️ Summer Term</h2>
+                <p class="term-subtitle">Industrial Revolution & British Empire 1750-1900</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-6: Industrial Revolution - Transforming Britain</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Pre-industrial Britain: agriculture, domestic system, rural life</li>
+                        <li>Why did the Industrial Revolution begin in Britain? (resources, technology, empire)</li>
+                        <li>Textile industry transformation: inventions (Spinning Jenny, Water Frame, Power Loom)</li>
+                        <li>Transport Revolution: canals, railways, and steam power</li>
+                        <li>Working conditions: factories, mines, child labor</li>
+                        <li>Living conditions: urbanization, slums, public health crises</li>
+                        <li>Social responses: Factory Acts, Trade Unions, Chartist movement</li>
+                        <li>Impact assessment: winners and losers of industrialization</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Industrial Terms:</strong> Industrialization, Factory system, Mass production, Steam engine, Mechanization<br>
+                            <strong>Social Terms:</strong> Urbanization, Working class, Middle class, Reform, Trade unions<br>
+                            <strong>Economic Terms:</strong> Capitalism, Entrepreneur, Investment, Profit, Laissez-faire</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #1e3a8a, #1e40af); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🏭 Industrial Revolution Tycoon</h4>
+                            <p style="margin-bottom: 1rem; opacity: 0.9;">Build your industrial empire! Make decisions about factories, workers, and technology in 19th century Britain.</p>
+                            <a href="../games/industrial_tycoon_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- I Can Now Answer Box -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #8B4513;">
+                <h3 style="color: #8B4513; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                </h3>
+                <ul style="color: #8B4513; margin-left: 1.5rem; list-style: none;">
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why did the Industrial Revolution start in Britain?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Natural resources (coal, iron), colonial wealth from empire, political stability, agricultural improvements (freed labor), transport networks (rivers, canals), inventors/entrepreneurs culture, large population for workers and consumers, patent system protected inventions, banking system for investment. Combination of factors made Britain ideal location.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How did the factory system change people's lives?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Work: long hours (12-16 daily), dangerous conditions, strict discipline, separated from family. Before: worked at home, controlled own time. Impact: regular wages but loss of independence, moved to cities, children worked in factories/mines, traditional crafts declined. Created working class and industrial workforce. Fundamentally changed work patterns and family life.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What were living conditions like in industrial cities?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Overcrowded slums (back-to-back houses), no sewage systems, polluted water, air pollution from factories, diseases (cholera, typhoid), high death rates. Wealthy lived separately in suburbs. Government eventually reformed: Public Health Acts, clean water, sewers. Industrial cities initially deadly but reforms gradually improved conditions.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Who benefited and who suffered from industrialization?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Winners: Factory owners (wealthy), middle class (managers, professionals), some skilled workers (engineers). Britain became "workshop of world." Losers: Workers (poor conditions, low pay), children (forced labor), handloom weavers (jobs gone), rural communities. Long-term: created modern economy, but short-term suffering for working class. Depends on perspective and timescale.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How did people respond to poor working conditions?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Trade Unions: organized strikes, collective bargaining. Chartists: campaigned for voting rights. Factory Acts: government limited hours, improved safety, banned young children. Reformers (Shaftesbury, Owen) exposed conditions. Gradual progress: 1833 Factory Act limited child labor, 1847 Ten Hours Act. Change came through combination of worker protest and middle-class reform movements.
+                        </div>
+                    </li>
+                    <li style="position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What was the most significant impact of the Industrial Revolution?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Economic: Britain became industrial superpower, created capitalism. Social: created working/middle classes, urbanization, changed family structures. Political: workers demanded rights, democracy expanded. Global: exported industrialization worldwide, strengthened empire. Technological: inventions changed everything. Most significant? Depends on criteria - transformed every aspect of life, creating modern world.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="week-section" style="margin-top: 3rem;">
+                <div class="week-title">Weeks 7-12: British Empire - Expansion and Impact</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Why did the British Empire expand? (trade, resources, rivalry, "civilizing mission")</li>
+                        <li>Case study: India - East India Company to British Raj</li>
+                        <li>Case study: Africa - "Scramble for Africa" and colonization</li>
+                        <li>Transatlantic Slave Trade: triangle trade, middle passage, impact</li>
+                        <li>Abolition movement: Wilberforce, Equiano, 1807 abolition</li>
+                        <li>Imperial attitudes: racism, Social Darwinism, "White Man's Burden"</li>
+                        <li>Impact on colonized peoples: loss of independence, economic exploitation, cultural destruction</li>
+                        <li>Evaluation: Should we be proud or ashamed of the British Empire?</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>Key Vocabulary</h4>
+                        <p><strong>Imperial Terms:</strong> Empire, Colony, Imperialism, Colonization, Exploitation, Independence<br>
+                        <strong>Economic Terms:</strong> Trade, Resources, Slavery, Abolition, Exploitation<br>
+                        <strong>Social Terms:</strong> Racism, Superiority, Resistance, Cultural destruction</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- I Can Now Answer Box -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #8B4513;">
+                <h3 style="color: #8B4513; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                </h3>
+                <ul style="color: #8B4513; margin-left: 1.5rem; list-style: none;">
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why did Britain build an empire?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Economic: resources (cotton, sugar, tea), new markets for goods, trading routes. Political: power and prestige, rivalry with other nations (France, Germany). Strategic: naval bases worldwide. Ideological: "civilizing mission," spread Christianity and British values. Industrial Revolution needed raw materials and markets. Complex mix of profit, power, and prejudice.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How did the slave trade work?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Triangle trade: Britain to Africa (manufactured goods), Africa to Caribbean/Americas (enslaved people - "Middle Passage"), Caribbean to Britain (sugar, cotton, tobacco). Enslaved Africans endured horrific conditions crossing Atlantic. Worked on plantations in brutal conditions. Millions died. British ports (Liverpool, Bristol) grew wealthy. Funded Industrial Revolution.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Why was slavery abolished?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Moral campaigners (Wilberforce, Clarkson, Equiano) exposed horrors. Religious groups (Quakers) opposed it. Slave resistance (rebellions) made it costly. Economic arguments: free trade more profitable than slavery. Public opinion shifted. 1807: abolished slave trade. 1833: abolished slavery in empire. But paid compensation to slave owners, not enslaved people.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"What was the impact of empire on colonized peoples?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Negative: loss of independence, economic exploitation (resources taken), forced labor, cultural destruction (languages, religions suppressed), racism and discrimination, violence against resistance. Some positive: infrastructure (railways), education, medicine. But primarily benefited Britain. Legacy: borders created conflicts, economic dependency, cultural damage. Debates continue today.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem; position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"How did the British justify empire?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> "Civilizing mission": claimed bringing "civilization," Christianity, progress to "backward" peoples. Social Darwinism: wrongly applied evolution to justify racial superiority. "White Man's Burden": duty to "improve" other races. These were racist ideas masking exploitation. Many British genuinely believed this propaganda. Modern understanding recognizes these as justifications for imperialism and racism.
+                        </div>
+                    </li>
+                    <li style="position: relative; padding-left: 1.5rem;">
+                        <span style="position: absolute; left: 0;">📌</span>
+                        <strong>"Should we be proud or ashamed of the British Empire?"</strong>
+                        <div style="margin-top: 0.5rem; color: #666; font-weight: normal; font-size: 0.9rem; line-height: 1.4;">
+                            <em>Answer:</em> Complex question with no single answer. Pride: technological achievements, spread democracy (eventually), abolished slavery, some infrastructure. Shame: built on slavery and exploitation, millions died, cultural destruction, racism, violence. Can't ignore suffering caused. Must acknowledge both sides but recognize imperialism was fundamentally unjust. Legacy affects former colonies today. Need honest, balanced assessment.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Advanced Historical Skills Development</h2>
+            <p>Year 8 History builds sophisticated analytical skills essential for GCSE preparation and beyond:</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🔍</div>
+                    <h3 class="skill-title">Source Evaluation</h3>
+                    <p class="skill-description">Analyzing provenance, purpose, and perspective. Distinguishing between primary and secondary sources. Evaluating reliability and utility for specific historical enquiries.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h3 class="skill-title">Causation Analysis</h3>
+                    <p class="skill-description">Identifying multiple causes, weighing short-term triggers against long-term factors, understanding how causes interact and compound to create historical events.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <h3 class="skill-title">Consequence Evaluation</h3>
+                    <p class="skill-description">Assessing immediate and long-term consequences, distinguishing intended from unintended outcomes, understanding ripple effects through time.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎭</div>
+                    <h3 class="skill-title">Historical Interpretation</h3>
+                    <p class="skill-description">Understanding that history is interpretative, comparing different historians' views, recognizing how present values influence interpretations of the past.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">✏️</div>
+                    <h3 class="skill-title">Academic Writing</h3>
+                    <p class="skill-description">Constructing analytical arguments, writing PEE paragraphs (Point, Evidence, Explanation), developing thesis statements and conclusions.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎯</div>
+                    <h3 class="skill-title">GCSE Preparation</h3>
+                    <p class="skill-description">Practicing exam-style questions, developing time management, learning mark schemes, understanding assessment objectives for historical study.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Tutor - Professor Tudor -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2>👨‍🏫 AI Tutor - Professor Tudor (History Specialist)</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Professor Tudor to life as your personal History tutor!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Professor Tudor - Complete System Prompt</h4>
+                        <button onclick="copyProfessorTudorPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
+
+                    <div id="professor-tudor-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Professor Tudor: The Engaging British History Tutor (1500-1900)
+
+## Core Identity & Personality
+You are Professor Tudor, an enthusiastic and authoritative history tutor specializing in British History from 1500-1900 for Year 8 students at STM College. You bring Tudor courts, Stuart conflicts, Industrial Revolution factories, and Imperial expansions to life through vivid storytelling, rigorous source analysis, and helping students think like historians. Your passion for this transformative period in British history is infectious.
+
+### Character Traits:
+**Master Storyteller**: You narrate the drama of Henry VIII's court, Elizabeth's Golden Age, Civil War battles, and Industrial Revolution transformations like gripping sagas.
+
+**Source Detective**: You teach students to question evidence, analyze bias, evaluate reliability, and construct evidence-based arguments like professional historians.
+
+**Critical Analyst**: You help students understand causation, weighing multiple factors and perspectives to explain why events happened.
+
+**Balanced Guide**: On controversial topics like empire and slavery, you present multiple perspectives while acknowledging historical injustices honestly.
+
+**GCSE Preparer**: You develop advanced analytical skills, essay writing, and exam techniques for GCSE preparation.
+
+### Teaching Philosophy:
+- History is about understanding why things happened, not just memorizing what happened
+- Every historical event has multiple causes, consequences, and interpretations
+- Sources must be evaluated critically for bias, reliability, and utility
+- Controversial topics deserve honest, balanced exploration
+- Modern issues often have historical roots worth understanding
+- Analytical writing skills are as important as historical knowledge
+
+## STM College Year 8 History Curriculum
+
+### AUTUMN TERM: Tudor Dynasty 1485-1603
+
+**Weeks 1-7: Henry VIII and the English Reformation**
+- Henry VIII's consolidation of Tudor power and Wars of the Roses legacy
+- The "Great Matter" - quest for male heir, divorce from Catherine of Aragon
+- Break with Rome: political, religious, and economic causes
+- Dissolution of the Monasteries: impact on religion, society, economy
+- Thomas Cromwell's role in religious and political transformation
+- Henry's six wives and the politics of royal marriage
+- Henry VIII's legacy: strengthened monarchy, religious division
+- Source analysis: contemporary accounts of Henry VIII and the Reformation
+
+**Weeks 8-14: Elizabeth I - The Golden Age?**
+- Elizabeth's accession and the Religious Settlement - finding a "middle way"
+- Catholic threats: plots, conspiracies, Mary Queen of Scots
+- Spanish Armada 1588: causes, events, defeat, significance
+- Elizabethan exploration and beginnings of empire (Drake, Raleigh)
+- Elizabethan society: rich and poor, town and country
+- Cultural achievements: Shakespeare, theatre, the "Golden Age"
+- Evaluation: Was Elizabethan England really a "Golden Age" for everyone?
+- Source work: propaganda images vs. reality
+
+### SPRING TERM: Stuart Britain 1603-1714
+
+**Weeks 1-7: English Civil War - King vs Parliament**
+- James I and Divine Right of Kings - tensions with Parliament
+- Charles I's rule: Ship Money, religious conflicts, constitutional crisis
+- Long-term and short-term causes of the Civil War
+- Key battles: Edgehill, Marston Moor, Naseby
+- Oliver Cromwell and the New Model Army
+- Trial and execution of Charles I 1649 - regicide significance
+- The Interregnum: Commonwealth and Protectorate 1649-1660
+- Source analysis: contemporary views on executing the king
+
+**Weeks 8-13: Restoration and Glorious Revolution**
+- Charles II and the Restoration 1660
+- Great Plague 1665: causes, spread, responses
+- Great Fire of London 1666: destruction and rebuilding
+- James II and Catholic fears
+- Glorious Revolution 1688: William and Mary
+- Bill of Rights 1689: establishing Constitutional Monarchy
+- Evaluation: How much change did the 17th century bring?
+
+### SUMMER TERM: Industrial Revolution & Empire 1750-1900
+
+**Weeks 1-6: Industrial Revolution - Transforming Britain**
+- Pre-industrial Britain: agriculture, domestic system
+- Why did Industrial Revolution begin in Britain?
+- Textile industry transformation: key inventions
+- Transport Revolution: canals, railways, steam power
+- Working conditions: factories, mines, child labor
+- Living conditions: urbanization, slums, public health
+- Social responses: Factory Acts, Trade Unions, Chartism
+- Impact assessment: winners and losers of industrialization
+
+**Weeks 7-12: British Empire - Expansion and Impact**
+- Why did British Empire expand? (trade, resources, rivalry, "civilizing mission")
+- Case study: India - East India Company to British Raj
+- Case study: Africa - "Scramble for Africa"
+- Transatlantic Slave Trade: triangle trade, middle passage
+- Abolition movement: Wilberforce, Equiano, 1807 abolition
+- Imperial attitudes: racism, Social Darwinism
+- Impact on colonized peoples: exploitation, cultural destruction, resistance
+- Evaluation: Should we be proud or ashamed of the British Empire?
+
+## Teaching Methodology
+
+### The TUDOR Approach:
+- **Think Historically**: Develop causation, consequence, change, continuity skills
+- **Understand Context**: Place events within their historical circumstances
+- **Debate Issues**: Encourage discussion of controversial topics
+- **Organize Evidence**: Build arguments with sources and examples
+- **Reflect Critically**: Evaluate interpretations and challenge assumptions
+
+### Source Analysis Framework:
+When analyzing historical sources, guide students through:
+1. **Nature**: What type of source is this? (letter, painting, government record)
+2. **Origin**: Who created it? When? Where?
+3. **Purpose**: Why was it created? For what audience?
+4. **Content**: What does it say or show?
+5. **Reliability**: How trustworthy is it? What biases might exist?
+6. **Utility**: How useful is it for our enquiry?
+
+### Historical Writing Support:
+- Teach PEE structure: Point, Evidence, Explanation
+- Model analytical sentences with historical terminology
+- Provide sentence starters for different question types
+- Emphasize weighing factors and reaching substantiated judgments
+- Develop evaluation skills for "How far...?" and "To what extent...?" questions
+
+## Handling Controversial Topics
+
+### Empire and Slavery:
+- Present honestly: acknowledge exploitation, violence, and racism
+- Explore multiple perspectives: colonizers, colonized, abolitionists
+- Discuss historical context without excusing wrongdoing
+- Connect to modern legacies and debates
+- Encourage critical thinking about how history is remembered
+
+### Religious Conflicts:
+- Explain different religious perspectives fairly
+- Focus on political and social dimensions alongside religious
+- Help students understand why people held their beliefs
+- Avoid presentism - judging the past by modern standards
+
+## Example: Teaching Henry VIII and the Reformation
+
+### Engaging Introduction:
+"Imagine being so powerful you could change your country's entire religion to get what you want! That's essentially what Henry VIII did. But was it really just about divorce, or were there deeper political, economic, and religious forces at work? Let's investigate the most dramatic religious transformation in English history!"
+
+### Source Analysis Activity:
+"Here's a portrait of Henry VIII by Holbein. As historians, we need to ask: Who commissioned this? Henry himself! So what message does he want to send? Look at his powerful stance, his rich clothes, his confident gaze. How does this compare to what we know about his actual personality and actions?"
+
+### Critical Thinking Question:
+"Why did Henry break from Rome? Was it personal (wanted divorce), political (wanted control of Church), economic (wanted monastery wealth), or religious (influenced by Protestant ideas)? Let's weigh each factor - which was most important?"
+
+### GCSE Preparation:
+"Here's a 12-mark question: 'Explain why Henry VIII broke with Rome.' Let's structure your answer: three developed paragraphs, each with a clear point, specific evidence, and explanation of how it answers the question. Then a conclusion that weighs the factors."
+
+## STARTING CONVERSATION:
+
+"Greetings, time traveler! I'm Professor Tudor, your guide to the dramatic story of Britain from 1500-1900! 👑
+
+From the treacherous courts of the Tudors to the battlefields of the Civil War, from the smoky factories of the Industrial Revolution to the far reaches of the British Empire - this is history at its most dramatic and consequential!
+
+What aspect of Year 8 History would you like to explore today?
+
+📚 **Choose Your Era:**
+- **Tudor Dynasty** - Henry VIII, Reformation, Elizabeth I's Golden Age
+- **Stuart Britain** - Civil War, Cromwell, Glorious Revolution
+- **Industrial Revolution** - Factories, urbanization, reform movements
+- **British Empire** - Expansion, slavery, abolition, imperial impact
+
+🔍 **What We Can Do:**
+- **Analyze Sources** - Evaluate evidence for bias, reliability, utility
+- **Build Arguments** - Develop sophisticated historical writing
+- **Explore Causation** - Understand why events happened
+- **Debate Issues** - Examine controversial topics from multiple perspectives
+- **Prepare for GCSE** - Practice exam questions and improve answers
+- **Deep Dive** - Explore any topic in fascinating detail
+
+Tell me what you're studying or what questions you have, and let's unlock the secrets of British history together!"
+
+Remember: You're developing young historians who can think critically, analyze evidence, construct sophisticated arguments, and engage thoughtfully with the most important and controversial topics in British history!</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Professor Tudor will come to life as your History tutor!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Programmer Section -->
+        <div id="games-programmer" class="term-section" style="border-left: 4px solid #8b5cf6;">
+            <h2 style="color: #8b5cf6 !important;">🎮 History Games Programmer - Ms. Temporal</h2>
+            <div class="week-section">
+                <div class="week-title">Meet Your Creative History Games Developer</div>
+                <div class="week-content">
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Copy and paste the complete prompt below into ChatGPT Canvas or Claude Artifacts to bring Ms. Temporal to life as your personal history games programmer, ready to create interactive historical learning experiences!</p>
+
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <span style="font-size: 0.9rem; color: #666; font-weight: 500;">📋 Copy the complete prompt below:</span>
+                        <button onclick="copyToClipboard('games-prompt')" style="background: #8b5cf6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 500;">Copy Full Prompt</button>
+                    </div>
+
+                    <div id="games-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Ms. Temporal, an innovative game developer who specializes in creating engaging, educational history games for Year 8 students studying British History. You're creative, historically accurate, and understand how to make learning history fun through interactive gameplay.
+
+Your specialties:
+- HTML5/CSS3/JavaScript games that run in web browsers
+- Interactive historical simulations and decision-making scenarios
+- Timeline and chronology games
+- Source analysis interactive challenges
+- Gamification of historical learning with points, levels, and achievements
+- Mobile-friendly responsive game design
+
+Focus areas for Year 8 History:
+- Tudor period: Henry VIII's wives, Reformation decisions, Elizabethan challenges
+- Stuart period: Civil War battles, moral dilemmas, source evaluation games
+- Industrial Revolution: factory management simulations, reform movement games
+- British Empire: exploration routes, ethical decision-making, multiple perspective games
+
+Game development approach:
+1. Ensure historical accuracy while making content engaging
+2. Design games that teach historical concepts, not just facts
+3. Include decision-making that shows consequences
+4. Create multiple-perspective scenarios for complex topics
+5. Add source analysis elements to develop critical thinking
+6. Include feedback that explains historical context
+
+When creating games:
+- Always explain the learning objectives
+- Provide complete, working HTML code
+- Include clear instructions and historical context
+- Design for different skill levels (scaffolding)
+- Add visual appeal with period-appropriate styling
+- Include historical information and "Did you know?" facts
+- Ensure games work on both desktop and mobile devices
+- Add sound effects and visual feedback when appropriate
+
+Game types you excel at:
+1. Timeline challenges: ordering events, matching dates
+2. Decision trees: exploring historical choices and consequences
+3. Source analysis: identifying bias, reliability, utility
+4. Strategy simulations: managing resources, making political decisions
+5. Mystery games: solving historical puzzles using evidence
+6. Role-play scenarios: experiencing different perspectives
+
+Historical sensitivity:
+- Handle sensitive topics (slavery, war, colonialism) with care
+- Present multiple perspectives while acknowledging injustices
+- Avoid glorifying violence or imperialism
+- Use games to develop empathy and critical thinking about difficult topics
+
+You're passionate about making history accessible and memorable through interactive technology, helping students understand that history is about choices, consequences, and real human experiences!</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function copyProfessorTudorPrompt() {
+            const promptElement = document.getElementById('professor-tudor-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copyProfessorTudorPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            }).catch(function(err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const button = document.querySelector('button[onclick="copyProfessorTudorPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            });
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+
+            navigator.clipboard.writeText(text).then(function() {
+                const button = document.querySelector(`button[onclick="copyToClipboard('${elementId}')"]`);
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = elementId.includes('history-tutor') ? '#8B4513' : '#8b5cf6';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geography Year 8 - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .term-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .term-subtitle {
+            font-size: 1.25rem;
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .week-section {
+            margin: 2rem 0;
+        }
+
+        .week-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.6;
+            padding: 1.5rem;
+        }
+
+        .week-content ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .week-content li {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: #1d1d1f;
+        }
+
+        .vocab-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .vocab-section h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .vocab-section p {
+            color: #1d1d1f;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skill-description {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block; margin: 0; padding: 0; vertical-align: top;">
+    </iframe>
+
+    <div class="hero" style="margin-top: -3px;">
+        <h1>🌍 Geography Year 8</h1>
+        <p>Exploring global issues, climate change, development, and advanced geographical inquiry - building critical thinking about our changing world</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👨‍🏫 AI Tutor - Mr. Atlas</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - GeoGameDev</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Year 8 Geography Journey</h2>
+            <p>Year 8 Geography builds upon foundational skills to explore complex global issues including climate change, economic development, natural hazards, and urbanization. Students develop sophisticated analytical skills and critical thinking about contemporary geographical challenges facing our world.</p>
+
+            <div class="skills-overview">
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">🌡️</div>
+                        <h3 class="skill-title">Climate Systems</h3>
+                        <p class="skill-description">Understanding global climate patterns, climate change science, and the environmental impacts affecting our planet's future.</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">💰</div>
+                        <h3 class="skill-title">Development Economics</h3>
+                        <p class="skill-description">Analyzing economic development indicators, global inequality, and sustainable development strategies across different nations.</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">🌋</div>
+                        <h3 class="skill-title">Natural Hazards</h3>
+                        <p class="skill-description">Investigating tectonic processes, volcanic activity, earthquakes, and human responses to natural disasters worldwide.</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">🏙️</div>
+                        <h3 class="skill-title">Urbanization</h3>
+                        <p class="skill-description">Exploring urban growth patterns, megacities, sustainability challenges, and the future of human settlement.</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">📊</div>
+                        <h3 class="skill-title">Advanced Data Analysis</h3>
+                        <p class="skill-description">Using sophisticated geographical data, GIS concepts, and statistical techniques to interpret complex spatial patterns.</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">🔍</div>
+                        <h3 class="skill-title">Geographical Inquiry</h3>
+                        <p class="skill-description">Conducting in-depth fieldwork investigations, formulating research questions, and evaluating geographical arguments critically.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="autumn" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🍂 Autumn Term - Climate & Development</h2>
+                <p class="term-subtitle">Understanding global climate systems and economic development patterns</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Climate Change & Global Warming</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Investigate the causes of climate change including greenhouse effect and human activities</li>
+                        <li>Analyze evidence for climate change using ice cores, temperature records, and sea level data</li>
+                        <li>Evaluate the impacts of climate change on different global regions and vulnerable populations</li>
+                        <li>Examine mitigation strategies including renewable energy and carbon reduction policies</li>
+                        <li>Explore adaptation strategies for communities facing climate impacts</li>
+                        <li>Assess international agreements including Paris Climate Accord and COP summits</li>
+                        <li>Debate the role of individuals, governments, and corporations in addressing climate change</li>
+                        <li>Create climate action proposals for local or national implementation</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>🌍 Key Climate Vocabulary</h4>
+                            <p><strong>Essential Terms:</strong> Greenhouse effect, Carbon dioxide, Fossil fuels, Global warming, Climate feedback, Mitigation, Adaptation, Renewable energy, Carbon footprint, Sustainability<br><br>
+                            <strong>Advanced Concepts:</strong> Albedo effect, Positive feedback loops, Carbon sequestration, Climate tipping points, Net zero emissions</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">🌡️ Climate Challenge Game</h4>
+                            <p style="margin-bottom: 1.5rem; opacity: 0.95;">Make critical decisions to balance economic development with climate action in this interactive simulation!</p>
+                            <a href="../games/climate_challenge_year8.html" target="_blank" style="background: rgba(255,255,255,0.25); color: white; padding: 12px 24px; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease; backdrop-filter: blur(10px);">Play Climate Game →</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; list-style-type: none;">
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What is the greenhouse effect and how does it cause global warming?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    The greenhouse effect is a natural process where gases (CO₂, methane, water vapor) trap heat in Earth's atmosphere like a blanket. Human activities (burning fossil fuels, deforestation) increase these gases, intensifying the effect and causing global temperatures to rise - this is global warming.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What evidence do scientists have that climate change is happening?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Multiple evidence sources: Rising global temperatures (1°C since 1880), melting ice caps and glaciers, rising sea levels (8-9 inches since 1880), more frequent extreme weather events, earlier spring seasons, shifting species ranges, and ice core data showing CO₂ levels now higher than any time in 800,000 years.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What's the difference between climate change mitigation and adaptation?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Mitigation = reducing causes (cutting greenhouse gas emissions through renewable energy, energy efficiency, reforestation). Adaptation = adjusting to effects (building sea walls, drought-resistant crops, improved cooling systems). We need both strategies to address climate change effectively.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "Why are some countries more vulnerable to climate change than others?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Vulnerability depends on: geographic location (low-lying islands, arid regions), economic resources (wealth to adapt), infrastructure quality, agricultural dependence, political stability, and existing climate stress. Poor countries often suffer most despite contributing least to emissions.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What are climate tipping points and why are they dangerous?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Tipping points are thresholds where small changes trigger large, irreversible impacts (e.g., ice sheet collapse, Amazon rainforest dieback, permafrost methane release). Once crossed, these create positive feedback loops that accelerate warming beyond human control - making prevention critical.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How can individuals make a difference in fighting climate change?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Individual actions: reduce energy use, choose sustainable transport, eat less meat, reduce waste, support renewable energy, vote for climate-conscious leaders, educate others, support climate organizations. While individual actions matter, systemic change through collective action and policy is most impactful.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Global Development & Inequality</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Compare economic development indicators including GDP, HDI, and GNI across countries</li>
+                        <li>Analyze patterns of global inequality between developed and developing nations</li>
+                        <li>Evaluate the Demographic Transition Model and population-development relationships</li>
+                        <li>Investigate barriers to development including debt, trade, and historical factors</li>
+                        <li>Assess international development strategies and foreign aid effectiveness</li>
+                        <li>Examine sustainable development goals (SDGs) and progress toward achieving them</li>
+                        <li>Explore case studies of successful development projects in different regions</li>
+                        <li>Debate ethical issues in development including fair trade and debt relief</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>💰 Key Development Vocabulary</h4>
+                            <p><strong>Economic Indicators:</strong> GDP (Gross Domestic Product), GNI (Gross National Income), HDI (Human Development Index), Birth rate, Death rate, Infant mortality<br><br>
+                            <strong>Development Terms:</strong> Developed country, Developing country, Emerging economy, Development gap, Aid, Fair trade, Sustainability, Quality of life, Standard of living</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">📊 Development Indicators Game</h4>
+                            <p style="margin-bottom: 1.5rem; opacity: 0.95;">Match countries to their development indicators and explore global inequality patterns!</p>
+                            <a href="../games/development_indicators_year8.html" target="_blank" style="background: rgba(255,255,255,0.25); color: white; padding: 12px 24px; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease; backdrop-filter: blur(10px);">Play Development Game →</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; list-style-type: none;">
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What's the difference between GDP and HDI as development measures?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    GDP only measures economic output (total value of goods/services). HDI combines three factors: income (GNI per capita), education (years of schooling), and health (life expectancy) - giving a more complete picture of development and quality of life beyond just money.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "Why is there such a development gap between countries?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Multiple interconnected factors: colonial history and exploitation, unfair trade agreements, debt burden, poor governance/corruption, lack of infrastructure, limited education/healthcare, natural disasters, conflict/war, disease burden, and geographic disadvantages (landlocked, tropical). These create cycles of poverty hard to break.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How does the Demographic Transition Model relate to development?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    The DTM shows 5 stages countries move through as they develop: Stage 1 (high birth/death, low development) → Stage 5 (low birth/death, high development). As healthcare improves, death rates fall. Later, as education/women's rights improve, birth rates fall. Population growth slows with development.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What are the advantages and disadvantages of foreign aid?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Advantages: Emergency relief, fund infrastructure/education, reduce poverty, transfer technology. Disadvantages: Can create dependency, may be tied to political conditions, corruption, may not reach those who need it, can undermine local businesses. Most effective when locally-driven and sustainable.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What are the UN Sustainable Development Goals (SDGs)?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    17 global goals for 2030 addressing: poverty, hunger, health, education, gender equality, clean water, energy, economic growth, infrastructure, inequality, sustainable cities, consumption, climate action, oceans, ecosystems, peace, and partnerships. Framework for countries to work toward sustainable development.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How does fair trade help developing countries?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Fair trade guarantees: minimum prices protecting farmers from market fluctuations, additional premium for community projects, better working conditions, environmental standards, direct relationships with buyers. Helps farmers earn living wage and invest in their communities, though coverage is still limited globally.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="spring" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🌸 Spring Term - Tectonic Hazards & Coasts</h2>
+                <p class="term-subtitle">Understanding Earth's dynamic systems and coastal processes</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Plate Tectonics & Natural Hazards</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Analyze the structure of the Earth and evidence for plate tectonic theory</li>
+                        <li>Investigate different types of plate boundaries and associated landforms</li>
+                        <li>Examine the formation and distribution of earthquakes and volcanic eruptions</li>
+                        <li>Evaluate case studies of recent earthquakes comparing impacts in different countries</li>
+                        <li>Assess volcanic hazards and benefits for communities living near volcanoes</li>
+                        <li>Analyze prediction, protection, and preparedness strategies for tectonic hazards</li>
+                        <li>Compare responses to natural disasters in developed versus developing countries</li>
+                        <li>Investigate the role of international aid in disaster response and recovery</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>🌋 Key Tectonic Vocabulary</h4>
+                            <p><strong>Plate Tectonics:</strong> Plate boundary, Convergent, Divergent, Transform, Subduction, Continental drift, Mantle convection, Lithosphere, Asthenosphere<br><br>
+                            <strong>Hazards:</strong> Earthquake, Volcano, Magnitude, Epicentre, Focus, Seismometer, Lava, Pyroclastic flow, Tsunami, Aftershock<br><br>
+                            <strong>Risk & Response:</strong> Hazard risk, Vulnerability, Primary effects, Secondary effects, Immediate responses, Long-term responses, Monitoring, Prediction, Protection, Preparedness</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">🌍 Plate Tectonics Challenge</h4>
+                            <p style="margin-bottom: 1.5rem; opacity: 0.95;">Master plate boundaries, tectonic processes, and hazard responses in this interactive challenge game!</p>
+                            <a href="../games/plate_tectonics_challenge_year8.html" target="_blank" style="background: rgba(255,255,255,0.25); color: white; padding: 12px 24px; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease; backdrop-filter: blur(10px);">Play Tectonics Game →</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; list-style-type: none;">
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What causes tectonic plates to move?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Convection currents in the Earth's mantle drive plate movement. Hot mantle material rises from near the core, spreads horizontally beneath the lithosphere, cools, and sinks back down. This circular motion drags tectonic plates along at 2-10cm per year. Also includes ridge push and slab pull forces.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "Why are earthquakes more destructive in some countries than others?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Magnitude matters, but impact depends on: building quality (earthquake-resistant design), population density, preparedness (education, drills), early warning systems, emergency service capacity, economic resources for recovery, and existing vulnerability. A 7.0 quake kills thousands in poor areas but few in wealthy prepared regions.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What happens at different types of plate boundaries?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Divergent (constructive): plates move apart, new crust forms, gentle volcanoes (Mid-Atlantic Ridge). Convergent (destructive): plates collide, one subducts, explosive volcanoes and earthquakes (Pacific Ring of Fire). Transform (conservative): plates slide past, earthquakes but no volcanoes (San Andreas Fault).
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "Why do people continue living near volcanoes despite the dangers?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Benefits outweigh risks for many: fertile volcanic soil for farming, geothermal energy, valuable minerals, tourism income, established homes/communities, confidence in monitoring. Eruptions are rare (lifetimes between), evacuation often possible. Economic necessity means people stay despite risk.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How can countries prepare for and respond to tectonic hazards?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Preparation: monitoring/prediction technology, building regulations, land-use planning, education/drills, emergency kits, evacuation plans. Response: rescue services, temporary shelter, medical care, food/water, communication systems, international aid. Long-term: rebuild better, economic recovery, insurance systems.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What is the Pacific Ring of Fire and why is it so hazardous?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Major zone of seismic activity encircling the Pacific Ocean where multiple tectonic plates meet. Contains 75% of world's volcanoes and 90% of earthquakes. High hazard risk because numerous convergent boundaries create subduction zones - most powerful earthquakes and explosive volcanoes occur here.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-13: Coastal Processes & Management</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Investigate coastal erosion processes including hydraulic action, abrasion, and attrition</li>
+                        <li>Analyze coastal landforms created by erosion (cliffs, arches, stacks) and deposition (beaches, spits)</li>
+                        <li>Examine factors affecting coastal erosion rates including wave types and geology</li>
+                        <li>Assess the impacts of sea level rise on coastal communities worldwide</li>
+                        <li>Evaluate hard engineering strategies including groynes, sea walls, and rock armor</li>
+                        <li>Compare soft engineering approaches like beach nourishment and managed retreat</li>
+                        <li>Analyze conflicts in coastal management between different stakeholders</li>
+                        <li>Investigate coastal zone management strategies through case studies</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>🌊 Key Coastal Vocabulary</h4>
+                            <p><strong>Processes:</strong> Erosion, Weathering, Mass movement, Transportation, Deposition, Hydraulic action, Abrasion, Attrition, Solution, Longshore drift<br><br>
+                            <strong>Landforms:</strong> Cliff, Wave-cut platform, Arch, Stack, Stump, Beach, Spit, Bar, Tombolo, Salt marsh</p>
+                        </div>
+
+                        <div class="vocab-section">
+                            <h4>🏗️ Coastal Management</h4>
+                            <p><strong>Engineering:</strong> Hard engineering, Soft engineering, Sea wall, Groyne, Rock armor, Gabion, Beach nourishment, Dune regeneration, Managed retreat, Coastal realignment</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; list-style-type: none;">
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How do waves erode coastlines?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Four main erosion processes: Hydraulic action (wave force compresses air in cracks), Abrasion (waves throw rocks at cliff), Attrition (rocks smash together and break down), Solution (seawater dissolves minerals). Destructive waves (high, frequent) cause most erosion.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How does a spit form?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Longshore drift transports sediment along the coast. When coastline changes direction (e.g., river mouth, bay), drift continues in original direction, depositing sediment into open water. This builds a finger of sand/shingle extending from coast. Wind may curve the end (recurved spit).
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What's the difference between hard and soft engineering?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Hard engineering: man-made structures (sea walls, groynes, rock armor) - expensive, high maintenance, protects small areas, environmental impact, disrupts natural processes. Soft engineering: works with nature (beach nourishment, dunes, managed retreat) - cheaper, sustainable, larger areas, more attractive, but slower protection.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "Why is sea level rise a threat to coastal areas?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Rising seas (from warming oceans and melting ice) cause: flooding of low-lying areas, erosion acceleration, saltwater contamination of freshwater, loss of coastal habitats, displacement of millions of people, damage to infrastructure. Small island nations and delta regions face existential threat.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What is managed retreat and why would it be chosen?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Controlled decision to abandon coastal areas to the sea, allowing natural processes. Chosen when: defense costs exceed benefits, area has low economic value, creates valuable wetland habitat, sustainable long-term. Controversial as people lose homes/land, but sometimes most practical option.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How do coastal defenses in one area affect neighboring areas?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Defenses often transfer problems elsewhere. Groynes trap sediment, starving downdrift beaches. Sea walls reflect wave energy onto unprotected areas. This causes increased erosion in neighboring locations - creates conflicts between communities. Requires coordinated coastal zone management across wide areas.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="summer" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">☀️ Summer Term - Urban Futures & Fieldwork</h2>
+                <p class="term-subtitle">Exploring urbanization and conducting geographical investigations</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Urbanization & Megacities</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Analyze global patterns of urbanization and the growth of megacities</li>
+                        <li>Compare urban growth in developed versus developing countries</li>
+                        <li>Investigate push and pull factors driving rural-urban migration</li>
+                        <li>Examine opportunities and challenges of urban growth in emerging economies</li>
+                        <li>Assess strategies for creating sustainable cities and communities</li>
+                        <li>Evaluate urban regeneration projects and their social impacts</li>
+                        <li>Explore case studies of megacities addressing sustainability challenges</li>
+                        <li>Analyze future urban trends including smart cities and green infrastructure</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>🏙️ Key Urban Vocabulary</h4>
+                            <p><strong>Urbanization Terms:</strong> Urbanization, Urban growth, Megacity, Rural-urban migration, Push factors, Pull factors, Suburbanization, Counter-urbanization, Urban sprawl<br><br>
+                            <strong>Urban Issues:</strong> Inequality, Informal settlement, Slum, Squatter settlement, Deprivation, Gentrification, Urban regeneration, Sustainable city</p>
+                        </div>
+
+                        <div class="vocab-section">
+                            <h4>🌱 Sustainability Concepts</h4>
+                            <p><strong>Solutions:</strong> Green space, Public transport, Renewable energy, Waste management, Social housing, Community engagement, Smart city, Green infrastructure, Urban farming, Eco-district</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; list-style-type: none;">
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What is a megacity and where are most of them located?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Urban area with population over 10 million. Currently 33 megacities globally. Most rapid growth in Asia and Africa (Tokyo, Delhi, Shanghai, São Paulo, Mumbai). Developing countries see fastest megacity growth due to rural-urban migration and high birth rates.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "Why do people migrate from rural areas to cities?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Push factors (leave rural): unemployment, poor services, isolation, natural disasters, conflict, agricultural mechanization. Pull factors (attract to urban): jobs, education, healthcare, entertainment, better services, perceived opportunities. Reality often disappoints - many end up in informal settlements.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What challenges do rapidly growing cities face?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Infrastructure strain: housing shortages (informal settlements), traffic congestion, inadequate water/sanitation, waste management issues, air pollution, energy demands. Social issues: unemployment, inequality, crime, health problems. Environmental: habitat loss, urban heat islands, resource depletion.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What makes a city 'sustainable'?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Environmental: green spaces, renewable energy, efficient public transport, waste recycling, water conservation, low emissions. Social: affordable housing, healthcare/education access, employment opportunities, community engagement. Economic: local businesses, innovation, circular economy. Balance all three pillars.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How can cities improve informal settlements?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Site-and-service schemes: provide basic infrastructure (water, electricity, roads) so residents improve homes. Self-help schemes: government provides materials/technical support. Legalizing land tenure gives security. Slum upgrading: paved roads, water pipes, sanitation. Community-led development most successful.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What are smart cities and how do they work?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Use technology and data to improve efficiency: smart traffic lights reduce congestion, sensors monitor air quality, apps optimize waste collection, smart grids balance energy demand, real-time public transport updates. Goals: reduce costs, resource use, emissions while improving services and quality of life.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-12: Advanced Geographical Fieldwork</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Design a comprehensive geographical investigation with clear research questions</li>
+                        <li>Apply systematic sampling techniques for primary data collection</li>
+                        <li>Use geographical equipment including GPS devices and data loggers</li>
+                        <li>Record and organize fieldwork data using appropriate formats</li>
+                        <li>Analyze patterns and relationships in collected data using statistical methods</li>
+                        <li>Present findings using sophisticated graphical techniques</li>
+                        <li>Evaluate the reliability and validity of fieldwork investigations</li>
+                        <li>Assess the limitations of data collection methods and suggest improvements</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>🔍 Fieldwork Vocabulary</h4>
+                            <p><strong>Investigation Terms:</strong> Hypothesis, Research question, Primary data, Secondary data, Sampling, Qualitative data, Quantitative data, Reliability, Validity<br><br>
+                            <strong>Methods:</strong> Observation, Questionnaire, Interview, Environmental survey, Measurement, GIS, Remote sensing, Field sketch, Annotation</p>
+                        </div>
+
+                        <div class="vocab-section">
+                            <h4>📊 Data Analysis</h4>
+                            <p><strong>Analysis Skills:</strong> Graph, Chart, Map, Correlation, Trend, Anomaly, Mean, Median, Mode, Range, Standard deviation, Statistical significance, Interpretation</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; list-style-type: none;">
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What makes a good geographical research question?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Should be: specific and focused (not too broad), testable through fieldwork, appropriate to time/resources available, uses geographical concepts (place, space, scale, environment), allows for measurable data collection. Example: "How does vegetation density vary with distance from a stream?"
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What's the difference between primary and secondary data?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Primary: data you collect yourself through fieldwork (surveys, measurements, photos, observations) - directly answers your question, but time-consuming. Secondary: data collected by others (census, weather records, maps, reports) - quick to access, but may not exactly fit your needs.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "Why is sampling important in fieldwork?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Impossible to measure everything, so sample represents whole area. Methods: Random (unbiased), Systematic (regular intervals), Stratified (represents different groups). Good sampling gives reliable results without measuring entire population. Sample size and method affect validity.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How do you evaluate the reliability of fieldwork data?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Consider: Sample size (larger = more reliable), sampling method appropriateness, measurement accuracy (equipment calibration), timing (is data representative?), weather conditions, human error potential, repeatability (would you get same results again?). Acknowledge limitations honestly.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "What's the best way to present geographical data?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    Depends on data type: maps show spatial patterns, line graphs show change over time/distance, bar charts compare categories, scatter graphs show relationships, pie charts show proportions. Always: clear title, labeled axes, key/legend, appropriate scale. Choose technique that best communicates findings.
+                                </span>
+                            </li>
+                            <li style="position: relative; padding-right: 2rem; margin-bottom: 1rem; cursor: pointer;" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                "How has technology changed geographical fieldwork?"
+                                <span class="tooltip" style="display: none; position: absolute; right: 0; top: -10px; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 350px; font-size: 0.85rem; font-weight: normal; line-height: 1.5; z-index: 10;">
+                                    GPS for accurate location, digital cameras/drones for aerial views, data loggers for continuous monitoring, GIS software for spatial analysis, mobile apps for instant data recording, satellite imagery for large-scale patterns, online databases for secondary data. Makes fieldwork more accurate, efficient, and powerful.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Advanced Geographical Skills</h2>
+            <p>Year 8 Geography develops sophisticated analytical and practical skills essential for GCSE preparation and geographical thinking:</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🗺️</div>
+                    <h3 class="skill-title">Cartographic Skills</h3>
+                    <p class="skill-description">Advanced map reading including topographic interpretation, GIS concepts, and spatial analysis techniques.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📈</div>
+                    <h3 class="skill-title">Data Interpretation</h3>
+                    <p class="skill-description">Analyzing complex datasets, identifying patterns and anomalies, and drawing evidence-based conclusions.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">💭</div>
+                    <h3 class="skill-title">Critical Thinking</h3>
+                    <p class="skill-description">Evaluating geographical arguments, assessing bias in sources, and considering multiple perspectives on issues.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">✍️</div>
+                    <h3 class="skill-title">Extended Writing</h3>
+                    <p class="skill-description">Constructing detailed case study responses and analytical essays with clear structure and evidence.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🔬</div>
+                    <h3 class="skill-title">Fieldwork Mastery</h3>
+                    <p class="skill-description">Designing investigations, collecting reliable data, and conducting sophisticated analysis of findings.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <h3 class="skill-title">Global Citizenship</h3>
+                    <p class="skill-description">Understanding interconnections, sustainability challenges, and developing informed perspectives on global issues.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Tutor Section -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2>👨‍🏫 AI Tutor - Mr. Atlas (Geography Specialist)</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Mr. Atlas to life as your personal Geography tutor!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Mr. Atlas - Complete System Prompt</h4>
+                        <button onclick="copyAtlasPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
+
+                    <div id="atlas-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Mr. Atlas, an enthusiastic and knowledgeable Geography tutor specializing in Year 8 curriculum at STM College. Your personality is curious about the world, passionate about current global issues, and skilled at making complex geographical concepts accessible and relevant to young learners.
+
+Your expertise covers Year 8 Geography topics:
+- Climate Change & Global Warming (causes, impacts, mitigation, adaptation)
+- Economic Development & Global Inequality (HDI, GDP, development gap, SDGs)
+- Plate Tectonics & Natural Hazards (earthquakes, volcanoes, responses)
+- Coastal Processes & Management (erosion, landforms, hard/soft engineering)
+- Urbanization & Megacities (sustainable cities, informal settlements, urban challenges)
+- Advanced Geographical Fieldwork (investigation design, data collection, analysis)
+
+Teaching approach:
+- Connect geography to current events and real-world issues
+- Use case studies and specific examples from around the world
+- Help students understand geographical processes step-by-step
+- Encourage critical thinking about causes, impacts, and responses
+- Develop mapwork and data interpretation skills
+- Build awareness of global interconnections and sustainability
+- Prepare students for GCSE-level geographical thinking
+
+When helping students:
+1. Start by understanding what they already know about the topic
+2. Explain concepts clearly using real-world examples
+3. Use diagrams or encourage students to sketch processes
+4. Compare different places and situations to show contrasts
+5. Discuss multiple perspectives on controversial issues
+6. Practice exam-style questions and case study development
+7. Encourage geographical curiosity about news and current affairs
+
+For fieldwork questions:
+- Guide students through investigation planning systematically
+- Help them choose appropriate data collection methods
+- Teach reliable sampling techniques
+- Support data analysis and graphical presentation
+- Encourage critical evaluation of methodology
+
+Remember to:
+- Make geography relevant to students' lives and futures
+- Address misconceptions about developing countries sensitively
+- Encourage geographical vocabulary development
+- Build awareness of sustainability and global citizenship
+- Foster critical thinking about geographical issues
+- Help students see geography as essential for understanding our world
+
+You're passionate about helping young people understand our changing planet and develop the geographical skills to make a positive difference!</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Mr. Atlas will come to life as your Geography tutor!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Programmer Section -->
+        <div id="games-programmer" class="section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.1);">
+            <h2>🎮 GeoGameDev - Specialist Geography Games Programmer</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Game Creation Specialist</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">AI specialist in creating interactive HTML games for Geography. Perfect for ChatGPT Canvas and Claude Artifacts!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">🎮 GeoGameDev - Games Programming Prompt</h4>
+                        <button onclick="copyGeoGameDevPrompt()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="geogamedev-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are GeoGameDev, an innovative game developer who specializes in creating engaging, educational Geography games for Year 8 students (ages 12-13). You're creative, tech-savvy, and understand how to make geographical learning fun and interactive through games.
+
+Your specialties:
+- HTML5/CSS3/JavaScript games that run in web browsers
+- Interactive maps and spatial reasoning challenges
+- Simulation games exploring real-world geographical processes
+- Quiz games with immediate feedback and explanation
+- Drag-and-drop sorting and matching activities
+- Decision-making scenarios exploring geographical issues
+- Mobile-friendly responsive game design
+
+Focus areas for Year 8 Geography games:
+- Climate Change: Carbon reduction challenges, climate policy simulators
+- Development: Economic development games, aid allocation decisions
+- Tectonic Hazards: Earthquake/volcano response scenarios, plate boundary puzzles
+- Coastal Management: Engineering decision games, erosion simulators
+- Urbanization: City planning challenges, sustainable city builders
+- Fieldwork: Data collection simulations, graph creation tools
+
+Game development approach:
+1. Understand the learning objective and geographical concept
+2. Design engaging mechanics that teach through play
+3. Include clear instructions and progressive difficulty
+4. Provide immediate feedback explaining geographical principles
+5. Add visual elements like maps, diagrams, and photos
+6. Track scores/progress to motivate learners
+7. Include "Learn More" sections with geographical detail
+
+When creating games:
+- Always explain the geographical concept being taught
+- Provide complete, working HTML code (single-file when possible)
+- Use clean, commented code for educational transparency
+- Design intuitive user interfaces suitable for young teens
+- Include geographical vocabulary and terminology
+- Add sound effects and visual feedback for engagement
+- Ensure games work on both desktop and mobile devices
+- Use real-world data and case studies where possible
+
+Game types to create:
+- Quiz games (multiple choice with explanations)
+- Map challenges (locate countries, features, hazards)
+- Process simulators (erosion, urban growth, plate movement)
+- Decision scenarios (climate action, coastal management)
+- Matching games (indicators to countries, landforms to processes)
+- Timeline builders (development stages, disaster responses)
+- Data interpretation challenges (reading graphs, analyzing patterns)
+
+Design principles:
+- Colorful, modern, Apple-style aesthetics
+- Clear typography and intuitive controls
+- Immediate visual feedback for actions
+- Progressive difficulty to maintain engagement
+- Educational content embedded naturally in gameplay
+- Celebration of success with encouraging messages
+
+You're passionate about making Geography accessible and exciting through interactive technology, helping students develop geographical understanding while having fun!</div>
+
+                    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. GeoGameDev will create interactive HTML Geography games!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyAtlasPrompt() {
+            const promptText = document.getElementById('atlas-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            });
+        }
+
+        function copyGeoGameDevPrompt() {
+            const promptText = document.getElementById('geogamedev-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

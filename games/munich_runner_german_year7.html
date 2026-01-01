@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Munich Runner - German Year 7 Autumn Term</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-canvas {
+            display: block;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .hud-item {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        #question-overlay {
+            display: block;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        .question-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 3px solid #dc2626;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .checkpoint-badge {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .answer-btn {
+            background: #f5f5f7;
+            border: 2px solid #e5e5e5;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e8e8ed;
+            border-color: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #16a34a;
+            color: white;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        #start-screen, #gameover-screen, #win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #gameover-screen, #win-screen {
+            display: none;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .instructions em {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .instructions p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1d1d1f;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(251, 191, 36, 0.5);
+        }
+
+        .theme-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback-text.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #166534;
+            display: block;
+        }
+
+        .feedback-text.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        #mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .jump-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #mobile-controls {
+                display: block;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="hud">
+            <div class="hud-item">🏔️ Level: <span id="level">1</span>/3</div>
+            <div class="hud-item">🥨 <span id="pretzels">0</span></div>
+            <div class="hud-item">⭐ <span id="score">0</span></div>
+            <div class="hud-item">❤️ <span id="lives">3</span></div>
+        </div>
+
+        <div id="mobile-controls">
+            <button class="jump-btn" id="jump-btn">⬆️</button>
+        </div>
+
+        <div id="question-overlay">
+            <div class="question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div class="checkpoint-badge">🇩🇪 Q<span id="checkpoint-num">1</span>/<span id="total-questions">12</span></div>
+                    <button id="read-again-btn" onclick="rereadQuestion()" style="background: #dc2626; color: white; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">🔊 Read Again</button>
+                </div>
+                <div class="question-text" id="q-text">Loading...</div>
+                <div class="question-context" id="q-context">German Year 7 Practice</div>
+                <div class="answers-grid" id="answers"></div>
+                <div class="feedback-text" id="feedback"></div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <div class="theme-emoji">🏔️</div>
+            <h1 class="title">Munich Runner</h1>
+            <p class="subtitle">Run, Jump & Master German!<br><em style="font-size: 0.9em; opacity: 0.8;">Lauf durch München und lerne Deutsch!</em></p>
+
+            <div class="instructions">
+                <h3>How to Play / Wie man spielt</h3>
+                <p>🏃 <strong>RUN</strong> through the Bavarian Alps!</p>
+                <p>🇩🇪 Practice <strong>GERMAN</strong> - greetings, family, numbers & more!</p>
+                <p>🥨 Collect pretzels for bonus points!</p>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p><strong>⌨️ Keyboard:</strong> SPACE = Jump | A B C D = Answer</p>
+                    <p><strong>🎮 Xbox:</strong> RT/LT = Jump | X Y A B = Answer</p>
+                </div>
+
+                <p style="margin-top: 1rem;">✅ Correct = +1 Life | Learn German vocabulary!</p>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">Los geht's! 🏔️</button>
+        </div>
+
+        <div id="gameover-screen">
+            <div class="result-icon">💔</div>
+            <h1 class="title">Game Over!</h1>
+            <p class="subtitle">Du hast alle Leben verloren!</p>
+            <div class="stats">
+                <p>Level / Stufe: <span id="final-level">1</span></p>
+                <p>Score / Punkte: <span id="final-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Nochmal! 🔄</button>
+        </div>
+
+        <div id="win-screen">
+            <div class="result-icon">🏆</div>
+            <h1 class="title">Fantastisch!</h1>
+            <p class="subtitle">Du bist ein Deutschmeister!</p>
+            <div class="stats">
+                <p>🥨 Pretzels / Brezeln: <span id="win-pretzels">0</span></p>
+                <p>⭐ Score / Punkte: <span id="win-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Nochmal spielen! 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let gameRunning = false;
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let distance = 0;
+        let checkpointDistance = 22000;
+        let gameSpeed = 4;
+        let baseSpeed = 4;
+        let isSpeakingFeedback = false;
+
+        // Collectibles
+        let pretzels = [];
+        let pretzelCount = 0;
+
+        // Power-ups
+        let powerUps = [];
+        let isInvincible = false;
+        let invincibleTimer = 0;
+
+        // Player
+        let player = {
+            x: 100,
+            y: 0,
+            width: 50,
+            height: 70,
+            velocityY: 0,
+            jumping: false,
+            grounded: true
+        };
+
+        // Physics
+        const gravity = 0.8;
+        const jumpForce = -16;
+
+        // Obstacles
+        let obstacles = [];
+        let obstacleTimer = 0;
+
+        // Background
+        let bgOffset = 0;
+        let trees = [];
+        let clouds = [];
+
+        // German Year 7 Autumn Term Questions - Greetings, Family, Numbers, Basic Vocab
+        const questions = [
+            // Greetings
+            {
+                text: "How do you say 'Hello' in German?",
+                context: "German Greetings - Begrüßungen",
+                answers: ["Hallo", "Tschüs", "Danke", "Bitte"],
+                correct: 0,
+                explanation: "Hallo = Hello (informal greeting)",
+                english: "Hello"
+            },
+            {
+                text: "What does 'Guten Morgen' mean?",
+                context: "German Greetings - Begrüßungen",
+                answers: ["Good morning", "Good night", "Good evening", "Goodbye"],
+                correct: 0,
+                explanation: "Guten Morgen = Good morning",
+                english: "Good morning"
+            },
+            {
+                text: "How do you say 'Goodbye' in German?",
+                context: "German Greetings - Begrüßungen",
+                answers: ["Auf Wiedersehen", "Guten Tag", "Hallo", "Danke"],
+                correct: 0,
+                explanation: "Auf Wiedersehen = Goodbye (formal)",
+                english: "Goodbye"
+            },
+            // Family
+            {
+                text: "What is 'der Vater' in English?",
+                context: "Family - Die Familie",
+                answers: ["The father", "The mother", "The brother", "The sister"],
+                correct: 0,
+                explanation: "Der Vater = The father",
+                english: "The father"
+            },
+            {
+                text: "What is 'die Mutter' in English?",
+                context: "Family - Die Familie",
+                answers: ["The mother", "The father", "The grandmother", "The aunt"],
+                correct: 0,
+                explanation: "Die Mutter = The mother",
+                english: "The mother"
+            },
+            {
+                text: "How do you say 'brother' in German?",
+                context: "Family - Die Familie",
+                answers: ["der Bruder", "die Schwester", "der Vater", "der Onkel"],
+                correct: 0,
+                explanation: "Der Bruder = The brother",
+                english: "The brother"
+            },
+            // Pets
+            {
+                text: "What is 'der Hund' in English?",
+                context: "Pets - Haustiere",
+                answers: ["The dog", "The cat", "The rabbit", "The hamster"],
+                correct: 0,
+                explanation: "Der Hund = The dog",
+                english: "The dog"
+            },
+            {
+                text: "How do you say 'cat' in German?",
+                context: "Pets - Haustiere",
+                answers: ["die Katze", "der Hund", "der Vogel", "der Fisch"],
+                correct: 0,
+                explanation: "Die Katze = The cat",
+                english: "The cat"
+            },
+            // Numbers
+            {
+                text: "What number is 'fünf' in German?",
+                context: "Numbers - Zahlen 1-19",
+                answers: ["5", "4", "6", "7"],
+                correct: 0,
+                explanation: "Fünf = Five (5)",
+                english: "Five"
+            },
+            {
+                text: "How do you say '10' in German?",
+                context: "Numbers - Zahlen 1-19",
+                answers: ["zehn", "neun", "elf", "acht"],
+                correct: 0,
+                explanation: "Zehn = Ten (10)",
+                english: "Ten"
+            },
+            // Verbs haben/sein
+            {
+                text: "Ich ___ 12 Jahre alt.",
+                context: "Verb 'sein' (to be)",
+                answers: ["bin", "habe", "ist", "hat"],
+                correct: 0,
+                explanation: "Ich bin = I am (with age, use sein)",
+                english: "I am 12 years old"
+            },
+            {
+                text: "Ich ___ einen Hund.",
+                context: "Verb 'haben' (to have)",
+                answers: ["habe", "bin", "hat", "ist"],
+                correct: 0,
+                explanation: "Ich habe = I have",
+                english: "I have a dog"
+            }
+        ];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 150 - player.height;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        function generateTrees() {
+            trees = [];
+            for (let i = 0; i < 10; i++) {
+                trees.push({
+                    x: i * 200 + Math.random() * 100,
+                    height: 80 + Math.random() * 60,
+                    type: Math.random() > 0.5 ? 'pine' : 'normal'
+                });
+            }
+        }
+
+        function generateClouds() {
+            clouds = [];
+            for (let i = 0; i < 6; i++) {
+                clouds.push({
+                    x: i * 300 + Math.random() * 150,
+                    y: 40 + Math.random() * 60,
+                    size: 25 + Math.random() * 20
+                });
+            }
+        }
+
+        function drawBackground() {
+            // Sky gradient - Bavarian blue sky
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.6);
+            skyGradient.addColorStop(0, '#60a5fa');
+            skyGradient.addColorStop(1, '#93c5fd');
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height * 0.6);
+
+            // Sun
+            ctx.fillStyle = '#fbbf24';
+            ctx.beginPath();
+            ctx.arc(canvas.width - 120, 80, 50, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#fcd34d';
+            ctx.beginPath();
+            ctx.arc(canvas.width - 120, 80, 40, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Clouds
+            ctx.fillStyle = 'rgba(255,255,255,0.9)';
+            clouds.forEach(cloud => {
+                const cloudX = ((cloud.x - bgOffset * 0.2) % (canvas.width + 300)) - 100;
+                drawCloud(cloudX, cloud.y, cloud.size);
+            });
+
+            // Alps mountains - far background
+            drawMountains(canvas.height * 0.35, '#9ca3af', 0.1);
+            drawMountains(canvas.height * 0.4, '#6b7280', 0.2);
+            drawMountains(canvas.height * 0.45, '#4b5563', 0.3);
+
+            // Snow caps
+            ctx.fillStyle = 'white';
+            drawSnowCaps(canvas.height * 0.35, 0.1);
+            drawSnowCaps(canvas.height * 0.4, 0.2);
+
+            // Green hills
+            ctx.fillStyle = '#22c55e';
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height * 0.6);
+            for (let x = 0; x < canvas.width; x += 5) {
+                const y = canvas.height * 0.55 + Math.sin((x + bgOffset * 0.4) / 100) * 20;
+                ctx.lineTo(x, y);
+            }
+            ctx.lineTo(canvas.width, canvas.height * 0.65);
+            ctx.lineTo(0, canvas.height * 0.65);
+            ctx.closePath();
+            ctx.fill();
+
+            // Pine trees
+            trees.forEach(tree => {
+                const treeX = ((tree.x - bgOffset * 0.5) % (canvas.width + 400)) - 100;
+                if (tree.type === 'pine') {
+                    drawPineTree(treeX, canvas.height * 0.55 - tree.height, tree.height);
+                } else {
+                    drawTree(treeX, canvas.height * 0.55 - tree.height * 0.7, tree.height * 0.7);
+                }
+            });
+
+            // Grass/ground
+            ctx.fillStyle = '#16a34a';
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 150);
+
+            // Grass details
+            ctx.fillStyle = '#15803d';
+            for (let x = -bgOffset % 30; x < canvas.width; x += 30) {
+                ctx.beginPath();
+                ctx.moveTo(x, canvas.height - 150);
+                ctx.lineTo(x + 5, canvas.height - 165);
+                ctx.lineTo(x + 10, canvas.height - 150);
+                ctx.fill();
+            }
+        }
+
+        function drawMountains(baseY, color, speed) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height * 0.65);
+
+            for (let x = 0; x < canvas.width + 200; x += 100) {
+                const peakHeight = 80 + Math.sin((x + bgOffset * speed) / 200) * 40;
+                ctx.lineTo(x, baseY - peakHeight);
+                ctx.lineTo(x + 50, baseY - peakHeight - 30);
+                ctx.lineTo(x + 100, baseY - peakHeight + 10);
+            }
+
+            ctx.lineTo(canvas.width, canvas.height * 0.65);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function drawSnowCaps(baseY, speed) {
+            for (let x = 0; x < canvas.width + 200; x += 100) {
+                const peakHeight = 80 + Math.sin((x + bgOffset * speed) / 200) * 40;
+                ctx.beginPath();
+                ctx.moveTo(x + 30, baseY - peakHeight - 10);
+                ctx.lineTo(x + 50, baseY - peakHeight - 30);
+                ctx.lineTo(x + 70, baseY - peakHeight - 5);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function drawCloud(x, y, size) {
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.arc(x + size, y - 5, size * 1.2, 0, Math.PI * 2);
+            ctx.arc(x + size * 2, y, size, 0, Math.PI * 2);
+            ctx.arc(x + size, y + 8, size * 0.8, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawPineTree(x, y, height) {
+            // Trunk
+            ctx.fillStyle = '#78350f';
+            ctx.fillRect(x - 5, y + height - 15, 10, 20);
+
+            // Pine layers
+            ctx.fillStyle = '#166534';
+            for (let i = 0; i < 4; i++) {
+                const layerY = y + i * (height / 5);
+                const layerWidth = 30 - i * 5;
+                ctx.beginPath();
+                ctx.moveTo(x - layerWidth, layerY + 25);
+                ctx.lineTo(x, layerY);
+                ctx.lineTo(x + layerWidth, layerY + 25);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function drawTree(x, y, height) {
+            // Trunk
+            ctx.fillStyle = '#78350f';
+            ctx.fillRect(x - 6, y + height - 10, 12, 15);
+
+            // Foliage
+            ctx.fillStyle = '#22c55e';
+            ctx.beginPath();
+            ctx.arc(x, y + height * 0.4, height * 0.5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawPlayer() {
+            // Body - Bavarian outfit (lederhosen style)
+            ctx.fillStyle = '#78350f';
+            ctx.fillRect(player.x, player.y + 20, player.width - 10, 35);
+
+            // Head
+            ctx.fillStyle = '#fcd5b8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 12, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Bavarian hat
+            ctx.fillStyle = '#16a34a';
+            ctx.beginPath();
+            ctx.ellipse(player.x + 20, player.y + 5, 18, 6, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 2, 12, Math.PI, 0);
+            ctx.fill();
+
+            // Hat feather
+            ctx.fillStyle = '#dc2626';
+            ctx.beginPath();
+            ctx.moveTo(player.x + 28, player.y - 5);
+            ctx.quadraticCurveTo(player.x + 35, player.y - 15, player.x + 30, player.y - 8);
+            ctx.fill();
+
+            // Eyes
+            ctx.fillStyle = '#1d1d1f';
+            ctx.beginPath();
+            ctx.arc(player.x + 15, player.y + 10, 3, 0, Math.PI * 2);
+            ctx.arc(player.x + 25, player.y + 10, 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Legs
+            ctx.fillStyle = '#fcd5b8';
+            if (player.grounded) {
+                ctx.fillRect(player.x + 5, player.y + 55, 12, 15);
+                ctx.fillRect(player.x + 22, player.y + 55, 12, 15);
+            } else {
+                ctx.fillRect(player.x + 5, player.y + 50, 12, 20);
+                ctx.fillRect(player.x + 22, player.y + 50, 12, 20);
+            }
+        }
+
+        function spawnObstacle() {
+            const types = [
+                { width: 50, height: 50, emoji: '🪨' },
+                { width: 45, height: 55, emoji: '🌲' },
+                { width: 40, height: 45, emoji: '🦌' },
+                { width: 50, height: 40, emoji: '⛷️' },
+                { width: 45, height: 45, emoji: '🎿' },
+                { width: 55, height: 50, emoji: '🏔️' },
+                { width: 40, height: 50, emoji: '🐻' }
+            ];
+            const type = types[Math.floor(Math.random() * types.length)];
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - type.height,
+                width: type.width,
+                height: type.height,
+                emoji: type.emoji
+            });
+
+            if (Math.random() < 0.15 && level > 1) {
+                const type2 = types[Math.floor(Math.random() * types.length)];
+                obstacles.push({
+                    x: canvas.width + 150,
+                    y: canvas.height - 150 - type2.height,
+                    width: type2.width,
+                    height: type2.height,
+                    emoji: type2.emoji
+                });
+            }
+        }
+
+        function spawnPretzel() {
+            const heights = [80, 120, 160];
+            pretzels.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - heights[Math.floor(Math.random() * heights.length)],
+                collected: false
+            });
+        }
+
+        function spawnPowerUp() {
+            const types = ['shield', 'magnet', 'slow'];
+            powerUps.push({
+                x: canvas.width + 50,
+                y: canvas.height - 280,
+                type: types[Math.floor(Math.random() * types.length)],
+                collected: false
+            });
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obs => {
+                ctx.font = `${obs.height}px Arial`;
+                ctx.fillText(obs.emoji, obs.x, obs.y + obs.height - 5);
+            });
+        }
+
+        function drawPretzels() {
+            pretzels.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '35px Arial';
+                    const bob = Math.sin(Date.now() / 200 + p.x) * 5;
+                    ctx.fillText('🥨', p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawPowerUps() {
+            powerUps.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '40px Arial';
+                    const bob = Math.sin(Date.now() / 150) * 8;
+                    let emoji = p.type === 'shield' ? '⭐' : p.type === 'magnet' ? '🧲' : '⏱️';
+                    ctx.fillText(emoji, p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawProgressBar() {
+            const barWidth = 200;
+            const barHeight = 10;
+            const barX = canvas.width / 2 - barWidth / 2;
+            const barY = 70;
+            const progress = Math.min(distance / checkpointDistance, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            ctx.fillStyle = '#22c55e';
+            ctx.fillRect(barX, barY, barWidth * progress, barHeight);
+
+            ctx.fillStyle = 'white';
+            ctx.font = '12px Arial';
+            ctx.fillText('🏁', barX + barWidth - 15, barY + 10);
+        }
+
+        let pretzelSpawnTimer = 0;
+        let powerUpSpawnTimer = 0;
+        let comboCount = 0;
+        let comboTimer = 0;
+
+        function update() {
+            if (!gameRunning) return;
+
+            gameSpeed = Math.min(baseSpeed + 5, baseSpeed + (distance / 5000));
+
+            bgOffset += gameSpeed;
+            distance += gameSpeed;
+
+            if (!player.grounded) {
+                player.velocityY += gravity;
+                player.y += player.velocityY;
+
+                if (player.y >= canvas.height - 150 - player.height) {
+                    player.y = canvas.height - 150 - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                    player.jumping = false;
+                }
+            }
+
+            obstacleTimer++;
+            const obstacleFreq = Math.max(80, 180 - gameSpeed * 15);
+            if (obstacleTimer > obstacleFreq + Math.random() * 60) {
+                spawnObstacle();
+                obstacleTimer = 0;
+            }
+
+            pretzelSpawnTimer++;
+            if (pretzelSpawnTimer > 40 + Math.random() * 30) {
+                spawnPretzel();
+                pretzelSpawnTimer = 0;
+            }
+
+            powerUpSpawnTimer++;
+            if (powerUpSpawnTimer > 400 + Math.random() * 200) {
+                spawnPowerUp();
+                powerUpSpawnTimer = 0;
+            }
+
+            obstacles.forEach(obs => { obs.x -= gameSpeed; });
+            pretzels.forEach(p => { p.x -= gameSpeed; });
+            powerUps.forEach(p => { p.x -= gameSpeed; });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+            pretzels = pretzels.filter(p => p.x > -100);
+            powerUps = powerUps.filter(p => p.x > -100);
+
+            if (!isInvincible) {
+                obstacles.forEach(obs => {
+                    if (player.x < obs.x + obs.width - 10 &&
+                        player.x + player.width - 10 > obs.x &&
+                        player.y + player.height > obs.y &&
+                        player.y < obs.y + obs.height) {
+                        hitObstacle();
+                    }
+                });
+            }
+
+            pretzels.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 35 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 35 &&
+                    player.y + player.height > p.y - 20) {
+                    p.collected = true;
+                    pretzelCount++;
+                    score += 50;
+                    comboCount++;
+                    comboTimer = 60;
+                    if (comboCount >= 3) score += comboCount * 20;
+                }
+            });
+
+            powerUps.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 40 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 20 &&
+                    player.y + player.height > p.y - 30) {
+                    p.collected = true;
+                    activatePowerUp(p.type);
+                }
+            });
+
+            if (comboTimer > 0) comboTimer--;
+            else comboCount = 0;
+
+            if (isInvincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) isInvincible = false;
+            }
+
+            if (distance >= checkpointDistance) reachCheckpoint();
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('pretzels').textContent = pretzelCount;
+        }
+
+        function activatePowerUp(type) {
+            if (type === 'shield') {
+                isInvincible = true;
+                invincibleTimer = 180;
+            } else if (type === 'slow') {
+                gameSpeed = Math.max(3, gameSpeed - 2);
+                setTimeout(() => { gameSpeed = baseSpeed; }, 3000);
+            } else if (type === 'magnet') {
+                pretzels.forEach(p => {
+                    if (!p.collected && p.x < player.x + 300) {
+                        p.x = player.x + 30;
+                        p.y = player.y + 20;
+                    }
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawPretzels();
+            drawPowerUps();
+            drawObstacles();
+            drawPlayer();
+            drawProgressBar();
+
+            if (comboCount >= 3) {
+                ctx.fillStyle = '#fbbf24';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText(`COMBO x${comboCount}!`, player.x - 20, player.y - 30);
+            }
+
+            if (isInvincible) {
+                ctx.strokeStyle = 'rgba(251, 191, 36, 0.8)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(player.x + 25, player.y + 35, 45, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.velocityY = jumpForce;
+                player.grounded = false;
+                player.jumping = true;
+            }
+        }
+
+        function hitObstacle() {
+            lives--;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                obstacles = [];
+                distance = Math.max(0, distance - 200);
+                canvas.style.filter = 'brightness(2)';
+                setTimeout(() => canvas.style.filter = 'none', 100);
+            }
+        }
+
+        function reachCheckpoint() {
+            distance = 0;
+            level++;
+
+            if (level > 3) {
+                winGame();
+                return;
+            }
+
+            checkpointDistance = 22000 + level * 2000;
+            baseSpeed = 4 + level * 0.5;
+            gameSpeed = baseSpeed;
+            document.getElementById('level').textContent = level;
+        }
+
+        // TTS Functions - German voice detection
+        function isGermanText(text) {
+            // Check for German special characters
+            if (/[äöüßÄÖÜ]/.test(text)) return true;
+            // Check for German sentence starters and common words
+            if (/^(Ich|Du|Er|Sie|Wir|Ihr|Das|Der|Die|Ein|Eine|Mein|Dein|Sein|Ihr|Unser|Guten|Auf|Wie|Was|Wo|Wer|Wann|Warum|Hallo|Tschüs|Danke|Bitte)/i.test(text)) return true;
+            // Check for common German words
+            if (/\b(ist|bin|habe|hat|sind|haben|der|die|das|ein|eine|und|oder|nicht|ja|nein|gut|sehr)\b/i.test(text)) return true;
+            return false;
+        }
+
+        function speak(text, lang = 'de-DE') {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                const voices = speechSynthesis.getVoices();
+                const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+                if (voice) utterance.voice = voice;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[questionCount % questions.length];
+            currentQuestion = question;
+
+            // Show position in question cycle (1-12, not counting up forever)
+            const questionInCycle = (questionCount % questions.length) + 1;
+            document.getElementById('checkpoint-num').textContent = questionInCycle;
+            document.getElementById('total-questions').textContent = questions.length;
+            document.getElementById('q-text').textContent = question.text;
+            document.getElementById('q-context').textContent = question.context;
+
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+
+            const shuffledAnswers = question.answers.map((ans, i) => ({ text: ans, isCorrect: i === question.correct }));
+            shuffledAnswers.sort(() => Math.random() - 0.5);
+            currentAnswers = shuffledAnswers;
+
+            const labels = ['A', 'B', 'C', 'D'];
+            shuffledAnswers.forEach((ans, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.onclick = () => handleAnswer(btn, ans.isCorrect, question.explanation);
+                btn.innerHTML = `<strong>${labels[i]}</strong> ${ans.text}`;
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback-text';
+
+            readQuestionAndAnswers(question.text, shuffledAnswers, labels);
+        }
+
+        function readQuestionAndAnswers(questionText, answers, labels) {
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeakingFeedback) return;
+
+            speechSynthesis.cancel();
+
+            const voices = speechSynthesis.getVoices();
+            const germanVoice = voices.find(v => v.lang === 'de-DE' && v.name.includes('Google')) ||
+                               voices.find(v => v.lang.startsWith('de'));
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+
+            const queue = [];
+
+            // Clean underscores
+            let cleanedQuestion = questionText.replace(/_+/g, 'blank');
+
+            // Detect if question is German or English
+            const questionIsGerman = isGermanText(cleanedQuestion);
+
+            const qUtterance = new SpeechSynthesisUtterance(cleanedQuestion);
+            qUtterance.lang = questionIsGerman ? 'de-DE' : 'en-GB';
+            qUtterance.rate = 0.9;
+            if (questionIsGerman && germanVoice) qUtterance.voice = germanVoice;
+            else if (englishVoice) qUtterance.voice = englishVoice;
+            queue.push(qUtterance);
+
+            // Answers
+            answers.forEach((ans, i) => {
+                const labelUtterance = new SpeechSynthesisUtterance(labels[i]);
+                labelUtterance.lang = 'en-GB';
+                labelUtterance.rate = 1.0;
+                if (englishVoice) labelUtterance.voice = englishVoice;
+                queue.push(labelUtterance);
+
+                const ansIsGerman = isGermanText(ans.text);
+
+                const ansUtterance = new SpeechSynthesisUtterance(ans.text);
+                ansUtterance.lang = ansIsGerman ? 'de-DE' : 'en-GB';
+                ansUtterance.rate = 0.85;
+                if (ansIsGerman && germanVoice) ansUtterance.voice = germanVoice;
+                else if (englishVoice) ansUtterance.voice = englishVoice;
+                queue.push(ansUtterance);
+            });
+
+            let i = 0;
+            function playNext() {
+                if (i < queue.length) {
+                    queue[i].onend = playNext;
+                    speechSynthesis.speak(queue[i]);
+                    i++;
+                }
+            }
+            playNext();
+        }
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.getVoices();
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        let questionCount = 0;
+        let currentQuestion = null;
+        let currentAnswers = null;
+        const answerLabels = ['A', 'B', 'C', 'D'];
+
+        function rereadQuestion() {
+            if (currentQuestion && currentAnswers) {
+                readQuestionAndAnswers(currentQuestion.text, currentAnswers, answerLabels);
+            }
+        }
+
+        function handleAnswer(btn, isCorrect, explanation) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('feedback');
+            const question = questions[questionCount % questions.length];
+            const correctAnswer = question.answers[question.correct];
+            const englishTranslation = question.english;
+
+            speechSynthesis.cancel();
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                lives++;
+                score += 200;
+                document.getElementById('lives').textContent = lives;
+                document.getElementById('score').textContent = score;
+
+                // Show translation in feedback if available
+                if (englishTranslation) {
+                    feedback.textContent = '✅ +1 ❤️ = "' + englishTranslation + '"';
+                } else {
+                    feedback.textContent = '✅ +1 ❤️ +200pts!';
+                }
+                feedback.className = 'feedback-text correct';
+
+                // Speak correct, then English translation if available, then "next question"
+                speakFeedback("Richtig!", 'de-DE', () => {
+                    if (englishTranslation) {
+                        speakFeedback("This means: " + englishTranslation, 'en-GB', () => {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        });
+                    } else {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    }
+                });
+            } else {
+                btn.classList.add('wrong');
+
+                // Show answer and translation
+                if (englishTranslation) {
+                    feedback.textContent = '❌ ' + correctAnswer + ' = "' + englishTranslation + '"';
+                } else {
+                    feedback.textContent = '❌ Nein! ' + correctAnswer;
+                }
+                feedback.className = 'feedback-text wrong';
+
+                // Speak wrong, answer (in German if German), then English translation, then "next question"
+                speakFeedback("Falsch! The answer is:", 'en-GB', () => {
+                    const answerIsGerman = isGermanText(correctAnswer);
+                    speakFeedback(correctAnswer, answerIsGerman ? 'de-DE' : 'en-GB', () => {
+                        if (englishTranslation) {
+                            speakFeedback("This means: " + englishTranslation, 'en-GB', () => {
+                                speakFeedback("Next question!", 'en-GB', () => {
+                                    questionCount++;
+                                    showQuestion();
+                                }, true);
+                            });
+                        } else {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        }
+                    });
+                });
+            }
+        }
+
+        function speakFeedback(text, lang, callback, isLast = false) {
+            isSpeakingFeedback = true;
+            const voices = speechSynthesis.getVoices();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 1.0;
+
+            if (lang === 'de-DE') {
+                const germanVoice = voices.find(v => v.lang === 'de-DE' && v.name.includes('Google')) ||
+                                   voices.find(v => v.lang.startsWith('de'));
+                if (germanVoice) utterance.voice = germanVoice;
+            } else {
+                const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                    voices.find(v => v.lang.startsWith('en'));
+                if (englishVoice) utterance.voice = englishVoice;
+            }
+
+            utterance.onend = () => {
+                if (isLast) isSpeakingFeedback = false;
+                if (callback) callback();
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'flex';
+            document.getElementById('final-level').textContent = level;
+            document.getElementById('final-score').textContent = score;
+        }
+
+        function winGame() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'flex';
+            document.getElementById('win-score').textContent = score;
+            document.getElementById('win-pretzels').textContent = pretzelCount;
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('question-overlay').style.display = 'block';
+
+            level = 1;
+            score = 0;
+            lives = 3;
+            distance = 0;
+            checkpointDistance = 22000;
+            gameSpeed = 4;
+            baseSpeed = 4;
+            isSpeakingFeedback = false;
+            obstacles = [];
+            pretzels = [];
+            powerUps = [];
+            pretzelCount = 0;
+            isInvincible = false;
+            invincibleTimer = 0;
+            comboCount = 0;
+            comboTimer = 0;
+            obstacleTimer = 0;
+            pretzelSpawnTimer = 0;
+            powerUpSpawnTimer = 0;
+            questionCount = 0;
+
+            document.getElementById('level').textContent = level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            document.getElementById('pretzels').textContent = pretzelCount;
+
+            player.y = canvas.height - 150 - player.height;
+            player.velocityY = 0;
+            player.grounded = true;
+
+            generateTrees();
+            generateClouds();
+            gameRunning = true;
+
+            showQuestion();
+        }
+
+        // Gamepad support
+        let gamepadConnected = false;
+        let lastButtonStates = {};
+
+        window.addEventListener('gamepadconnected', () => { gamepadConnected = true; });
+        window.addEventListener('gamepaddisconnected', () => { gamepadConnected = false; });
+
+        function pollGamepad() {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads) return;
+
+            for (const gamepad of gamepads) {
+                if (!gamepad) continue;
+
+                const buttons = gamepad.buttons;
+
+                if ((buttons[7]?.pressed || buttons[6]?.pressed) && !lastButtonStates['jump']) {
+                    jump();
+                    lastButtonStates['jump'] = true;
+                } else if (!buttons[7]?.pressed && !buttons[6]?.pressed) {
+                    lastButtonStates['jump'] = false;
+                }
+
+                const answerMap = [
+                    { btn: 2, answer: 0, key: 'X' },
+                    { btn: 3, answer: 1, key: 'Y' },
+                    { btn: 0, answer: 2, key: 'A' },
+                    { btn: 1, answer: 3, key: 'B' }
+                ];
+
+                answerMap.forEach(({ btn, answer, key }) => {
+                    if (buttons[btn]?.pressed && !lastButtonStates[key]) {
+                        const answerBtns = document.querySelectorAll('.answer-btn');
+                        if (answerBtns[answer] && !answerBtns[answer].disabled) {
+                            answerBtns[answer].click();
+                        }
+                        lastButtonStates[key] = true;
+                    } else if (!buttons[btn]?.pressed) {
+                        lastButtonStates[key] = false;
+                    }
+                });
+            }
+            requestAnimationFrame(pollGamepad);
+        }
+        pollGamepad();
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+
+            const keyMap = { 'KeyA': 0, 'KeyB': 1, 'KeyC': 2, 'KeyD': 3 };
+            if (keyMap.hasOwnProperty(e.code)) {
+                const btns = document.querySelectorAll('.answer-btn');
+                if (btns[keyMap[e.code]] && !btns[keyMap[e.code]].disabled) {
+                    btns[keyMap[e.code]].click();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+        document.getElementById('jump-btn').addEventListener('click', jump);
+        document.getElementById('jump-btn').addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+
+        // Initialize
+        resizeCanvas();
+        generateTrees();
+        generateClouds();
+        gameLoop();
+    </script>
+</body>
+</html>

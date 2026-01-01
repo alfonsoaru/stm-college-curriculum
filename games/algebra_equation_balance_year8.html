@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algebra Equation Balance - Year 8 Mathematics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3b82f6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 30px;
+            background: rgba(255,255,255,0.15);
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .game-container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
+            color: #1a1a1a;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .level-indicator {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .equation-display {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 3px solid #e2e8f0;
+        }
+
+        .balance-visual {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 20px;
+            min-height: 120px;
+        }
+
+        .scale-side {
+            flex: 1;
+            max-width: 250px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 3px solid #f59e0b;
+            position: relative;
+        }
+
+        .scale-side.left {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-color: #3b82f6;
+        }
+
+        .scale-side.right {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: #22c55e;
+        }
+
+        .scale-content {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .equals-sign {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #6b7280;
+        }
+
+        .equation-text {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .instruction {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #4b5563;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #eff6ff;
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .operations-panel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .op-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .op-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .op-btn.add { background: #22c55e; color: white; }
+        .op-btn.subtract { background: #ef4444; color: white; }
+        .op-btn.multiply { background: #8b5cf6; color: white; }
+        .op-btn.divide { background: #f59e0b; color: white; }
+
+        .input-section {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .input-group input {
+            width: 100px;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .apply-btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+
+        .hint-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .skip-btn {
+            background: #6b7280;
+            color: white;
+        }
+
+        .steps-display {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .step {
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 8px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.95rem;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.success {
+            background: #dcfce7;
+            color: #166534;
+            display: block;
+        }
+
+        .feedback.error {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
+        .feedback.hint {
+            background: #fef3c7;
+            color: #92400e;
+            display: block;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            color: #1a1a1a;
+        }
+
+        .modal-content h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #22c55e;
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #4b5563;
+        }
+
+        .modal-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            margin: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .stats-bar { flex-wrap: wrap; gap: 15px; }
+            .operations-panel { grid-template-columns: repeat(2, 1fr); }
+            .scale-content { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚖️ Algebra Equation Balance</h1>
+        <p>Keep the equation balanced by doing the same operation to both sides!</p>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-value" id="score">0</div>
+            <div class="stat-label">Score</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="level">1</div>
+            <div class="stat-label">Level</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="streak">0</div>
+            <div class="stat-label">Streak</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="solved">0</div>
+            <div class="stat-label">Solved</div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div class="level-indicator">
+            <span class="level-badge" id="level-badge">Level 1: One-Step Equations</span>
+        </div>
+
+        <div class="equation-display">
+            <div class="balance-visual">
+                <div class="scale-side left">
+                    <div class="scale-content" id="left-side">3x + 5</div>
+                </div>
+                <div class="equals-sign">=</div>
+                <div class="scale-side right">
+                    <div class="scale-content" id="right-side">14</div>
+                </div>
+            </div>
+            <div class="equation-text" id="equation-text">3x + 5 = 14</div>
+        </div>
+
+        <div class="instruction" id="instruction">
+            What operation should you apply to BOTH sides to solve for x?
+        </div>
+
+        <div class="operations-panel">
+            <button class="op-btn add" onclick="selectOperation('add')">+ Add</button>
+            <button class="op-btn subtract" onclick="selectOperation('subtract')">− Subtract</button>
+            <button class="op-btn multiply" onclick="selectOperation('multiply')">× Multiply</button>
+            <button class="op-btn divide" onclick="selectOperation('divide')">÷ Divide</button>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label>Operation:</label>
+                <span id="selected-op" style="font-weight: 700; color: #3b82f6;">None</span>
+            </div>
+            <div class="input-group">
+                <label>Value:</label>
+                <input type="number" id="op-value" placeholder="?" />
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="action-btn apply-btn" onclick="applyOperation()">Apply to Both Sides</button>
+            <button class="action-btn check-btn" onclick="checkAnswer()">Check Answer</button>
+            <button class="action-btn hint-btn" onclick="showHint()">💡 Hint</button>
+            <button class="action-btn skip-btn" onclick="skipEquation()">Skip →</button>
+        </div>
+
+        <div class="steps-display" id="steps-display">
+            <div class="step">Start: <span id="original-equation"></span></div>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <div class="modal" id="level-modal">
+        <div class="modal-content">
+            <h2>🎉 Level Complete!</h2>
+            <p id="modal-message">Great work! You've mastered one-step equations.</p>
+            <button class="modal-btn" onclick="nextLevel()">Next Level →</button>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let state = {
+            score: 0,
+            level: 1,
+            streak: 0,
+            solved: 0,
+            currentEquation: null,
+            selectedOp: null,
+            steps: [],
+            hintsUsed: 0
+        };
+
+        // Equation templates by level
+        const levels = {
+            1: { name: "One-Step Equations", solveFor: 3 },
+            2: { name: "Two-Step Equations", solveFor: 4 },
+            3: { name: "Equations with Variables on Both Sides", solveFor: 4 },
+            4: { name: "Multi-Step Equations", solveFor: 5 },
+            5: { name: "Challenge Mode", solveFor: 6 }
+        };
+
+        // Generate equations based on level
+        function generateEquation() {
+            let eq = {};
+            const x = Math.floor(Math.random() * 10) + 1; // Solution
+
+            switch(state.level) {
+                case 1: // One-step: ax = b or x + a = b
+                    if (Math.random() > 0.5) {
+                        const a = Math.floor(Math.random() * 8) + 2;
+                        eq = {
+                            left: `${a}x`,
+                            right: `${a * x}`,
+                            solution: x,
+                            leftParsed: { coefficient: a, constant: 0 },
+                            rightParsed: { coefficient: 0, constant: a * x }
+                        };
+                    } else {
+                        const a = Math.floor(Math.random() * 15) + 1;
+                        eq = {
+                            left: `x + ${a}`,
+                            right: `${x + a}`,
+                            solution: x,
+                            leftParsed: { coefficient: 1, constant: a },
+                            rightParsed: { coefficient: 0, constant: x + a }
+                        };
+                    }
+                    break;
+
+                case 2: // Two-step: ax + b = c
+                    const a2 = Math.floor(Math.random() * 5) + 2;
+                    const b2 = Math.floor(Math.random() * 10) + 1;
+                    eq = {
+                        left: `${a2}x + ${b2}`,
+                        right: `${a2 * x + b2}`,
+                        solution: x,
+                        leftParsed: { coefficient: a2, constant: b2 },
+                        rightParsed: { coefficient: 0, constant: a2 * x + b2 }
+                    };
+                    break;
+
+                case 3: // Variables both sides: ax + b = cx + d
+                    const a3 = Math.floor(Math.random() * 5) + 3;
+                    const b3 = Math.floor(Math.random() * 10) + 1;
+                    const c3 = Math.floor(Math.random() * 3) + 1;
+                    const d3 = (a3 - c3) * x + b3;
+                    eq = {
+                        left: `${a3}x + ${b3}`,
+                        right: `${c3}x + ${d3}`,
+                        solution: x,
+                        leftParsed: { coefficient: a3, constant: b3 },
+                        rightParsed: { coefficient: c3, constant: d3 }
+                    };
+                    break;
+
+                case 4: // Multi-step with negatives
+                    const a4 = Math.floor(Math.random() * 6) + 2;
+                    const b4 = Math.floor(Math.random() * 15) - 7;
+                    const sign4 = b4 >= 0 ? '+' : '';
+                    eq = {
+                        left: `${a4}x ${sign4} ${b4}`,
+                        right: `${a4 * x + b4}`,
+                        solution: x,
+                        leftParsed: { coefficient: a4, constant: b4 },
+                        rightParsed: { coefficient: 0, constant: a4 * x + b4 }
+                    };
+                    break;
+
+                case 5: // Challenge: more complex
+                    const a5 = Math.floor(Math.random() * 7) + 3;
+                    const b5 = Math.floor(Math.random() * 20) - 10;
+                    const c5 = Math.floor(Math.random() * 4) + 1;
+                    const d5 = (a5 - c5) * x + b5;
+                    const signB5 = b5 >= 0 ? '+' : '';
+                    const signD5 = d5 >= 0 ? '+' : '';
+                    eq = {
+                        left: `${a5}x ${signB5} ${b5}`,
+                        right: `${c5}x ${signD5} ${d5}`,
+                        solution: x,
+                        leftParsed: { coefficient: a5, constant: b5 },
+                        rightParsed: { coefficient: c5, constant: d5 }
+                    };
+                    break;
+            }
+
+            return eq;
+        }
+
+        function selectOperation(op) {
+            state.selectedOp = op;
+            const opSymbols = { add: '+', subtract: '−', multiply: '×', divide: '÷' };
+            document.getElementById('selected-op').textContent = opSymbols[op] || 'None';
+
+            // Highlight selected button
+            document.querySelectorAll('.op-btn').forEach(btn => btn.style.boxShadow = 'none');
+            document.querySelector(`.op-btn.${op}`).style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.5)';
+        }
+
+        function applyOperation() {
+            const value = parseFloat(document.getElementById('op-value').value);
+            if (!state.selectedOp || isNaN(value)) {
+                showFeedback('Please select an operation and enter a value!', 'error');
+                return;
+            }
+
+            const eq = state.currentEquation;
+            let newLeft = { ...eq.leftParsed };
+            let newRight = { ...eq.rightParsed };
+
+            // Apply operation to both sides
+            switch(state.selectedOp) {
+                case 'add':
+                    newLeft.constant += value;
+                    newRight.constant += value;
+                    break;
+                case 'subtract':
+                    newLeft.constant -= value;
+                    newRight.constant -= value;
+                    break;
+                case 'multiply':
+                    newLeft.coefficient *= value;
+                    newLeft.constant *= value;
+                    newRight.coefficient *= value;
+                    newRight.constant *= value;
+                    break;
+                case 'divide':
+                    if (value === 0) {
+                        showFeedback('Cannot divide by zero!', 'error');
+                        return;
+                    }
+                    newLeft.coefficient /= value;
+                    newLeft.constant /= value;
+                    newRight.coefficient /= value;
+                    newRight.constant /= value;
+                    break;
+            }
+
+            // Update equation
+            eq.leftParsed = newLeft;
+            eq.rightParsed = newRight;
+
+            // Format and display
+            const leftStr = formatSide(newLeft);
+            const rightStr = formatSide(newRight);
+
+            eq.left = leftStr;
+            eq.right = rightStr;
+
+            document.getElementById('left-side').textContent = leftStr;
+            document.getElementById('right-side').textContent = rightStr;
+            document.getElementById('equation-text').textContent = `${leftStr} = ${rightStr}`;
+
+            // Add step to history
+            const opSymbols = { add: '+', subtract: '−', multiply: '×', divide: '÷' };
+            state.steps.push(`${opSymbols[state.selectedOp]} ${value} both sides → ${leftStr} = ${rightStr}`);
+            updateStepsDisplay();
+
+            // Clear inputs
+            document.getElementById('op-value').value = '';
+            state.selectedOp = null;
+            document.getElementById('selected-op').textContent = 'None';
+            document.querySelectorAll('.op-btn').forEach(btn => btn.style.boxShadow = 'none');
+
+            showFeedback('Operation applied to both sides!', 'success');
+        }
+
+        function formatSide(parsed) {
+            let str = '';
+            if (parsed.coefficient !== 0) {
+                if (parsed.coefficient === 1) str = 'x';
+                else if (parsed.coefficient === -1) str = '-x';
+                else str = `${parsed.coefficient}x`;
+            }
+
+            if (parsed.constant !== 0) {
+                if (str === '') {
+                    str = `${parsed.constant}`;
+                } else if (parsed.constant > 0) {
+                    str += ` + ${parsed.constant}`;
+                } else {
+                    str += ` - ${Math.abs(parsed.constant)}`;
+                }
+            }
+
+            if (str === '') str = '0';
+            return str;
+        }
+
+        function checkAnswer() {
+            const eq = state.currentEquation;
+            const left = eq.leftParsed;
+            const right = eq.rightParsed;
+
+            // Check if solved (x = number)
+            if (left.coefficient === 1 && left.constant === 0 && right.coefficient === 0) {
+                if (right.constant === eq.solution) {
+                    celebrateSolve();
+                } else {
+                    showFeedback(`Close, but x = ${right.constant} is not correct. The answer should be x = ${eq.solution}`, 'error');
+                }
+            } else if (right.coefficient === 1 && right.constant === 0 && left.coefficient === 0) {
+                if (left.constant === eq.solution) {
+                    celebrateSolve();
+                } else {
+                    showFeedback(`Close, but x = ${left.constant} is not correct. The answer should be x = ${eq.solution}`, 'error');
+                }
+            } else {
+                showFeedback('Keep going! The equation is not fully solved yet. Get x alone on one side.', 'hint');
+            }
+        }
+
+        function celebrateSolve() {
+            state.score += 100 * state.level - (state.hintsUsed * 20);
+            state.streak++;
+            state.solved++;
+
+            if (state.streak > 0 && state.streak % 3 === 0) {
+                state.score += 50; // Streak bonus
+            }
+
+            updateStats();
+            showFeedback(`🎉 Correct! x = ${state.currentEquation.solution}. +${100 * state.level - (state.hintsUsed * 20)} points!`, 'success');
+
+            // Check for level up
+            if (state.solved >= levels[state.level].solveFor && state.level < 5) {
+                setTimeout(() => {
+                    document.getElementById('modal-message').textContent =
+                        `Amazing! You've solved ${levels[state.level].solveFor} equations. Ready for ${levels[state.level + 1].name}?`;
+                    document.getElementById('level-modal').style.display = 'flex';
+                }, 1500);
+            } else {
+                setTimeout(newEquation, 2000);
+            }
+        }
+
+        function nextLevel() {
+            state.level++;
+            state.solved = 0;
+            document.getElementById('level-modal').style.display = 'none';
+            document.getElementById('level-badge').textContent = `Level ${state.level}: ${levels[state.level].name}`;
+            newEquation();
+        }
+
+        function showHint() {
+            const eq = state.currentEquation;
+            const left = eq.leftParsed;
+            const right = eq.rightParsed;
+
+            let hint = '';
+            state.hintsUsed++;
+
+            if (left.constant !== 0 && left.coefficient !== 0) {
+                hint = `Try ${left.constant > 0 ? 'subtracting' : 'adding'} ${Math.abs(left.constant)} from both sides to eliminate the constant on the left.`;
+            } else if (right.constant !== 0 && right.coefficient !== 0) {
+                hint = `Try ${right.constant > 0 ? 'subtracting' : 'adding'} ${Math.abs(right.constant)} from both sides.`;
+            } else if (right.coefficient !== 0 && left.coefficient !== 0) {
+                hint = `Try subtracting ${right.coefficient}x from both sides to get all x terms on one side.`;
+            } else if (left.coefficient !== 1 && left.coefficient !== 0) {
+                hint = `Divide both sides by ${left.coefficient} to get x alone.`;
+            } else if (right.coefficient !== 1 && right.coefficient !== 0) {
+                hint = `Divide both sides by ${right.coefficient} to get x alone.`;
+            } else {
+                hint = `You're very close! Check if x equals the number on the other side.`;
+            }
+
+            showFeedback(`💡 Hint: ${hint}`, 'hint');
+        }
+
+        function skipEquation() {
+            state.streak = 0;
+            updateStats();
+            newEquation();
+        }
+
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = message;
+            feedback.className = `feedback ${type}`;
+
+            if (type !== 'hint') {
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('score').textContent = state.score;
+            document.getElementById('level').textContent = state.level;
+            document.getElementById('streak').textContent = state.streak;
+            document.getElementById('solved').textContent = state.solved;
+        }
+
+        function updateStepsDisplay() {
+            const display = document.getElementById('steps-display');
+            display.innerHTML = `<div class="step">Start: ${document.getElementById('original-equation').textContent}</div>`;
+            state.steps.forEach(step => {
+                display.innerHTML += `<div class="step">${step}</div>`;
+            });
+            display.scrollTop = display.scrollHeight;
+        }
+
+        function newEquation() {
+            state.currentEquation = generateEquation();
+            state.steps = [];
+            state.hintsUsed = 0;
+            state.selectedOp = null;
+
+            const eq = state.currentEquation;
+            document.getElementById('left-side').textContent = eq.left;
+            document.getElementById('right-side').textContent = eq.right;
+            document.getElementById('equation-text').textContent = `${eq.left} = ${eq.right}`;
+            document.getElementById('original-equation').textContent = `${eq.left} = ${eq.right}`;
+            document.getElementById('op-value').value = '';
+            document.getElementById('selected-op').textContent = 'None';
+            document.getElementById('feedback').className = 'feedback';
+            document.querySelectorAll('.op-btn').forEach(btn => btn.style.boxShadow = 'none');
+            updateStepsDisplay();
+        }
+
+        // Initialize game
+        document.getElementById('level-badge').textContent = `Level ${state.level}: ${levels[state.level].name}`;
+        newEquation();
+    </script>
+</body>
+</html>

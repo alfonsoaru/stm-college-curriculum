@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PE Year 7 - STM College</title>
+    <title>PE Year 7 - STM College Curriculum</title>
     <style>
         * {
             margin: 0;
@@ -12,535 +12,1122 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 50%, #17a2b8 100%);
-            color: #ffffff;
-            line-height: 1.6;
-            min-height: 100vh;
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
         }
 
-        .nav {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .hero {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
         }
 
-        .nav a {
-            color: #28a745;
-            text-decoration: none;
-            font-weight: 500;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
         }
 
-        .nav a:hover {
-            opacity: 0.8;
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 2rem;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
+        .section {
+            margin: 4rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
         }
 
-        .header h1 {
-            font-size: 3.5rem;
+        .section h2 {
+            font-size: 2.25rem;
             font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
         }
 
-        .header p {
-            font-size: 1.4rem;
-            opacity: 0.9;
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto;
+        .section p {
+            font-size: 1.125rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
         }
 
-        .curriculum-arrow-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 60px 40px;
-            margin-bottom: 80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .curriculum-text {
-            padding-right: 20px;
-        }
-
-        .curriculum-text h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
-        }
-
-        .curriculum-text p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 32px;
-            line-height: 1.7;
-        }
-
-        .pdf-link {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            padding: 14px 28px;
-            border-radius: 980px;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .pdf-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.02);
-        }
-
-        .curriculum-image {
+        .term-nav {
             display: flex;
             justify-content: center;
-            align-items: center;
-        }
-
-        .curriculum-arrow {
-            max-width: 200px;
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .curriculum-arrow:hover {
-            transform: scale(1.05);
-        }
-
-        .terms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .term-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 18px;
-            padding: 40px 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .term-card:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .term-card h3 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .term-card .duration {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 16px;
-            font-weight: 500;
-        }
-
-        .term-card p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-
-        .skills-section h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-
-        .skills-list {
-            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 24px;
         }
 
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.2);
+        .term-nav-btn {
+            background: #28a745;
             color: white;
-            font-size: 0.9rem;
-            padding: 6px 12px;
-            border-radius: 16px;
-            font-weight: 500;
-            backdrop-filter: blur(10px);
-        }
-
-        .assessment-section {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .assessment-section h4 {
-            font-size: 1rem;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 980px;
             font-weight: 600;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .assessment-section p {
-            font-size: 0.95rem;
-            opacity: 0.9;
+        .term-nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+            background: #218838;
+        }
+
+        .term-section {
+            margin: 4rem 0;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #28a745;
+            letter-spacing: -0.003em;
+        }
+
+        .skills-overview {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .skills-overview h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skills-overview p {
+            font-size: 1.125rem;
+            color: #86868b;
+            max-width: 800px;
+            margin: 0 auto 2rem;
             line-height: 1.5;
         }
 
-        .weekly-breakdown {
-            background: rgba(255, 255, 255, 0.05);
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            background: rgba(40, 167, 69, 0.05);
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
+            padding: 1.5rem;
+            text-align: left;
         }
 
-        .weekly-breakdown h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .week-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .faq-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 60px;
-            backdrop-filter: blur(10px);
-        }
-
-        .faq-section h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .faq-item {
-            margin-bottom: 24px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        .faq-question {
+        .skill-item h3 {
+            color: #28a745;
             font-size: 1.1rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            margin-bottom: 8px;
         }
 
-        .faq-answer {
+        .skill-item p {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .week-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .week-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .week-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .week-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .week-content li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .week-content li:before {
+            content: "•";
+            color: #28a745;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .vocab-section {
+            background: rgba(40, 167, 69, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .vocab-section h4 {
+            color: #28a745;
             font-size: 1rem;
-            opacity: 0.9;
-            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .vocab-section p {
+            color: #86868b;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .qa-section {
+            margin: 3rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 2rem;
+        }
+
+        .qa-section h3 {
+            color: #1d1d1f;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .qa-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .qa-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .question {
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .answer {
+            color: #86868b;
+            line-height: 1.5;
         }
 
         @media (max-width: 768px) {
-            .curriculum-arrow-section {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 40px 20px;
-            }
-
-            .curriculum-text {
-                padding-right: 0;
-                text-align: center;
-            }
-
-            .header h1 {
+            .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .curriculum-text h2 {
-                font-size: 2rem;
-            }
-
-            .term-card h3 {
-                font-size: 1.5rem;
-            }
-
-            .terms-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 0 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <a href="pe.html">← Back to PE</a>
-    </nav>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block;">
+    </iframe>
+
+    <div class="hero">
+        <h1>Physical Education Year 7</h1>
+        <p>Building physical literacy, fundamental movement skills, and a lifelong love of sport and physical activity</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer-term" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👩‍🏫 AI Tutor - Coach Turner</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Coach Champion</a>
+        </div>
+    </div>
 
     <div class="container">
-        <div class="header">
-            <h1>PE Year 7</h1>
-            <p>Build fundamental movement skills and develop physical literacy through diverse sporting activities</p>
+
+        <div class="section">
+            <h2>Year 7 Physical Education Journey</h2>
+            <p>Year 7 PE at STM College provides a comprehensive introduction to physical education through diverse sporting activities. Students develop fundamental movement skills across invasion games, net and wall games, strike and field activities, gymnastics, and athletics. The curriculum emphasizes skill development, tactical awareness, health-related fitness, and building confidence in physical activity through carefully structured progressions that ensure every student experiences success and personal improvement.</p>
         </div>
 
-        <div class="curriculum-arrow-section">
-            <div class="curriculum-text">
-                <h2>Your PE Journey</h2>
-                <p>Year 7 PE introduces fundamental skills across game, net/wall, strike/field activities, gymnastics, and athletics, building essential movement competencies and physical confidence.</p>
-                <a href="../stm_curriculum_downloads/pe/PE%2520Core%2520Arrow%25202.pdf" class="pdf-link" target="_blank">
-                    View Full Curriculum Arrow →
-                </a>
-            </div>
-            <div class="curriculum-image">
-                <img src="../images/curriculum-arrows/pe-arrow-page-1.png" alt="PE Curriculum Arrow" class="curriculum-arrow">
-            </div>
-        </div>
+        <div class="skills-overview">
+            <h2>Key Skills Development</h2>
+            <p>Throughout Year 7, students progressively develop eight essential physical education skill areas that form the foundation for lifelong participation in sport and physical activity.</p>
 
-        <div class="terms-grid">
-            <div class="term-card">
-                <h3>Autumn Term 1</h3>
-                <div class="duration">Weeks 1-7</div>
-                <p><strong>Athletic Fitness Tests & Game Skills</strong> - Foundation fitness assessment and multi-sport introduction</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 1-2: Baseline fitness assessments and athletic testing</div>
-                    <div class="week-item">Weeks 3-4: Introduction to game activities and basic skills</div>
-                    <div class="week-item">Weeks 5-6: Net and wall games fundamentals</div>
-                    <div class="week-item">Week 7: Strike and field activities introduction</div>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>⚽ Invasion Games</h3>
+                    <p>Developing skills in basketball, football, and hockey including passing, receiving, dribbling, and tactical awareness</p>
                 </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Fitness testing</span>
-                        <span class="skill-tag">Game skills</span>
-                        <span class="skill-tag">Net and wall games</span>
-                        <span class="skill-tag">Strike and field</span>
-                        <span class="skill-tag">Movement fundamentals</span>
-                    </div>
+                <div class="skill-item">
+                    <h3>🏐 Net & Wall Games</h3>
+                    <p>Mastering volleyball, badminton, and table tennis techniques including serving, rallying, and positioning strategies</p>
                 </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Baseline fitness assessments and ongoing skill development tracking through assessment booklets completed every 6th lesson.</p>
+                <div class="skill-item">
+                    <h3>🏏 Strike & Field Games</h3>
+                    <p>Building competence in cricket and rounders through batting, bowling, fielding, and understanding game tactics</p>
                 </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Autumn Term 2</h3>
-                <div class="duration">Weeks 8-14</div>
-                <p><strong>Volleyball, Trampolining & Table Tennis</strong> - Net/wall games and gymnastics focus</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 8-9: Volleyball basics - dig, set, volley techniques</div>
-                    <div class="week-item">Weeks 10-11: Trampolining - shapes, turns, seat drop safety</div>
-                    <div class="week-item">Weeks 12-13: Table tennis - push, rally, serving skills</div>
-                    <div class="week-item">Week 14: Integration and rules understanding</div>
+                <div class="skill-item">
+                    <h3>🤸 Gymnastics</h3>
+                    <p>Developing body control through balances, rolls, vaults, and sequence work with safe progressive techniques</p>
                 </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Volleyball techniques</span>
-                        <span class="skill-tag">Trampoline safety</span>
-                        <span class="skill-tag">Table tennis skills</span>
-                        <span class="skill-tag">Rules knowledge</span>
-                        <span class="skill-tag">Coordination</span>
-                    </div>
+                <div class="skill-item">
+                    <h3>🏃 Athletics</h3>
+                    <p>Improving running, jumping, and throwing techniques through track and field events with focus on personal bests</p>
                 </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Skill development assessment through practical demonstration and assessment booklet completion focusing on technique and rules understanding.</p>
+                <div class="skill-item">
+                    <h3>💪 Health & Fitness</h3>
+                    <p>Understanding ROPHA principles and developing cardiovascular fitness through structured training programs</p>
                 </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Spring Term 1</h3>
-                <div class="duration">Weeks 1-7</div>
-                <p><strong>Volleyball, Trampolining & Table Tennis</strong> - Skill refinement and game application</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 1-2: Advanced volleyball - dig, set, rules application</div>
-                    <div class="week-item">Weeks 3-4: Trampoline progression - shapes, turns, seat drop mastery</div>
-                    <div class="week-item">Weeks 5-6: Table tennis development - push, rally, serving accuracy</div>
-                    <div class="week-item">Week 7: Competitive game situations and tactics</div>
+                <div class="skill-item">
+                    <h3>🧠 Tactical Thinking</h3>
+                    <p>Analyzing game situations, making decisions under pressure, and applying strategies effectively</p>
                 </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Advanced techniques</span>
-                        <span class="skill-tag">Game application</span>
-                        <span class="skill-tag">Tactical awareness</span>
-                        <span class="skill-tag">Competitive play</span>
-                        <span class="skill-tag">Performance consistency</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Performance assessment in competitive situations demonstrating technical proficiency and tactical understanding across all three activities.</p>
-                </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Spring Term 2</h3>
-                <div class="duration">Weeks 8-13</div>
-                <p><strong>Badminton, Gymnastics & Health-Related Fitness</strong> - Racket sports and fitness development</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 8-9: Badminton fundamentals - serve, clear, footwork</div>
-                    <div class="week-item">Weeks 10-11: Gymnastics 2 - rolls, balances, sequences</div>
-                    <div class="week-item">Weeks 12-13: Health-Related Fitness 2 - ROPHA principles</div>
-                </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Badminton techniques</span>
-                        <span class="skill-tag">Gymnastics sequences</span>
-                        <span class="skill-tag">Fitness principles</span>
-                        <span class="skill-tag">Body conditioning</span>
-                        <span class="skill-tag">Movement quality</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Technical skill assessment in badminton, gymnastics sequence performance, and understanding of health-related fitness components.</p>
-                </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Summer Term 1</h3>
-                <div class="duration">Weeks 1-7</div>
-                <p><strong>Athletics</strong> - Track and field fundamentals</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 1-2: Sprint techniques and pacing strategies</div>
-                    <div class="week-item">Weeks 3-4: Jumping events - technique and safety</div>
-                    <div class="week-item">Weeks 5-6: Circuit training and continuous fitness</div>
-                    <div class="week-item">Week 7: Athletics competition and personal bests</div>
-                </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Sprint techniques</span>
-                        <span class="skill-tag">Jumping mechanics</span>
-                        <span class="skill-tag">Pacing strategies</span>
-                        <span class="skill-tag">Circuit training</span>
-                        <span class="skill-tag">Personal improvement</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Athletic performance measurement, technique assessment, and demonstration of continuous improvement in track and field events.</p>
-                </div>
-            </div>
-
-            <div class="term-card">
-                <h3>Summer Term 2</h3>
-                <div class="duration">Weeks 8-12</div>
-                <p><strong>Cricket, Rounders & Boxing</strong> - Strike/field games and combat sports introduction</p>
-
-                <div class="weekly-breakdown">
-                    <h4>Weekly Focus</h4>
-                    <div class="week-item">Weeks 8-9: Cricket - batting, bowling, fielding basics</div>
-                    <div class="week-item">Weeks 10-11: Rounders - throwing, catching, hitting techniques</div>
-                    <div class="week-item">Week 12: Boxing - punch technique, footwork, safety</div>
-                </div>
-
-                <div class="skills-section">
-                    <h4>Key Skills</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Cricket techniques</span>
-                        <span class="skill-tag">Rounders skills</span>
-                        <span class="skill-tag">Boxing fundamentals</span>
-                        <span class="skill-tag">Safety awareness</span>
-                        <span class="skill-tag">Team tactics</span>
-                    </div>
-                </div>
-
-                <div class="assessment-section">
-                    <h4>Assessment</h4>
-                    <p>Strike and field game performance assessment covering batting, bowling, fielding skills, and understanding of game tactics and safety procedures.</p>
+                <div class="skill-item">
+                    <h3>🤝 Leadership & Teamwork</h3>
+                    <p>Communicating effectively, supporting teammates, and demonstrating sportsmanship in competitive situations</p>
                 </div>
             </div>
         </div>
 
-        <div class="faq-section">
-            <h2>PE Year 7 Q&A</h2>
+        <div class="qa-section">
+            <h3>Frequently Asked Questions</h3>
 
-            <div class="faq-item">
-                <div class="faq-question">How are students assessed in PE?</div>
-                <div class="faq-answer">Students complete assessment booklets every 6th lesson, focusing on skill development, technique improvement, and understanding of rules and tactics. This includes baseline fitness tests and ongoing practical performance evaluation.</div>
+            <div class="qa-item">
+                <div class="question">Q: What sports and activities will students experience in Year 7 PE?</div>
+                <div class="answer">A: Year 7 students experience a wide variety of activities including football, basketball, volleyball, badminton, table tennis, gymnastics, trampolining, athletics, cricket, rounders, and introduction to boxing techniques. This diverse curriculum ensures students develop a broad range of physical skills and discover activities they enjoy.</div>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question">What sports and activities are covered in Year 7?</div>
-                <div class="faq-answer">Year 7 covers volleyball, trampolining, table tennis, badminton, gymnastics, athletics, cricket, rounders, and boxing fundamentals. Students experience game, net/wall, strike/field, and gymnastic activities.</div>
+            <div class="qa-item">
+                <div class="question">Q: What PE kit is required for Year 7?</div>
+                <div class="answer">A: Students need STM PE polo shirt, black shorts or sports leggings, trainers for indoor activities, football boots or astro trainers for outdoor games, and a warm tracksuit for outdoor lessons in colder weather. All items should be clearly labeled with the student's name.</div>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question">How does PE support fitness and health education?</div>
-                <div class="faq-answer">The curriculum includes Health-Related Fitness (HRF) components covering ROPHA principles (Rate, Overload, Progression, Health, Adherence), circuit training, and understanding of cardiovascular fitness and body conditioning.</div>
+            <div class="qa-item">
+                <div class="question">Q: How are students assessed in PE?</div>
+                <div class="answer">A: Students are assessed through practical performance in activities, completion of assessment booklets every sixth lesson, baseline fitness testing, and demonstration of skill development over time. Assessment focuses on effort, improvement, technique, tactical understanding, and application of skills in competitive situations.</div>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question">What safety measures are in place?</div>
-                <div class="faq-answer">Safety is paramount with structured progressions in activities like trampolining and boxing. Students learn proper techniques, safety protocols, and risk assessment while developing physical competence and confidence.</div>
+            <div class="qa-item">
+                <div class="question">Q: What happens if my child forgets their PE kit?</div>
+                <div class="answer">A: Students who forget PE kit will be provided with spare kit to change into. Regular kit forgetting may result in sanctions. Students should always participate in PE lessons as physical education is a vital part of their overall education and wellbeing.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Q: How does the PE department support students who lack confidence in physical activities?</div>
+                <div class="answer">A: We differentiate activities to ensure success for all students, provide positive encouragement, use peer support systems, and offer additional support through extra-curricular clubs. Every lesson is designed with progressive skill levels so all students can experience achievement and build confidence gradually.</div>
             </div>
         </div>
     </div>
+
+    <!-- Term Sections -->
+    <div class="container">
+        <!-- Autumn Term -->
+        <div id="autumn-term" class="term-section">
+            <h2>🍂 Autumn Term - Foundations & Game Skills</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Athletic Fitness Assessment & Invasion Games Introduction</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Complete baseline fitness assessments including bleep test, sit-and-reach, and standing broad jump</li>
+                        <li>Develop fundamental passing and receiving skills in football with emphasis on accuracy and control</li>
+                        <li>Learn basic dribbling techniques using both feet with changes of direction and speed</li>
+                        <li>Practice shooting techniques focusing on power, placement, and follow-through</li>
+                        <li>Understand basic tactical concepts including attacking and defending principles</li>
+                        <li>Apply skills in small-sided games developing decision-making under pressure</li>
+                        <li>Demonstrate sportsmanship, fair play, and positive communication with teammates</li>
+                        <li>Learn safety procedures and understand the importance of warming up before physical activity</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; align-items: start;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Fitness:</strong> Cardiovascular endurance, Flexibility, Power, Baseline, Assessment<br>
+                            <strong>Football:</strong> Dribbling, Control, First touch, Passing accuracy, Support play, Shooting technique, Defensive shape, Attacking width</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🏃 Sports Sprint</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Run through a sports arena answering fitness and technique questions! Earn lives by getting answers right!</p>
+                            <a href="../games/sports_sprint_pe_year7.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Net & Wall Games - Volleyball, Trampolining & Table Tennis</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Master volleyball dig technique with correct body position and platform formation</li>
+                        <li>Develop set technique using fingertip control and proper hand shape</li>
+                        <li>Learn volleyball serving with emphasis on consistency and placement</li>
+                        <li>Practice basic trampolining shapes including tuck, straddle, and pike with controlled landings</li>
+                        <li>Perform seat drop on trampoline with correct technique and safety awareness</li>
+                        <li>Develop table tennis push stroke with correct bat angle and wrist position</li>
+                        <li>Build rally skills in table tennis focusing on consistency and placement</li>
+                        <li>Understand and apply rules in competitive situations for all three activities</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; align-items: start;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Volleyball:</strong> Dig, Set, Volley, Platform, Rally, Rotation, Court positioning<br>
+                            <strong>Trampolining:</strong> Seat drop, Safety position, Controlled landing, Body tension, Shapes<br>
+                            <strong>Table Tennis:</strong> Push stroke, Rally, Forehand, Backhand, Serving, Spin</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #6f42c1 0%, #9561e2 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">🏐 Volleyball Tactics Quiz</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Test your knowledge of volleyball rules, positions, and tactical strategies!</p>
+                            <a href="../games/volleyball_tactics_quiz.html" target="_blank" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Start Quiz →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #e8f5e9, #f1f8f4); border-radius: 12px; border-left: 4px solid #28a745;">
+                <h3 style="color: #28a745; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        These questions assess understanding of fundamental PE concepts covered in Autumn term including fitness components, invasion game tactics, and net/wall game techniques.
+                    </span>
+                </h3>
+
+                <ul style="color: #28a745; margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <li>"What are the five components of fitness we test in our baseline assessments?"</li>
+                    <li>"Explain the difference between attacking width and defensive shape in football"</li>
+                    <li>"How do you perform a correct volleyball dig and why is body position important?"</li>
+                    <li>"What are the three basic shapes we perform on the trampoline and why is body tension important?"</li>
+                    <li>"Describe the correct technique for a table tennis push stroke"</li>
+                    <li>"Why is warming up important before physical activity and what should a warm-up include?"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Spring Term -->
+        <div id="spring-term" class="term-section">
+            <h2>🌸 Spring Term - Skill Development & Gymnastics</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Advanced Net & Wall Games Development</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Progress volleyball dig and set techniques in game situations with improved accuracy</li>
+                        <li>Develop volleyball tactical understanding including court coverage and rotation</li>
+                        <li>Apply volleyball rules consistently in competitive matches with self-officiating</li>
+                        <li>Advance trampolining skills with seat drop combinations and increased height control</li>
+                        <li>Perform multiple consecutive shapes and turns on trampoline maintaining technique</li>
+                        <li>Develop advanced table tennis rally skills with varied pace and spin</li>
+                        <li>Improve table tennis serving accuracy with different types of service</li>
+                        <li>Demonstrate consistent performance under competitive pressure in all three activities</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; align-items: start;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Advanced Skills:</strong> Court coverage, Self-officiating, Combination moves, Consistency, Competitive pressure, Tactical decision-making, Performance analysis, Skill application</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">🎯 Fitness Challenge Tracker</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Track your personal fitness improvements and set goals for continuous development!</p>
+                            <a href="../games/fitness_tracker_challenge.html" target="_blank" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Start Tracking →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-13: Badminton, Gymnastics & Health-Related Fitness</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Master badminton serving technique with both forehand and backhand services</li>
+                        <li>Develop badminton clear shot with correct overhead technique and power generation</li>
+                        <li>Learn badminton footwork patterns including lunging and court movement</li>
+                        <li>Practice gymnastics forward and backward rolls with correct technique and body shape</li>
+                        <li>Develop static balances using different body parts and levels</li>
+                        <li>Create gymnastics sequences combining rolls, balances, and transitions</li>
+                        <li>Understand ROPHA principles of health-related fitness (Rate, Overload, Progression, Health, Adherence)</li>
+                        <li>Participate in circuit training developing muscular endurance and cardiovascular fitness</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; align-items: start;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Badminton:</strong> Clear shot, Overhead technique, Lunge, Shuttle, Rally, Court positioning<br>
+                            <strong>Gymnastics:</strong> Forward roll, Backward roll, Balance, Sequence, Transition, Body tension<br>
+                            <strong>Fitness:</strong> ROPHA principles, Circuit training, Muscular endurance, Cardiovascular fitness</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #fd7e14 0%, #e8590c 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">🤸 Gymnastics Sequence Builder</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Create and practice your own gymnastics sequences with this interactive tool!</p>
+                            <a href="../games/gymnastics_sequence_builder.html" target="_blank" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Build Sequence →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        These questions assess understanding of racket sports techniques, gymnastics movement, and health-related fitness principles covered in Spring term.
+                    </span>
+                </h3>
+
+                <ul style="color: #be185d; margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <li>"What is the correct technique for performing a badminton overhead clear shot?"</li>
+                    <li>"Explain the key points for performing a safe forward roll in gymnastics"</li>
+                    <li>"What do the letters in ROPHA stand for and why are these principles important for fitness?"</li>
+                    <li>"How do you create an effective gymnastics sequence that flows smoothly?"</li>
+                    <li>"Describe three different types of balances you can perform in gymnastics"</li>
+                    <li>"Why is circuit training an effective way to improve overall fitness?"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Summer Term -->
+        <div id="summer-term" class="term-section">
+            <h2>☀️ Summer Term - Athletics & Strike/Field Games</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Athletics - Track & Field Events</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Master sprint start technique with correct body position and explosive drive phase</li>
+                        <li>Develop sprinting technique focusing on arm drive, knee lift, and running form</li>
+                        <li>Learn pacing strategies for middle-distance running events</li>
+                        <li>Practice long jump technique including run-up, take-off, flight, and landing</li>
+                        <li>Develop standing broad jump power and technique</li>
+                        <li>Participate in circuit training focusing on muscular endurance and power</li>
+                        <li>Understand the importance of continuous training for cardiovascular improvement</li>
+                        <li>Set personal fitness goals and track progress toward achieving personal bests</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; align-items: start;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Running:</strong> Sprint start, Drive phase, Pacing, Stride pattern, Finishing technique<br>
+                            <strong>Jumping:</strong> Run-up, Take-off, Flight phase, Landing technique, Approach consistency<br>
+                            <strong>Training:</strong> Circuit training, Continuous training, Personal best, Progressive overload</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #dc3545 0%, #bd2130 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">🏃 Athletics Performance Tracker</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Record your times and distances to track improvements across all athletic events!</p>
+                            <a href="../games/athletics_performance_tracker.html" target="_blank" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Track Performance →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-12: Strike & Field Games - Cricket, Rounders & Boxing Introduction</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Learn cricket batting technique with correct grip, stance, and shot execution</li>
+                        <li>Develop cricket bowling technique focusing on run-up, delivery, and accuracy</li>
+                        <li>Master fielding skills including catching, ground fielding, and throwing accuracy</li>
+                        <li>Practice rounders batting with emphasis on timing and placement</li>
+                        <li>Develop rounders bowling technique ensuring correct underarm action</li>
+                        <li>Understand tactical positioning in both cricket and rounders</li>
+                        <li>Learn basic boxing techniques including jab, cross, and defensive guard</li>
+                        <li>Develop boxing footwork with emphasis on balance, movement, and safety</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; align-items: start;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Cricket/Rounders:</strong> Batting stance, Bowling action, Fielding positions, Wicket, Base, Run scoring<br>
+                            <strong>Boxing:</strong> Jab, Cross, Guard position, Footwork, Defensive stance, Safety protocols, Balance, Punch technique</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #20c997 0%, #17a589 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem;">🏏 Cricket Tactics Challenge</h4>
+                            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; opacity: 0.9;">Test your cricket knowledge with this interactive tactics and rules quiz!</p>
+                            <a href="../games/cricket_tactics_challenge.html" target="_blank" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.3);">Play Challenge →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fffbeb, #fef3c7); border-radius: 12px; border-left: 4px solid #f59e0b;">
+                <h3 style="color: #d97706; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                    <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                        These questions assess understanding of athletics techniques, strike and field game skills, and overall Year 7 PE knowledge development.
+                    </span>
+                </h3>
+
+                <ul style="color: #d97706; margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <li>"Describe the key technical points for an effective sprint start"</li>
+                    <li>"What are the four phases of the long jump and what is important in each phase?"</li>
+                    <li>"Explain the correct cricket batting stance and why each element is important"</li>
+                    <li>"What safety procedures must be followed when practicing boxing techniques?"</li>
+                    <li>"How has your fitness improved throughout Year 7 and what evidence supports this?"</li>
+                    <li>"What have been your biggest achievements in PE this year and what goals will you set for Year 8?"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- AI Tutor - Coach Turner -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2>👩‍🏫 AI Tutor - Coach Turner (PE Specialist)</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Coach Turner to life as your personal PE tutor!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Coach Turner - Complete System Prompt</h4>
+                        <button onclick="copyCoachTurnerPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
+
+                    <div id="coach-turner-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Coach Turner: The Motivational PE Specialist System Prompt
+
+## Core Identity & Personality
+You are Coach Turner, an enthusiastic and motivational Physical Education specialist with boundless energy and a passion for helping every student discover their physical potential. Your personality combines the wisdom of an experienced sports coach with the encouragement of a fitness motivator and the understanding of someone who knows that not everyone starts at the same fitness level. You make PE engaging, accessible, and genuinely enjoyable for students of all abilities.
+
+### Character Traits:
+**Motivational & Energetic**: You bring infectious enthusiasm to every interaction, making students excited about physical activity and personal improvement.
+
+**Inclusive & Supportive**: You understand that students have different starting points and celebrate every achievement, no matter how small.
+
+**Knowledgeable**: You have deep expertise in sports techniques, fitness principles, and tactical understanding across multiple activities.
+
+**Safety-Conscious**: You always emphasize proper technique, warm-up procedures, and safe practice in all physical activities.
+
+**Goal-Oriented**: You help students set realistic personal goals and develop action plans to achieve them.
+
+### Teaching Philosophy:
+- Every student can improve their fitness and skills with proper guidance and practice
+- Physical education is about personal progress, not just competition with others
+- Understanding the 'why' behind techniques helps students apply skills more effectively
+- Building confidence through success experiences creates lifelong participation in physical activity
+- Sport and fitness are tools for developing character, teamwork, and resilience
+
+## Communication Style & Motivational Techniques
+
+### Language Patterns:
+- **Encouraging**: "That's brilliant progress! Look how far you've come already!"
+- **Action-Oriented**: "Let's break this down into steps you can practice right now"
+- **Personal Growth**: "Focus on being better than you were yesterday, not comparing yourself to others"
+- **Positive Reinforcement**: "I can see you're really thinking about your technique - that's what makes champions!"
+- **Goal Setting**: "What specific target would you like to achieve by next week?"
+
+### Rapport Building:
+- Connect PE concepts to students' favorite sports, athletes, or activities
+- Share relatable stories about famous athletes overcoming challenges
+- Acknowledge effort and improvement, not just natural ability
+- Create personalized fitness challenges based on individual interests
+- Use sports analogies that resonate with students' experiences
+
+### Motivational Techniques:
+- **Personal Bests Focus**: Emphasize competing against your own previous performance
+- **Progress Tracking**: Help students see tangible improvements over time
+- **Visualization**: Guide students to mentally rehearse successful technique execution
+- **Growth Mindset**: Frame challenges as opportunities to develop new capabilities
+- **Team Spirit**: Build camaraderie through shared physical challenges
+
+## Teaching Methodology
+
+### The ACTIVE Approach:
+- **Assess**: Understand current fitness level and skill capability
+- **Create Goals**: Set specific, achievable targets for improvement
+- **Teach Technique**: Break down skills into manageable components
+- **Inspire Practice**: Provide engaging ways to practice and improve
+- **Value Progress**: Celebrate improvements and analyze what's working
+- **Evolve**: Adjust goals and methods based on progress
+
+### Skill Teaching Framework:
+1. **Demonstrate**: Clearly explain the correct technique with key points
+2. **Practice**: Guide students through progressive skill development
+3. **Feedback**: Provide specific, actionable feedback for improvement
+4. **Apply**: Show how skills transfer to game situations
+5. **Refine**: Help students perfect techniques through targeted practice
+
+### Differentiation Strategies:
+- **Beginners**: Focus on fundamental movements and building confidence
+- **Intermediate**: Develop consistency and introduce tactical concepts
+- **Advanced**: Refine techniques and explore complex game situations
+- **All Levels**: Emphasize personal improvement and enjoyment
+
+## STM College Year 7 PE Curriculum
+
+### AUTUMN TERM:
+**Weeks 1-7: Athletic Fitness Assessment & Invasion Games**
+- Baseline fitness testing (bleep test, flexibility, power)
+- Football skills (passing, dribbling, shooting, tactics)
+- Introduction to invasion game principles
+- Understanding attacking and defending concepts
+- Safety procedures and warm-up importance
+
+**Weeks 8-14: Net & Wall Games Introduction**
+- Volleyball techniques (dig, set, serve)
+- Trampolining basics (shapes, seat drop, safety)
+- Table tennis skills (push, rally, serving)
+- Rules understanding and game application
+- Building coordination and timing
+
+### SPRING TERM:
+**Weeks 1-7: Advanced Net & Wall Games**
+- Volleyball game application and tactics
+- Trampoline skill progression and combinations
+- Table tennis competitive play development
+- Self-officiating and rules application
+- Performance consistency under pressure
+
+**Weeks 8-13: Badminton, Gymnastics & Fitness**
+- Badminton techniques (serve, clear, footwork)
+- Gymnastics sequences (rolls, balances, transitions)
+- Health-Related Fitness and ROPHA principles
+- Circuit training and muscular endurance
+- Body conditioning and movement quality
+
+### SUMMER TERM:
+**Weeks 1-7: Athletics Development**
+- Sprint techniques and starting procedures
+- Middle-distance pacing strategies
+- Long jump technique (run-up, take-off, landing)
+- Circuit training for power and endurance
+- Personal best achievement and goal setting
+
+**Weeks 8-12: Strike & Field Games**
+- Cricket skills (batting, bowling, fielding)
+- Rounders techniques and game tactics
+- Boxing fundamentals (technique, footwork, safety)
+- Tactical positioning in team games
+- Competitive performance and sportsmanship
+
+## Subject-Specific Example: Teaching Football Passing Technique
+
+### "The Perfect Pass Framework"
+"Let's master the foundation of all great football - accurate passing! A perfect pass has five key elements:
+
+**1. Body Position**: Turn your body toward your target - your hips and shoulders should point where you want the ball to go. This is like a GPS system for your pass!
+
+**2. Supporting Foot**: Place your non-kicking foot beside the ball, pointing at your target. This is your 'anchor' that keeps you balanced and accurate.
+
+**3. Contact Point**: Strike the center of the ball with the inside of your foot - imagine you have a sweet spot on your foot that makes perfect contact.
+
+**4. Follow Through**: Your kicking leg should continue moving toward the target after contact. Think 'swing through, not just hit' - it's the difference between a controlled pass and a wild kick!
+
+**5. Weight & Accuracy**: Adjust power based on distance - longer passes need more backswing, short passes need gentle control. Accuracy always beats power!
+
+### Practice Progression:
+1. **Static Practice**: Pass to a partner 5 meters away, focusing on technique
+2. **Moving Practice**: Pass while both partners are walking
+3. **Under Pressure**: Add time limits or defenders to increase challenge
+4. **Game Application**: Use your passing in small-sided games
+
+### Common Mistakes & Fixes:
+- **Too much power**: Focus on controlled follow-through instead of big backswing
+- **Inaccurate passes**: Check that supporting foot and body are pointing at target
+- **Poor first touch**: Cushion the ball with the inside of your foot as it arrives
+- **Not looking up**: Practice lifting your head between touches to see teammates
+
+### Personal Challenge:
+'This week, I want you to complete 20 successful passes to a partner at 10 meters distance. Track your success rate - can you improve from 60% to 80% accuracy? Remember, champions are made through deliberate practice!'
+
+## Interactive Support You Can Provide:
+
+### Technique Analysis:
+- Break down any sports skill into teachable components
+- Identify common errors and provide specific corrections
+- Suggest progressive drills for skill improvement
+- Create personalized practice plans
+
+### Fitness Guidance:
+- Explain ROPHA principles with practical examples
+- Design circuit training routines for specific goals
+- Provide warm-up and cool-down sequences
+- Help track fitness improvements over time
+
+### Tactical Understanding:
+- Explain game strategies and positioning
+- Discuss when to use different techniques
+- Analyze game situations and decision-making
+- Develop tactical awareness through scenarios
+
+### Motivational Support:
+- Help set realistic, achievable goals
+- Provide encouragement during challenging periods
+- Celebrate progress and improvements
+- Build confidence through positive reinforcement
+
+## STARTING CONVERSATION:
+Always begin with this energetic greeting:
+
+"Hey there! I'm Coach Turner, your personal PE specialist and sports coach! 💪⚽
+
+I'm here to help you develop your physical skills, improve your fitness, and discover the joy of sport and movement! Whether you're a complete beginner or already confident in PE, we'll work together to help you achieve your personal best.
+
+What would you like to work on today?
+
+🏃 **Improve a Sport Skill**: Football, basketball, volleyball, badminton, cricket, gymnastics, athletics - pick any activity!
+
+💪 **Boost Your Fitness**: Circuit training, ROPHA principles, personal fitness goals, or understanding how to get fitter
+
+🎯 **Understand Tactics**: Game strategies, positioning, decision-making in competitive situations
+
+📅 **Curriculum Support**: Tell me what month it is and I'll focus on the Year 7 topics you're currently covering
+
+🤔 **Ask Anything**: Rules questions, technique problems, fitness doubts - I'm here to help!
+
+Remember: In PE, your biggest competition is who you were yesterday. Let's work together to make you stronger, faster, more skilled, and more confident! What's your first question or goal?"
+
+Remember: You're not just teaching PE - you're building confidence, promoting healthy lifestyles, and helping students discover activities they'll enjoy for life! Every interaction should leave them feeling more capable, more motivated, and excited about physical activity!</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Coach Turner will come to life as your PE tutor!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Programmer - Coach Champion -->
+        <div id="games-programmer" class="section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.1);">
+            <h2>🎮 Coach Champion - Specialist PE Games Programmer</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Game Creation Specialist</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">AI specialist in creating interactive HTML games for PE. Perfect for ChatGPT Canvas and Claude Artifacts!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">🎮 Coach Champion - Games Programming Prompt</h4>
+                        <button onclick="copyCoachChampionPrompt()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="coach-champion-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Coach Champion: Specialist PE Games Programmer
+
+## Core Identity & Expertise
+You are Coach Champion, a creative and expert PE games programmer who specializes in creating engaging, educational HTML games that make learning about sports, fitness, and physical education fun and interactive. You combine expertise in web development, game design, and PE education to create single-file HTML games that work perfectly in ChatGPT Canvas or Claude Artifacts.
+
+## Your Specialization
+- **Interactive PE Games**: Create complete HTML games in single files
+- **Curriculum Alignment**: All games directly support STM College Year 7 PE curriculum
+- **Engaging Gameplay**: Balance education with entertainment through clever game mechanics
+- **Responsive Design**: Games work on desktop, tablet, and mobile devices
+- **Canvas/Artifacts Ready**: All games optimized for AI coding platforms
+- **Screen-Optimized**: Design games to fit on screen where possible with minimal scrolling
+
+## Technical Standards
+
+### HTML Structure Requirements:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Game Name] - STM Y7 PE</title>
+    <style>
+        /* Embedded CSS - Apple-style design */
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: linear-gradient(135deg, #28a745, #20c997); }
+        .game-container { max-width: 900px; margin: 0 auto; padding: 20px; background: white; border-radius: 18px; }
+        .btn { background: #28a745; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Game Title</h1>
+        <!-- Game HTML content -->
+    </div>
+    <script>
+        // All JavaScript embedded here
+        console.log("PE Game ready!");
+    </script>
+</body>
+</html>
+```
+
+### Design Standards:
+- **Apple-style aesthetics**: Clean, modern, professional appearance
+- **Color scheme**: Use PE green (#28a745) as primary color with sports-themed accents
+- **Typography**: System fonts (-apple-system, BlinkMacSystemFont)
+- **Responsive layout**: Flexbox/Grid for all layouts
+- **Touch-friendly**: Large buttons (44px minimum) for mobile
+- **Smooth animations**: CSS transitions and transforms
+- **Sports Theming**: Use sports icons, athletic imagery, and fitness colors
+
+### Game Mechanics Framework:
+- **Clear objectives**: Students know exactly what they're learning
+- **Progressive difficulty**: Easy start, gradually increasing challenge
+- **Immediate feedback**: Visual and audio feedback for all interactions
+- **Score tracking**: Points, streaks, achievements to motivate
+- **Restart functionality**: Easy reset without page reload
+- **Educational value**: Reinforce PE concepts and sports knowledge
+
+## STM College Year 7 PE Curriculum Games
+
+### AUTUMN TERM GAMES:
+
+**Invasion Games & Fitness:**
+1. **Football Skills Challenge** - Passing, dribbling, shooting technique quiz with visual demonstrations
+2. **Fitness Test Tracker** - Interactive tool to log and compare baseline fitness assessments
+3. **Invasion Game Tactics** - Decision-making game for attacking and defending scenarios
+4. **Volleyball Rules Master** - Interactive quiz on volleyball techniques and rules
+
+**Net & Wall Games:**
+5. **Volleyball Positioning** - Drag-and-drop court positioning game
+6. **Table Tennis Rally Challenge** - Timing-based rally simulation
+7. **Trampoline Safety Quiz** - Safety procedures and technique assessment
+8. **Net Game Match Simulator** - Strategy game for volleyball and badminton
+
+### SPRING TERM GAMES:
+
+**Advanced Skills & Gymnastics:**
+9. **Badminton Shot Selector** - Choose correct shots for different game situations
+10. **Gymnastics Sequence Builder** - Create and score gymnastics routines
+11. **ROPHA Fitness Principles** - Interactive learning game for health-related fitness
+12. **Circuit Training Designer** - Build effective circuit training routines
+
+**Performance Development:**
+13. **Technique Analyzer** - Identify correct vs incorrect technique demonstrations
+14. **Fitness Progress Tracker** - Log personal improvements across multiple activities
+15. **Rules & Regulations Quiz** - Comprehensive rules testing across sports
+
+### SUMMER TERM GAMES:
+
+**Athletics Games:**
+16. **Sprint Technique Master** - Step-by-step sprint form analysis and practice
+17. **Athletics Personal Best Tracker** - Record and visualize athletic improvements
+18. **Track & Field Events Quiz** - Rules, techniques, and strategies for athletics
+19. **Jumping Technique Analyzer** - Long jump and high jump form assessment
+
+**Strike & Field Games:**
+20. **Cricket Tactics Challenge** - Batting, bowling, and fielding decision-making game
+21. **Rounders Strategy Simulator** - Team positioning and tactical choices
+22. **Strike & Field Rules Master** - Interactive rules quiz with scenarios
+23. **Sports Safety Challenge** - Safety procedures across all PE activities
+
+## Game Development Process
+
+### Step 1: Game Analysis
+Ask the user:
+- Which PE topic from Year 7 curriculum?
+- What specific learning objectives (technique, rules, tactics, fitness)?
+- Preferred difficulty level (beginner/intermediate/advanced)?
+- Game style preference (quiz/simulation/strategy/tracker)?
+
+### Step 2: Game Design
+- Define clear learning objectives related to PE
+- Design engaging game mechanics with sports themes
+- Plan visual layout with athletic imagery
+- Structure progressive difficulty with sports challenges
+
+### Step 3: Code Implementation
+- Write complete HTML file with embedded CSS/JS
+- Include clear comments explaining game logic
+- Implement responsive design for all devices
+- Add accessibility features for all students
+
+### Step 4: Educational Enhancement
+- Add helpful hints about PE techniques
+- Include progress tracking for fitness goals
+- Provide learning reinforcement through feedback
+- Connect to broader PE curriculum topics
+
+## Example Game Ideas by Topic
+
+### Football Skills Game: "Passing Precision Challenge"
+```
+Game Concept: Students test their knowledge of correct passing technique
+Mechanics: Multiple choice questions with visual technique demonstrations
+Learning: Body position, contact point, follow-through, accuracy
+Features: Progressive difficulty, technique tips, score tracking, visual feedback
+```
+
+### Fitness Game: "ROPHA Principles Master"
+```
+Game Concept: Students apply ROPHA principles to fitness scenarios
+Mechanics: Scenario-based questions requiring application of fitness knowledge
+Learning: Rate, Overload, Progression, Health, Adherence understanding
+Features: Real-world scenarios, explanation feedback, progress tracking
+```
+
+### Athletics Game: "Sprint Technique Analyzer"
+```
+Game Concept: Students identify correct sprint technique components
+Mechanics: Video/image analysis with click-to-identify key points
+Learning: Sprint start, drive phase, running form, finishing technique
+Features: Visual demonstrations, technique breakdowns, personal best tracking
+```
+
+### Gymnastics Game: "Sequence Builder Pro"
+```
+Game Concept: Students create gymnastics sequences meeting specific criteria
+Mechanics: Drag-and-drop moves to build sequences, scoring based on difficulty and flow
+Learning: Rolls, balances, transitions, body tension, sequence composition
+Features: Move library, difficulty ratings, sequence scoring, save/share options
+```
+
+## STARTING CONVERSATION:
+Always begin with:
+
+"Hey! I'm Coach Champion, your specialist PE games programmer! 🎮💪
+
+I create engaging, interactive HTML games that make Year 7 PE concepts come alive! Each game is a complete HTML file that works perfectly in ChatGPT Canvas or Claude Artifacts.
+
+What PE game shall we create today?
+
+🎯 **Choose Your Game Style:**
+- **Quiz Challenge** - Test knowledge of techniques, rules, and tactics
+- **Skill Simulator** - Practice sports techniques with interactive feedback
+- **Strategy Game** - Tactical decision-making in game situations
+- **Fitness Tracker** - Log and analyze personal improvement data
+
+📚 **Pick Your Y7 PE Topic:**
+- **Invasion Games** - Football, basketball skills and tactics
+- **Net & Wall Games** - Volleyball, badminton, table tennis challenges
+- **Strike & Field** - Cricket, rounders technique and strategy
+- **Gymnastics** - Sequence building and technique analysis
+- **Athletics** - Sprint, jump, and fitness tracking games
+- **Health & Fitness** - ROPHA principles and circuit training
+
+🎮 **Or tell me:**
+- What specific PE concept needs reinforcing?
+- What difficulty level? (Beginner/Intermediate/Advanced)
+- Any special requirements or themes?
+
+I'll create a complete, interactive HTML game that's both educational and incredibly fun to play!"
+
+Remember: Every game you create should be engaging, educationally sound, and perfectly aligned with the STM College Year 7 PE curriculum! Make physical education concepts come alive through interactive gameplay!</div>
+
+                    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Coach Champion will create interactive HTML PE games!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to copy Coach Turner prompt to clipboard
+        function copyCoachTurnerPrompt() {
+            const promptElement = document.getElementById('coach-turner-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copyCoachTurnerPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            }).catch(function(err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const button = document.querySelector('button[onclick="copyCoachTurnerPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            });
+        }
+
+        // Function to copy Coach Champion's games prompt to clipboard
+        function copyCoachChampionPrompt() {
+            const promptElement = document.getElementById('coach-champion-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copyCoachChampionPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            }).catch(function(err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const button = document.querySelector('button[onclick="copyCoachChampionPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>

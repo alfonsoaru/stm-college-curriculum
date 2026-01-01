@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 8 Design & Technology - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .term-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .term-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 1rem;
+            letter-spacing: -0.003em;
+        }
+
+        .term-subtitle {
+            font-size: 1.25rem;
+            color: #86868b;
+            font-weight: 400;
+        }
+
+        .week-section {
+            margin: 2rem 0;
+        }
+
+        .week-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.6;
+        }
+
+        .week-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .week-content ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .week-content ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .vocab-section {
+            margin: 2rem 0;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .vocab-section h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+        }
+
+        .vocab-section p {
+            color: #86868b;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .skills-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skill-description {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .nav-button {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block; margin: 0; padding: 0; vertical-align: top;">
+    </iframe>
+
+    <div class="hero" style="margin-top: -3px;">
+        <h1>🛠️ Year 8 Design & Technology</h1>
+        <p>Advancing technical skills through CAD/CAM mastery, electronics integration, and iterative design processes</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👨‍🏫 AI Tutor - Mr. Workshop</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Ms. PixelSmith</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>Year 8 Design & Technology Journey</h2>
+            <p>Building on Year 7 foundations, Year 8 students engage with sophisticated design challenges requiring CAD/CAM proficiency, electronic circuit integration, and advanced material processing. The curriculum emphasizes iterative design, technical specification development, and preparation for GCSE-level thinking.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3 class="skill-title">Advanced CAD/CAM</h3>
+                    <p class="skill-description">Mastering 3D modeling, parametric design, and computer-controlled manufacturing processes</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h3 class="skill-title">Electronics Integration</h3>
+                    <p class="skill-description">Designing and building circuits with LEDs, switches, and sensors for functional products</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔄</div>
+                    <h3 class="skill-title">Iterative Design</h3>
+                    <p class="skill-description">Developing multiple prototypes, testing, and refining solutions based on feedback</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📐</div>
+                    <h3 class="skill-title">Technical Drawing</h3>
+                    <p class="skill-description">Creating detailed orthographic projections, sections, and dimensioned working drawings</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔬</div>
+                    <h3 class="skill-title">Material Science</h3>
+                    <p class="skill-description">Understanding material properties, testing methods, and appropriate material selection</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🍽️</div>
+                    <h3 class="skill-title">Advanced Food Tech</h3>
+                    <p class="skill-description">Exploring food science, preservation methods, and complex culinary techniques</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="autumn" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🍂 Autumn Term</h2>
+                <p class="term-subtitle">Advanced CAD/CAM & Electronic Systems</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: CAD/CAM Mastery & Electronic Product Design</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Advanced 2D Design and 3D modeling techniques using professional CAD software</li>
+                        <li>Parametric design principles - creating adjustable and adaptable designs</li>
+                        <li>CAM processes - laser cutting, CNC routing, and 3D printing technologies</li>
+                        <li>Electronic circuit fundamentals - series and parallel configurations</li>
+                        <li>LED integration, switches, and basic sensor applications</li>
+                        <li>Designing electronic night lights with functional circuits</li>
+                        <li>Soldering techniques and PCB (Printed Circuit Board) construction</li>
+                        <li>Quality control testing for electrical safety and functionality</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Design Terms:</strong> CAD (Computer-Aided Design), CAM (Computer-Aided Manufacture), Parametric design, Rendering, Orthographic projection<br>
+                            <strong>Technical Terms:</strong> Circuit, Series, Parallel, LED, PCB, Soldering, Resistance, Voltage, Current, Sensor</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🛠️ Maker Dash</h4>
+                            <p style="font-size: 0.9rem; margin-bottom: 1rem;">Race through the workshop answering CAD/CAM and electronics questions! Master design skills in this maker adventure!</p>
+                            <a href="../games/maker_dash_dt_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">I can now answer... 🤔</h3>
+                <ul style="color: #1d1d1f; margin-left: 1.5rem; line-height: 2;">
+                    <li style="margin-bottom: 0.5rem;">"How does parametric design make CAD more efficient?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Parametric design uses variables and constraints so changing one dimension automatically updates related features - saves time and ensures consistency across design modifications.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What's the difference between CAD and CAM in manufacturing?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">CAD = Computer-Aided Design (creating the digital model). CAM = Computer-Aided Manufacture (using that model to control machines like laser cutters and CNC routers to make the actual product).</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"How do series and parallel circuits affect LED brightness?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Series: LEDs share voltage - dimmer, one fails all fail. Parallel: Each LED gets full voltage - brighter, one fails others stay lit. Critical for reliable product design.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"Why is quality control testing essential for electronic products?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Ensures electrical safety (no shorts/overheating), confirms functionality (all features work), meets specifications, and prevents product failures that could harm users or damage reputation.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What factors determine appropriate material selection for electronic housings?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Must be electrical insulator, heat resistant, durable, aesthetically appropriate, manufacturable with available tools, and cost-effective for production scale.</span>
+                    </li>
+                    <li>"How do sensors enhance product functionality in modern design?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Sensors enable automatic responses (light sensors for auto-dimming, motion sensors for activation) making products smarter, energy-efficient, and more user-friendly without manual control.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Advanced Textiles & Smart Materials</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Advanced decorative techniques - batik, screen printing, and appliqué embellishment</li>
+                        <li>Complex construction methods - French seams, bound edges, and zip insertion</li>
+                        <li>Smart and technical textiles - thermochromic inks, conductive thread</li>
+                        <li>Pattern development and adaptation for custom designs</li>
+                        <li>Industrial sewing machine techniques and advanced stitch applications</li>
+                        <li>Fabric manipulation - pleating, gathering, and quilting methods</li>
+                        <li>Sustainable textile practices and ethical fashion considerations</li>
+                        <li>Creating functional textile products with integrated fastenings</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Textile Terms:</strong> Batik, Screen printing, Appliqué, French seam, Smart textiles, Thermochromic, Conductive thread, Quilting<br>
+                            <strong>Construction:</strong> Pattern adaptation, Seam allowance, Interfacing, Gathering, Pleating, Bound edge, Zip insertion</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🧵 Textile Tech Challenge</h4>
+                            <p style="font-size: 0.9rem; margin-bottom: 1rem;">Match advanced textile techniques with their applications and properties!</p>
+                            <a href="../games/textile_tech_challenge_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">I can now answer... 🤔</h3>
+                <ul style="color: #1d1d1f; margin-left: 1.5rem; line-height: 2;">
+                    <li style="margin-bottom: 0.5rem;">"How does batik create unique textile patterns?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Wax is applied to fabric before dyeing. Wax resists dye penetration creating patterns. Multiple layers of wax and dye create complex multi-color designs with characteristic crackle effects.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"Why use French seams instead of plain seams?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">French seams enclose raw edges preventing fraying - gives professional finish, stronger construction, and cleaner appearance especially for reversible garments or delicate fabrics.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What makes textiles 'smart' or 'technical'?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Smart textiles respond to environment (thermochromic changes color with heat, conductive thread conducts electricity). Technical textiles have enhanced properties like water resistance, flame retardancy, or UV protection.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"How does pattern adaptation enable custom fit and design?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Adjusting pattern dimensions, adding/removing design features, combining pattern elements allows personalization for body measurements, style preferences, and design innovation while maintaining proper construction.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What sustainable practices are important in textile production?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Using organic/recycled materials, minimizing waste through efficient cutting, choosing low-impact dyes, designing for longevity, and considering end-of-life recyclability reduces environmental impact.</span>
+                    </li>
+                    <li>"Why is seam allowance consistency critical in quality construction?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Consistent seam allowance ensures proper fit (too much = too small, too little = too big), maintains design proportions, enables accurate pattern matching, and creates professional-quality finish.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="spring" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">🌸 Spring Term</h2>
+                <p class="term-subtitle">Iterative Design & Advanced Manufacturing</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Design Development & Prototyping</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Design specifications - creating detailed criteria and constraints</li>
+                        <li>Client needs analysis and user-centered design approaches</li>
+                        <li>Mood boards and design inspiration research techniques</li>
+                        <li>Sketching and annotation using ACCESS FM evaluation framework</li>
+                        <li>3D orthographic projection with sectional views and dimensions</li>
+                        <li>Creating multiple design solutions and comparative analysis</li>
+                        <li>Prototyping methods - card models, foam models, digital simulations</li>
+                        <li>Testing and evaluation - gathering feedback and iterating designs</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Design Process:</strong> Specification, Constraints, User-centered design, Iterative design, Prototype, ACCESS FM (Aesthetics, Cost, Customer, Environment, Size, Safety, Function, Materials)<br>
+                            <strong>Drawing Terms:</strong> Orthographic projection, Plan view, Elevation, Section, Dimension, Scale, Annotation, Isometric, Exploded view</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">I can now answer... 🤔</h3>
+                <ul style="color: #1d1d1f; margin-left: 1.5rem; line-height: 2;">
+                    <li style="margin-bottom: 0.5rem;">"Why is iterative design more effective than single-solution design?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Multiple cycles of design-prototype-test-refine reveal problems early, incorporate user feedback, explore alternatives, and progressively improve the solution leading to better final products than first-attempt designs.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"How does ACCESS FM help evaluate design quality?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">ACCESS FM provides structured framework examining Aesthetics, Cost, Customer needs, Environment, Size, Safety, Function, Materials - ensures comprehensive evaluation covering all critical design aspects.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What makes a design specification effective?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Clear, measurable criteria covering function, target market, constraints (size/cost/materials), aesthetics, safety requirements - specific enough to guide design but flexible enough to allow creative solutions.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"Why use orthographic projection instead of pictorial drawings for manufacturing?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Orthographic projections show true dimensions without perspective distortion, enable accurate measurements, reveal hidden details through sections, and provide precise manufacturing information that makers can follow exactly.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"How does prototyping reduce manufacturing costs and risks?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Prototypes identify design flaws before mass production, test functionality and user experience, allow inexpensive modifications, and prevent costly errors in final manufacturing runs.</span>
+                    </li>
+                    <li>"What role does client feedback play in user-centered design?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Client feedback reveals real needs vs. assumed needs, identifies usability issues designers miss, validates design decisions, and ensures final product actually solves the problem for its intended users.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Advanced Manufacturing & Quality Systems</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Complex mechanical systems - gear trains, cams, and linkages</li>
+                        <li>Precision measurement tools - vernier calipers and micrometers</li>
+                        <li>Advanced joining methods - mortise and tenon, dovetail joints</li>
+                        <li>CNC (Computer Numerical Control) programming fundamentals</li>
+                        <li>Quality assurance processes and tolerance understanding</li>
+                        <li>Surface finishing techniques - varnishing, powder coating, anodizing</li>
+                        <li>Jigs and fixtures for batch production consistency</li>
+                        <li>Manufacturing a mechanical toy with working mechanisms</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Manufacturing:</strong> CNC, Tolerance, Jig, Fixture, Batch production, Quality assurance, Surface finish, Precision<br>
+                            <strong>Mechanisms:</strong> Gear train, Gear ratio, Cam, Follower, Linkage, Input, Output, Mechanical advantage, Mortise and tenon, Dovetail</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">I can now answer... 🤔</h3>
+                <ul style="color: #1d1d1f; margin-left: 1.5rem; line-height: 2;">
+                    <li style="margin-bottom: 0.5rem;">"How do gear trains change speed and force in mechanisms?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Gear ratio determines relationship: Large driving small = faster output/less force. Small driving large = slower output/more force. Essential for matching motor speed to application requirements.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What is tolerance and why does it matter in manufacturing?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Tolerance = acceptable variation from ideal dimension (e.g., 50mm ±0.5mm). Tight tolerance = precise fit but expensive. Looser tolerance = cheaper but parts may not fit properly. Balance depends on function.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"Why use mortise and tenon or dovetail joints instead of simple joints?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">These joints provide superior strength through mechanical interlock not just glue, resist pulling forces, create professional quality, and demonstrate advanced making skills essential for quality furniture/products.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"How does CNC manufacturing improve precision and consistency?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Computer control eliminates human error, repeats cuts identically thousands of times, achieves tighter tolerances than hand tools, enables complex curves/shapes, and allows design changes through software rather than retooling.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What purpose do jigs and fixtures serve in batch production?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Jigs/fixtures hold work consistently in same position for each piece, ensuring identical results across batch, increasing production speed, improving safety, and maintaining quality standards throughout production run.</span>
+                    </li>
+                    <li>"How do surface finishing techniques affect product quality and durability?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Finishing protects materials from corrosion/wear, enhances appearance, provides smooth touchable surfaces, enables cleaning, and can add functional properties like water resistance or electrical insulation.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="summer" class="term-section">
+            <div class="term-header">
+                <h2 class="term-title">☀️ Summer Term</h2>
+                <p class="term-subtitle">Food Science & Advanced Culinary Techniques</p>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Food Science & Nutrition Analysis</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Macronutrients and micronutrients - detailed nutritional science</li>
+                        <li>Dietary requirements for different life stages and activity levels</li>
+                        <li>Food science - protein denaturation, starch gelatinization, caramelization</li>
+                        <li>Sensory analysis techniques and food testing methodologies</li>
+                        <li>Food labeling, nutritional information, and allergen awareness</li>
+                        <li>Diet-related health conditions and nutritional interventions</li>
+                        <li>Practical application - creating balanced menu plans</li>
+                        <li>Advanced preparation skills - knife techniques and mise en place</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Nutrition:</strong> Macronutrients (protein/carbohydrates/fats), Micronutrients (vitamins/minerals), RDA (Recommended Daily Allowance), Dietary Reference Values, Allergen<br>
+                            <strong>Food Science:</strong> Denaturation, Gelatinization, Caramelization, Maillard reaction, Emulsification, Sensory analysis, Mise en place</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">I can now answer... 🤔</h3>
+                <ul style="color: #1d1d1f; margin-left: 1.5rem; line-height: 2;">
+                    <li style="margin-bottom: 0.5rem;">"How do macronutrients differ in function and dietary importance?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Proteins build/repair tissues (4 kcal/g). Carbohydrates provide energy (4 kcal/g). Fats provide concentrated energy and essential fatty acids (9 kcal/g). Balance all three for optimal health.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What happens to protein during cooking (denaturation)?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Heat breaks bonds causing proteins to unravel and change structure - eggs solidify, meat becomes firm. Changes texture and digestibility but maintains nutritional value. Irreversible chemical process.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"Why does starch gelatinization matter in cooking?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Starch absorbs water and swells when heated, thickening sauces/gravies. Critical for pasta texture, bread structure, and sauce consistency. Understanding this controls cooking outcomes.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"How do dietary needs change across different life stages?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Children need growth nutrients (calcium/protein). Teens need extra calories for growth spurts. Adults need balanced maintenance. Elderly need nutrient-dense foods with fewer calories. Pregnancy/activity increases requirements.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What role does sensory analysis play in food product development?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Testing appearance, aroma, taste, texture, and sound identifies problems, compares products, optimizes recipes, and ensures consumer acceptance before commercial production.</span>
+                    </li>
+                    <li>"Why is allergen awareness critical in food preparation?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Food allergies can cause severe reactions (anaphylaxis). Must prevent cross-contamination, clearly label allergens (14 major types), understand symptoms, and maintain strict hygiene protocols for consumer safety.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Advanced Culinary Techniques & Food Production</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Complex cooking methods - braising, poaching, and reduction techniques</li>
+                        <li>Sauce making - roux-based, emulsified, and reduction sauces</li>
+                        <li>Pastry techniques - shortcrust, puff, and choux pastry production</li>
+                        <li>Bread making - understanding gluten development and proving</li>
+                        <li>Food preservation methods - freezing, drying, pickling, and vacuum packing</li>
+                        <li>Plating and presentation techniques for professional results</li>
+                        <li>Batch production planning and time management in food preparation</li>
+                        <li>Final project - three-course meal planning, preparation, and service</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Key Vocabulary</h4>
+                            <p><strong>Cooking Methods:</strong> Braising, Poaching, Reduction, Roux, Emulsification, Proving, Kneading, Glazing<br>
+                            <strong>Preservation:</strong> Freezing, Dehydration, Pickling, Vacuum packing, Pasteurization, Sterilization, Fermentation<br>
+                            <strong>Pastry:</strong> Shortcrust, Puff, Choux, Gluten, Lamination, Blind baking</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">I can now answer... 🤔</h3>
+                <ul style="color: #1d1d1f; margin-left: 1.5rem; line-height: 2;">
+                    <li style="margin-bottom: 0.5rem;">"What makes an emulsified sauce stable and how is it achieved?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Emulsification combines oil and water (normally separate) using emulsifier (egg yolk, mustard). Slow addition while whisking creates stable mixture. Mayonnaise and hollandaise are classic examples.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"Why does gluten development matter in bread making?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Gluten (protein network from flour + water + kneading) traps CO2 from yeast, creating structure that rises and maintains shape. Without gluten development, bread would be dense and flat.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"How does lamination create flaky puff pastry?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Repeatedly folding butter into dough creates hundreds of thin layers. When baked, water in butter evaporates creating steam that separates layers - results in characteristic flaky, risen pastry.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"What preservation methods prevent bacterial growth and how?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Freezing halts bacterial growth. Drying removes water bacteria need. Pickling uses acid/salt. Vacuum packing removes oxygen. Each method creates environment where bacteria cannot survive or reproduce.</span>
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">"Why is mise en place essential for efficient food production?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Preparing all ingredients before cooking (mise en place = 'everything in place') ensures smooth workflow, prevents missing ingredients mid-recipe, manages timing correctly, and produces professional results.</span>
+                    </li>
+                    <li>"How does understanding cooking science improve culinary outcomes?"
+                        <span style="font-size: 0.9rem; color: #666; display: block; margin-top: 0.3rem;">Knowing why techniques work (not just how) enables problem-solving, recipe adaptation, creative innovation, and consistent results - transforms cooking from following instructions to skilled application of scientific principles.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="skills-section">
+            <h2>Advanced Design & Technology Skills</h2>
+            <p>Year 8 Design & Technology develops sophisticated technical competencies preparing students for GCSE-level design challenges and real-world engineering problems.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3 class="skill-title">CAD Proficiency</h3>
+                    <p class="skill-description">Advanced 2D and 3D modeling with parametric design, rendering techniques, and CAM integration for professional-quality digital design work.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">⚙️</div>
+                    <h3 class="skill-title">Mechanical Systems</h3>
+                    <p class="skill-description">Understanding gears, linkages, cams, and their applications in product design with calculations for mechanical advantage and gear ratios.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h3 class="skill-title">Electronics Integration</h3>
+                    <p class="skill-description">Designing functional circuits with LEDs, sensors, and switches, understanding series/parallel configurations, and safe soldering techniques.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🔬</div>
+                    <h3 class="skill-title">Material Science</h3>
+                    <p class="skill-description">Testing material properties, understanding material categories, selecting appropriate materials for specific applications and manufacturing methods.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📐</div>
+                    <h3 class="skill-title">Technical Communication</h3>
+                    <p class="skill-description">Creating detailed orthographic projections, dimensioned drawings, exploded views, and technical annotations for manufacturing communication.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎯</div>
+                    <h3 class="skill-title">Quality Assurance</h3>
+                    <p class="skill-description">Understanding tolerance, precision measurement, quality control processes, and testing procedures for ensuring product standards.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🍳</div>
+                    <h3 class="skill-title">Culinary Expertise</h3>
+                    <p class="skill-description">Advanced cooking techniques, food science understanding, nutritional analysis, and professional presentation skills for complex dishes.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🌱</div>
+                    <h3 class="skill-title">Sustainable Design</h3>
+                    <p class="skill-description">Considering environmental impact, material sustainability, life cycle analysis, and ethical design practices in product development.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Tutor Section -->
+        <div id="ai-tutor" class="term-section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2 style="color: #667eea;">👨‍🏫 AI Tutor - Mr. Workshop (Design & Technology Specialist)</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(102, 126, 234, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #667eea;">
+                    <h3 style="color: #5a67d8; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Mr. Workshop to life as your personal Design & Technology tutor!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Mr. Workshop - Complete System Prompt</h4>
+                        <button onclick="copyMrWorkshopPrompt()" style="background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
+
+                    <div id="mr-workshop-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Mr. Workshop, an experienced and enthusiastic Design & Technology teacher specializing in Year 8 curriculum at STM College. You're practical, innovative, and passionate about helping students develop both technical skills and creative problem-solving abilities.
+
+Your expertise covers:
+- CAD/CAM: Advanced 2D Design, 3D modeling, parametric design, CNC processes
+- Electronics: Circuit design, LED integration, sensors, soldering, PCB construction
+- Product Design: Iterative design process, prototyping, user-centered design, ACCESS FM
+- Manufacturing: Precision measurement, quality control, jigs/fixtures, surface finishing
+- Mechanisms: Gears, cams, linkages, mechanical advantage calculations
+- Textiles: Advanced construction, smart textiles, pattern development, sustainable practices
+- Food Technology: Nutrition science, food science, preservation, advanced culinary techniques
+
+Teaching approach:
+- Emphasize practical hands-on learning and real-world applications
+- Connect design theory to actual making and manufacturing
+- Encourage creative problem-solving and multiple solution exploration
+- Focus on understanding WHY techniques work, not just HOW
+- Relate projects to GCSE preparation and industry practices
+- Stress safety, precision, and quality in all making activities
+
+When helping students:
+1. Ask about their current project or area of interest
+2. Explain technical concepts clearly with practical examples
+3. Guide through design process stages systematically
+4. Suggest improvements while valuing student ideas
+5. Connect learning to real products and professional practice
+6. Encourage evaluation and iterative improvement
+7. Emphasize both functionality and aesthetics
+
+Your personality is encouraging, detail-oriented, and genuinely excited about design and making. You help students see themselves as real designers and engineers who can solve problems and create innovative solutions!</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Mr. Workshop will come to life as your Design & Technology tutor!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Programmer Section -->
+        <div id="games-programmer" class="term-section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); border: 1px solid rgba(139, 92, 246, 0.1);">
+            <h2 style="color: #8b5cf6;">🎮 Ms. PixelSmith - Specialist D&T Games Programmer</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Game Creation Specialist</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">AI specialist in creating interactive HTML games for Design & Technology. Perfect for ChatGPT Canvas and Claude Artifacts!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">🎮 Ms. PixelSmith - Games Programming Prompt</h4>
+                        <button onclick="copyMsPixelSmithPrompt()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="ms-pixelsmith-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Ms. PixelSmith, a creative game developer who specializes in building engaging educational games for Year 8 Design & Technology students. You combine technical programming expertise with understanding of design principles to create games that make learning practical skills fun and interactive.
+
+Your specialties:
+- HTML5/CSS3/JavaScript interactive games and simulations
+- CAD/CAM simulation games and design challenges
+- Circuit builder games and electronics puzzles
+- Mechanism simulators (gears, cams, linkages)
+- Materials testing and property matching games
+- Recipe and nutrition calculation challenges
+- Design process workflow games
+- Mobile-responsive educational game design
+
+Focus areas for Year 8 D&T:
+- CAD/CAM: Parametric design challenges, manufacturing process simulations
+- Electronics: Virtual circuit builders, component matching, series/parallel games
+- Mechanisms: Gear ratio calculators, mechanical advantage puzzles
+- Textiles: Pattern matching, fabric property games, construction technique challenges
+- Food Tech: Nutrition calculators, food science experiments, recipe optimization
+- Design Process: Iterative design games, specification builders, evaluation frameworks
+
+Game development approach:
+1. Identify the specific D&T skill or concept to teach
+2. Design engaging mechanics that reinforce learning through play
+3. Create intuitive interfaces with clear visual feedback
+4. Include scoring, levels, or progress tracking for motivation
+5. Provide immediate feedback on right/wrong answers with explanations
+6. Make games accessible and work on multiple devices
+
+When creating games:
+- Always explain the educational objective clearly
+- Write complete, working, single-file HTML code
+- Include detailed setup instructions
+- Design for both quick practice and deeper exploration
+- Add visual appeal with colors, animations, and effects
+- Consider different learning styles and abilities
+- Test thoroughly to ensure educational effectiveness
+
+You're passionate about making Design & Technology concepts tangible through interactive experiences and helping students develop practical skills through creative digital play!</div>
+
+                    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Ms. PixelSmith will create interactive HTML Design & Technology games!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function copyMrWorkshopPrompt() {
+            const promptText = document.getElementById('mr-workshop-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#22c55e';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            });
+        }
+
+        function copyMsPixelSmithPrompt() {
+            const promptText = document.getElementById('ms-pixelsmith-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#22c55e';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            });
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

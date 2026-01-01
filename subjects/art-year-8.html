@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 8 Art - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .term-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .week-section {
+            margin: 2rem 0;
+        }
+
+        .week-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #8e44ad;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #8e44ad;
+        }
+
+        .week-content {
+            color: #86868b;
+            line-height: 1.6;
+        }
+
+        .week-content ul {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        .week-content li {
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .vocab-section {
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid #8e44ad;
+        }
+
+        .vocab-section h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #8e44ad;
+            margin-bottom: 1rem;
+        }
+
+        .vocab-section p {
+            color: #333;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border: 1px solid rgba(142, 68, 173, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(142, 68, 173, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #8e44ad;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .skill-description {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="../shared-nav.html"
+            style="width: 100%; height: 70px; border: none; position: sticky; top: 0; z-index: 1000; background: white; display: block; margin: 0; padding: 0; vertical-align: top;">
+    </iframe>
+
+    <div class="hero" style="margin-top: -3px;">
+        <h1>🎨 Year 8 Art</h1>
+        <p>Advancing artistic expression through art movements, advanced techniques, and personal creative vision - preparing for GCSE-level artistic development</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <a href="#autumn" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🍂 Autumn Term</a>
+            <a href="#spring" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">🌸 Spring Term</a>
+            <a href="#summer" class="term-nav-btn" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px);">☀️ Summer Term</a>
+            <a href="#ai-tutor" class="term-nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.4);">👨‍🎨 AI Tutor - Mr. Da Vinci</a>
+            <a href="#games-programmer" class="term-nav-btn" style="background: rgba(139, 92, 246, 0.9); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Ms. Picasso</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>Year 8 Art Journey</h2>
+            <p>In Year 8, students build upon fundamental skills from Year 7, exploring major art movements, developing personal artistic style, and mastering advanced techniques in drawing, painting, and mixed media. The curriculum emphasizes creative independence, critical analysis of art history, and preparation for GCSE-level work.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🖼️</div>
+                    <h3 class="skill-title">Art Movements</h3>
+                    <p class="skill-description">Deep exploration of Impressionism, Cubism, Surrealism, and Pop Art, understanding historical context and artistic innovation.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎭</div>
+                    <h3 class="skill-title">Personal Expression</h3>
+                    <p class="skill-description">Developing individual artistic voice through self-portraits, emotional artwork, and personally meaningful themes.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🖌️</div>
+                    <h3 class="skill-title">Advanced Techniques</h3>
+                    <p class="skill-description">Mastering perspective, advanced shading, mixed media layering, and sophisticated composition strategies.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📖</div>
+                    <h3 class="skill-title">Artist Research</h3>
+                    <p class="skill-description">In-depth study of master artists, analyzing their techniques, influences, and contributions to art history.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">💭</div>
+                    <h3 class="skill-title">Critical Analysis</h3>
+                    <p class="skill-description">Advanced evaluation of artworks using sophisticated vocabulary and understanding of artistic intent and context.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3 class="skill-title">Portfolio Development</h3>
+                    <p class="skill-description">Building cohesive project portfolios that demonstrate skill progression and artistic development over time.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="autumn" class="term-section">
+            <h2 style="color: #8e44ad; font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">🍂 Autumn Term - Art Movements & Identity</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Impressionism & Observational Drawing</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Understanding Impressionist movement: Monet, Renoir, Degas - capturing light, movement, and atmosphere</li>
+                        <li>Advanced observational drawing from primary sources with focus on speed and impression</li>
+                        <li>Exploring broken color technique and optical color mixing using pastels and paint</li>
+                        <li>Creating outdoor sketches and developing work from photographs</li>
+                        <li>Analyzing how Impressionists broke from traditional academic art</li>
+                        <li>Experimenting with loose brushwork and visible brushstrokes</li>
+                        <li>Developing series of works showing different lighting conditions</li>
+                        <li>Understanding relationship between Impressionism and photography's invention</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>🎨 Key Vocabulary</h4>
+                            <p><strong>Artistic Terms:</strong> Impressionism, Broken color, En plein air (outdoor painting), Optical mixing, Brushstroke, Atmosphere, Ephemeral, Capturing moment<br><br>
+                            <strong>Techniques:</strong> Alla prima, Impasto, Scumbling, Glazing, Color temperature, Complementary contrast</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">🏃 Art Movement Runner</h4>
+                            <p style="margin-bottom: 1.5rem; opacity: 0.9;">Sprint through galleries answering art movement questions! Master Impressionism, Cubism, and more in this parkour adventure!</p>
+                            <a href="../games/art_movement_runner_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; line-height: 2;">
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What makes Impressionism different from traditional academic art?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Impressionists focused on capturing fleeting moments, light effects, and atmosphere rather than detailed realism. They used visible brushstrokes, painted outdoors (en plein air), and emphasized color over line. They broke from the rigid rules of academic painting to show their personal impression of a scene.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How do Impressionists use color to create light effects?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">They use broken color (small dabs of pure color placed side-by-side) that optically mix when viewed from a distance. They avoid black for shadows, instead using complementary colors. Warm and cool color contrasts create vibration and luminosity that mimics natural light.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "Why did the invention of photography influence Impressionism?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Photography could now capture realistic scenes, so artists explored what painting could do that photography couldn't - capturing atmosphere, emotion, color relationships, and personal impressions. Photos also showed unusual cropping and compositions that inspired Impressionist compositions.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "Who were the key Impressionist artists and what did they paint?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Monet (water lilies, haystacks, light effects), Renoir (figures and social scenes), Degas (ballet dancers, movement), Pissarro (landscapes, rural life), Morisot (domestic scenes, women's perspectives), Caillebotte (urban Paris scenes).</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What is 'en plein air' and why is it important?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">French for 'in open air' - painting outdoors on location rather than in a studio. This was revolutionary because portable paint tubes (newly invented) allowed artists to capture changing light and atmosphere directly from nature, creating more immediate and vibrant paintings.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How can I create an Impressionist effect in my own artwork?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Use short, visible brushstrokes or marks. Apply pure colors side-by-side rather than mixing. Focus on overall impression rather than fine details. Observe and capture changing light. Work quickly to maintain spontaneity. Use complementary colors for shadows instead of black or brown.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Self-Portrait & Identity</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Exploring self-portrait through art history: Van Gogh, Frida Kahlo, Rembrandt</li>
+                        <li>Understanding facial proportions and advanced portraiture techniques</li>
+                        <li>Developing personal symbolism and visual metaphors for identity</li>
+                        <li>Experimenting with different media: pencil, charcoal, paint, collage</li>
+                        <li>Creating expressive self-portraits that reveal personality and emotion</li>
+                        <li>Analyzing how artists use self-portraiture for self-expression and social commentary</li>
+                        <li>Incorporating cultural identity and personal narrative into artwork</li>
+                        <li>Building confidence in figure drawing and proportion accuracy</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>🎨 Key Vocabulary</h4>
+                        <p><strong>Portrait Terms:</strong> Physiognomy, Likeness, Expression, Character, Sitter, Three-quarter view, Profile, Frontal view<br><br>
+                        <strong>Concepts:</strong> Identity, Self-representation, Symbolism, Visual metaphor, Cultural identity, Personal narrative, Introspection, Psychological portrait</p>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; line-height: 2;">
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What are the basic proportions of a human face?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Eyes are halfway down the head (not higher!). Eye width = distance between eyes. Bottom of nose = halfway between eyes and chin. Mouth = one-third down from nose to chin. Ears align from eyebrows to bottom of nose. These are guidelines that vary per individual.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How did Frida Kahlo use self-portraiture to express her identity?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Kahlo painted herself repeatedly to explore her Mexican heritage, physical pain, emotional suffering, and feminist identity. She included symbolic elements (animals, plants, cultural artifacts) to tell her story. Her direct gaze confronts viewers, asserting her presence and challenging beauty standards.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What makes a self-portrait more than just a realistic copy?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Expressive self-portraits reveal personality, emotions, values, or experiences through choices in color, composition, symbolism, style, and expression. Artists make deliberate decisions about how to represent themselves - what to reveal, hide, emphasize, or distort to communicate deeper meaning.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How can I add symbolism to represent my identity?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Include objects that represent your interests, heritage, or values. Use color symbolically (warm/cool, cultural meanings). Add backgrounds that represent important places. Include animals, plants, or patterns that have personal meaning. Clothing and accessories can show cultural identity or personal style.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What techniques create emotion in a portrait?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Facial expression (especially eyes and mouth), body language, color choices (warm = energy, cool = calm), lighting (dramatic shadows = mystery), brushwork quality (loose = energetic, tight = controlled), composition (close = intimate, distant = isolated), and gaze direction (direct = confrontational, averted = introspective).</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "Why did artists like Van Gogh paint so many self-portraits?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Self-portraits were free (no model fees), always available, allowed experimentation with techniques and styles, documented their appearance over time, and provided a way to explore their own psychology and emotions. For Van Gogh, they were also a way to study human expression and practice portrait skills.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="spring" class="term-section">
+            <h2 style="color: #8e44ad; font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">🌸 Spring Term - Cubism & Abstract Art</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Cubism & Multiple Perspectives</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Understanding Cubism: Picasso, Braque, and the revolutionary approach to form</li>
+                        <li>Analyzing objects from multiple viewpoints simultaneously</li>
+                        <li>Breaking down complex forms into geometric shapes</li>
+                        <li>Creating still life compositions using Cubist techniques</li>
+                        <li>Exploring collage and mixed media in Cubist style</li>
+                        <li>Understanding the relationship between Cubism and African art</li>
+                        <li>Developing analytical drawing skills through form fragmentation</li>
+                        <li>Experimenting with overlapping planes and transparent surfaces</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>🎨 Key Vocabulary</h4>
+                            <p><strong>Cubist Terms:</strong> Fragmentation, Multiple perspectives, Geometric forms, Analytical Cubism, Synthetic Cubism, Faceted, Overlapping planes<br><br>
+                            <strong>Techniques:</strong> Collage, Mixed media, Abstraction, Form simplification, Spatial ambiguity, Monochromatic palette</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">🎯 Cubist Composer Game</h4>
+                            <p style="margin-bottom: 1.5rem; opacity: 0.9;">Create Cubist artworks by dragging and arranging geometric shapes from multiple perspectives! Master the techniques of Picasso and Braque.</p>
+                            <a href="../games/cubist_composer_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; line-height: 2;">
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What revolutionary idea did Cubism introduce to art?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Cubism showed objects from multiple viewpoints simultaneously in a single image. Instead of one fixed perspective (like a photograph), Cubists showed front, side, top, and inside views all at once. This broke 500 years of Renaissance perspective tradition and changed how we represent three-dimensional objects on flat surfaces.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What's the difference between Analytical and Synthetic Cubism?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Analytical (1908-12): Breaking objects down into fragments, monochromatic colors, complex and serious. Synthetic (1912+): Building up with collage, brighter colors, simpler forms, more playful. Analytical = taking apart, Synthetic = putting together.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How did African art influence Cubism?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">African masks showed simplified, geometric forms and multiple perspectives that inspired Picasso and Braque. African sculptors weren't trying to copy reality realistically - they created powerful symbolic forms. This freedom from realistic representation was revolutionary for European artists and helped birth Cubism.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "Why do Cubist paintings look 'fragmented'?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Artists break objects into geometric fragments to show multiple angles simultaneously. Each fragment represents a different viewpoint. Overlapping these creates a complete 'understanding' of the object rather than just one frozen view. It's like walking around an object and seeing it all at once on the canvas.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How can I create a Cubist artwork?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Choose a simple object (guitar, face, bottle). Draw it from front, side, top. Break each view into geometric shapes. Overlap and arrange these fragments in interesting ways. Use limited colors (browns, grays, blacks for Analytical). Add patterns or textures. Make some areas transparent to show multiple views simultaneously.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "Why was Cubism considered shocking when it first appeared?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">People expected art to look realistic and beautiful. Cubism looked 'wrong' - distorted, angular, confusing. Viewers were used to single-point perspective (like photos). Cubism challenged what art 'should' look like and what subjects were 'worthy' of art. It was radical because it prioritized ideas and analysis over pretty pictures.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Surrealism & The Subconscious</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Exploring Surrealist movement: Dalí, Magritte, Miró, Ernst</li>
+                        <li>Understanding dreams, imagination, and the subconscious mind in art</li>
+                        <li>Creating unexpected juxtapositions and impossible scenarios</li>
+                        <li>Developing technical skills for realistic rendering in surreal contexts</li>
+                        <li>Experimenting with automatic drawing and chance-based techniques</li>
+                        <li>Analyzing symbolism and hidden meanings in Surrealist works</li>
+                        <li>Creating dreamscapes and personal symbolic imagery</li>
+                        <li>Understanding Surrealism's connection to psychology and Freudian theory</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>🎨 Key Vocabulary</h4>
+                        <p><strong>Surrealist Terms:</strong> Subconscious, Automatism, Juxtaposition, Dreamscape, Metamorphosis, Symbolism, Irrational, Uncanny<br><br>
+                        <strong>Techniques:</strong> Photorealism, Frottage, Decalcomania, Exquisite corpse, Illusionism, Transformation, Distortion</p>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; line-height: 2;">
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What is Surrealism trying to express?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Surrealism explores the unconscious mind, dreams, imagination, and irrational thoughts. It aims to liberate thought from reason and logic, revealing hidden desires, fears, and truths. Surrealists believed the unconscious mind held deeper truths than rational thought, so they created bizarre, dreamlike imagery to access these deeper realities.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How do Surrealists create the feeling of a dream?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">They combine realistic painting technique with impossible situations - melting clocks, floating objects, strange transformations. Familiar objects appear in unexpected contexts. Scale is distorted. Physical laws are broken. This creates the 'logic' of dreams where everything seems real but nothing makes sense.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What is 'automatism' in Surrealist art?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Drawing or painting without conscious control, letting the hand move freely without planning. Like free-writing or doodling. The goal is to bypass rational thinking and access the unconscious mind. Artists like Miró used this to create spontaneous, unexpected imagery that revealed inner thoughts and feelings.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "Why do Surrealists paint ordinary objects in strange ways?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">To make us see familiar things differently and question reality. Dalí's melting clocks challenge our concept of time. Magritte's floating rocks challenge gravity. By disturbing the familiar, they make us think deeper about meaning, reality, and perception. The 'uncanny' feeling provokes thought and emotion.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How can I create my own Surrealist artwork?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Start with realistic drawings of ordinary objects. Then combine them in unexpected ways - change scale, transform one object into another, place objects in wrong environments. Use realistic painting technique to make impossible scenes look 'real'. Include personal symbols from your dreams or imagination. Create visual puzzles and surprises.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What's the connection between Surrealism and psychology?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Surrealism was heavily influenced by Sigmund Freud's theories about the unconscious mind, dreams, and symbols. Surrealists believed accessing the unconscious through art could reveal psychological truths. Many Surrealists underwent psychoanalysis and used dream journals to inspire their work. Art became a tool for psychological exploration.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="summer" class="term-section">
+            <h2 style="color: #8e44ad; font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">☀️ Summer Term - Pop Art & Personal Project</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Pop Art & Contemporary Culture</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Understanding Pop Art movement: Warhol, Lichtenstein, Hamilton, Hockney</li>
+                        <li>Analyzing consumer culture, mass media, and celebrity in art</li>
+                        <li>Creating artwork using repetition, bold colors, and graphic techniques</li>
+                        <li>Exploring screen printing, stenciling, and digital media</li>
+                        <li>Understanding the democratization of art through popular imagery</li>
+                        <li>Analyzing how Pop Art blurred boundaries between 'high' and 'low' culture</li>
+                        <li>Creating contemporary Pop Art inspired by social media and modern culture</li>
+                        <li>Developing graphic design skills and understanding of visual communication</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>🎨 Key Vocabulary</h4>
+                            <p><strong>Pop Art Terms:</strong> Consumer culture, Mass production, Appropriation, Repetition, Icon, Celebrity, Commercial art, Graphic<br><br>
+                            <strong>Techniques:</strong> Screen printing, Stenciling, Flattened color, Bold outlines, Ben-Day dots, Collage, Photo transfer, Digital manipulation</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">🎯 Pop Art Color Challenge</h4>
+                            <p style="margin-bottom: 1.5rem; opacity: 0.9;">Transform images into bold Pop Art masterpieces! Experiment with Warhol-style repetition and vivid color schemes in this interactive design game.</p>
+                            <a href="../games/pop_art_studio_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Create Pop Art →</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; line-height: 2;">
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What makes Pop Art 'Pop'?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">'Pop' is short for 'popular' - Pop Art used images from popular culture (ads, comics, products, celebrities) rather than traditional art subjects. It celebrated mass culture and consumerism. Bold, bright, accessible imagery made art feel modern, youthful, and democratic rather than elite or intellectual.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "Why did Warhol paint Campbell's soup cans and celebrities?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Warhol challenged what was considered 'worthy' subject matter for art. Soup cans represented mass production and consumer culture. Celebrities were the new 'icons' replacing religious art. By repeating these images, he commented on how mass media makes everything into a product - even people and art itself become consumer goods.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How did Pop Art change attitudes about 'high' and 'low' culture?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Pop Art blurred the line between fine art (museums, galleries) and commercial art (advertising, comics). It argued that popular culture images were just as valid as traditional subjects. This democratized art - making it about everyday life rather than exclusive, elite culture. It challenged snobbery about what deserved to be called 'art'.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What techniques did Lichtenstein use to copy comic book style?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Ben-Day dots (colored dots that create tone), thick black outlines, flat areas of bright primary colors, thought/speech bubbles, dramatic cropped compositions. He hand-painted these commercial printing techniques on large canvases, elevating 'low' comic art to 'high' fine art while questioning the distinction.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How can I create my own Pop Art inspired by modern culture?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Choose recognizable images from current popular culture (social media icons, modern brands, influencers, memes). Use bold, flat colors and strong outlines. Repeat images in a grid. Add text or speech bubbles. Use graphic, simplified style. Comment on modern consumer culture, technology, or celebrity just as original Pop Artists commented on 1960s culture.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "Was Pop Art celebrating or criticizing consumer culture?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Both! Pop Art was ambiguous - it could be seen as either celebration of modern life's vibrancy and energy, or ironic criticism of materialism and shallow celebrity culture. Warhol said 'I think everybody should be a machine' - is that celebration of efficiency or criticism of dehumanization? This ambiguity was intentional and makes Pop Art complex.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Personal Project & Portfolio Development</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Developing an independent art project based on personal interests and chosen art movement</li>
+                        <li>Creating a cohesive series of artworks that demonstrate skill progression</li>
+                        <li>Documenting creative process through artist journals and annotations</li>
+                        <li>Experimenting with different media and techniques to find personal style</li>
+                        <li>Presenting finished work professionally with artist statements</li>
+                        <li>Peer critique and constructive feedback sessions</li>
+                        <li>Understanding portfolio presentation for GCSE preparation</li>
+                        <li>Reflecting on artistic development throughout Year 8</li>
+                    </ul>
+
+                    <div class="vocab-section" style="margin-top: 2rem;">
+                        <h4>🎨 Key Vocabulary</h4>
+                        <p><strong>Portfolio Terms:</strong> Artist statement, Creative process, Work in progress, Refinement, Personal style, Thematic development, Series, Documentation<br><br>
+                        <strong>Presentation:</strong> Curation, Arrangement, Annotation, Evaluation, Justification, Reflection, Professional presentation</p>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                        <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                            I can now answer... 🤔
+                        </h3>
+                        <ul style="color: #be185d; margin-left: 1.5rem; line-height: 2;">
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What makes a good artist statement?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Explain your inspiration, artistic intent, chosen techniques, and materials. Describe your creative process and decisions. Connect to artists who influenced you. Discuss meaning and themes. Be personal but clear. Write in first person. Avoid being too technical or too vague. Help viewers understand your artistic journey and what your work means to you.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How do I develop a cohesive art series?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Choose a theme, subject, or concept. Use consistent style, colors, or techniques across works. Create variations that explore different aspects of your theme. Each piece should stand alone but also contribute to the whole series. Show progression and development. Think of it like chapters in a book - connected but each tells part of the story.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "Why is documenting my creative process important?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Shows your thinking, planning, experimentation, and problem-solving - not just final products. Essential for GCSE portfolios. Helps you reflect on what worked and what didn't. Demonstrates research, development, and refinement. Shows you're thinking like an artist, not just copying. Documents skills development over time.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How do I give constructive feedback in critique?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Start with what works well (composition, color, technique). Be specific - not 'I like it' but 'the contrast in this area draws my eye effectively'. Suggest improvements respectfully - 'Have you considered...' Ask questions about intent. Focus on the artwork, not the person. Balance positive and constructive. Explain your reasoning using art vocabulary.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "What should be included in an art portfolio?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Research pages (artist studies, visual research), development work (sketches, experiments, refinements), final pieces, annotations explaining decisions, photographs of 3D work, evidence of different techniques and media, reflection on successes and areas for improvement, connections to chosen artists and movements.</span>
+                            </li>
+                            <li style="cursor: pointer; position: relative;" onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#be185d'">
+                                "How can I find my personal artistic style?"
+                                <span style="display: none; position: absolute; background: white; color: #333; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 300px; font-size: 0.85rem; font-weight: normal; line-height: 1.4; z-index: 10;">Experiment widely with different media, subjects, and techniques. Notice what you enjoy and what comes naturally. Study artists you admire and try their approaches. Combine influences in unique ways. Create work about subjects that matter to you. Style develops over time through practice and exploration - it's not something you choose, it emerges from your consistent artistic decisions and interests.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Advanced Artistic Skills Development</h2>
+            <p>Year 8 Art builds sophisticated creative abilities, preparing students for GCSE-level independent project work and critical artistic thinking.</p>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3 class="skill-title">Advanced Techniques</h3>
+                    <p class="skill-description">Mastery of perspective, advanced color theory, mixed media integration, and sophisticated rendering techniques across multiple media.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🖼️</div>
+                    <h3 class="skill-title">Art Historical Knowledge</h3>
+                    <p class="skill-description">Understanding major art movements, key artists, historical contexts, and how art reflects and influences society and culture.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">💭</div>
+                    <h3 class="skill-title">Critical Thinking</h3>
+                    <p class="skill-description">Analyzing artworks using sophisticated vocabulary, understanding artistic intent, and making connections between art and broader cultural contexts.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📚</div>
+                    <h3 class="skill-title">Research Skills</h3>
+                    <p class="skill-description">Conducting independent artist research, gathering visual references, and using research to inform personal creative practice.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎭</div>
+                    <h3 class="skill-title">Personal Expression</h3>
+                    <p class="skill-description">Developing individual artistic voice, exploring personally meaningful themes, and communicating ideas through visual language.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">📖</div>
+                    <h3 class="skill-title">Portfolio Presentation</h3>
+                    <p class="skill-description">Professional documentation of creative process, coherent project development, and articulate artist statements preparing for GCSE coursework.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); color: white;">
+            <h2 style="color: white;">Assessment & GCSE Preparation</h2>
+            <p style="color: rgba(255,255,255,0.9);">
+                Year 8 Art assessment focuses on portfolio development, technical skill progression, understanding of art movements, and ability to articulate artistic decisions. Students complete major projects demonstrating research, development, refinement, and presentation skills essential for GCSE Art & Design success.
+            </p>
+        </div>
+
+        <!-- AI Tutor Section -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2>👨‍🎨 AI Tutor - Mr. Da Vinci (Art Specialist)</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Mr. Da Vinci to life as your personal art tutor!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Mr. Da Vinci - Complete System Prompt</h4>
+                        <button onclick="copyDaVinciPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
+
+                    <div id="davinci-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Mr. Da Vinci, an inspiring and knowledgeable art tutor specializing in Year 8 curriculum at STM College. Your personality is creative, encouraging, and passionate about art history and personal expression. You love helping students discover their artistic voice and understand how art connects to culture, history, and identity.
+
+Your expertise covers:
+- Art Movements: Impressionism, Cubism, Surrealism, Pop Art
+- Techniques: Observational drawing, portraiture, perspective, mixed media
+- Artists: Monet, Renoir, Picasso, Braque, Dalí, Magritte, Warhol, Lichtenstein
+- Skills: Composition, color theory, critical analysis, portfolio development
+- Personal expression, identity in art, and creative independence
+
+Teaching approach:
+- Connect art to students' lives and contemporary culture
+- Encourage experimentation and personal interpretation
+- Explain historical context to deepen understanding
+- Build confidence through achievable challenges
+- Celebrate individual artistic style and vision
+- Use artist case studies to inspire student work
+- Develop critical thinking and analytical skills
+
+When helping students:
+1. Ask about their interests and what inspires them
+2. Explain techniques with visual descriptions and examples
+3. Reference specific artists and artworks to illustrate points
+4. Encourage personal interpretation over copying
+5. Provide constructive feedback that builds confidence
+6. Connect technical skills to expressive possibilities
+7. Discuss both 'how' (technique) and 'why' (meaning/intent)
+
+Remember to be enthusiastic about artistic discovery, make art history relevant and exciting, help students see themselves as artists, and prepare them for GCSE-level independent creative work. You're not just teaching techniques - you're nurturing creative thinkers who can express themselves visually!</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Mr. Da Vinci will come to life as your art tutor!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Programmer Section -->
+        <div id="games-programmer" class="section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.1);">
+            <h2>🎮 Ms. Picasso - Specialist Art Games Programmer</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Game Creation Specialist</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">AI specialist in creating interactive HTML games for Art learning. Perfect for ChatGPT Canvas and Claude Artifacts!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">🎮 Ms. Picasso - Games Programming Prompt</h4>
+                        <button onclick="copyPicassoPrompt()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="picasso-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Ms. Picasso, an innovative game developer who specializes in creating engaging, educational art games for Year 8 students. You're creative, visually-minded, and understand how to make art history and techniques fun through interactive experiences.
+
+Your specialties:
+- HTML5/CSS3/JavaScript games with beautiful visual design
+- Interactive art creation tools and simulators
+- Art history matching games and quizzes
+- Color theory and composition challenges
+- Style-based transformation games (Cubist composer, Pop Art creator)
+- Artist identification and artwork matching games
+
+Focus areas for Year 8 Art:
+- Art Movements: Impressionism, Cubism, Surrealism, Pop Art matching games
+- Techniques: Interactive drawing tools, color mixing simulators, composition builders
+- Artists: Artist biography quizzes, artwork identification challenges
+- Creative tools: Style filters, digital art creation, portfolio builders
+
+Game development approach:
+1. Make games visually appealing with artistic interfaces
+2. Include educational content about artists and movements
+3. Provide creative freedom within structured challenges
+4. Include gallery features to showcase student creations
+5. Use art-appropriate color schemes and typography
+6. Add inspiring quotes from famous artists
+
+When creating games:
+- Focus on visual learning and artistic experimentation
+- Include 'did you know' facts about artists and movements
+- Design beautiful, gallery-like interfaces
+- Allow creativity and personal expression
+- Provide immediate visual feedback
+- Include saving/exporting features for student work
+- Make games inspire real-world art creation
+
+You're passionate about making art history engaging through technology and helping students learn artistic concepts through interactive play!</div>
+
+                    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Ms. Picasso will create interactive HTML art games!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function copyDaVinciPrompt() {
+            const promptText = document.getElementById('davinci-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copyDaVinciPrompt()"]');
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            });
+        }
+
+        function copyPicassoPrompt() {
+            const promptText = document.getElementById('picasso-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copyPicassoPrompt()"]');
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            });
+        }
+
+        // Add hover effect for assessment questions
+        document.addEventListener('DOMContentLoaded', function() {
+            const assessmentItems = document.querySelectorAll('.assessment-heading + ul li');
+            assessmentItems.forEach(item => {
+                const tooltip = item.querySelector('span');
+                if (tooltip) {
+                    item.addEventListener('mouseenter', function() {
+                        tooltip.style.display = 'block';
+                    });
+                    item.addEventListener('mouseleave', function() {
+                        tooltip.style.display = 'none';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

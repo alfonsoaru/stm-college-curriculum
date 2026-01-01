@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Gallery Dash - Art Year 7 Elements of Art</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-canvas {
+            display: block;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .hud-item {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        #question-overlay {
+            display: block;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        .question-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 3px solid #8e44ad;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .checkpoint-badge {
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .answer-btn {
+            background: #f5f5f7;
+            border: 2px solid #e5e5e5;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e8e8ed;
+            border-color: #8e44ad;
+            transform: translateY(-2px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #16a34a;
+            color: white;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        #start-screen, #gameover-screen, #win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #8e44ad 0%, #7d3c98 100%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #gameover-screen, #win-screen {
+            display: none;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .instructions em {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .instructions p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .theme-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback-text.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #166534;
+            display: block;
+        }
+
+        .feedback-text.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        #mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .jump-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #mobile-controls {
+                display: block;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="hud">
+            <div class="hud-item">🖼️ Level: <span id="level">1</span>/3</div>
+            <div class="hud-item">🎨 <span id="palettes">0</span></div>
+            <div class="hud-item">⭐ <span id="score">0</span></div>
+            <div class="hud-item">❤️ <span id="lives">3</span></div>
+        </div>
+
+        <div id="mobile-controls">
+            <button class="jump-btn" id="jump-btn">⬆️</button>
+        </div>
+
+        <div id="question-overlay">
+            <div class="question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div class="checkpoint-badge">🎨 Q<span id="checkpoint-num">1</span>/<span id="total-questions">12</span></div>
+                    <button id="read-again-btn" onclick="rereadQuestion()" style="background: #8e44ad; color: white; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">🔊 Read Again</button>
+                </div>
+                <div class="question-text" id="q-text">Loading...</div>
+                <div class="question-context" id="q-context">Elements of Art</div>
+                <div class="answers-grid" id="answers"></div>
+                <div class="feedback-text" id="feedback"></div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <div class="theme-emoji">🎨</div>
+            <h1 class="title">Gallery Dash</h1>
+            <p class="subtitle">Run, Jump & Master the Elements of Art!<br><em style="font-size: 0.9em; opacity: 0.8;">Explore Line, Shape, Colour, Tone, Texture & Form!</em></p>
+
+            <div class="instructions">
+                <h3>How to Play</h3>
+                <p>🏃 <strong>RUN</strong> through the art gallery!</p>
+                <p>🎨 Learn the <strong>ELEMENTS OF ART</strong> - the building blocks of visual art!</p>
+                <p>🖌️ Collect palettes for bonus points!</p>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p><strong>⌨️ Keyboard:</strong> SPACE = Jump | A B C D = Answer</p>
+                    <p><strong>🎮 Xbox:</strong> RT/LT = Jump | X Y A B = Answer</p>
+                </div>
+
+                <p style="margin-top: 1rem;">✅ Correct = +1 Life | Learn all 6 Elements!</p>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">Start Creating! 🖌️</button>
+        </div>
+
+        <div id="gameover-screen">
+            <div class="result-icon">💔</div>
+            <h1 class="title">Game Over!</h1>
+            <p class="subtitle">Your gallery tour has ended!</p>
+            <div class="stats">
+                <p>Level: <span id="final-level">1</span></p>
+                <p>Score: <span id="final-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Try Again! 🔄</button>
+        </div>
+
+        <div id="win-screen">
+            <div class="result-icon">🏆</div>
+            <h1 class="title">Art Master!</h1>
+            <p class="subtitle">You've mastered the Elements of Art!</p>
+            <div class="stats">
+                <p>🎨 Palettes: <span id="win-palettes">0</span></p>
+                <p>⭐ Score: <span id="win-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Play Again! 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let gameRunning = false;
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let distance = 0;
+        let checkpointDistance = 22000;
+        let gameSpeed = 4;
+        let baseSpeed = 4;
+        let isSpeakingFeedback = false;
+
+        // Collectibles
+        let palettes = [];
+        let paletteCount = 0;
+
+        // Power-ups
+        let powerUps = [];
+        let isInvincible = false;
+        let invincibleTimer = 0;
+
+        // Player
+        let player = {
+            x: 100,
+            y: 0,
+            width: 50,
+            height: 70,
+            velocityY: 0,
+            jumping: false,
+            grounded: true
+        };
+
+        // Physics
+        const gravity = 0.8;
+        const jumpForce = -16;
+
+        // Obstacles
+        let obstacles = [];
+        let obstacleTimer = 0;
+
+        // Background
+        let bgOffset = 0;
+        let paintings = [];
+        let easels = [];
+
+        // Elements of Art Questions
+        const questions = [
+            // LINE questions
+            {
+                text: "What is LINE in art?",
+                context: "Element 1: Line",
+                answers: ["A mark moving through space", "A 3D shape", "Light and dark areas", "Surface quality"],
+                correct: 0,
+                english: "Line is a continuous mark made on a surface - it can be straight, curved, thick, thin, or expressive"
+            },
+            {
+                text: "Which describes a 'sensitive' line?",
+                context: "Line Qualities",
+                answers: ["Light and delicate", "Thick and bold", "Zigzag pattern", "Perfectly straight"],
+                correct: 0,
+                english: "A sensitive line is drawn with light pressure, creating a delicate, faint mark that suggests gentleness"
+            },
+            // SHAPE questions
+            {
+                text: "What is the difference between organic and geometric shapes?",
+                context: "Element 2: Shape",
+                answers: ["Natural vs mathematical", "Big vs small", "Light vs dark", "Smooth vs rough"],
+                correct: 0,
+                english: "Organic shapes are irregular and natural (like leaves), geometric shapes are precise and mathematical (like circles)"
+            },
+            {
+                text: "What is NEGATIVE SPACE?",
+                context: "Shape and Space",
+                answers: ["Empty area around objects", "The main subject", "Dark shadows", "Bright highlights"],
+                correct: 0,
+                english: "Negative space is the empty area around and between the subjects of an image"
+            },
+            // COLOUR questions
+            {
+                text: "What are the PRIMARY colours?",
+                context: "Element 3: Colour",
+                answers: ["Red, Blue, Yellow", "Orange, Green, Purple", "Black, White, Grey", "Pink, Brown, Beige"],
+                correct: 0,
+                english: "Primary colours cannot be made by mixing other colours - they are red, blue, and yellow"
+            },
+            {
+                text: "What are COMPLEMENTARY colours?",
+                context: "Colour Theory",
+                answers: ["Opposite on colour wheel", "Next to each other", "Same colour family", "All warm colours"],
+                correct: 0,
+                english: "Complementary colours sit opposite each other on the colour wheel (red/green, blue/orange, yellow/purple)"
+            },
+            // TONE questions
+            {
+                text: "What is TONE in art?",
+                context: "Element 4: Tone",
+                answers: ["Light and dark values", "Colour brightness", "Surface texture", "Shape outline"],
+                correct: 0,
+                english: "Tone refers to the lightness or darkness of a colour - from white through greys to black"
+            },
+            {
+                text: "How does tone create FORM?",
+                context: "Tone and Depth",
+                answers: ["Shows 3D on 2D surface", "Adds colour variety", "Creates patterns", "Makes lines thicker"],
+                correct: 0,
+                english: "By adding light and dark tones to shapes, artists create the illusion of 3D form on a flat surface"
+            },
+            // TEXTURE questions
+            {
+                text: "What is IMPLIED TEXTURE?",
+                context: "Element 5: Texture",
+                answers: ["Visual texture you can see", "Texture you can touch", "Smooth surfaces only", "Rough surfaces only"],
+                correct: 0,
+                english: "Implied texture is visual texture created through marks - it looks textured but feels smooth"
+            },
+            {
+                text: "What technique uses tiny dots to create texture?",
+                context: "Texture Techniques",
+                answers: ["Stippling", "Cross-hatching", "Scribbling", "Blending"],
+                correct: 0,
+                english: "Stippling uses many small dots - closer together for darker areas, further apart for lighter"
+            },
+            // FORM questions
+            {
+                text: "What is FORM in art?",
+                context: "Element 6: Form",
+                answers: ["3D shapes with depth", "2D flat shapes", "Line patterns", "Colour mixing"],
+                correct: 0,
+                english: "Form refers to three-dimensional shapes that have height, width, AND depth"
+            },
+            {
+                text: "How is a SPHERE different from a CIRCLE?",
+                context: "Shape vs Form",
+                answers: ["Sphere is 3D, circle is 2D", "Same thing", "Circle is bigger", "Sphere is flat"],
+                correct: 0,
+                english: "A circle is a flat 2D shape, while a sphere is a 3D form - like a ball you could hold"
+            }
+        ];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 150 - player.height;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        function generatePaintings() {
+            paintings = [];
+            for (let i = 0; i < 6; i++) {
+                paintings.push({
+                    x: i * 350 + Math.random() * 100,
+                    y: 80 + Math.random() * 40,
+                    width: 60 + Math.random() * 40,
+                    height: 50 + Math.random() * 30,
+                    color: ['#e74c3c', '#3498db', '#f1c40f', '#27ae60', '#9b59b6', '#e67e22'][Math.floor(Math.random() * 6)]
+                });
+            }
+        }
+
+        function generateEasels() {
+            easels = [];
+            for (let i = 0; i < 4; i++) {
+                easels.push({
+                    x: i * 400 + Math.random() * 150,
+                    height: 100 + Math.random() * 30
+                });
+            }
+        }
+
+        function drawBackground() {
+            // Gallery wall gradient
+            const wallGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.7);
+            wallGradient.addColorStop(0, '#f8f4f0');
+            wallGradient.addColorStop(1, '#e8e4e0');
+            ctx.fillStyle = wallGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height * 0.7);
+
+            // Crown molding
+            ctx.fillStyle = '#d4c8be';
+            ctx.fillRect(0, 0, canvas.width, 15);
+            ctx.fillStyle = '#c4b8ae';
+            ctx.fillRect(0, 15, canvas.width, 5);
+
+            // Paintings on wall
+            paintings.forEach(painting => {
+                const paintX = ((painting.x - bgOffset * 0.3) % (canvas.width + 600)) - 200;
+
+                // Frame
+                ctx.fillStyle = '#8b7355';
+                ctx.fillRect(paintX - 5, painting.y - 5, painting.width + 10, painting.height + 10);
+
+                // Canvas
+                ctx.fillStyle = painting.color;
+                ctx.fillRect(paintX, painting.y, painting.width, painting.height);
+
+                // Abstract art pattern
+                ctx.fillStyle = 'rgba(255,255,255,0.3)';
+                ctx.beginPath();
+                ctx.arc(paintX + painting.width/2, painting.y + painting.height/2, 15, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Wainscoting (lower wall panel)
+            ctx.fillStyle = '#d8d0c8';
+            ctx.fillRect(0, canvas.height * 0.7 - 60, canvas.width, 60);
+            ctx.fillStyle = '#c8c0b8';
+            ctx.fillRect(0, canvas.height * 0.7 - 62, canvas.width, 2);
+
+            // Gallery floor - polished wood
+            const floorGradient = ctx.createLinearGradient(0, canvas.height * 0.7, 0, canvas.height);
+            floorGradient.addColorStop(0, '#c19a6b');
+            floorGradient.addColorStop(0.3, '#a0522d');
+            floorGradient.addColorStop(1, '#8b4513');
+            ctx.fillStyle = floorGradient;
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 150);
+
+            // Floor boards
+            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+            ctx.lineWidth = 1;
+            for (let x = -bgOffset % 80; x < canvas.width; x += 80) {
+                ctx.beginPath();
+                ctx.moveTo(x, canvas.height - 150);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            // Easels in background
+            easels.forEach(easel => {
+                const easelX = ((easel.x - bgOffset * 0.5) % (canvas.width + 600)) - 200;
+                drawEasel(easelX, canvas.height - 150 - easel.height, easel.height);
+            });
+
+            // Gallery rope barrier
+            ctx.strokeStyle = '#722f37';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            const ropeY = canvas.height - 120;
+            for (let x = 0; x < canvas.width; x += 5) {
+                const y = ropeY + Math.sin((x + bgOffset) / 20) * 3;
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // Rope posts
+            for (let x = -bgOffset % 200 + 100; x < canvas.width; x += 200) {
+                ctx.fillStyle = '#c4a35a';
+                ctx.fillRect(x - 5, ropeY - 30, 10, 35);
+                ctx.beginPath();
+                ctx.arc(x, ropeY - 30, 8, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawEasel(x, y, height) {
+            // Easel legs
+            ctx.fillStyle = '#8b7355';
+            ctx.save();
+            ctx.translate(x, y + height);
+
+            // Back leg
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(-20, height);
+            ctx.lineTo(-15, height);
+            ctx.lineTo(5, 0);
+            ctx.fill();
+
+            // Front legs
+            ctx.beginPath();
+            ctx.moveTo(-5, 0);
+            ctx.lineTo(-30, height);
+            ctx.lineTo(-25, height);
+            ctx.lineTo(0, 0);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(5, 0);
+            ctx.lineTo(30, height);
+            ctx.lineTo(25, height);
+            ctx.lineTo(0, 0);
+            ctx.fill();
+
+            ctx.restore();
+
+            // Canvas on easel
+            ctx.fillStyle = '#f5f5dc';
+            ctx.fillRect(x - 25, y - 40, 50, 40);
+            ctx.strokeStyle = '#8b7355';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(x - 25, y - 40, 50, 40);
+        }
+
+        function drawPlayer() {
+            // Artist smock
+            ctx.fillStyle = '#f5f5dc';
+            ctx.fillRect(player.x, player.y + 20, player.width - 10, 35);
+
+            // Paint splashes on smock
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(player.x + 10, player.y + 35, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#3498db';
+            ctx.beginPath();
+            ctx.arc(player.x + 25, player.y + 40, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#f1c40f';
+            ctx.beginPath();
+            ctx.arc(player.x + 35, player.y + 32, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Head
+            ctx.fillStyle = '#fcd5b8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 12, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Beret
+            ctx.fillStyle = '#8e44ad';
+            ctx.beginPath();
+            ctx.ellipse(player.x + 20, player.y + 3, 18, 8, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 5, 12, Math.PI, 0);
+            ctx.fill();
+            // Beret pom-pom
+            ctx.fillStyle = '#9b59b6';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y - 2, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Face
+            ctx.fillStyle = '#1d1d1f';
+            ctx.beginPath();
+            ctx.arc(player.x + 15, player.y + 10, 2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(player.x + 25, player.y + 10, 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Smile
+            ctx.strokeStyle = '#1d1d1f';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 14, 5, 0.2, Math.PI - 0.2);
+            ctx.stroke();
+
+            // Legs
+            ctx.fillStyle = '#4a4a4a';
+            if (player.grounded) {
+                ctx.fillRect(player.x + 5, player.y + 55, 12, 15);
+                ctx.fillRect(player.x + 22, player.y + 55, 12, 15);
+            } else {
+                ctx.fillRect(player.x + 5, player.y + 50, 12, 20);
+                ctx.fillRect(player.x + 22, player.y + 50, 12, 20);
+            }
+
+            // Paintbrush in hand
+            ctx.fillStyle = '#8b7355';
+            ctx.fillRect(player.x + 38, player.y + 30, 4, 25);
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.moveTo(player.x + 40, player.y + 55);
+            ctx.lineTo(player.x + 35, player.y + 65);
+            ctx.lineTo(player.x + 45, player.y + 65);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function spawnObstacle() {
+            const types = [
+                { width: 45, height: 50, emoji: '🖼️' },
+                { width: 50, height: 55, emoji: '🎨' },
+                { width: 40, height: 45, emoji: '🖌️' },
+                { width: 55, height: 40, emoji: '🎭' },
+                { width: 45, height: 45, emoji: '🏺' },
+                { width: 50, height: 50, emoji: '🗿' },
+                { width: 40, height: 50, emoji: '📐' }
+            ];
+            const type = types[Math.floor(Math.random() * types.length)];
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - type.height,
+                width: type.width,
+                height: type.height,
+                emoji: type.emoji
+            });
+
+            if (Math.random() < 0.15 && level > 1) {
+                const type2 = types[Math.floor(Math.random() * types.length)];
+                obstacles.push({
+                    x: canvas.width + 150,
+                    y: canvas.height - 150 - type2.height,
+                    width: type2.width,
+                    height: type2.height,
+                    emoji: type2.emoji
+                });
+            }
+        }
+
+        function spawnPalette() {
+            const heights = [80, 120, 160];
+            palettes.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - heights[Math.floor(Math.random() * heights.length)],
+                collected: false
+            });
+        }
+
+        function spawnPowerUp() {
+            const types = ['shield', 'magnet', 'slow'];
+            powerUps.push({
+                x: canvas.width + 50,
+                y: canvas.height - 280,
+                type: types[Math.floor(Math.random() * types.length)],
+                collected: false
+            });
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obs => {
+                ctx.font = `${obs.height}px Arial`;
+                ctx.fillText(obs.emoji, obs.x, obs.y + obs.height - 5);
+            });
+        }
+
+        function drawPalettes() {
+            palettes.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '35px Arial';
+                    const bob = Math.sin(Date.now() / 200 + p.x) * 5;
+                    ctx.fillText('🎨', p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawPowerUps() {
+            powerUps.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '40px Arial';
+                    const bob = Math.sin(Date.now() / 150) * 8;
+                    let emoji = p.type === 'shield' ? '⭐' : p.type === 'magnet' ? '🧲' : '⏱️';
+                    ctx.fillText(emoji, p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawProgressBar() {
+            const barWidth = 200;
+            const barHeight = 10;
+            const barX = canvas.width / 2 - barWidth / 2;
+            const barY = 70;
+            const progress = Math.min(distance / checkpointDistance, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            ctx.fillStyle = '#22c55e';
+            ctx.fillRect(barX, barY, barWidth * progress, barHeight);
+
+            ctx.fillStyle = 'white';
+            ctx.font = '12px Arial';
+            ctx.fillText('🏁', barX + barWidth - 15, barY + 10);
+        }
+
+        let paletteSpawnTimer = 0;
+        let powerUpSpawnTimer = 0;
+        let comboCount = 0;
+        let comboTimer = 0;
+
+        function update() {
+            if (!gameRunning) return;
+
+            gameSpeed = Math.min(baseSpeed + 5, baseSpeed + (distance / 5000));
+
+            bgOffset += gameSpeed;
+            distance += gameSpeed;
+
+            if (!player.grounded) {
+                player.velocityY += gravity;
+                player.y += player.velocityY;
+
+                if (player.y >= canvas.height - 150 - player.height) {
+                    player.y = canvas.height - 150 - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                    player.jumping = false;
+                }
+            }
+
+            obstacleTimer++;
+            const obstacleFreq = Math.max(80, 180 - gameSpeed * 15);
+            if (obstacleTimer > obstacleFreq + Math.random() * 60) {
+                spawnObstacle();
+                obstacleTimer = 0;
+            }
+
+            paletteSpawnTimer++;
+            if (paletteSpawnTimer > 40 + Math.random() * 30) {
+                spawnPalette();
+                paletteSpawnTimer = 0;
+            }
+
+            powerUpSpawnTimer++;
+            if (powerUpSpawnTimer > 400 + Math.random() * 200) {
+                spawnPowerUp();
+                powerUpSpawnTimer = 0;
+            }
+
+            obstacles.forEach(obs => { obs.x -= gameSpeed; });
+            palettes.forEach(p => { p.x -= gameSpeed; });
+            powerUps.forEach(p => { p.x -= gameSpeed; });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+            palettes = palettes.filter(p => p.x > -100);
+            powerUps = powerUps.filter(p => p.x > -100);
+
+            if (!isInvincible) {
+                obstacles.forEach(obs => {
+                    if (player.x < obs.x + obs.width - 10 &&
+                        player.x + player.width - 10 > obs.x &&
+                        player.y + player.height > obs.y &&
+                        player.y < obs.y + obs.height) {
+                        hitObstacle();
+                    }
+                });
+            }
+
+            palettes.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 35 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 35 &&
+                    player.y + player.height > p.y - 20) {
+                    p.collected = true;
+                    paletteCount++;
+                    score += 50;
+                    comboCount++;
+                    comboTimer = 60;
+                    if (comboCount >= 3) score += comboCount * 20;
+                }
+            });
+
+            powerUps.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 40 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 20 &&
+                    player.y + player.height > p.y - 30) {
+                    p.collected = true;
+                    activatePowerUp(p.type);
+                }
+            });
+
+            if (comboTimer > 0) comboTimer--;
+            else comboCount = 0;
+
+            if (isInvincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) isInvincible = false;
+            }
+
+            if (distance >= checkpointDistance) reachCheckpoint();
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('palettes').textContent = paletteCount;
+        }
+
+        function activatePowerUp(type) {
+            if (type === 'shield') {
+                isInvincible = true;
+                invincibleTimer = 180;
+            } else if (type === 'slow') {
+                gameSpeed = Math.max(3, gameSpeed - 2);
+                setTimeout(() => { gameSpeed = baseSpeed; }, 3000);
+            } else if (type === 'magnet') {
+                palettes.forEach(p => {
+                    if (!p.collected && p.x < player.x + 300) {
+                        p.x = player.x + 30;
+                        p.y = player.y + 20;
+                    }
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawPalettes();
+            drawPowerUps();
+            drawObstacles();
+            drawPlayer();
+            drawProgressBar();
+
+            if (comboCount >= 3) {
+                ctx.fillStyle = '#8e44ad';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText(`COMBO x${comboCount}!`, player.x - 20, player.y - 30);
+            }
+
+            if (isInvincible) {
+                ctx.strokeStyle = 'rgba(142, 68, 173, 0.8)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(player.x + 25, player.y + 35, 45, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.velocityY = jumpForce;
+                player.grounded = false;
+                player.jumping = true;
+            }
+        }
+
+        function hitObstacle() {
+            lives--;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                obstacles = [];
+                distance = Math.max(0, distance - 200);
+                canvas.style.filter = 'brightness(2)';
+                setTimeout(() => canvas.style.filter = 'none', 100);
+            }
+        }
+
+        function reachCheckpoint() {
+            distance = 0;
+            level++;
+
+            if (level > 3) {
+                winGame();
+                return;
+            }
+
+            checkpointDistance = 22000 + level * 2000;
+            baseSpeed = 4 + level * 0.5;
+            gameSpeed = baseSpeed;
+            document.getElementById('level').textContent = level;
+        }
+
+        // TTS Functions
+        function speak(text, lang = 'en-GB') {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                const voices = speechSynthesis.getVoices();
+                const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+                if (voice) utterance.voice = voice;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[questionCount % questions.length];
+            currentQuestion = question;
+
+            // Show position in question cycle (1-12, not counting up forever)
+            const questionInCycle = (questionCount % questions.length) + 1;
+            document.getElementById('checkpoint-num').textContent = questionInCycle;
+            document.getElementById('total-questions').textContent = questions.length;
+            document.getElementById('q-text').textContent = question.text;
+            document.getElementById('q-context').textContent = question.context;
+
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+
+            const shuffledAnswers = question.answers.map((ans, i) => ({ text: ans, isCorrect: i === question.correct }));
+            shuffledAnswers.sort(() => Math.random() - 0.5);
+            currentAnswers = shuffledAnswers;
+
+            const labels = ['A', 'B', 'C', 'D'];
+            shuffledAnswers.forEach((ans, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.onclick = () => handleAnswer(btn, ans.isCorrect, question.english);
+                btn.innerHTML = `<strong>${labels[i]}</strong> ${ans.text}`;
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback-text';
+
+            readQuestionAndAnswers(question.text, shuffledAnswers, labels);
+        }
+
+        function readQuestionAndAnswers(questionText, answers, labels) {
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeakingFeedback) return;
+
+            speechSynthesis.cancel();
+
+            const voices = speechSynthesis.getVoices();
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+
+            const queue = [];
+
+            // Question in English
+            const qUtterance = new SpeechSynthesisUtterance(questionText);
+            qUtterance.lang = 'en-GB';
+            qUtterance.rate = 0.9;
+            if (englishVoice) qUtterance.voice = englishVoice;
+            queue.push(qUtterance);
+
+            // Answers
+            answers.forEach((ans, i) => {
+                const labelUtterance = new SpeechSynthesisUtterance(labels[i]);
+                labelUtterance.lang = 'en-GB';
+                labelUtterance.rate = 1.0;
+                if (englishVoice) labelUtterance.voice = englishVoice;
+                queue.push(labelUtterance);
+
+                const ansUtterance = new SpeechSynthesisUtterance(ans.text);
+                ansUtterance.lang = 'en-GB';
+                ansUtterance.rate = 0.85;
+                if (englishVoice) ansUtterance.voice = englishVoice;
+                queue.push(ansUtterance);
+            });
+
+            let i = 0;
+            function playNext() {
+                if (i < queue.length) {
+                    queue[i].onend = playNext;
+                    speechSynthesis.speak(queue[i]);
+                    i++;
+                }
+            }
+            playNext();
+        }
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.getVoices();
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        let questionCount = 0;
+        let currentQuestion = null;
+        let currentAnswers = null;
+        const answerLabels = ['A', 'B', 'C', 'D'];
+
+        function rereadQuestion() {
+            if (currentQuestion && currentAnswers) {
+                readQuestionAndAnswers(currentQuestion.text, currentAnswers, answerLabels);
+            }
+        }
+
+        function handleAnswer(btn, isCorrect, explanation) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('feedback');
+            const question = questions[questionCount % questions.length];
+            const correctAnswer = question.answers[question.correct];
+            const englishExplanation = question.english;
+
+            speechSynthesis.cancel();
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                lives++;
+                score += 200;
+                document.getElementById('lives').textContent = lives;
+                document.getElementById('score').textContent = score;
+
+                feedback.textContent = '✅ +1 ❤️ Correct!';
+                feedback.className = 'feedback-text correct';
+
+                // Speak correct, then explanation, then "next question"
+                speakFeedback("Correct!", 'en-GB', () => {
+                    if (englishExplanation) {
+                        speakFeedback(englishExplanation, 'en-GB', () => {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        });
+                    } else {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    }
+                });
+            } else {
+                btn.classList.add('wrong');
+
+                feedback.textContent = '❌ The answer is: ' + correctAnswer;
+                feedback.className = 'feedback-text wrong';
+
+                // Speak wrong, answer, then explanation, then "next question"
+                speakFeedback("Wrong! The answer is: " + correctAnswer, 'en-GB', () => {
+                    if (englishExplanation) {
+                        speakFeedback(englishExplanation, 'en-GB', () => {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        });
+                    } else {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    }
+                });
+            }
+        }
+
+        function speakFeedback(text, lang, callback, isLast = false) {
+            isSpeakingFeedback = true;
+            const voices = speechSynthesis.getVoices();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 1.0;
+
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+            if (englishVoice) utterance.voice = englishVoice;
+
+            utterance.onend = () => {
+                if (isLast) isSpeakingFeedback = false;
+                if (callback) callback();
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'flex';
+            document.getElementById('final-level').textContent = level;
+            document.getElementById('final-score').textContent = score;
+        }
+
+        function winGame() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'flex';
+            document.getElementById('win-score').textContent = score;
+            document.getElementById('win-palettes').textContent = paletteCount;
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('question-overlay').style.display = 'block';
+
+            level = 1;
+            score = 0;
+            lives = 3;
+            distance = 0;
+            checkpointDistance = 22000;
+            gameSpeed = 4;
+            baseSpeed = 4;
+            isSpeakingFeedback = false;
+            obstacles = [];
+            palettes = [];
+            powerUps = [];
+            paletteCount = 0;
+            isInvincible = false;
+            invincibleTimer = 0;
+            comboCount = 0;
+            comboTimer = 0;
+            obstacleTimer = 0;
+            paletteSpawnTimer = 0;
+            powerUpSpawnTimer = 0;
+            questionCount = 0;
+
+            document.getElementById('level').textContent = level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            document.getElementById('palettes').textContent = paletteCount;
+
+            player.y = canvas.height - 150 - player.height;
+            player.velocityY = 0;
+            player.grounded = true;
+
+            generatePaintings();
+            generateEasels();
+            gameRunning = true;
+
+            showQuestion();
+        }
+
+        // Gamepad support
+        let gamepadConnected = false;
+        let lastButtonStates = {};
+
+        window.addEventListener('gamepadconnected', () => { gamepadConnected = true; });
+        window.addEventListener('gamepaddisconnected', () => { gamepadConnected = false; });
+
+        function pollGamepad() {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads) return;
+
+            for (const gamepad of gamepads) {
+                if (!gamepad) continue;
+
+                const buttons = gamepad.buttons;
+
+                if ((buttons[7]?.pressed || buttons[6]?.pressed) && !lastButtonStates['jump']) {
+                    jump();
+                    lastButtonStates['jump'] = true;
+                } else if (!buttons[7]?.pressed && !buttons[6]?.pressed) {
+                    lastButtonStates['jump'] = false;
+                }
+
+                const answerMap = [
+                    { btn: 2, answer: 0, key: 'X' },
+                    { btn: 3, answer: 1, key: 'Y' },
+                    { btn: 0, answer: 2, key: 'A' },
+                    { btn: 1, answer: 3, key: 'B' }
+                ];
+
+                answerMap.forEach(({ btn, answer, key }) => {
+                    if (buttons[btn]?.pressed && !lastButtonStates[key]) {
+                        const answerBtns = document.querySelectorAll('.answer-btn');
+                        if (answerBtns[answer] && !answerBtns[answer].disabled) {
+                            answerBtns[answer].click();
+                        }
+                        lastButtonStates[key] = true;
+                    } else if (!buttons[btn]?.pressed) {
+                        lastButtonStates[key] = false;
+                    }
+                });
+            }
+            requestAnimationFrame(pollGamepad);
+        }
+        pollGamepad();
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+
+            const keyMap = { 'KeyA': 0, 'KeyB': 1, 'KeyC': 2, 'KeyD': 3 };
+            if (keyMap.hasOwnProperty(e.code)) {
+                const btns = document.querySelectorAll('.answer-btn');
+                if (btns[keyMap[e.code]] && !btns[keyMap[e.code]].disabled) {
+                    btns[keyMap[e.code]].click();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+        document.getElementById('jump-btn').addEventListener('click', jump);
+        document.getElementById('jump-btn').addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+
+        // Initialize
+        resizeCanvas();
+        generatePaintings();
+        generateEasels();
+        gameLoop();
+    </script>
+</body>
+</html>

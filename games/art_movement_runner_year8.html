@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Art Movement Runner - Year 8 Art History</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-canvas {
+            display: block;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .hud-item {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        #question-overlay {
+            display: block;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        .question-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 3px solid #8e44ad;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .checkpoint-badge {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .answer-btn {
+            background: #f5f5f7;
+            border: 2px solid #e5e5e5;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e8e8ed;
+            border-color: #8e44ad;
+            transform: translateY(-2px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #16a34a;
+            color: white;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        #start-screen, #gameover-screen, #win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #gameover-screen, #win-screen {
+            display: none;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .instructions em {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .instructions p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .theme-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback-text.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #166534;
+            display: block;
+        }
+
+        .feedback-text.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        #mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .jump-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #mobile-controls {
+                display: block;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="hud">
+            <div class="hud-item">🎨 Level: <span id="level">1</span>/3</div>
+            <div class="hud-item">🖌️ <span id="brushes">0</span></div>
+            <div class="hud-item">⭐ <span id="score">0</span></div>
+            <div class="hud-item">❤️ <span id="lives">3</span></div>
+        </div>
+
+        <div id="mobile-controls">
+            <button class="jump-btn" id="jump-btn">⬆️</button>
+        </div>
+
+        <div id="question-overlay">
+            <div class="question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div class="checkpoint-badge">🎨 Q<span id="checkpoint-num">1</span>/<span id="total-questions">12</span></div>
+                    <button id="read-again-btn" onclick="rereadQuestion()" style="background: #8e44ad; color: white; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">🔊 Read Again</button>
+                </div>
+                <div class="question-text" id="q-text">Loading...</div>
+                <div class="question-context" id="q-context">Art Movements</div>
+                <div class="answers-grid" id="answers"></div>
+                <div class="feedback-text" id="feedback"></div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <div class="theme-emoji">🎨</div>
+            <h1 class="title">Art Movement Runner</h1>
+            <p class="subtitle">Run Through Art History!<br><em style="font-size: 0.9em; opacity: 0.8;">Impressionism, Identity & Beyond!</em></p>
+
+            <div class="instructions">
+                <h3>How to Play</h3>
+                <p>🏃 <strong>RUN</strong> through a gallery of art movements!</p>
+                <p>🖼️ Learn about <strong>IMPRESSIONISM</strong> and famous artists!</p>
+                <p>🖌️ Collect paintbrushes for bonus points!</p>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p><strong>⌨️ Keyboard:</strong> SPACE = Jump | A B C D = Answer</p>
+                    <p><strong>🎮 Xbox:</strong> RT/LT = Jump | X Y A B = Answer</p>
+                </div>
+
+                <p style="margin-top: 1rem;">✅ Correct = +1 Life | Learn Art History!</p>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">Start Painting! 🎨</button>
+        </div>
+
+        <div id="gameover-screen">
+            <div class="result-icon">💔</div>
+            <h1 class="title">Game Over!</h1>
+            <p class="subtitle">Your artistic journey has ended!</p>
+            <div class="stats">
+                <p>Level: <span id="final-level">1</span></p>
+                <p>Score: <span id="final-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Try Again! 🔄</button>
+        </div>
+
+        <div id="win-screen">
+            <div class="result-icon">🏆</div>
+            <h1 class="title">Masterpiece!</h1>
+            <p class="subtitle">You're an Art History Master!</p>
+            <div class="stats">
+                <p>🖌️ Brushes: <span id="win-brushes">0</span></p>
+                <p>⭐ Score: <span id="win-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Play Again! 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let gameRunning = false;
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let distance = 0;
+        let checkpointDistance = 22000;
+        let gameSpeed = 4;
+        let baseSpeed = 4;
+        let isSpeakingFeedback = false;
+
+        // Collectibles
+        let brushes = [];
+        let brushCount = 0;
+
+        // Power-ups
+        let powerUps = [];
+        let isInvincible = false;
+        let invincibleTimer = 0;
+
+        // Player
+        let player = {
+            x: 100,
+            y: 0,
+            width: 50,
+            height: 70,
+            velocityY: 0,
+            jumping: false,
+            grounded: true
+        };
+
+        // Physics
+        const gravity = 0.8;
+        const jumpForce = -16;
+
+        // Obstacles
+        let obstacles = [];
+        let obstacleTimer = 0;
+
+        // Background
+        let bgOffset = 0;
+        let paintings = [];
+        let clouds = [];
+
+        // Art Movement Questions - Year 8 Autumn Term
+        const questions = [
+            // Impressionism
+            {
+                text: "Which artist painted 'Water Lilies'?",
+                context: "Impressionism - Famous Artists",
+                answers: ["Claude Monet", "Edgar Degas", "Pierre Renoir", "Paul Cezanne"],
+                correct: 0,
+                english: "Monet created over 250 Water Lilies paintings, capturing light and reflections in his garden at Giverny."
+            },
+            {
+                text: "What does 'en plein air' mean?",
+                context: "Impressionist Techniques",
+                answers: ["Outdoor painting", "Indoor studio", "Night painting", "Abstract art"],
+                correct: 0,
+                english: "En plein air is French for 'in open air' - Impressionists painted outdoors to capture natural light."
+            },
+            {
+                text: "What technique uses small dabs of pure color side-by-side?",
+                context: "Impressionist Colour Theory",
+                answers: ["Broken color", "Flat color", "Gradient", "Monochrome"],
+                correct: 0,
+                english: "Broken color creates optical mixing - colors blend in the viewer's eye from a distance."
+            },
+            {
+                text: "Which artist is famous for painting ballet dancers?",
+                context: "Impressionism - Famous Artists",
+                answers: ["Edgar Degas", "Claude Monet", "Van Gogh", "Picasso"],
+                correct: 0,
+                english: "Degas captured movement and behind-the-scenes life of ballet dancers at the Paris Opera."
+            },
+            {
+                text: "What invention helped artists paint outdoors?",
+                context: "Impressionism & Technology",
+                answers: ["Portable paint tubes", "Electric lights", "Cameras", "Computers"],
+                correct: 0,
+                english: "Metal paint tubes (invented 1841) freed artists from studios, enabling outdoor painting."
+            },
+            {
+                text: "Why did Impressionists avoid using black for shadows?",
+                context: "Impressionist Colour Theory",
+                answers: ["Used complementary colors", "Black was expensive", "They couldn't see shadows", "It was forbidden"],
+                correct: 0,
+                english: "Impressionists used complementary colors (blue/orange, purple/yellow) to create vibrant, luminous shadows."
+            },
+            // Self-Portrait & Identity
+            {
+                text: "Which artist painted many self-portraits with bold brushstrokes?",
+                context: "Self-Portrait & Identity",
+                answers: ["Vincent van Gogh", "Claude Monet", "Andy Warhol", "Roy Lichtenstein"],
+                correct: 0,
+                english: "Van Gogh created over 30 self-portraits to practice and explore his identity through expressive style."
+            },
+            {
+                text: "Frida Kahlo often included _____ in her self-portraits.",
+                context: "Self-Portrait & Identity",
+                answers: ["Symbolic animals and plants", "Abstract shapes", "Geometric patterns", "Pop art elements"],
+                correct: 0,
+                english: "Kahlo used monkeys, birds, and native Mexican plants as personal symbols of her identity and heritage."
+            },
+            {
+                text: "Where are the eyes positioned on an average face?",
+                context: "Facial Proportions",
+                answers: ["Halfway down the head", "Near the top", "Near the bottom", "One-third down"],
+                correct: 0,
+                english: "Eyes sit at the vertical midpoint of the head - a common mistake is drawing them too high."
+            },
+            {
+                text: "What term describes art revealing personality and emotion?",
+                context: "Portrait Concepts",
+                answers: ["Expressive", "Realistic", "Abstract", "Geometric"],
+                correct: 0,
+                english: "Expressive art prioritizes emotion and personality over exact realistic representation."
+            },
+            {
+                text: "Which artist painted himself with a bandaged ear?",
+                context: "Self-Portrait & Identity",
+                answers: ["Vincent van Gogh", "Pablo Picasso", "Claude Monet", "Rembrandt"],
+                correct: 0,
+                english: "Van Gogh's famous self-portrait shows him after cutting his ear during a mental health crisis in 1888."
+            },
+            {
+                text: "What is a 'visual metaphor' in art?",
+                context: "Symbolism in Art",
+                answers: ["An image representing an idea", "A type of brush", "A color mixing technique", "A frame style"],
+                correct: 0,
+                english: "Visual metaphors use images to represent abstract concepts - like a storm for anger or flowers for growth."
+            }
+        ];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 150 - player.height;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        function generatePaintings() {
+            paintings = [];
+            for (let i = 0; i < 6; i++) {
+                paintings.push({
+                    x: i * 350 + Math.random() * 100,
+                    height: 100 + Math.random() * 60,
+                    width: 80 + Math.random() * 40,
+                    style: Math.floor(Math.random() * 4) // 0=impressionist, 1=pop, 2=abstract, 3=portrait
+                });
+            }
+        }
+
+        function generateClouds() {
+            clouds = [];
+            for (let i = 0; i < 6; i++) {
+                clouds.push({
+                    x: i * 300 + Math.random() * 150,
+                    y: 40 + Math.random() * 60,
+                    size: 25 + Math.random() * 20
+                });
+            }
+        }
+
+        function drawBackground() {
+            // Sky gradient - gallery inspired
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.6);
+            skyGradient.addColorStop(0, '#e9d5ff');
+            skyGradient.addColorStop(1, '#f3e8ff');
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height * 0.6);
+
+            // Impressionist-style sun with visible brushstrokes
+            drawImpressionistSun(canvas.width - 150, 100);
+
+            // Clouds with impressionist style
+            clouds.forEach(cloud => {
+                const cloudX = ((cloud.x - bgOffset * 0.2) % (canvas.width + 300)) - 100;
+                drawImpressionistCloud(cloudX, cloud.y, cloud.size);
+            });
+
+            // Colorful hills (impressionist style)
+            drawImpressionistHills();
+
+            // Gallery floor
+            const floorGradient = ctx.createLinearGradient(0, canvas.height - 150, 0, canvas.height);
+            floorGradient.addColorStop(0, '#fef3c7');
+            floorGradient.addColorStop(1, '#fcd34d');
+            ctx.fillStyle = floorGradient;
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 150);
+
+            // Paintings on walls
+            paintings.forEach(painting => {
+                const paintingX = ((painting.x - bgOffset * 0.5) % (canvas.width + 600)) - 200;
+                drawPainting(paintingX, canvas.height * 0.35, painting.width, painting.height, painting.style);
+            });
+
+            // Floor pattern
+            ctx.fillStyle = '#d97706';
+            for (let x = -bgOffset % 100; x < canvas.width; x += 100) {
+                ctx.fillRect(x, canvas.height - 140, 50, 10);
+            }
+        }
+
+        function drawImpressionistSun(x, y) {
+            // Multiple overlapping circles with visible "brushstrokes"
+            const colors = ['#fef08a', '#fde047', '#facc15', '#fbbf24', '#f59e0b'];
+            for (let i = 0; i < 15; i++) {
+                const angle = (i / 15) * Math.PI * 2;
+                const radius = 35 + Math.random() * 15;
+                const offsetX = Math.cos(angle) * 10;
+                const offsetY = Math.sin(angle) * 10;
+                ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+                ctx.beginPath();
+                ctx.arc(x + offsetX, y + offsetY, radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawImpressionistCloud(x, y, size) {
+            const colors = ['rgba(255,255,255,0.9)', 'rgba(243,232,255,0.8)', 'rgba(233,213,255,0.7)'];
+            for (let i = 0; i < 8; i++) {
+                ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+                ctx.beginPath();
+                ctx.arc(x + (i % 3) * size * 0.7, y + Math.sin(i) * size * 0.3, size * (0.6 + Math.random() * 0.4), 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawImpressionistHills() {
+            // Purple/pink hills in background
+            const hillColors = [
+                ['#c084fc', '#a855f7'],
+                ['#d8b4fe', '#c084fc'],
+                ['#f0abfc', '#e879f9']
+            ];
+
+            for (let h = 0; h < 3; h++) {
+                const yBase = canvas.height * 0.5 - h * 30;
+                const gradient = ctx.createLinearGradient(0, yBase - 60, 0, yBase + 40);
+                gradient.addColorStop(0, hillColors[h][0]);
+                gradient.addColorStop(1, hillColors[h][1]);
+                ctx.fillStyle = gradient;
+
+                ctx.beginPath();
+                ctx.moveTo(0, yBase + 40);
+                for (let x = 0; x <= canvas.width; x += 20) {
+                    const hillY = yBase + Math.sin((x + bgOffset * (0.3 - h * 0.1)) / 100 + h) * 30;
+                    ctx.lineTo(x, hillY);
+                }
+                ctx.lineTo(canvas.width, canvas.height);
+                ctx.lineTo(0, canvas.height);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function drawPainting(x, y, width, height, style) {
+            // Frame
+            ctx.fillStyle = '#92400e';
+            ctx.fillRect(x - 5, y - 5, width + 10, height + 10);
+
+            // Canvas background
+            ctx.fillStyle = '#fef3c7';
+            ctx.fillRect(x, y, width, height);
+
+            // Different art styles
+            if (style === 0) {
+                // Impressionist - water lilies style
+                ctx.fillStyle = '#60a5fa';
+                ctx.fillRect(x, y, width, height);
+                for (let i = 0; i < 5; i++) {
+                    ctx.fillStyle = ['#22c55e', '#16a34a', '#f472b6', '#ec4899'][Math.floor(Math.random() * 4)];
+                    ctx.beginPath();
+                    ctx.ellipse(x + width * Math.random(), y + height * Math.random(), 8, 5, Math.random(), 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            } else if (style === 1) {
+                // Pop Art style
+                const popColors = ['#ef4444', '#3b82f6', '#fbbf24', '#22c55e'];
+                for (let row = 0; row < 2; row++) {
+                    for (let col = 0; col < 2; col++) {
+                        ctx.fillStyle = popColors[(row * 2 + col) % 4];
+                        ctx.fillRect(x + col * width/2, y + row * height/2, width/2, height/2);
+                    }
+                }
+            } else if (style === 2) {
+                // Abstract/Cubist
+                ctx.fillStyle = '#e5e7eb';
+                ctx.fillRect(x, y, width, height);
+                const cubistColors = ['#1d4ed8', '#b91c1c', '#fbbf24', '#1d1d1f'];
+                for (let i = 0; i < 4; i++) {
+                    ctx.fillStyle = cubistColors[i];
+                    ctx.beginPath();
+                    ctx.moveTo(x + Math.random() * width, y + Math.random() * height);
+                    ctx.lineTo(x + Math.random() * width, y + Math.random() * height);
+                    ctx.lineTo(x + Math.random() * width, y + Math.random() * height);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            } else {
+                // Portrait style
+                ctx.fillStyle = '#fcd5b8';
+                ctx.fillRect(x, y, width, height);
+                // Simple face
+                ctx.fillStyle = '#fcd5b8';
+                ctx.beginPath();
+                ctx.arc(x + width/2, y + height * 0.4, height * 0.25, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#1d1d1f';
+                ctx.beginPath();
+                ctx.arc(x + width * 0.4, y + height * 0.35, 3, 0, Math.PI * 2);
+                ctx.arc(x + width * 0.6, y + height * 0.35, 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawPlayer() {
+            // Artist character
+            // Body - artist smock
+            ctx.fillStyle = '#8e44ad';
+            ctx.fillRect(player.x, player.y + 20, player.width - 10, 35);
+
+            // Beret
+            ctx.fillStyle = '#1d1d1f';
+            ctx.beginPath();
+            ctx.ellipse(player.x + 20, player.y + 5, 18, 8, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 5, 12, Math.PI, 0);
+            ctx.fill();
+
+            // Head
+            ctx.fillStyle = '#fcd5b8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 18, 12, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Eyes
+            ctx.fillStyle = '#1d1d1f';
+            ctx.beginPath();
+            ctx.arc(player.x + 16, player.y + 16, 2, 0, Math.PI * 2);
+            ctx.arc(player.x + 24, player.y + 16, 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Paintbrush in hand
+            ctx.fillStyle = '#92400e';
+            ctx.fillRect(player.x + 35, player.y + 30, 15, 4);
+            ctx.fillStyle = '#ef4444';
+            ctx.beginPath();
+            ctx.arc(player.x + 52, player.y + 32, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Legs
+            ctx.fillStyle = '#1d1d1f';
+            if (player.grounded) {
+                ctx.fillRect(player.x + 5, player.y + 55, 12, 15);
+                ctx.fillRect(player.x + 22, player.y + 55, 12, 15);
+            } else {
+                ctx.fillRect(player.x + 5, player.y + 50, 12, 20);
+                ctx.fillRect(player.x + 22, player.y + 50, 12, 20);
+            }
+
+            // Invincibility glow
+            if (isInvincible) {
+                ctx.strokeStyle = 'rgba(251, 191, 36, 0.8)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(player.x + 25, player.y + 35, 45, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        function spawnObstacle() {
+            const types = [
+                { width: 45, height: 50, emoji: '🖼️' },
+                { width: 50, height: 40, emoji: '🎭' },
+                { width: 40, height: 55, emoji: '🏺' },
+                { width: 55, height: 35, emoji: '📚' },
+                { width: 45, height: 45, emoji: '🗿' },
+                { width: 50, height: 50, emoji: '🪞' },
+                { width: 40, height: 40, emoji: '🎪' }
+            ];
+            const type = types[Math.floor(Math.random() * types.length)];
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - type.height,
+                width: type.width,
+                height: type.height,
+                emoji: type.emoji
+            });
+
+            if (Math.random() < 0.15 && level > 1) {
+                const type2 = types[Math.floor(Math.random() * types.length)];
+                obstacles.push({
+                    x: canvas.width + 150,
+                    y: canvas.height - 150 - type2.height,
+                    width: type2.width,
+                    height: type2.height,
+                    emoji: type2.emoji
+                });
+            }
+        }
+
+        function spawnBrush() {
+            const heights = [80, 120, 160];
+            brushes.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - heights[Math.floor(Math.random() * heights.length)],
+                collected: false
+            });
+        }
+
+        function spawnPowerUp() {
+            const types = ['shield', 'magnet', 'slow'];
+            powerUps.push({
+                x: canvas.width + 50,
+                y: canvas.height - 280,
+                type: types[Math.floor(Math.random() * types.length)],
+                collected: false
+            });
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obs => {
+                ctx.font = `${obs.height}px Arial`;
+                ctx.fillText(obs.emoji, obs.x, obs.y + obs.height - 5);
+            });
+        }
+
+        function drawBrushes() {
+            brushes.forEach(b => {
+                if (!b.collected) {
+                    ctx.font = '35px Arial';
+                    const bob = Math.sin(Date.now() / 200 + b.x) * 5;
+                    ctx.fillText('🖌️', b.x, b.y + bob);
+                }
+            });
+        }
+
+        function drawPowerUps() {
+            powerUps.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '40px Arial';
+                    const bob = Math.sin(Date.now() / 150) * 8;
+                    let emoji = p.type === 'shield' ? '⭐' : p.type === 'magnet' ? '🧲' : '⏱️';
+                    ctx.fillText(emoji, p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawProgressBar() {
+            const barWidth = 200;
+            const barHeight = 10;
+            const barX = canvas.width / 2 - barWidth / 2;
+            const barY = 70;
+            const progress = Math.min(distance / checkpointDistance, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            ctx.fillStyle = '#22c55e';
+            ctx.fillRect(barX, barY, barWidth * progress, barHeight);
+
+            ctx.fillStyle = 'white';
+            ctx.font = '12px Arial';
+            ctx.fillText('🏁', barX + barWidth - 15, barY + 10);
+        }
+
+        let brushSpawnTimer = 0;
+        let powerUpSpawnTimer = 0;
+        let comboCount = 0;
+        let comboTimer = 0;
+
+        function update() {
+            if (!gameRunning) return;
+
+            gameSpeed = Math.min(baseSpeed + 5, baseSpeed + (distance / 5000));
+
+            bgOffset += gameSpeed;
+            distance += gameSpeed;
+
+            if (!player.grounded) {
+                player.velocityY += gravity;
+                player.y += player.velocityY;
+
+                if (player.y >= canvas.height - 150 - player.height) {
+                    player.y = canvas.height - 150 - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                    player.jumping = false;
+                }
+            }
+
+            obstacleTimer++;
+            const obstacleFreq = Math.max(80, 180 - gameSpeed * 15);
+            if (obstacleTimer > obstacleFreq + Math.random() * 60) {
+                spawnObstacle();
+                obstacleTimer = 0;
+            }
+
+            brushSpawnTimer++;
+            if (brushSpawnTimer > 40 + Math.random() * 30) {
+                spawnBrush();
+                brushSpawnTimer = 0;
+            }
+
+            powerUpSpawnTimer++;
+            if (powerUpSpawnTimer > 400 + Math.random() * 200) {
+                spawnPowerUp();
+                powerUpSpawnTimer = 0;
+            }
+
+            obstacles.forEach(obs => { obs.x -= gameSpeed; });
+            brushes.forEach(b => { b.x -= gameSpeed; });
+            powerUps.forEach(p => { p.x -= gameSpeed; });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+            brushes = brushes.filter(b => b.x > -100);
+            powerUps = powerUps.filter(p => p.x > -100);
+
+            if (!isInvincible) {
+                obstacles.forEach(obs => {
+                    if (player.x < obs.x + obs.width - 10 &&
+                        player.x + player.width - 10 > obs.x &&
+                        player.y + player.height > obs.y &&
+                        player.y < obs.y + obs.height) {
+                        hitObstacle();
+                    }
+                });
+            }
+
+            brushes.forEach(b => {
+                if (!b.collected &&
+                    player.x < b.x + 35 &&
+                    player.x + player.width > b.x &&
+                    player.y < b.y + 35 &&
+                    player.y + player.height > b.y - 20) {
+                    b.collected = true;
+                    brushCount++;
+                    score += 50;
+                    comboCount++;
+                    comboTimer = 60;
+                    if (comboCount >= 3) score += comboCount * 20;
+                }
+            });
+
+            powerUps.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 40 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 20 &&
+                    player.y + player.height > p.y - 30) {
+                    p.collected = true;
+                    activatePowerUp(p.type);
+                }
+            });
+
+            if (comboTimer > 0) comboTimer--;
+            else comboCount = 0;
+
+            if (isInvincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) isInvincible = false;
+            }
+
+            if (distance >= checkpointDistance) reachCheckpoint();
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('brushes').textContent = brushCount;
+        }
+
+        function activatePowerUp(type) {
+            if (type === 'shield') {
+                isInvincible = true;
+                invincibleTimer = 180;
+            } else if (type === 'slow') {
+                gameSpeed = Math.max(3, gameSpeed - 2);
+                setTimeout(() => { gameSpeed = baseSpeed; }, 3000);
+            } else if (type === 'magnet') {
+                brushes.forEach(b => {
+                    if (!b.collected && b.x < player.x + 300) {
+                        b.x = player.x + 30;
+                        b.y = player.y + 20;
+                    }
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawBrushes();
+            drawPowerUps();
+            drawObstacles();
+            drawPlayer();
+            drawProgressBar();
+
+            if (comboCount >= 3) {
+                ctx.fillStyle = '#fbbf24';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText(`COMBO x${comboCount}!`, player.x - 20, player.y - 30);
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.velocityY = jumpForce;
+                player.grounded = false;
+                player.jumping = true;
+            }
+        }
+
+        function hitObstacle() {
+            lives--;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                obstacles = [];
+                distance = Math.max(0, distance - 200);
+                canvas.style.filter = 'brightness(2)';
+                setTimeout(() => canvas.style.filter = 'none', 100);
+            }
+        }
+
+        function reachCheckpoint() {
+            distance = 0;
+            level++;
+
+            if (level > 3) {
+                winGame();
+                return;
+            }
+
+            checkpointDistance = 22000 + level * 2000;
+            baseSpeed = 4 + level * 0.5;
+            gameSpeed = baseSpeed;
+            document.getElementById('level').textContent = level;
+        }
+
+        // TTS Functions
+        function speak(text, lang = 'en-GB') {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                const voices = speechSynthesis.getVoices();
+                const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+                if (voice) utterance.voice = voice;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[questionCount % questions.length];
+            currentQuestion = question;
+
+            // Show position in question cycle (1-12)
+            const questionInCycle = (questionCount % questions.length) + 1;
+            document.getElementById('checkpoint-num').textContent = questionInCycle;
+            document.getElementById('total-questions').textContent = questions.length;
+            document.getElementById('q-text').textContent = question.text;
+            document.getElementById('q-context').textContent = question.context;
+
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+
+            const shuffledAnswers = question.answers.map((ans, i) => ({ text: ans, isCorrect: i === question.correct }));
+            shuffledAnswers.sort(() => Math.random() - 0.5);
+            currentAnswers = shuffledAnswers;
+
+            const labels = ['A', 'B', 'C', 'D'];
+            shuffledAnswers.forEach((ans, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.onclick = () => handleAnswer(btn, ans.isCorrect, question.english);
+                btn.innerHTML = `<strong>${labels[i]}</strong> ${ans.text}`;
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback-text';
+
+            readQuestionAndAnswers(question.text, shuffledAnswers, labels);
+        }
+
+        function readQuestionAndAnswers(questionText, answers, labels) {
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeakingFeedback) return;
+
+            speechSynthesis.cancel();
+
+            const voices = speechSynthesis.getVoices();
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+
+            const queue = [];
+
+            // Question in English
+            const qUtterance = new SpeechSynthesisUtterance(questionText);
+            qUtterance.lang = 'en-GB';
+            qUtterance.rate = 0.9;
+            if (englishVoice) qUtterance.voice = englishVoice;
+            queue.push(qUtterance);
+
+            // Answers
+            answers.forEach((ans, i) => {
+                const labelUtterance = new SpeechSynthesisUtterance(labels[i]);
+                labelUtterance.lang = 'en-GB';
+                labelUtterance.rate = 1.0;
+                if (englishVoice) labelUtterance.voice = englishVoice;
+                queue.push(labelUtterance);
+
+                const ansUtterance = new SpeechSynthesisUtterance(ans.text);
+                ansUtterance.lang = 'en-GB';
+                ansUtterance.rate = 0.85;
+                if (englishVoice) ansUtterance.voice = englishVoice;
+                queue.push(ansUtterance);
+            });
+
+            let i = 0;
+            function playNext() {
+                if (i < queue.length) {
+                    queue[i].onend = playNext;
+                    speechSynthesis.speak(queue[i]);
+                    i++;
+                }
+            }
+            playNext();
+        }
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.getVoices();
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        let questionCount = 0;
+        let currentQuestion = null;
+        let currentAnswers = null;
+        const answerLabels = ['A', 'B', 'C', 'D'];
+
+        function rereadQuestion() {
+            if (currentQuestion && currentAnswers) {
+                readQuestionAndAnswers(currentQuestion.text, currentAnswers, answerLabels);
+            }
+        }
+
+        function handleAnswer(btn, isCorrect, explanation) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('feedback');
+            const question = questions[questionCount % questions.length];
+            const correctAnswer = question.answers[question.correct];
+
+            speechSynthesis.cancel();
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                lives++;
+                score += 200;
+                document.getElementById('lives').textContent = lives;
+                document.getElementById('score').textContent = score;
+
+                feedback.textContent = '✅ +1 ❤️ ' + explanation;
+                feedback.className = 'feedback-text correct';
+
+                speakFeedback("Correct!", 'en-GB', () => {
+                    speakFeedback(explanation, 'en-GB', () => {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    });
+                });
+            } else {
+                btn.classList.add('wrong');
+
+                feedback.textContent = '❌ ' + correctAnswer + ' - ' + explanation;
+                feedback.className = 'feedback-text wrong';
+
+                speakFeedback("Wrong! The answer is:", 'en-GB', () => {
+                    speakFeedback(correctAnswer, 'en-GB', () => {
+                        speakFeedback(explanation, 'en-GB', () => {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        });
+                    });
+                });
+            }
+        }
+
+        function speakFeedback(text, lang, callback, isLast = false) {
+            isSpeakingFeedback = true;
+            const voices = speechSynthesis.getVoices();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 1.0;
+
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+            if (englishVoice) utterance.voice = englishVoice;
+
+            utterance.onend = () => {
+                if (isLast) isSpeakingFeedback = false;
+                if (callback) callback();
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'flex';
+            document.getElementById('final-level').textContent = level;
+            document.getElementById('final-score').textContent = score;
+        }
+
+        function winGame() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'flex';
+            document.getElementById('win-score').textContent = score;
+            document.getElementById('win-brushes').textContent = brushCount;
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('question-overlay').style.display = 'block';
+
+            level = 1;
+            score = 0;
+            lives = 3;
+            distance = 0;
+            checkpointDistance = 22000;
+            gameSpeed = 4;
+            baseSpeed = 4;
+            isSpeakingFeedback = false;
+            obstacles = [];
+            brushes = [];
+            powerUps = [];
+            brushCount = 0;
+            isInvincible = false;
+            invincibleTimer = 0;
+            comboCount = 0;
+            comboTimer = 0;
+            obstacleTimer = 0;
+            brushSpawnTimer = 0;
+            powerUpSpawnTimer = 0;
+            questionCount = 0;
+
+            document.getElementById('level').textContent = level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            document.getElementById('brushes').textContent = brushCount;
+
+            player.y = canvas.height - 150 - player.height;
+            player.velocityY = 0;
+            player.grounded = true;
+
+            generatePaintings();
+            generateClouds();
+            gameRunning = true;
+
+            showQuestion();
+        }
+
+        // Gamepad support
+        let gamepadConnected = false;
+        let lastButtonStates = {};
+
+        window.addEventListener('gamepadconnected', () => { gamepadConnected = true; });
+        window.addEventListener('gamepaddisconnected', () => { gamepadConnected = false; });
+
+        function pollGamepad() {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads) return;
+
+            for (const gamepad of gamepads) {
+                if (!gamepad) continue;
+
+                const buttons = gamepad.buttons;
+
+                if ((buttons[7]?.pressed || buttons[6]?.pressed) && !lastButtonStates['jump']) {
+                    jump();
+                    lastButtonStates['jump'] = true;
+                } else if (!buttons[7]?.pressed && !buttons[6]?.pressed) {
+                    lastButtonStates['jump'] = false;
+                }
+
+                const answerMap = [
+                    { btn: 2, answer: 0, key: 'X' },
+                    { btn: 3, answer: 1, key: 'Y' },
+                    { btn: 0, answer: 2, key: 'A' },
+                    { btn: 1, answer: 3, key: 'B' }
+                ];
+
+                answerMap.forEach(({ btn, answer, key }) => {
+                    if (buttons[btn]?.pressed && !lastButtonStates[key]) {
+                        const answerBtns = document.querySelectorAll('.answer-btn');
+                        if (answerBtns[answer] && !answerBtns[answer].disabled) {
+                            answerBtns[answer].click();
+                        }
+                        lastButtonStates[key] = true;
+                    } else if (!buttons[btn]?.pressed) {
+                        lastButtonStates[key] = false;
+                    }
+                });
+            }
+            requestAnimationFrame(pollGamepad);
+        }
+        pollGamepad();
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+
+            const keyMap = { 'KeyA': 0, 'KeyB': 1, 'KeyC': 2, 'KeyD': 3 };
+            if (keyMap.hasOwnProperty(e.code)) {
+                const btns = document.querySelectorAll('.answer-btn');
+                if (btns[keyMap[e.code]] && !btns[keyMap[e.code]].disabled) {
+                    btns[keyMap[e.code]].click();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+        document.getElementById('jump-btn').addEventListener('click', jump);
+        document.getElementById('jump-btn').addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+
+        // Initialize
+        resizeCanvas();
+        generatePaintings();
+        generateClouds();
+        gameLoop();
+    </script>
+</body>
+</html>

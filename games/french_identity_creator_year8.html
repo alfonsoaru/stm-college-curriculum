@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Louvre Runner - French Identity Year 8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #4a1c6b 0%, #7c3aed 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-canvas {
+            display: block;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .hud-item {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        #question-overlay {
+            display: block;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        .question-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 3px solid #8b5cf6;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .checkpoint-badge {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .answer-btn {
+            background: #f5f5f7;
+            border: 2px solid #e5e5e5;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e8e8ed;
+            border-color: #8b5cf6;
+            transform: translateY(-2px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #16a34a;
+            color: white;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        #start-screen, #gameover-screen, #win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #4a1c6b 0%, #7c3aed 100%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #gameover-screen, #win-screen {
+            display: none;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .instructions p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .theme-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback-text.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #166534;
+            display: block;
+        }
+
+        .feedback-text.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        #mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .jump-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #mobile-controls {
+                display: block;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .question-text {
+                font-size: 1.4rem;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="hud">
+            <div class="hud-item">🏃 Level: <span id="level">1</span>/3</div>
+            <div class="hud-item">🎨 <span id="collectibles">0</span></div>
+            <div class="hud-item">⭐ <span id="score">0</span></div>
+            <div class="hud-item">❤️ <span id="lives">3</span></div>
+        </div>
+
+        <div id="mobile-controls">
+            <button class="jump-btn" id="jump-btn">⬆️</button>
+        </div>
+
+        <div id="question-overlay">
+            <div class="question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div class="checkpoint-badge">❓ Question <span id="checkpoint-num">1</span></div>
+                    <button id="read-again-btn" onclick="rereadQuestion()" style="background: #8b5cf6; color: white; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">🔊 Read Again</button>
+                </div>
+                <div class="question-text" id="q-text">Complete the comparison</div>
+                <div class="question-context" id="q-context">Comparatives and Superlatives</div>
+                <div class="answers-grid" id="answers">
+                    <button class="answer-btn">A</button>
+                    <button class="answer-btn">B</button>
+                    <button class="answer-btn">C</button>
+                    <button class="answer-btn">D</button>
+                </div>
+                <div class="feedback-text" id="feedback"></div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <div class="theme-emoji">🖼️</div>
+            <h1 class="title">Louvre Runner</h1>
+            <p class="subtitle">Run through the Louvre & Master French Identity!<br><em style="font-size: 0.9em; opacity: 0.8;">Courez au Louvre et Maîtrisez l'Identité!</em></p>
+
+            <div class="instructions">
+                <h3>How to Play / Comment Jouer</h3>
+                <p>🏃 <strong>RUN</strong> through the Louvre &amp; answer identity questions!</p>
+                <p>🎨 Collect berets 🖼️ Pass paintings ⚱️🗿📦 Dodge exhibits!</p>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p><strong>⌨️ Keyboard:</strong></p>
+                    <p>SPACE = Jump | A B C D = Answer questions</p>
+                </div>
+
+                <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p><strong>🎮 Xbox Controller:</strong></p>
+                    <p>RT/LT = Jump | X Y A B = Answer questions</p>
+                </div>
+
+                <p style="margin-top: 1rem;">✅ Correct = +1 Life | Complete 3 levels to win!</p>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">Allons-y! 🇫🇷</button>
+        </div>
+
+        <div id="gameover-screen">
+            <div class="result-icon">💔</div>
+            <h1 class="title">Game Over!</h1>
+            <p class="subtitle">You ran out of lives<br><em style="opacity: 0.8;">Vous n'avez plus de vies</em></p>
+            <div class="stats">
+                <p>You reached Level / Niveau atteint: <span id="final-level">1</span></p>
+                <p>Final Score / Score final: <span id="final-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Réessayer! 🔄</button>
+        </div>
+
+        <div id="win-screen">
+            <div class="result-icon">🏆</div>
+            <h1 class="title">Félicitations!</h1>
+            <p class="subtitle">You completed Louvre Runner!<br><em style="opacity: 0.8;">Vous avez terminé Louvre Runner!</em></p>
+            <div class="stats">
+                <p>🌟 All 3 levels complete! / Les 3 niveaux terminés!</p>
+                <p>🎨 Berets: <span id="win-collectibles">0</span></p>
+                <p>⭐ Score final: <span id="win-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Rejouer! 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let gameRunning = false;
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let distance = 0;
+        let checkpointDistance = 22000;
+        let gameSpeed = 4;
+        let baseSpeed = 4;
+        let isSpeakingFeedback = false;
+
+        // Collectibles
+        let collectibles = [];
+        let collectibleCount = 0;
+
+        // Power-ups
+        let powerUps = [];
+        let isInvincible = false;
+        let invincibleTimer = 0;
+
+        // Player
+        let player = {
+            x: 100,
+            y: 0,
+            width: 50,
+            height: 70,
+            velocityY: 0,
+            jumping: false,
+            grounded: true
+        };
+
+        // Physics
+        const gravity = 0.8;
+        const jumpForce = -16;
+
+        // Obstacles
+        let obstacles = [];
+        let obstacleTimer = 0;
+
+        // Background
+        let bgOffset = 0;
+        let paintings = [];
+
+        // French Identity questions - comparatives, superlatives, personality
+        const questions = [
+            // Comparatives - plus...que
+            {
+                text: "Marie est ___ grande ___ Pierre.",
+                context: "Comparative: taller than",
+                answers: ["plus...que", "moins...que", "aussi...que", "le plus"],
+                correct: 0,
+                explanation: "'Plus...que' means 'more...than'. Marie is taller THAN Pierre."
+            },
+            {
+                text: "Translate: 'He is taller than me'",
+                context: "Comparative with 'plus'",
+                answers: ["Il est plus grand que moi", "Il est moins grand que moi", "Il est aussi grand que moi", "Il est le plus grand"],
+                correct: 0,
+                explanation: "'Plus grand que moi' = taller than me. 'Plus' = more, 'que' = than."
+            },
+            {
+                text: "Elle est ___ intelligente que son frère.",
+                context: "Fill in: more intelligent",
+                answers: ["plus", "moins", "aussi", "très"],
+                correct: 0,
+                explanation: "'Plus intelligente' = more intelligent. Add 'que' for comparison."
+            },
+            // Comparatives - moins...que
+            {
+                text: "Mon chien est ___ méchant ___ ton chat.",
+                context: "Comparative: less mean than",
+                answers: ["moins...que", "plus...que", "aussi...que", "le moins"],
+                correct: 0,
+                explanation: "'Moins...que' = less...than. Less mean than your cat."
+            },
+            {
+                text: "Translate: 'She is less shy than him'",
+                context: "Comparative with 'moins'",
+                answers: ["Elle est moins timide que lui", "Elle est plus timide que lui", "Elle est aussi timide que lui", "Elle est la moins timide"],
+                correct: 0,
+                explanation: "'Moins timide' = less shy. 'Que lui' = than him."
+            },
+            // Comparatives - aussi...que
+            {
+                text: "Je suis ___ sportif ___ toi.",
+                context: "Comparative: as sporty as",
+                answers: ["aussi...que", "plus...que", "moins...que", "le plus"],
+                correct: 0,
+                explanation: "'Aussi...que' = as...as. I am as sporty as you."
+            },
+            {
+                text: "Translate: 'They are as funny as us'",
+                context: "Comparative equality",
+                answers: ["Ils sont aussi drôles que nous", "Ils sont plus drôles que nous", "Ils sont moins drôles que nous", "Ils sont les plus drôles"],
+                correct: 0,
+                explanation: "'Aussi drôles que' = as funny as. Note: 'drôles' agrees with 'ils'."
+            },
+            // Superlatives
+            {
+                text: "C'est ___ beau garçon de la classe.",
+                context: "Superlative: the most handsome",
+                answers: ["le plus", "la plus", "les plus", "plus"],
+                correct: 0,
+                explanation: "'Le plus beau' = the most handsome. Use 'le' for masculine singular."
+            },
+            {
+                text: "Elle est ___ intelligente de l'école.",
+                context: "Superlative: the most intelligent",
+                answers: ["la plus", "le plus", "les plus", "plus"],
+                correct: 0,
+                explanation: "'La plus intelligente' = the most intelligent. Use 'la' for feminine."
+            },
+            {
+                text: "Translate: 'She is the tallest in the family'",
+                context: "Superlative with feminine",
+                answers: ["Elle est la plus grande de la famille", "Elle est le plus grande de la famille", "Elle est plus grande de la famille", "Elle est la grande de la famille"],
+                correct: 0,
+                explanation: "'La plus grande' needs feminine 'la' to match 'elle'."
+            },
+            // Personality adjectives
+            {
+                text: "What does 'bavard' mean?",
+                context: "Personality vocabulary",
+                answers: ["Talkative", "Shy", "Lazy", "Generous"],
+                correct: 0,
+                explanation: "'Bavard/bavarde' means talkative. 'Il est très bavard' = He talks a lot."
+            },
+            {
+                text: "Translate: 'She is hardworking'",
+                context: "Feminine adjective agreement",
+                answers: ["Elle est travailleuse", "Elle est travailleur", "Elle est paresseuse", "Elle est généreuse"],
+                correct: 0,
+                explanation: "'Travailleur' becomes 'travailleuse' for feminine. Hardworking = travailleur/euse."
+            },
+            {
+                text: "What is the feminine of 'généreux'?",
+                context: "Adjective agreement -eux → -euse",
+                answers: ["généreuse", "généreux", "générale", "gentille"],
+                correct: 0,
+                explanation: "Adjectives ending in -eux change to -euse for feminine: généreux → généreuse."
+            },
+            {
+                text: "How do you say 'confident' in French?",
+                context: "Personality adjective",
+                answers: ["confiant(e)", "timide", "paresseux/euse", "égoïste"],
+                correct: 0,
+                explanation: "'Confiant' (m) / 'confiante' (f) means confident."
+            },
+            // Modal verbs
+            {
+                text: "Complete: 'Je ___ parler français.'",
+                context: "Modal verb: I can",
+                answers: ["peux", "veux", "dois", "sais"],
+                correct: 0,
+                explanation: "'Je peux' = I can (ability). 'Pouvoir' = to be able to."
+            },
+            {
+                text: "Translate: 'I want to be a doctor'",
+                context: "Modal verb: vouloir",
+                answers: ["Je veux être médecin", "Je peux être médecin", "Je dois être médecin", "Je sais être médecin"],
+                correct: 0,
+                explanation: "'Vouloir' = to want. 'Je veux être' = I want to be."
+            },
+            {
+                text: "What does 'Je dois travailler' mean?",
+                context: "Modal verb: devoir",
+                answers: ["I must work", "I can work", "I want to work", "I know how to work"],
+                correct: 0,
+                explanation: "'Devoir' = must/have to. 'Je dois travailler' = I must work."
+            },
+            {
+                text: "'Je sais nager' means...",
+                context: "Modal verb: savoir",
+                answers: ["I know how to swim", "I can swim (allowed)", "I want to swim", "I must swim"],
+                correct: 0,
+                explanation: "'Savoir' + infinitive = know how to do something (skill)."
+            },
+            // Physical descriptions
+            {
+                text: "Translate: 'I have blue eyes'",
+                context: "Physical description with avoir",
+                answers: ["J'ai les yeux bleus", "Je suis les yeux bleus", "J'ai des yeux bleus", "Mes yeux sont bleu"],
+                correct: 0,
+                explanation: "Use 'avoir' for body parts: J'ai les yeux bleus, j'ai les cheveux bruns."
+            },
+            {
+                text: "How do you say 'curly hair'?",
+                context: "Physical description vocabulary",
+                answers: ["les cheveux frisés", "les cheveux raides", "les cheveux longs", "les cheveux courts"],
+                correct: 0,
+                explanation: "'Frisés' = curly, 'raides' = straight, 'longs' = long, 'courts' = short."
+            }
+        ];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 150 - player.height;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        function generatePaintings() {
+            paintings = [];
+            const frames = ['🖼️', '🎨', '🌄', '👤', '🌻', '🌙'];
+            for (let i = 0; i < 8; i++) {
+                paintings.push({
+                    x: i * 250,
+                    width: 80 + Math.random() * 40,
+                    height: 60 + Math.random() * 40,
+                    frame: frames[Math.floor(Math.random() * frames.length)],
+                    y: 100 + Math.random() * 100
+                });
+            }
+        }
+
+        function drawBackground() {
+            // Museum wall gradient
+            const wallGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.7);
+            wallGradient.addColorStop(0, '#f5f0e8');
+            wallGradient.addColorStop(1, '#e8e0d5');
+            ctx.fillStyle = wallGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height * 0.7);
+
+            // Decorative molding at top
+            ctx.fillStyle = '#d4c8b8';
+            ctx.fillRect(0, 0, canvas.width, 30);
+            ctx.fillStyle = '#c4b8a8';
+            ctx.fillRect(0, 25, canvas.width, 5);
+
+            // Paintings on wall
+            paintings.forEach((painting) => {
+                const px = ((painting.x - bgOffset * 0.5) % (canvas.width + 400)) - 100;
+
+                // Frame
+                ctx.fillStyle = '#8B4513';
+                ctx.fillRect(px - 5, painting.y - 5, painting.width + 10, painting.height + 10);
+
+                // Canvas
+                ctx.fillStyle = '#f5f5dc';
+                ctx.fillRect(px, painting.y, painting.width, painting.height);
+
+                // Painting emoji
+                ctx.font = `${Math.min(painting.width, painting.height) - 10}px Arial`;
+                ctx.fillText(painting.frame, px + 10, painting.y + painting.height - 10);
+            });
+
+            // Spotlights on ceiling
+            for (let i = 0; i < 6; i++) {
+                const spotX = ((i * 200 - bgOffset * 0.3) % (canvas.width + 200));
+                ctx.fillStyle = '#2d2d2d';
+                ctx.beginPath();
+                ctx.arc(spotX, 40, 10, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Light beam
+                ctx.fillStyle = 'rgba(255, 255, 200, 0.1)';
+                ctx.beginPath();
+                ctx.moveTo(spotX - 5, 50);
+                ctx.lineTo(spotX - 40, canvas.height * 0.6);
+                ctx.lineTo(spotX + 40, canvas.height * 0.6);
+                ctx.lineTo(spotX + 5, 50);
+                ctx.fill();
+            }
+
+            // Museum floor
+            ctx.fillStyle = '#3d2914';
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 150);
+
+            // Parquet floor pattern
+            ctx.fillStyle = '#5d3d1a';
+            for (let x = -bgOffset % 80; x < canvas.width; x += 80) {
+                for (let y = canvas.height - 140; y < canvas.height; y += 40) {
+                    ctx.fillRect(x, y, 75, 35);
+                }
+            }
+            ctx.fillStyle = '#4d3014';
+            for (let x = -bgOffset % 80 + 40; x < canvas.width; x += 80) {
+                for (let y = canvas.height - 120; y < canvas.height; y += 40) {
+                    ctx.fillRect(x, y, 75, 35);
+                }
+            }
+
+            // Red velvet rope posts
+            for (let i = 0; i < 4; i++) {
+                const postX = ((i * 300 - bgOffset * 0.8) % (canvas.width + 400)) - 50;
+                // Post
+                ctx.fillStyle = '#FFD700';
+                ctx.fillRect(postX, canvas.height - 200, 8, 60);
+                ctx.beginPath();
+                ctx.arc(postX + 4, canvas.height - 205, 10, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawPlayer() {
+            // Body - art critic outfit
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(player.x, player.y + 20, player.width - 10, 35);
+
+            // Scarf
+            ctx.fillStyle = '#dc2626';
+            ctx.fillRect(player.x + 10, player.y + 18, 20, 8);
+
+            // Head
+            ctx.fillStyle = '#fcd5b8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 12, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Beret
+            ctx.fillStyle = '#1a1a2e';
+            ctx.beginPath();
+            ctx.ellipse(player.x + 20, player.y + 3, 18, 8, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 5, 12, Math.PI, 0);
+            ctx.fill();
+
+            // Glasses
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(player.x + 14, player.y + 12, 6, 0, Math.PI * 2);
+            ctx.arc(player.x + 28, player.y + 12, 6, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(player.x + 20, player.y + 12);
+            ctx.lineTo(player.x + 22, player.y + 12);
+            ctx.stroke();
+
+            // Legs
+            ctx.fillStyle = '#2d2d2d';
+            if (player.grounded) {
+                ctx.fillRect(player.x + 5, player.y + 55, 12, 15);
+                ctx.fillRect(player.x + 22, player.y + 55, 12, 15);
+            } else {
+                ctx.fillRect(player.x + 5, player.y + 50, 12, 20);
+                ctx.fillRect(player.x + 22, player.y + 50, 12, 20);
+            }
+        }
+
+        function spawnObstacle() {
+            const types = [
+                { width: 50, height: 60, emoji: '⚱️' }, // Vase
+                { width: 60, height: 50, emoji: '🗿' }, // Sculpture
+                { width: 45, height: 55, emoji: '📦' }, // Crate
+                { width: 55, height: 40, emoji: '🪑' }, // Bench
+                { width: 50, height: 70, emoji: '🧍' }, // Tourist
+                { width: 40, height: 50, emoji: '🎒' }, // Backpack
+                { width: 70, height: 35, emoji: '🛒' }, // Cart
+                { width: 45, height: 60, emoji: '🧳' }  // Luggage
+            ];
+            const type = types[Math.floor(Math.random() * types.length)];
+
+            const isDouble = Math.random() < 0.2 && level > 1;
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - type.height,
+                width: type.width,
+                height: type.height,
+                emoji: type.emoji
+            });
+
+            if (isDouble) {
+                const type2 = types[Math.floor(Math.random() * types.length)];
+                obstacles.push({
+                    x: canvas.width + 150,
+                    y: canvas.height - 150 - type2.height,
+                    width: type2.width,
+                    height: type2.height,
+                    emoji: type2.emoji
+                });
+            }
+        }
+
+        function spawnCollectible() {
+            const heights = [80, 120, 160];
+            collectibles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - heights[Math.floor(Math.random() * heights.length)],
+                collected: false
+            });
+        }
+
+        function spawnPowerUp() {
+            const types = ['shield', 'magnet', 'slow'];
+            powerUps.push({
+                x: canvas.width + 50,
+                y: canvas.height - 280,
+                type: types[Math.floor(Math.random() * types.length)],
+                collected: false
+            });
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obs => {
+                ctx.font = `${obs.height}px Arial`;
+                ctx.fillText(obs.emoji, obs.x, obs.y + obs.height - 5);
+            });
+        }
+
+        function drawCollectibles() {
+            collectibles.forEach(c => {
+                if (!c.collected) {
+                    ctx.font = '35px Arial';
+                    const bob = Math.sin(Date.now() / 200 + c.x) * 5;
+                    ctx.fillText('🎨', c.x, c.y + bob);
+                }
+            });
+        }
+
+        function drawPowerUps() {
+            powerUps.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '40px Arial';
+                    const bob = Math.sin(Date.now() / 150) * 8;
+                    let emoji = p.type === 'shield' ? '⭐' : p.type === 'magnet' ? '🧲' : '⏱️';
+                    ctx.fillText(emoji, p.x, p.y + bob);
+
+                    ctx.beginPath();
+                    ctx.arc(p.x + 20, p.y - 10, 30, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 215, 0, 0.2)';
+                    ctx.fill();
+                }
+            });
+        }
+
+        function drawCheckpoint() {
+            const checkX = checkpointDistance - distance + canvas.width;
+            if (checkX < canvas.width + 200 && checkX > -100) {
+                // Museum archway
+                ctx.fillStyle = '#8B4513';
+                ctx.fillRect(checkX, canvas.height - 300, 15, 160);
+                ctx.fillRect(checkX + 85, canvas.height - 300, 15, 160);
+                ctx.beginPath();
+                ctx.arc(checkX + 50, canvas.height - 300, 50, Math.PI, 0);
+                ctx.fill();
+
+                ctx.fillStyle = '#1d1d1f';
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText(`SALLE ${level}`, checkX + 15, canvas.height - 310);
+            }
+        }
+
+        function drawProgressBar() {
+            const barWidth = 200;
+            const barHeight = 10;
+            const barX = canvas.width / 2 - barWidth / 2;
+            const barY = 70;
+            const progress = Math.min(distance / checkpointDistance, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            ctx.fillStyle = '#8b5cf6';
+            ctx.fillRect(barX, barY, barWidth * progress, barHeight);
+
+            ctx.fillStyle = 'white';
+            ctx.font = '12px Arial';
+            ctx.fillText('🏛️', barX + barWidth - 15, barY + 10);
+        }
+
+        let collectibleSpawnTimer = 0;
+        let powerUpSpawnTimer = 0;
+        let comboCount = 0;
+        let comboTimer = 0;
+
+        function update() {
+            if (!gameRunning) return;
+
+            gameSpeed = Math.min(baseSpeed + 5, baseSpeed + (distance / 5000));
+
+            bgOffset += gameSpeed;
+            distance += gameSpeed;
+
+            if (!player.grounded) {
+                player.velocityY += gravity;
+                player.y += player.velocityY;
+
+                if (player.y >= canvas.height - 150 - player.height) {
+                    player.y = canvas.height - 150 - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                    player.jumping = false;
+                }
+            }
+
+            obstacleTimer++;
+            const obstacleFreq = Math.max(80, 180 - gameSpeed * 15);
+            if (obstacleTimer > obstacleFreq + Math.random() * 60) {
+                spawnObstacle();
+                obstacleTimer = 0;
+            }
+
+            collectibleSpawnTimer++;
+            if (collectibleSpawnTimer > 40 + Math.random() * 30) {
+                spawnCollectible();
+                collectibleSpawnTimer = 0;
+            }
+
+            powerUpSpawnTimer++;
+            if (powerUpSpawnTimer > 400 + Math.random() * 200) {
+                spawnPowerUp();
+                powerUpSpawnTimer = 0;
+            }
+
+            obstacles.forEach(obs => { obs.x -= gameSpeed; });
+            collectibles.forEach(c => { c.x -= gameSpeed; });
+            powerUps.forEach(p => { p.x -= gameSpeed; });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+            collectibles = collectibles.filter(c => c.x > -100);
+            powerUps = powerUps.filter(p => p.x > -100);
+
+            if (!isInvincible) {
+                obstacles.forEach(obs => {
+                    if (player.x < obs.x + obs.width - 10 &&
+                        player.x + player.width - 10 > obs.x &&
+                        player.y + player.height > obs.y &&
+                        player.y < obs.y + obs.height) {
+                        hitObstacle();
+                    }
+                });
+            }
+
+            collectibles.forEach(c => {
+                if (!c.collected &&
+                    player.x < c.x + 35 &&
+                    player.x + player.width > c.x &&
+                    player.y < c.y + 35 &&
+                    player.y + player.height > c.y - 20) {
+                    c.collected = true;
+                    collectibleCount++;
+                    score += 50;
+                    comboCount++;
+                    comboTimer = 60;
+
+                    if (comboCount >= 3) {
+                        score += comboCount * 20;
+                    }
+                }
+            });
+
+            powerUps.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 40 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 20 &&
+                    player.y + player.height > p.y - 30) {
+                    p.collected = true;
+                    activatePowerUp(p.type);
+                }
+            });
+
+            if (comboTimer > 0) {
+                comboTimer--;
+            } else {
+                comboCount = 0;
+            }
+
+            if (isInvincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) {
+                    isInvincible = false;
+                }
+            }
+
+            if (distance >= checkpointDistance) {
+                reachCheckpoint();
+            }
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('collectibles').textContent = collectibleCount;
+        }
+
+        function activatePowerUp(type) {
+            if (type === 'shield') {
+                isInvincible = true;
+                invincibleTimer = 180;
+            } else if (type === 'slow') {
+                gameSpeed = Math.max(3, gameSpeed - 2);
+                setTimeout(() => { gameSpeed = baseSpeed + level * 0.5; }, 3000);
+            } else if (type === 'magnet') {
+                collectibles.forEach(c => {
+                    if (!c.collected && c.x < player.x + 300) {
+                        c.x = player.x + 30;
+                        c.y = player.y + 20;
+                    }
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawCheckpoint();
+            drawCollectibles();
+            drawPowerUps();
+            drawObstacles();
+            drawPlayer();
+            drawProgressBar();
+
+            if (comboCount >= 3) {
+                ctx.fillStyle = '#FFD700';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText(`COMBO x${comboCount}!`, player.x - 20, player.y - 30);
+            }
+
+            if (isInvincible) {
+                ctx.strokeStyle = 'rgba(255, 215, 0, 0.8)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(player.x + 25, player.y + 35, 45, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.velocityY = jumpForce;
+                player.grounded = false;
+                player.jumping = true;
+            }
+        }
+
+        function hitObstacle() {
+            lives--;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                obstacles = [];
+                distance = Math.max(0, distance - 200);
+                canvas.style.filter = 'brightness(2)';
+                setTimeout(() => canvas.style.filter = 'none', 100);
+            }
+        }
+
+        function reachCheckpoint() {
+            distance = 0;
+            level++;
+
+            if (level > 3) {
+                winGame();
+                return;
+            }
+
+            checkpointDistance = 22000 + level * 2000;
+            baseSpeed = 4 + level * 0.5;
+            gameSpeed = baseSpeed;
+            document.getElementById('level').textContent = level;
+        }
+
+        // Text-to-Speech
+        function speakFeedback(text, lang, callback, isLast = false) {
+            isSpeakingFeedback = true;
+            const voices = speechSynthesis.getVoices();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 1.0;
+
+            if (lang === 'fr-FR') {
+                const frenchVoice = voices.find(v => v.lang === 'fr-FR' && v.name.includes('Google')) ||
+                                   voices.find(v => v.lang.startsWith('fr'));
+                if (frenchVoice) utterance.voice = frenchVoice;
+            } else {
+                const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                    voices.find(v => v.lang.startsWith('en-GB')) ||
+                                    voices.find(v => v.lang.startsWith('en'));
+                if (englishVoice) utterance.voice = englishVoice;
+            }
+
+            utterance.onend = () => {
+                if (isLast) isSpeakingFeedback = false;
+                if (callback) callback();
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        function readQuestionAndAnswers(questionText, answers, labels) {
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeakingFeedback) return;
+
+            speechSynthesis.cancel();
+
+            const voices = speechSynthesis.getVoices();
+            const frenchVoice = voices.find(v => v.lang === 'fr-FR' && v.name.includes('Google')) ||
+                               voices.find(v => v.lang.startsWith('fr'));
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en-GB')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+
+            const queue = [];
+
+            let cleanedQuestion = questionText.replace(/_+/g, 'blank');
+            const isTranslateToFrench = /^Translate:/i.test(cleanedQuestion);
+
+            const parts = cleanedQuestion.split(/('[^']+')/).filter(p => p);
+
+            parts.forEach(part => {
+                const isQuoted = part.startsWith("'") && part.endsWith("'");
+                const text = isQuoted ? part.slice(1, -1) : part;
+
+                if (!text.trim()) return;
+
+                let isFrenchPart;
+                if (isQuoted) {
+                    if (isTranslateToFrench) {
+                        isFrenchPart = false;
+                    } else {
+                        isFrenchPart = /^(Je |J'|Nous |Elle |Il |Tu |On |Vous |s'|se |C'est |Mon |Ma |Mes )/.test(text) ||
+                                      /[éèêëàâäùûüôöîïç]/.test(text);
+                    }
+                } else {
+                    isFrenchPart = /[éèêëàâäùûüôöîïç]/.test(text) ||
+                                  /^(Elle |Il |Je |C'est |Mon |Ma )/.test(text);
+                }
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = isFrenchPart ? 'fr-FR' : 'en-GB';
+                utterance.rate = 0.95;
+                if (isFrenchPart && frenchVoice) {
+                    utterance.voice = frenchVoice;
+                } else if (englishVoice) {
+                    utterance.voice = englishVoice;
+                }
+                queue.push(utterance);
+            });
+
+            answers.forEach((ans, i) => {
+                const labelUtterance = new SpeechSynthesisUtterance(labels[i]);
+                labelUtterance.lang = 'en-GB';
+                labelUtterance.rate = 1.0;
+                if (englishVoice) labelUtterance.voice = englishVoice;
+                queue.push(labelUtterance);
+
+                const isFrench = /^(Je |J'|Nous |Elle |Il |Tu |On |Vous |s'|se |C'est |plus|moins|aussi|le |la |les )/.test(ans.text) ||
+                               /[éèêëàâäùûüôöîïç]/.test(ans.text) ||
+                               /\.\.\./.test(ans.text);
+
+                const ansUtterance = new SpeechSynthesisUtterance(ans.text.replace(/\.\.\./g, ' '));
+                ansUtterance.lang = isFrench ? 'fr-FR' : 'en-GB';
+                ansUtterance.rate = 0.85;
+                if (isFrench && frenchVoice) {
+                    ansUtterance.voice = frenchVoice;
+                } else if (englishVoice) {
+                    ansUtterance.voice = englishVoice;
+                }
+                queue.push(ansUtterance);
+            });
+
+            let i = 0;
+            function playNext() {
+                if (i < queue.length) {
+                    queue[i].onend = playNext;
+                    speechSynthesis.speak(queue[i]);
+                    i++;
+                }
+            }
+            playNext();
+        }
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.getVoices();
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        let questionCount = 0;
+        let currentQuestion = null;
+        let currentAnswers = null;
+        const answerLabels = ['A', 'B', 'C', 'D'];
+
+        function rereadQuestion() {
+            if (currentQuestion && currentAnswers) {
+                readQuestionAndAnswers(currentQuestion.text, currentAnswers, answerLabels);
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[questionCount % questions.length];
+            currentQuestion = question;
+
+            document.getElementById('checkpoint-num').textContent = questionCount + 1;
+            document.getElementById('q-text').textContent = question.text;
+            document.getElementById('q-context').textContent = question.context;
+
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+
+            const shuffledAnswers = question.answers.map((ans, i) => ({ text: ans, isCorrect: i === question.correct }));
+            shuffledAnswers.sort(() => Math.random() - 0.5);
+            currentAnswers = shuffledAnswers;
+
+            const labels = ['A', 'B', 'C', 'D'];
+            shuffledAnswers.forEach((ans, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.onclick = () => handleAnswer(btn, ans.isCorrect, question.explanation);
+                btn.innerHTML = `<strong>${labels[i]}</strong> ${ans.text}`;
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback-text';
+
+            readQuestionAndAnswers(question.text, shuffledAnswers, labels);
+        }
+
+        function handleAnswer(btn, isCorrect, explanation) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('feedback');
+            const correctAnswer = questions[questionCount % questions.length].answers[questions[questionCount % questions.length].correct];
+
+            speechSynthesis.cancel();
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                lives++;
+                score += 200;
+                document.getElementById('lives').textContent = lives;
+                document.getElementById('score').textContent = score;
+                feedback.textContent = '✅ +1 ❤️ +200pts!';
+                feedback.className = 'feedback-text correct';
+
+                speakFeedback("Correct! Well done!", 'en-GB', () => {
+                    questionCount++;
+                    showQuestion();
+                }, true);
+            } else {
+                btn.classList.add('wrong');
+                feedback.textContent = '❌ Non! ' + correctAnswer;
+                feedback.className = 'feedback-text wrong';
+
+                const isFrench = /^(Je |J'|Nous |Elle |Il |Tu |On |Vous |s'|se |C'est |plus|moins|aussi|le |la |les )/.test(correctAnswer) ||
+                               /[éèêëàâäùûüôöîïç]/.test(correctAnswer);
+
+                speakFeedback("Wrong! The answer is:", 'en-GB', () => {
+                    speakFeedback(correctAnswer.replace(/\.\.\./g, ' '), isFrench ? 'fr-FR' : 'en-GB', () => {
+                        questionCount++;
+                        showQuestion();
+                    }, true);
+                });
+            }
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'flex';
+            document.getElementById('final-level').textContent = level;
+            document.getElementById('final-score').textContent = score;
+        }
+
+        function winGame() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'flex';
+            document.getElementById('win-score').textContent = score;
+            document.getElementById('win-collectibles').textContent = collectibleCount;
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('question-overlay').style.display = 'block';
+
+            level = 1;
+            score = 0;
+            lives = 3;
+            distance = 0;
+            checkpointDistance = 22000;
+            gameSpeed = 4;
+            baseSpeed = 4;
+            isSpeakingFeedback = false;
+            obstacles = [];
+            collectibles = [];
+            powerUps = [];
+            collectibleCount = 0;
+            isInvincible = false;
+            invincibleTimer = 0;
+            comboCount = 0;
+            comboTimer = 0;
+            obstacleTimer = 0;
+            collectibleSpawnTimer = 0;
+            powerUpSpawnTimer = 0;
+            questionCount = 0;
+
+            document.getElementById('level').textContent = level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            document.getElementById('collectibles').textContent = collectibleCount;
+
+            player.y = canvas.height - 150 - player.height;
+            player.velocityY = 0;
+            player.grounded = true;
+
+            generatePaintings();
+            gameRunning = true;
+            showQuestion();
+        }
+
+        // Gamepad support
+        let gamepadConnected = false;
+        let lastButtonStates = {};
+
+        window.addEventListener('gamepadconnected', (e) => {
+            console.log('Gamepad connected:', e.gamepad.id);
+            gamepadConnected = true;
+        });
+
+        window.addEventListener('gamepaddisconnected', (e) => {
+            console.log('Gamepad disconnected');
+            gamepadConnected = false;
+        });
+
+        function pollGamepad() {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads) return;
+
+            for (const gamepad of gamepads) {
+                if (!gamepad) continue;
+
+                const buttons = gamepad.buttons;
+
+                if ((buttons[7]?.pressed || buttons[6]?.pressed) &&
+                    !lastButtonStates['jump']) {
+                    jump();
+                    lastButtonStates['jump'] = true;
+                } else if (!buttons[7]?.pressed && !buttons[6]?.pressed) {
+                    lastButtonStates['jump'] = false;
+                }
+
+                const answerMap = [
+                    { btn: 2, answer: 0, key: 'X' },
+                    { btn: 3, answer: 1, key: 'Y' },
+                    { btn: 0, answer: 2, key: 'A' },
+                    { btn: 1, answer: 3, key: 'B' }
+                ];
+
+                answerMap.forEach(({ btn, answer, key }) => {
+                    if (buttons[btn]?.pressed && !lastButtonStates[key]) {
+                        const answerBtns = document.querySelectorAll('.answer-btn');
+                        if (answerBtns[answer] && !answerBtns[answer].disabled) {
+                            answerBtns[answer].click();
+                        }
+                        lastButtonStates[key] = true;
+                    } else if (!buttons[btn]?.pressed) {
+                        lastButtonStates[key] = false;
+                    }
+                });
+            }
+
+            requestAnimationFrame(pollGamepad);
+        }
+
+        pollGamepad();
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+
+            const keyMap = { 'KeyA': 0, 'KeyB': 1, 'KeyC': 2, 'KeyD': 3 };
+            if (keyMap.hasOwnProperty(e.code)) {
+                const btns = document.querySelectorAll('.answer-btn');
+                if (btns[keyMap[e.code]] && !btns[keyMap[e.code]].disabled) {
+                    btns[keyMap[e.code]].click();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            jump();
+        });
+
+        document.getElementById('jump-btn').addEventListener('click', jump);
+        document.getElementById('jump-btn').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            jump();
+        });
+
+        // Initialize
+        resizeCanvas();
+        generatePaintings();
+        gameLoop();
+    </script>
+</body>
+</html>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 8 French - STM College Curriculum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            padding: 5rem 2rem 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.003em;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .term-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .term-navigation a {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .term-navigation a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin: 5rem 0;
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1d1d1f;
+            letter-spacing: -0.003em;
+        }
+
+        .section p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .skills-overview {
+            margin-top: 3rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+        }
+
+        .skill-item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #6366f1;
+        }
+
+        .skill-item p {
+            font-size: 1rem;
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .term-section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .week-section {
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #6366f1;
+        }
+
+        .week-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #6366f1;
+            margin-bottom: 1.5rem;
+        }
+
+        .week-content ul {
+            margin-left: 2rem;
+            color: #1d1d1f;
+        }
+
+        .week-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        .vocab-section {
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-left: 4px solid #6366f1;
+        }
+
+        .vocab-section h4 {
+            color: #6366f1;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .vocab-section p {
+            color: #1d1d1f;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .assessment-heading {
+            position: relative;
+            cursor: help;
+        }
+
+        .assessment-answer {
+            display: none;
+        }
+
+        .assessment-heading:hover .assessment-answer {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>French Year 8 Curriculum</h1>
+            <p>Comprehensive weekly breakdown of the Year 8 French curriculum - advancing to complex grammar, past tense narratives, and deeper cultural exploration</p>
+        </div>
+
+        <div class="term-navigation">
+            <a href="#autumn-term">🍂 Autumn Term</a>
+            <a href="#spring-term">🌸 Spring Term</a>
+            <a href="#summer-term">☀️ Summer Term</a>
+            <a href="#ai-tutor">👨‍🏫 AI Tutor - Monsieur Rousseau</a>
+            <a href="#games-programmer">🎮 Games - Madame Pixel</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Year 8 French Journey</h2>
+            <p>Year 8 French builds significantly on Year 7 foundations, introducing the perfect and imperfect tenses, reflexive verbs, and more complex sentence structures. Students engage with authentic French texts, develop extended speaking and writing skills, and explore Francophone culture through film, music, and literature.</p>
+
+            <div class="skills-overview">
+                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: #1d1d1f;">Key Skills Development</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <h3>Past Tense Mastery</h3>
+                        <p>Confidently using passé composé and imparfait to narrate events, describe past states, and tell stories with increasing sophistication.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Extended Communication</h3>
+                        <p>Expressing complex ideas through longer spoken and written passages, using connectives and multi-clause sentences.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Reflexive Verbs</h3>
+                        <p>Mastering daily routine verbs with reflexive pronouns, understanding reciprocal actions and idiomatic expressions.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Cultural Depth</h3>
+                        <p>Exploring Francophone countries, French cinema, music, and contemporary social issues through authentic materials.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Comparative Structures</h3>
+                        <p>Making detailed comparisons using comparative and superlative forms, expressing preferences with nuanced reasoning.</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Authentic Interaction</h3>
+                        <p>Engaging with native speaker materials, understanding different registers, and responding to unpredictable questions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="autumn-term" class="term-section">
+            <h2>🍂 Autumn Term - Daily Life & Holidays</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Ma Routine Quotidienne (My Daily Routine)</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Describing daily routine using reflexive verbs (se réveiller, se lever, se laver, s'habiller, se coucher)</li>
+                        <li>Telling time with precision, including 24-hour clock format</li>
+                        <li>Using time expressions and frequency adverbs (d'habitude, toujours, souvent, parfois, jamais)</li>
+                        <li>Discussing school day schedules and after-school activities in detail</li>
+                        <li>Comparing routines on weekdays versus weekends</li>
+                        <li>Introducing perfect tense (passé composé) with avoir for routine activities</li>
+                        <li>Understanding French vs UK daily routine differences</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Vocabulaire Clé (Key Vocabulary)</h4>
+                            <p><strong>Reflexive Verbs:</strong> je me réveille (I wake up), tu te lèves (you get up), il se lave (he washes), elle s'habille (she gets dressed), nous nous préparons (we prepare ourselves), vous vous dépêchez (you hurry), ils se couchent (they go to bed)<br><br>
+                            <strong>Time Expressions:</strong> le matin (morning), l'après-midi (afternoon), le soir (evening), tôt (early), tard (late), d'abord (first), ensuite (then), après (after), finalement (finally)<br><br>
+                            <strong>Activities:</strong> prendre le petit déjeuner (have breakfast), se brosser les dents (brush teeth), partir à l'école (leave for school), rentrer à la maison (return home)</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🗼 Paris Parkour</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Run through Paris answering French verb conjugation questions! Earn lives by getting answers right!</p>
+                            <a href="../games/paris_parkour_french_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                    <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                        I can now answer... 🤔
+                        <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                            Reflexive verbs describe actions you do to yourself. In French, you use reflexive pronouns (me, te, se, nous, vous, se) before the verb. For example: "Je me réveille" means "I wake (myself) up", and "Elle s'habille" means "She gets (herself) dressed". The reflexive pronoun matches the subject and shows the action reflects back to the person doing it.
+                        </span>
+                    </h3>
+
+                    <ul style="color: #be185d; margin-left: 1.5rem;">
+                        <li>"Comment utiliser les verbes réfléchis?" (How do I use reflexive verbs?)</li>
+                        <li>"Quelle est la différence entre 'le matin' et 'le soir'?" (What's the difference between morning and evening?)</li>
+                        <li>"Comment décrire ma routine avec précision?" (How do I describe my routine with precision?)</li>
+                        <li>"Pourquoi les Français utilisent l'heure de 24 heures?" (Why do French people use 24-hour time?)</li>
+                        <li>"Comment comparer ma routine française et anglaise?" (How do I compare French and English routines?)</li>
+                        <li>"Qu'est-ce que le passé composé et quand l'utiliser?" (What is passé composé and when do I use it?)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Les Vacances (Holidays)</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Describing past holidays using passé composé with avoir and être</li>
+                        <li>Understanding which verbs take être in perfect tense (DR & MRS VANDERTRAMP)</li>
+                        <li>Agreement of past participles with être verbs</li>
+                        <li>Holiday destinations, accommodation types, and transport methods</li>
+                        <li>Weather in past tense (il faisait beau/chaud/froid)</li>
+                        <li>Expressing opinions about holiday experiences with justifications</li>
+                        <li>Comparing different types of holidays (beach, mountains, city breaks)</li>
+                        <li>Introduction to near future tense for holiday plans</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Vocabulaire Clé</h4>
+                            <p><strong>Perfect Tense Verbs:</strong> je suis allé(e) (I went), j'ai visité (I visited), j'ai mangé (I ate), nous sommes partis (we left), ils sont arrivés (they arrived), elle est restée (she stayed)<br><br>
+                            <strong>Holiday Places:</strong> la plage (beach), la montagne (mountain), la campagne (countryside), la mer (sea), l'hôtel (hotel), le camping (campsite), l'appartement (apartment)<br><br>
+                            <strong>Activities:</strong> faire du ski (ski), nager dans la mer (swim in sea), visiter des monuments (visit monuments), prendre des photos (take photos), goûter la cuisine locale (taste local food)</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🏖️ Côte d'Azur Runner</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Beach parkour adventure! Practice passé composé and DR & MRS VANDERTRAMP verbs while running along the French Riviera!</p>
+                            <a href="../games/cote_azur_runner_french_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                    <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                        I can now answer... 🤔
+                        <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                            Use passé composé (perfect tense) to describe completed actions in the past. Most verbs use 'avoir' + past participle: "J'ai mangé" (I ate). But 17 verbs use 'être' instead (DR & MRS VANDERTRAMP): "Je suis allé" (I went). With être verbs, the past participle must agree with the subject: "Elle est allée" (she went - feminine ending), "Nous sommes allés" (we went - masculine/mixed plural).
+                        </span>
+                    </h3>
+
+                    <ul style="color: #be185d; margin-left: 1.5rem;">
+                        <li>"Comment former le passé composé?" (How do I form the perfect tense?)</li>
+                        <li>"Quels verbes utilisent 'être' au passé composé?" (Which verbs use être in perfect tense?)</li>
+                        <li>"Qu'est-ce que DR & MRS VANDERTRAMP?" (What is DR & MRS VANDERTRAMP?)</li>
+                        <li>"Comment faire l'accord avec 'être'?" (How do I make agreement with être?)</li>
+                        <li>"Comment décrire mes dernières vacances?" (How do I describe my last holiday?)</li>
+                        <li>"Quelle est la différence entre 'j'ai été' et 'je suis allé'?" (What's the difference between I was and I went?)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="spring-term" class="term-section">
+            <h2>🌸 Spring Term - Identity & Lifestyle</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: Mon Identité (My Identity)</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Detailed physical descriptions using avoir and être with extended adjectives</li>
+                        <li>Describing personality traits in depth with examples</li>
+                        <li>Discussing relationships with family and friends</li>
+                        <li>Talking about personal interests, passions, and ambitions</li>
+                        <li>Using comparatives and superlatives (plus...que, moins...que, le/la plus...)</li>
+                        <li>Expressing what makes you unique and different</li>
+                        <li>Understanding cultural identity in France and Francophone countries</li>
+                        <li>Modal verbs in context (pouvoir, vouloir, devoir, savoir)</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Vocabulaire Clé</h4>
+                            <p><strong>Physical Description:</strong> j'ai les cheveux longs/courts/frisés/raides (I have long/short/curly/straight hair), les yeux marron/verts/bleus (brown/green/blue eyes), je suis grand(e)/petit(e)/de taille moyenne (tall/short/average height)<br><br>
+                            <strong>Personality:</strong> confiant(e) (confident), timide (shy), bavard(e) (talkative), travailleur/travailleuse (hardworking), paresseux/paresseuse (lazy), généreux/généreuse (generous), égoïste (selfish)<br><br>
+                            <strong>Comparatives:</strong> plus grand que (taller than), moins timide que (less shy than), aussi sportif que (as sporty as), le plus intelligent (the most intelligent)</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🖼️ Louvre Runner</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Run through the Louvre museum mastering comparatives, superlatives, and personality descriptions!</p>
+                            <a href="../games/french_identity_creator_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                    <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                        I can now answer... 🤔
+                        <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                            Comparatives compare two things: "Je suis plus grand que mon frère" (I'm taller than my brother). Use plus (more), moins (less), or aussi (as). Superlatives describe the most/least of something: "Je suis le plus grand de ma famille" (I'm the tallest in my family). Remember to make adjectives agree: "Elle est la plus intelligente" (she's the most intelligent - feminine form).
+                        </span>
+                    </h3>
+
+                    <ul style="color: #be185d; margin-left: 1.5rem;">
+                        <li>"Comment utiliser les comparatifs et superlatifs?" (How do I use comparatives and superlatives?)</li>
+                        <li>"Comment décrire ma personnalité en détail?" (How do I describe my personality in detail?)</li>
+                        <li>"Quels sont les verbes modaux importants?" (What are the important modal verbs?)</li>
+                        <li>"Comment exprimer ce qui me rend unique?" (How do I express what makes me unique?)</li>
+                        <li>"Qu'est-ce que l'identité francophone?" (What is Francophone identity?)</li>
+                        <li>"Comment parler de mes ambitions en français?" (How do I talk about my ambitions in French?)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: Le Mode de Vie (Lifestyle)</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Discussing healthy vs unhealthy lifestyles with complex reasoning</li>
+                        <li>Food and nutrition - expressing food preferences and dietary requirements</li>
+                        <li>Exercise and sports - frequency, benefits, and personal experiences</li>
+                        <li>Understanding the partitive article (du, de la, de l', des)</li>
+                        <li>Negative constructions (ne...jamais, ne...rien, ne...personne, ne...plus)</li>
+                        <li>Using 'il faut' and 'on doit' to give advice</li>
+                        <li>Discussing social issues: stress, social media, screen time</li>
+                        <li>Comparing French and UK attitudes to health and lifestyle</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Vocabulaire Clé</h4>
+                            <p><strong>Health:</strong> en bonne santé (healthy), malsain (unhealthy), la santé (health), faire de l'exercice (exercise), manger équilibré (eat balanced), dormir suffisamment (sleep enough), éviter (avoid)<br><br>
+                            <strong>Food:</strong> les légumes (vegetables), les fruits (fruit), la viande (meat), le poisson (fish), les produits laitiers (dairy), les sucreries (sweets), gras/grasse (fatty), nutritif/nutritive (nutritious)<br><br>
+                            <strong>Partitive:</strong> je mange du pain (some bread), de la salade (some salad), de l'eau (some water), des légumes (some vegetables), pas de viande (no meat)</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🥗 French Lifestyle Coach</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Make healthy lifestyle choices in French and learn to give advice using il faut and on doit!</p>
+                            <a href="../games/french_lifestyle_coach_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                    <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                        I can now answer... 🤔
+                        <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                            The partitive article means "some" or "any" in French. Use: du (masculine), de la (feminine), de l' (before vowels), des (plural). Examples: "Je mange du pain" (some bread), "Elle boit de l'eau" (some water). In negatives, du/de la/des all become "de": "Je ne mange pas de viande" (I don't eat any meat). The partitive expresses an unspecified quantity.
+                        </span>
+                    </h3>
+
+                    <ul style="color: #be185d; margin-left: 1.5rem;">
+                        <li>"Comment utiliser l'article partitif?" (How do I use the partitive article?)</li>
+                        <li>"Quelle est la différence entre 'ne...pas' et 'ne...jamais'?" (What's the difference between ne...pas and ne...jamais?)</li>
+                        <li>"Comment donner des conseils en français?" (How do I give advice in French?)</li>
+                        <li>"Comment parler d'un mode de vie sain?" (How do I talk about a healthy lifestyle?)</li>
+                        <li>"Qu'est-ce que les Français pensent de la santé?" (What do French people think about health?)</li>
+                        <li>"Comment exprimer mes habitudes alimentaires?" (How do I express my eating habits?)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="summer-term" class="term-section">
+            <h2>☀️ Summer Term - Technology & Future</h2>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 1-7: La Technologie et les Médias (Technology and Media)</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Discussing technology use, advantages and disadvantages</li>
+                        <li>Social media - benefits, risks, and online safety</li>
+                        <li>Using depuis (for/since) to talk about how long you've done something</li>
+                        <li>Expressing frequency and duration with complex time expressions</li>
+                        <li>Conditional tense introduction (je voudrais, j'aimerais) for polite requests</li>
+                        <li>Discussing future technology and predictions</li>
+                        <li>Debating advantages vs disadvantages with structured arguments</li>
+                        <li>Understanding French attitudes to technology and privacy</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Vocabulaire Clé</h4>
+                            <p><strong>Technology:</strong> le portable (mobile phone), l'ordinateur (computer), la tablette (tablet), les réseaux sociaux (social media), l'application (app), télécharger (download), envoyer un message (send a message)<br><br>
+                            <strong>Time Expressions:</strong> depuis (for/since), pendant (during/for), il y a (ago), ça fait...que (it's been...that), toute la journée (all day), plusieurs heures (several hours)<br><br>
+                            <strong>Opinions:</strong> à mon avis (in my opinion), d'un côté...de l'autre côté (on one hand...on the other hand), d'abord (firstly), de plus (moreover), cependant (however), en conclusion (in conclusion)</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">📱 French Tech Debater</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Practice structured debates in French about technology advantages and disadvantages!</p>
+                            <a href="../games/french_tech_debate_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                    <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                        I can now answer... 🤔
+                        <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                            Use 'depuis' to say how long something has been happening that still continues: "J'utilise mon portable depuis trois ans" (I've been using my phone for three years - and still do). Use 'pendant' for a completed duration: "J'ai joué pendant deux heures" (I played for two hours - finished now). Use 'il y a' for time ago: "J'ai acheté mon portable il y a un an" (I bought my phone a year ago).
+                        </span>
+                    </h3>
+
+                    <ul style="color: #be185d; margin-left: 1.5rem;">
+                        <li>"Comment utiliser 'depuis', 'pendant' et 'il y a'?" (How do I use depuis, pendant, and il y a?)</li>
+                        <li>"Comment structurer un débat en français?" (How do I structure a debate in French?)</li>
+                        <li>"Quels sont les avantages et inconvénients de la technologie?" (What are the advantages and disadvantages of technology?)</li>
+                        <li>"Comment exprimer une demande polie?" (How do I make a polite request?)</li>
+                        <li>"Comment parler de mes habitudes numériques?" (How do I talk about my digital habits?)</li>
+                        <li>"Qu'est-ce que les Français pensent des réseaux sociaux?" (What do French people think about social media?)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <div class="week-title">Weeks 8-14: L'Avenir et les Ambitions (The Future and Ambitions)</div>
+                <div class="week-content">
+                    <ul>
+                        <li>Future tense formation and usage (je serai, j'aurai, je ferai)</li>
+                        <li>Discussing future career ambitions and study plans</li>
+                        <li>Expressing hopes, dreams, and goals with complex reasoning</li>
+                        <li>Understanding French education system post-16</li>
+                        <li>Conditional tense for hypothetical situations (si + imparfait + conditional)</li>
+                        <li>Discussing global issues: environment, equality, sustainability</li>
+                        <li>Year 8 comprehensive review of all tenses and structures</li>
+                        <li>Extended writing and speaking: My future self presentation</li>
+                    </ul>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div class="vocab-section">
+                            <h4>Vocabulaire Clé</h4>
+                            <p><strong>Future Tense:</strong> je serai (I will be), j'aurai (I will have), je ferai (I will do), j'irai (I will go), je pourrai (I will be able to), je travaillerai (I will work), je voyagerai (I will travel)<br><br>
+                            <strong>Careers:</strong> médecin (doctor), professeur (teacher), ingénieur (engineer), avocat(e) (lawyer), scientifique (scientist), artiste (artist), entrepreneur (entrepreneur)<br><br>
+                            <strong>Ambitions:</strong> j'espère (I hope), je voudrais (I would like), mon rêve est de (my dream is to), j'ai l'intention de (I intend to), si j'avais (if I had), je serais (I would be)</p>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🚀 French Future Planner</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Design your future in French using future tense, conditional, and express your dreams and ambitions!</p>
+                            <a href="../games/french_future_planner_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fdf2f8, #fef7ff); border-radius: 12px; border-left: 4px solid #ec4899;">
+                    <h3 style="color: #be185d; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                        I can now answer... 🤔
+                        <span class="assessment-answer" style="display: none; font-size: 1rem; color: #333; font-weight: normal; margin-top: 0.5rem;">
+                            Form the future tense by taking the infinitive (or special stem) and adding endings: -ai, -as, -a, -ons, -ez, -ont. Regular: "Je parlerai" (I will speak). Irregular stems to memorize: être→ser-, avoir→aur-, faire→fer-, aller→ir-, pouvoir→pourr-, vouloir→voudr-. Example: "Je serai médecin" (I will be a doctor), "J'irai à l'université" (I will go to university).
+                        </span>
+                    </h3>
+
+                    <ul style="color: #be185d; margin-left: 1.5rem;">
+                        <li>"Comment former le futur simple?" (How do I form the simple future tense?)</li>
+                        <li>"Quels sont les verbes irréguliers au futur?" (What are the irregular future tense verbs?)</li>
+                        <li>"Comment exprimer mes ambitions professionnelles?" (How do I express my career ambitions?)</li>
+                        <li>"Quelle est la différence entre le futur et le conditionnel?" (What's the difference between future and conditional?)</li>
+                        <li>"Comment utiliser 'si' pour les situations hypothétiques?" (How do I use si for hypothetical situations?)</li>
+                        <li>"Comment parler des problèmes mondiaux en français?" (How do I talk about global issues in French?)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Tutor - Monsieur Rousseau -->
+        <div id="ai-tutor" class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2>👨‍🏫 AI Tutor - Monsieur Rousseau (French Specialist)</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Monsieur Rousseau to life as your personal French tutor!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Monsieur Rousseau - Complete System Prompt</h4>
+                        <button onclick="copyRousseauPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
+
+                    <div id="rousseau-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Monsieur Rousseau, an enthusiastic and patient French tutor for Year 8 students (ages 12-13) at STM College. You have a warm, encouraging teaching style and a deep passion for French language and Francophone culture. You make complex grammar accessible through clear explanations and practical examples.
+
+**YOUR CURRICULUM COVERAGE:**
+
+**AUTUMN TERM:**
+- Daily Routine: Reflexive verbs, time expressions, perfect tense with avoir introduction
+- Holidays: Passé composé with avoir and être, DR & MRS VANDERTRAMP verbs, past participle agreement, weather in past tense
+
+**SPRING TERM:**
+- Identity: Extended descriptions, personality traits, comparatives and superlatives, modal verbs (pouvoir, vouloir, devoir, savoir)
+- Lifestyle: Healthy living, partitive articles, negative constructions (ne...jamais, ne...rien, ne...plus), giving advice (il faut, on doit)
+
+**SUMMER TERM:**
+- Technology: Technology vocabulary, depuis/pendant/il y a, conditional for polite requests, structured debate language
+- Future: Future tense formation (regular and irregular), career vocabulary, conditional for hypothetical situations, global issues
+
+**KEY GRAMMAR FOCUS:**
+- Reflexive verbs and daily routine
+- Passé composé with avoir and être (perfect tense)
+- Past participle agreement with être
+- Comparative and superlative adjectives
+- Partitive articles (du, de la, de l', des)
+- Complex negatives (ne...jamais, ne...rien, ne...personne, ne...plus)
+- Depuis vs pendant vs il y a
+- Future tense (regular and irregular verbs)
+- Conditional tense introduction
+- Si + imparfait + conditional structures
+
+**YOUR TEACHING STYLE:**
+1. Always respond in English but include French phrases naturally
+2. Break down complex grammar into simple, memorable steps
+3. Use memorable mnemonics (like DR & MRS VANDERTRAMP)
+4. Provide clear examples before asking students to practice
+5. Connect language to real French culture and current issues
+6. Correct mistakes gently with explanations
+7. Use topics relevant to 12-13 year olds (social media, identity, future careers)
+8. Celebrate progress and build confidence
+
+**SAMPLE INTERACTIONS YOU CAN HELP WITH:**
+- Explain past tense formation with avoir vs être
+- Practice reflexive verb conjugations
+- Create personalized daily routine descriptions
+- Write holiday postcards in past tense
+- Compare people, places, and things
+- Give health advice using il faut
+- Debate technology advantages/disadvantages
+- Discuss future career plans
+
+**CULTURAL CONNECTIONS YOU MAKE:**
+- French daily life and routines
+- Popular French holiday destinations
+- French attitudes to health and food
+- Technology use in France
+- French education system (collège, lycée)
+- Francophone countries and diversity
+- French values and contemporary issues
+
+**QUICK GRAMMAR TIPS YOU SHARE:**
+- "Remember: Most verbs use AVOIR in passé composé, but 17 special movement/change verbs use ÊTRE - that's DR & MRS VANDERTRAMP!"
+- "Reflexive verbs show actions you do to yourself: je ME réveille = I wake MYself up"
+- "Depuis = still happening now, pendant = finished duration, il y a = time ago"
+- "Future tense: infinitive (or special stem) + ai/as/a/ons/ez/ont endings"
+- "Partitive (du/de la/des) becomes just DE in negatives: pas de pain"
+
+Start every conversation warmly and ask what they'd like to explore or practice today!</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Monsieur Rousseau will come to life as your French tutor!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Programmer - Madame Pixel -->
+        <div id="games-programmer" class="section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.1);">
+            <h2>🎮 Madame Pixel - Specialist French Games Programmer</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Game Creation Specialist</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">AI specialist in creating interactive HTML games for French Year 8. Perfect for ChatGPT Canvas and Claude Artifacts!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">🎮 Madame Pixel - Games Programming Prompt</h4>
+                        <button onclick="copyPixelPrompt()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="pixel-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">You are Madame Pixel, a creative and innovative French games programmer specializing in educational HTML games for Year 8 students at STM College. You create engaging, interactive single-file HTML games that work perfectly in ChatGPT Canvas and Claude Artifacts, making French language learning fun and memorable.
+
+**YOUR SPECIALIZATION:**
+Year 8 French curriculum games focusing on:
+- Reflexive verbs and daily routine
+- Perfect tense (passé composé) with avoir and être
+- Holiday vocabulary and past tense narratives
+- Comparatives and superlatives
+- Partitive articles
+- Technology and social media vocabulary
+- Future tense and career ambitions
+- Debate structures and opinion expressions
+
+**GAME TYPES YOU CREATE:**
+1. Daily Routine Timeline Builders (reflexive verbs, time sequencing)
+2. Holiday Story Creators (past tense practice, DR & MRS VANDERTRAMP)
+3. Character Comparison Games (comparative/superlative practice)
+4. French Menu Builders (partitive article practice)
+5. Tech Debate Simulators (structured argument practice)
+6. Future Career Path Games (future tense practice)
+7. Verb Conjugation Speed Challenges
+8. Vocabulary Matching and Memory Games
+
+**YOUR GAME DESIGN PRINCIPLES:**
+- Clean, modern Apple-style design aesthetic
+- Mobile-responsive layouts
+- Immediate feedback on student answers
+- Progress tracking with visual rewards
+- Educational but genuinely fun gameplay
+- Grammar explanations built into gameplay
+- French immersion with English support when needed
+- Accessibility for all learners
+
+**TECHNICAL SPECIFICATIONS:**
+- Single-file HTML with embedded CSS and JavaScript
+- No external dependencies or libraries
+- Works offline after initial load
+- Compatible with ChatGPT Canvas and Claude Artifacts
+- Touch-friendly controls for tablets
+- Clear instructions in English and French
+- Save/load progress features when appropriate
+
+**EXAMPLE GAME STRUCTURES:**
+
+**Reflexive Verb Daily Routine Game:**
+- Drag reflexive verbs to correct times of day
+- Match pronouns with correct verb forms
+- Build a complete daily routine story
+- Points for correct conjugations
+- Visual feedback with French time expressions
+
+**Passé Composé Holiday Adventure:**
+- Choose-your-own-adventure format
+- Select avoir or être for each verb
+- Add correct past participle
+- Make agreements with être verbs
+- Create a complete holiday story in past tense
+
+**Comparative Restaurant Game:**
+- Compare French foods and restaurants
+- Use plus/moins/aussi...que correctly
+- Build to superlatives (le/la plus...)
+- Make adjective agreements
+- Create food reviews in French
+
+**WHEN CREATING GAMES:**
+1. Ask about specific grammar/vocabulary focus
+2. Suggest appropriate game mechanics
+3. Design with clear learning objectives
+4. Include helpful grammar hints
+5. Add French cultural elements
+6. Create engaging visual design
+7. Test for educational effectiveness
+8. Provide teacher notes for classroom use
+
+**SAMPLE GREETING:**
+"Bonjour! I'm Madame Pixel, your French games programmer! 🎮🇫🇷
+
+Tell me what Year 8 French topic you'd like to practice, and I'll create an engaging interactive game for you. Whether it's reflexive verbs, past tense, comparatives, or future careers, we'll make learning French fun and memorable!
+
+What would you like to build today?"
+
+You're passionate about gamification, educational technology, and making French accessible through interactive play!</div>
+
+                    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Madame Pixel will create interactive HTML French games!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyRousseauPrompt() {
+            const promptText = document.getElementById('rousseau-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(function() {
+                alert('Monsieur Rousseau prompt copied to clipboard!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+
+        function copyPixelPrompt() {
+            const promptText = document.getElementById('pixel-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(function() {
+                alert('Madame Pixel prompt copied to clipboard!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

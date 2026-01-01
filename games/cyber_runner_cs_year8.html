@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Cyber Runner - Computer Science Year 8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-canvas {
+            display: block;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .hud-item {
+            background: rgba(0,0,0,0.7);
+            color: #00ff88;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #00ff88;
+        }
+
+        #question-overlay {
+            display: block;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        .question-box {
+            background: rgba(10, 20, 40, 0.95);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 255, 136, 0.3);
+            border: 2px solid #00ff88;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .checkpoint-badge {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #0a1428;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 0.2rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: #88ccff;
+            margin-bottom: 0.8rem;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .answer-btn {
+            background: #0a1428;
+            border: 2px solid #00ff88;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+        }
+
+        .answer-btn:hover {
+            background: #00ff88;
+            color: #0a1428;
+            transform: translateY(-2px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #16a34a;
+            color: white;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        #start-screen, #gameover-screen, #win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0a1428 0%, #1e3c72 50%, #2a5298 100%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #00ff88;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #gameover-screen, #win-screen {
+            display: none;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0, 255, 136, 0.5);
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            color: #88ccff;
+        }
+
+        .instructions {
+            background: rgba(0, 255, 136, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: left;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .instructions em {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: #00ff88;
+        }
+
+        .instructions p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: #88ccff;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #0a1428;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4);
+            font-family: 'Courier New', monospace;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(0, 255, 136, 0.5);
+        }
+
+        .theme-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: rgba(0, 255, 136, 0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback-text.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            display: block;
+        }
+
+        .feedback-text.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        #mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .jump-btn {
+            background: rgba(0, 255, 136, 0.9);
+            border: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            #mobile-controls {
+                display: block;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="hud">
+            <div class="hud-item">// Level: <span id="level">1</span>/3</div>
+            <div class="hud-item">{data}: <span id="shells">0</span></div>
+            <div class="hud-item">score: <span id="score">0</span></div>
+            <div class="hud-item">lives: <span id="lives">3</span></div>
+        </div>
+
+        <div id="mobile-controls">
+            <button class="jump-btn" id="jump-btn">^</button>
+        </div>
+
+        <div id="question-overlay">
+            <div class="question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div class="checkpoint-badge">Q<span id="checkpoint-num">1</span>/<span id="total-questions">12</span></div>
+                    <button id="read-again-btn" onclick="rereadQuestion()" style="background: #00ff88; color: #0a1428; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">Read Again</button>
+                </div>
+                <div class="question-text" id="q-text">Loading...</div>
+                <div class="question-context" id="q-context">Computer Science Practice</div>
+                <div class="answers-grid" id="answers"></div>
+                <div class="feedback-text" id="feedback"></div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <div class="theme-emoji">💻</div>
+            <h1 class="title">Cyber Runner</h1>
+            <p class="subtitle">Run Through the Data Stream & Master CS!<br><em style="font-size: 0.9em; opacity: 0.8;">Python, Cybersecurity & Networks</em></p>
+
+            <div class="instructions">
+                <h3>// How to Play</h3>
+                <p>🏃 <strong>RUN</strong> through the digital network!</p>
+                <p>💻 Practice <strong>PYTHON</strong> and <strong>CYBERSECURITY</strong>!</p>
+                <p>📦 Collect data packets for bonus points!</p>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0, 255, 136, 0.3);">
+                    <p><strong>Keyboard:</strong> SPACE = Jump | A B C D = Answer</p>
+                    <p><strong>Xbox:</strong> RT/LT = Jump | X Y A B = Answer</p>
+                </div>
+
+                <p style="margin-top: 1rem;">Correct = +1 Life | Learn Python & Stay Cyber Safe!</p>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">EXECUTE_GAME()</button>
+        </div>
+
+        <div id="gameover-screen">
+            <div class="result-icon">💔</div>
+            <h1 class="title">SYSTEM CRASH!</h1>
+            <p class="subtitle">Connection lost... Try again!</p>
+            <div class="stats">
+                <p>Level: <span id="final-level">1</span></p>
+                <p>Score: <span id="final-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">REBOOT()</button>
+        </div>
+
+        <div id="win-screen">
+            <div class="result-icon">🏆</div>
+            <h1 class="title">ACCESS GRANTED!</h1>
+            <p class="subtitle">You've mastered Year 8 Computer Science!</p>
+            <div class="stats">
+                <p>📦 Data Packets: <span id="win-shells">0</span></p>
+                <p>⭐ Score: <span id="win-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">PLAY_AGAIN()</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let gameRunning = false;
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let distance = 0;
+        let checkpointDistance = 22000;
+        let gameSpeed = 4;
+        let baseSpeed = 4;
+        let isSpeakingFeedback = false;
+
+        // Collectibles (data packets)
+        let shells = [];
+        let shellCount = 0;
+
+        // Power-ups
+        let powerUps = [];
+        let isInvincible = false;
+        let invincibleTimer = 0;
+
+        // Player
+        let player = {
+            x: 100,
+            y: 0,
+            width: 50,
+            height: 70,
+            velocityY: 0,
+            jumping: false,
+            grounded: true
+        };
+
+        // Physics
+        const gravity = 0.8;
+        const jumpForce = -16;
+
+        // Obstacles
+        let obstacles = [];
+        let obstacleTimer = 0;
+
+        // Background
+        let bgOffset = 0;
+        let servers = [];
+        let dataStreams = [];
+
+        // Computer Science Year 8 Autumn Term Questions
+        const questions = [
+            // Python Programming - Variables & Data Types
+            {
+                text: "What data type is: age = 13",
+                context: "Python Data Types",
+                answers: ["Integer", "String", "Boolean", "Float"],
+                correct: 0,
+                english: "13 is a whole number, so it's an integer (int). Integers are numbers without decimal points."
+            },
+            {
+                text: "What symbol assigns a value to a variable?",
+                context: "Python Assignment",
+                answers: ["=", "==", "=>", ":"],
+                correct: 0,
+                english: "The single equals sign (=) assigns a value. Double equals (==) compares values."
+            },
+            {
+                text: "What does input() do in Python?",
+                context: "Python Input/Output",
+                answers: ["Gets user input", "Prints output", "Stores data", "Creates loops"],
+                correct: 0,
+                english: "input() pauses the program and waits for the user to type something, then returns what they typed."
+            },
+            // Selection Statements
+            {
+                text: "Which keyword starts a condition in Python?",
+                context: "Python Selection",
+                answers: ["if", "when", "check", "test"],
+                correct: 0,
+                english: "The 'if' keyword starts a conditional statement. It checks if a condition is true before running code."
+            },
+            {
+                text: "What does 'elif' mean?",
+                context: "Python Selection",
+                answers: ["else if", "end loop", "error list", "element if"],
+                correct: 0,
+                english: "'elif' is short for 'else if' - it checks another condition if the previous 'if' was false."
+            },
+            {
+                text: "What logical operator means BOTH must be true?",
+                context: "Python Logical Operators",
+                answers: ["and", "or", "not", "both"],
+                correct: 0,
+                english: "The 'and' operator requires both conditions to be true. Example: if age > 12 and age < 20"
+            },
+            // Cybersecurity
+            {
+                text: "What is malware?",
+                context: "Cybersecurity Threats",
+                answers: ["Malicious software", "Email service", "Firewall type", "Password tool"],
+                correct: 0,
+                english: "Malware is any malicious software designed to harm computers - includes viruses, trojans, and ransomware."
+            },
+            {
+                text: "What is phishing?",
+                context: "Cybersecurity Threats",
+                answers: ["Fake messages to steal info", "A type of firewall", "Password encryption", "Network cable"],
+                correct: 0,
+                english: "Phishing uses fake emails or websites that look legitimate to trick people into revealing passwords or personal data."
+            },
+            {
+                text: "What does 2FA stand for?",
+                context: "Cybersecurity Protection",
+                answers: ["Two-Factor Authentication", "Two-File Access", "Two-Firewall Audit", "Two-Folder Archive"],
+                correct: 0,
+                english: "Two-Factor Authentication requires TWO things to log in: something you know (password) AND something you have (phone code)."
+            },
+            {
+                text: "What does encryption do?",
+                context: "Cybersecurity Protection",
+                answers: ["Scrambles data to protect it", "Deletes viruses", "Speeds up internet", "Creates passwords"],
+                correct: 0,
+                english: "Encryption scrambles data using a secret key so only authorized people can read it - like a secret code!"
+            },
+            // Network basics
+            {
+                text: "What does a firewall do?",
+                context: "Network Security",
+                answers: ["Blocks unauthorized access", "Stores passwords", "Creates backups", "Sends emails"],
+                correct: 0,
+                english: "A firewall monitors network traffic and blocks suspicious or unauthorized connections to protect your computer."
+            },
+            {
+                text: "What is a strong password characteristic?",
+                context: "Password Security",
+                answers: ["Mix of letters, numbers, symbols", "Your birthday", "Just numbers", "Short and simple"],
+                correct: 0,
+                english: "Strong passwords are 12+ characters with uppercase, lowercase, numbers, and symbols. Never use personal info!"
+            }
+        ];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 150 - player.height;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        function generateServers() {
+            servers = [];
+            for (let i = 0; i < 8; i++) {
+                servers.push({
+                    x: i * 250 + Math.random() * 100,
+                    height: 100 + Math.random() * 60,
+                    lights: Math.floor(Math.random() * 5) + 3
+                });
+            }
+        }
+
+        function generateDataStreams() {
+            dataStreams = [];
+            for (let i = 0; i < 20; i++) {
+                dataStreams.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * (canvas.height * 0.6),
+                    speed: 1 + Math.random() * 2,
+                    length: 20 + Math.random() * 40
+                });
+            }
+        }
+
+        function drawBackground() {
+            // Dark cyber gradient
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            skyGradient.addColorStop(0, '#0a1428');
+            skyGradient.addColorStop(0.5, '#1e3c72');
+            skyGradient.addColorStop(1, '#0a1428');
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Grid lines (cyber effect)
+            ctx.strokeStyle = 'rgba(0, 255, 136, 0.1)';
+            ctx.lineWidth = 1;
+            for (let x = -bgOffset % 50; x < canvas.width; x += 50) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+
+            // Data streams (falling binary)
+            ctx.fillStyle = '#00ff88';
+            ctx.font = '14px Courier New';
+            dataStreams.forEach(stream => {
+                stream.y += stream.speed;
+                if (stream.y > canvas.height * 0.6) {
+                    stream.y = -stream.length;
+                    stream.x = Math.random() * canvas.width;
+                }
+                for (let i = 0; i < stream.length; i += 14) {
+                    const char = Math.random() > 0.5 ? '1' : '0';
+                    const alpha = 1 - (i / stream.length);
+                    ctx.fillStyle = `rgba(0, 255, 136, ${alpha * 0.5})`;
+                    ctx.fillText(char, stream.x, stream.y + i);
+                }
+            });
+
+            // Server towers in background
+            servers.forEach(server => {
+                const serverX = ((server.x - bgOffset * 0.4) % (canvas.width + 500)) - 200;
+                drawServer(serverX, canvas.height - 150 - server.height, server.height, server.lights);
+            });
+
+            // Ground - circuit board pattern
+            ctx.fillStyle = '#0d2847';
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 150);
+
+            // Circuit traces on ground
+            ctx.strokeStyle = '#00ff88';
+            ctx.lineWidth = 2;
+            for (let x = -bgOffset % 100; x < canvas.width; x += 100) {
+                ctx.beginPath();
+                ctx.moveTo(x, canvas.height - 140);
+                ctx.lineTo(x + 30, canvas.height - 140);
+                ctx.lineTo(x + 30, canvas.height - 120);
+                ctx.lineTo(x + 60, canvas.height - 120);
+                ctx.stroke();
+            }
+
+            // Ground highlight line
+            ctx.strokeStyle = '#00ff88';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height - 150);
+            ctx.lineTo(canvas.width, canvas.height - 150);
+            ctx.stroke();
+        }
+
+        function drawServer(x, y, height, lights) {
+            // Server tower body
+            ctx.fillStyle = '#1a2f4a';
+            ctx.fillRect(x, y, 40, height);
+
+            // Server rack lines
+            ctx.strokeStyle = '#0d1f32';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < height; i += 15) {
+                ctx.beginPath();
+                ctx.moveTo(x, y + i);
+                ctx.lineTo(x + 40, y + i);
+                ctx.stroke();
+            }
+
+            // Blinking lights
+            for (let i = 0; i < lights; i++) {
+                const lightY = y + 10 + i * 20;
+                const blinking = Math.sin(Date.now() / 200 + i + x) > 0;
+                ctx.fillStyle = blinking ? '#00ff88' : '#0a4d2e';
+                ctx.beginPath();
+                ctx.arc(x + 10, lightY, 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Red warning light occasionally
+                ctx.fillStyle = Math.sin(Date.now() / 300 + i) > 0.8 ? '#ff4444' : '#4d0a0a';
+                ctx.beginPath();
+                ctx.arc(x + 30, lightY, 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawPlayer() {
+            // Cyber character - hacker/coder style
+
+            // Body - hoodie
+            ctx.fillStyle = '#2563eb';
+            ctx.fillRect(player.x, player.y + 20, player.width - 10, 35);
+
+            // Hood
+            ctx.fillStyle = '#1d4ed8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 15, 18, Math.PI, 0);
+            ctx.fill();
+
+            // Head/Face
+            ctx.fillStyle = '#fcd5b8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 15, 12, 0, Math.PI * 2);
+            ctx.fill();
+
+            // VR/Tech glasses
+            ctx.fillStyle = '#00ff88';
+            ctx.fillRect(player.x + 8, player.y + 12, 24, 8);
+            ctx.fillStyle = '#0a1428';
+            ctx.fillRect(player.x + 10, player.y + 14, 8, 4);
+            ctx.fillRect(player.x + 22, player.y + 14, 8, 4);
+
+            // Digital glow effect when invincible
+            if (isInvincible) {
+                ctx.strokeStyle = '#00ff88';
+                ctx.lineWidth = 2;
+                ctx.shadowColor = '#00ff88';
+                ctx.shadowBlur = 20;
+                ctx.beginPath();
+                ctx.arc(player.x + 20, player.y + 35, 40, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+            }
+
+            // Legs
+            ctx.fillStyle = '#1e3a5f';
+            if (player.grounded) {
+                ctx.fillRect(player.x + 5, player.y + 55, 12, 15);
+                ctx.fillRect(player.x + 22, player.y + 55, 12, 15);
+            } else {
+                ctx.fillRect(player.x + 5, player.y + 50, 12, 20);
+                ctx.fillRect(player.x + 22, player.y + 50, 12, 20);
+            }
+        }
+
+        function spawnObstacle() {
+            const types = [
+                { width: 45, height: 50, emoji: '🔥' },  // Firewall to jump
+                { width: 50, height: 40, emoji: '🦠' },  // Virus
+                { width: 40, height: 55, emoji: '🐛' },  // Bug
+                { width: 55, height: 35, emoji: '💣' },  // Logic bomb
+                { width: 45, height: 45, emoji: '🕷️' }, // Spider (crawler)
+                { width: 50, height: 50, emoji: '⚡' },  // Power surge
+                { width: 40, height: 40, emoji: '🔒' }   // Locked system
+            ];
+            const type = types[Math.floor(Math.random() * types.length)];
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - type.height,
+                width: type.width,
+                height: type.height,
+                emoji: type.emoji
+            });
+
+            if (Math.random() < 0.15 && level > 1) {
+                const type2 = types[Math.floor(Math.random() * types.length)];
+                obstacles.push({
+                    x: canvas.width + 150,
+                    y: canvas.height - 150 - type2.height,
+                    width: type2.width,
+                    height: type2.height,
+                    emoji: type2.emoji
+                });
+            }
+        }
+
+        function spawnShell() {
+            // Data packets instead of shells
+            const heights = [80, 120, 160];
+            shells.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - heights[Math.floor(Math.random() * heights.length)],
+                collected: false
+            });
+        }
+
+        function spawnPowerUp() {
+            const types = ['shield', 'magnet', 'slow'];
+            powerUps.push({
+                x: canvas.width + 50,
+                y: canvas.height - 280,
+                type: types[Math.floor(Math.random() * types.length)],
+                collected: false
+            });
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obs => {
+                ctx.font = `${obs.height}px Arial`;
+                ctx.fillText(obs.emoji, obs.x, obs.y + obs.height - 5);
+            });
+        }
+
+        function drawShells() {
+            // Draw as data packets
+            shells.forEach(s => {
+                if (!s.collected) {
+                    ctx.font = '35px Arial';
+                    const bob = Math.sin(Date.now() / 200 + s.x) * 5;
+                    ctx.fillText('📦', s.x, s.y + bob);
+                }
+            });
+        }
+
+        function drawPowerUps() {
+            powerUps.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '40px Arial';
+                    const bob = Math.sin(Date.now() / 150) * 8;
+                    let emoji = p.type === 'shield' ? '🛡️' : p.type === 'magnet' ? '🧲' : '⏱️';
+                    ctx.fillText(emoji, p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawProgressBar() {
+            const barWidth = 200;
+            const barHeight = 10;
+            const barX = canvas.width / 2 - barWidth / 2;
+            const barY = 70;
+            const progress = Math.min(distance / checkpointDistance, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.5)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            ctx.fillStyle = '#00ff88';
+            ctx.fillRect(barX, barY, barWidth * progress, barHeight);
+
+            ctx.fillStyle = '#00ff88';
+            ctx.font = '12px Courier New';
+            ctx.fillText('END', barX + barWidth - 20, barY + 10);
+        }
+
+        let shellSpawnTimer = 0;
+        let powerUpSpawnTimer = 0;
+        let comboCount = 0;
+        let comboTimer = 0;
+
+        function update() {
+            if (!gameRunning) return;
+
+            gameSpeed = Math.min(baseSpeed + 5, baseSpeed + (distance / 5000));
+
+            bgOffset += gameSpeed;
+            distance += gameSpeed;
+
+            if (!player.grounded) {
+                player.velocityY += gravity;
+                player.y += player.velocityY;
+
+                if (player.y >= canvas.height - 150 - player.height) {
+                    player.y = canvas.height - 150 - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                    player.jumping = false;
+                }
+            }
+
+            obstacleTimer++;
+            const obstacleFreq = Math.max(80, 180 - gameSpeed * 15);
+            if (obstacleTimer > obstacleFreq + Math.random() * 60) {
+                spawnObstacle();
+                obstacleTimer = 0;
+            }
+
+            shellSpawnTimer++;
+            if (shellSpawnTimer > 40 + Math.random() * 30) {
+                spawnShell();
+                shellSpawnTimer = 0;
+            }
+
+            powerUpSpawnTimer++;
+            if (powerUpSpawnTimer > 400 + Math.random() * 200) {
+                spawnPowerUp();
+                powerUpSpawnTimer = 0;
+            }
+
+            obstacles.forEach(obs => { obs.x -= gameSpeed; });
+            shells.forEach(s => { s.x -= gameSpeed; });
+            powerUps.forEach(p => { p.x -= gameSpeed; });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+            shells = shells.filter(s => s.x > -100);
+            powerUps = powerUps.filter(p => p.x > -100);
+
+            if (!isInvincible) {
+                obstacles.forEach(obs => {
+                    if (player.x < obs.x + obs.width - 10 &&
+                        player.x + player.width - 10 > obs.x &&
+                        player.y + player.height > obs.y &&
+                        player.y < obs.y + obs.height) {
+                        hitObstacle();
+                    }
+                });
+            }
+
+            shells.forEach(s => {
+                if (!s.collected &&
+                    player.x < s.x + 35 &&
+                    player.x + player.width > s.x &&
+                    player.y < s.y + 35 &&
+                    player.y + player.height > s.y - 20) {
+                    s.collected = true;
+                    shellCount++;
+                    score += 50;
+                    comboCount++;
+                    comboTimer = 60;
+                    if (comboCount >= 3) score += comboCount * 20;
+                }
+            });
+
+            powerUps.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 40 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 20 &&
+                    player.y + player.height > p.y - 30) {
+                    p.collected = true;
+                    activatePowerUp(p.type);
+                }
+            });
+
+            if (comboTimer > 0) comboTimer--;
+            else comboCount = 0;
+
+            if (isInvincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) isInvincible = false;
+            }
+
+            if (distance >= checkpointDistance) reachCheckpoint();
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('shells').textContent = shellCount;
+        }
+
+        function activatePowerUp(type) {
+            if (type === 'shield') {
+                isInvincible = true;
+                invincibleTimer = 180;
+            } else if (type === 'slow') {
+                gameSpeed = Math.max(3, gameSpeed - 2);
+                setTimeout(() => { gameSpeed = baseSpeed; }, 3000);
+            } else if (type === 'magnet') {
+                shells.forEach(s => {
+                    if (!s.collected && s.x < player.x + 300) {
+                        s.x = player.x + 30;
+                        s.y = player.y + 20;
+                    }
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawShells();
+            drawPowerUps();
+            drawObstacles();
+            drawPlayer();
+            drawProgressBar();
+
+            if (comboCount >= 3) {
+                ctx.fillStyle = '#00ff88';
+                ctx.font = 'bold 24px Courier New';
+                ctx.fillText(`COMBO x${comboCount}!`, player.x - 20, player.y - 30);
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.velocityY = jumpForce;
+                player.grounded = false;
+                player.jumping = true;
+            }
+        }
+
+        function hitObstacle() {
+            lives--;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                obstacles = [];
+                distance = Math.max(0, distance - 200);
+                canvas.style.filter = 'brightness(2)';
+                setTimeout(() => canvas.style.filter = 'none', 100);
+            }
+        }
+
+        function reachCheckpoint() {
+            distance = 0;
+            level++;
+
+            if (level > 3) {
+                winGame();
+                return;
+            }
+
+            checkpointDistance = 22000 + level * 2000;
+            baseSpeed = 4 + level * 0.5;
+            gameSpeed = baseSpeed;
+            document.getElementById('level').textContent = level;
+        }
+
+        // TTS Functions
+        function speak(text, lang = 'en-GB') {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                const voices = speechSynthesis.getVoices();
+                const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+                if (voice) utterance.voice = voice;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[questionCount % questions.length];
+            currentQuestion = question;
+
+            const questionInCycle = (questionCount % questions.length) + 1;
+            document.getElementById('checkpoint-num').textContent = questionInCycle;
+            document.getElementById('total-questions').textContent = questions.length;
+            document.getElementById('q-text').textContent = question.text;
+            document.getElementById('q-context').textContent = question.context;
+
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+
+            const shuffledAnswers = question.answers.map((ans, i) => ({ text: ans, isCorrect: i === question.correct }));
+            shuffledAnswers.sort(() => Math.random() - 0.5);
+            currentAnswers = shuffledAnswers;
+
+            const labels = ['A', 'B', 'C', 'D'];
+            shuffledAnswers.forEach((ans, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.onclick = () => handleAnswer(btn, ans.isCorrect, question.english);
+                btn.innerHTML = `<strong>${labels[i]}</strong> ${ans.text}`;
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback-text';
+
+            readQuestionAndAnswers(question.text, shuffledAnswers, labels);
+        }
+
+        function readQuestionAndAnswers(questionText, answers, labels) {
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeakingFeedback) return;
+
+            speechSynthesis.cancel();
+
+            const voices = speechSynthesis.getVoices();
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+
+            const queue = [];
+
+            // Question in English
+            const qUtterance = new SpeechSynthesisUtterance(questionText);
+            qUtterance.lang = 'en-GB';
+            qUtterance.rate = 0.9;
+            if (englishVoice) qUtterance.voice = englishVoice;
+            queue.push(qUtterance);
+
+            // Answers
+            answers.forEach((ans, i) => {
+                const labelUtterance = new SpeechSynthesisUtterance(labels[i]);
+                labelUtterance.lang = 'en-GB';
+                labelUtterance.rate = 1.0;
+                if (englishVoice) labelUtterance.voice = englishVoice;
+                queue.push(labelUtterance);
+
+                const ansUtterance = new SpeechSynthesisUtterance(ans.text);
+                ansUtterance.lang = 'en-GB';
+                ansUtterance.rate = 0.85;
+                if (englishVoice) ansUtterance.voice = englishVoice;
+                queue.push(ansUtterance);
+            });
+
+            let i = 0;
+            function playNext() {
+                if (i < queue.length) {
+                    queue[i].onend = playNext;
+                    speechSynthesis.speak(queue[i]);
+                    i++;
+                }
+            }
+            playNext();
+        }
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.getVoices();
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        let questionCount = 0;
+        let currentQuestion = null;
+        let currentAnswers = null;
+        const answerLabels = ['A', 'B', 'C', 'D'];
+
+        function rereadQuestion() {
+            if (currentQuestion && currentAnswers) {
+                readQuestionAndAnswers(currentQuestion.text, currentAnswers, answerLabels);
+            }
+        }
+
+        function handleAnswer(btn, isCorrect, explanation) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('feedback');
+            const question = questions[questionCount % questions.length];
+            const correctAnswer = question.answers[question.correct];
+
+            speechSynthesis.cancel();
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                lives++;
+                score += 200;
+                document.getElementById('lives').textContent = lives;
+                document.getElementById('score').textContent = score;
+
+                feedback.textContent = '+1 Life! ' + explanation;
+                feedback.className = 'feedback-text correct';
+
+                speakFeedback("Correct!", 'en-GB', () => {
+                    speakFeedback(explanation, 'en-GB', () => {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    });
+                });
+            } else {
+                btn.classList.add('wrong');
+
+                feedback.textContent = 'Wrong! ' + correctAnswer + ' - ' + explanation;
+                feedback.className = 'feedback-text wrong';
+
+                speakFeedback("Wrong! The answer is " + correctAnswer + ".", 'en-GB', () => {
+                    speakFeedback(explanation, 'en-GB', () => {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    });
+                });
+            }
+        }
+
+        function speakFeedback(text, lang, callback, isLast = false) {
+            isSpeakingFeedback = true;
+            const voices = speechSynthesis.getVoices();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 1.0;
+
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+            if (englishVoice) utterance.voice = englishVoice;
+
+            utterance.onend = () => {
+                if (isLast) isSpeakingFeedback = false;
+                if (callback) callback();
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'flex';
+            document.getElementById('final-level').textContent = level;
+            document.getElementById('final-score').textContent = score;
+        }
+
+        function winGame() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'flex';
+            document.getElementById('win-score').textContent = score;
+            document.getElementById('win-shells').textContent = shellCount;
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('question-overlay').style.display = 'block';
+
+            level = 1;
+            score = 0;
+            lives = 3;
+            distance = 0;
+            checkpointDistance = 22000;
+            gameSpeed = 4;
+            baseSpeed = 4;
+            isSpeakingFeedback = false;
+            obstacles = [];
+            shells = [];
+            powerUps = [];
+            shellCount = 0;
+            isInvincible = false;
+            invincibleTimer = 0;
+            comboCount = 0;
+            comboTimer = 0;
+            obstacleTimer = 0;
+            shellSpawnTimer = 0;
+            powerUpSpawnTimer = 0;
+            questionCount = 0;
+
+            document.getElementById('level').textContent = level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            document.getElementById('shells').textContent = shellCount;
+
+            player.y = canvas.height - 150 - player.height;
+            player.velocityY = 0;
+            player.grounded = true;
+
+            generateServers();
+            generateDataStreams();
+            gameRunning = true;
+
+            showQuestion();
+        }
+
+        // Gamepad support
+        let gamepadConnected = false;
+        let lastButtonStates = {};
+
+        window.addEventListener('gamepadconnected', () => { gamepadConnected = true; });
+        window.addEventListener('gamepaddisconnected', () => { gamepadConnected = false; });
+
+        function pollGamepad() {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads) return;
+
+            for (const gamepad of gamepads) {
+                if (!gamepad) continue;
+
+                const buttons = gamepad.buttons;
+
+                if ((buttons[7]?.pressed || buttons[6]?.pressed) && !lastButtonStates['jump']) {
+                    jump();
+                    lastButtonStates['jump'] = true;
+                } else if (!buttons[7]?.pressed && !buttons[6]?.pressed) {
+                    lastButtonStates['jump'] = false;
+                }
+
+                const answerMap = [
+                    { btn: 2, answer: 0, key: 'X' },
+                    { btn: 3, answer: 1, key: 'Y' },
+                    { btn: 0, answer: 2, key: 'A' },
+                    { btn: 1, answer: 3, key: 'B' }
+                ];
+
+                answerMap.forEach(({ btn, answer, key }) => {
+                    if (buttons[btn]?.pressed && !lastButtonStates[key]) {
+                        const answerBtns = document.querySelectorAll('.answer-btn');
+                        if (answerBtns[answer] && !answerBtns[answer].disabled) {
+                            answerBtns[answer].click();
+                        }
+                        lastButtonStates[key] = true;
+                    } else if (!buttons[btn]?.pressed) {
+                        lastButtonStates[key] = false;
+                    }
+                });
+            }
+            requestAnimationFrame(pollGamepad);
+        }
+        pollGamepad();
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+
+            const keyMap = { 'KeyA': 0, 'KeyB': 1, 'KeyC': 2, 'KeyD': 3 };
+            if (keyMap.hasOwnProperty(e.code)) {
+                const btns = document.querySelectorAll('.answer-btn');
+                if (btns[keyMap[e.code]] && !btns[keyMap[e.code]].disabled) {
+                    btns[keyMap[e.code]].click();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+        document.getElementById('jump-btn').addEventListener('click', jump);
+        document.getElementById('jump-btn').addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+
+        // Initialize
+        resizeCanvas();
+        generateServers();
+        generateDataStreams();
+        gameLoop();
+    </script>
+</body>
+</html>

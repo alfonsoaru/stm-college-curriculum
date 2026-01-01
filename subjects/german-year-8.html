@@ -248,12 +248,14 @@
         <div class="header">
             <h1>🇩🇪 German Year 8</h1>
             <p>Expanding German language skills through cultural exploration, advanced grammar, and practical communication</p>
-        </div>
 
-        <div class="navigation">
-            <button class="nav-button" onclick="scrollToTerm('autumn')">Autumn Term</button>
-            <button class="nav-button" onclick="scrollToTerm('spring')">Spring Term</button>
-            <button class="nav-button" onclick="scrollToTerm('summer')">Summer Term</button>
+            <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                <a href="#autumn" class="nav-button" style="text-decoration: none;">🍂 Autumn Term</a>
+                <a href="#spring" class="nav-button" style="text-decoration: none;">🌸 Spring Term</a>
+                <a href="#summer" class="nav-button" style="text-decoration: none;">☀️ Summer Term</a>
+                <a href="#ai-tutor" class="nav-button" style="text-decoration: none; border: 2px solid rgba(255,255,255,0.4);">👩‍🏫 AI Tutor - Frau Muller</a>
+                <a href="#games-programmer" class="nav-button" style="text-decoration: none; background: rgba(139, 92, 246, 0.9); border: 2px solid rgba(255,255,255,0.3);">🎮 Games - Herr Spielmeister</a>
+            </div>
         </div>
 
         <div id="autumn" class="term-section">
@@ -316,7 +318,15 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="term-game-btn">🎮 Practice Vocabulary</a>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+                        <a href="#" class="term-game-btn" style="text-align: center;">🎮 Practice Vocabulary</a>
+
+                        <div style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); border-radius: 12px; padding: 1.5rem; color: white; text-align: center;">
+                            <h4 style="margin-bottom: 1rem;">🏃 Berlin Runner</h4>
+                            <p style="margin-bottom: 1rem; font-size: 0.95rem;">Race through Berlin answering German travel and transport questions! Test your modal verbs and dative prepositions!</p>
+                            <a href="../games/berlin_runner_german_year8.html" target="_blank" style="background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block; backdrop-filter: blur(10px);">Play Game →</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="module-card">
@@ -373,6 +383,61 @@
                         </div>
                     </div>
                     <a href="#" class="term-game-btn">🎮 Practice Vocabulary</a>
+                </div>
+            </div>
+
+            <!-- I Can Now Answer Box - Autumn Term -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fef3c7, #fef9e7); border-radius: 12px; border-left: 4px solid #f59e0b;">
+                <h3 style="color: #b45309; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                </h3>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I use modal verbs to explain what I can, must, or want to do when travelling?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Modal verbs (können, müssen, wollen) come second in the sentence, with the main verb at the end in infinitive form. <strong>Ich kann mit dem Zug fahren</strong> (I can travel by train). <strong>Du musst eine Karte kaufen</strong> (You must buy a ticket). <strong>Wir wollen nach Berlin reisen</strong> (We want to travel to Berlin).</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I form the perfect tense to describe what I watched or listened to?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Perfect tense uses <strong>haben</strong> or <strong>sein</strong> + past participle. Most verbs use haben: <strong>Ich habe einen Film gesehen</strong> (I watched a film). <strong>Er hat Musik gehört</strong> (He listened to music). Movement verbs use sein: <strong>Wir sind ins Kino gegangen</strong> (We went to the cinema).</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What prepositions do I use with dative when describing locations?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Mit</strong> (with): Ich fahre mit dem Bus. <strong>Nach</strong> (to/after): Wir fahren nach Deutschland. <strong>Bei</strong> (at/near): Ich bin beim Bahnhof. <strong>Zu</strong> (to): Ich gehe zum Flughafen. The dative changes articles: der→dem, die→der, das→dem.</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I compare German entertainment with English using comparatives?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Add <strong>-er</strong> to adjectives for comparatives + <strong>als</strong> (than). <strong>Dieser Film ist spannender als der andere</strong> (This film is more exciting than the other). Some add umlaut: alt→älter, groß→größer. <strong>Gut→besser</strong> (good→better) is irregular.</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do separable verbs work when talking about watching TV or going out?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Separable verbs split: prefix goes to end. <strong>fernsehen</strong>: Ich <strong>sehe</strong> gern <strong>fern</strong> (I like watching TV). <strong>ausgehen</strong>: Wir <strong>gehen</strong> heute Abend <strong>aus</strong> (We're going out tonight). <strong>anfangen</strong>: Der Film <strong>fängt</strong> um acht Uhr <strong>an</strong> (The film starts at 8).</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 0;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"Can I express opinions about German films and music?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Use opinion phrases: <strong>Ich finde es...</strong> (I find it...), <strong>Meiner Meinung nach...</strong> (In my opinion...). Add adjectives: <strong>spannend</strong> (exciting), <strong>langweilig</strong> (boring), <strong>lustig</strong> (funny), <strong>traurig</strong> (sad). Example: <strong>Ich finde deutsche Musik sehr interessant</strong>.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -496,6 +561,61 @@
                     <a href="#" class="term-game-btn">🎮 Practice Vocabulary</a>
                 </div>
             </div>
+
+            <!-- I Can Now Answer Box - Spring Term -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fef3c7, #fef9e7); border-radius: 12px; border-left: 4px solid #f59e0b;">
+                <h3 style="color: #b45309; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                </h3>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I use reflexive verbs to describe my daily health routine?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Reflexive verbs use reflexive pronouns (mich, dich, sich, uns, euch, sich). <strong>Ich wasche mich</strong> (I wash myself). <strong>Er duscht sich morgens</strong> (He showers in the morning). <strong>Wir halten uns fit</strong> (We keep ourselves fit). The pronoun matches the subject.</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I describe what will happen in my future using 'werden'?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Future tense: <strong>werden</strong> + infinitive at end. <strong>Ich werde Arzt werden</strong> (I will become a doctor). <strong>Du wirst an der Uni studieren</strong> (You will study at university). <strong>Wir werden viel Geld verdienen</strong> (We will earn a lot of money).</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What are wenn clauses and how do I use them for health advice?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Wenn</strong> (if/when) sends verb to end of clause. <strong>Wenn du Kopfschmerzen hast, sollst du dich ausruhen</strong> (If you have a headache, you should rest). <strong>Wenn man gesund sein will, muss man Sport treiben</strong> (If you want to be healthy, you must do sport).</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I talk about different careers and qualifications in German?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">German jobs have masculine/feminine forms: <strong>Arzt/Ärztin</strong>, <strong>Lehrer/Lehrerin</strong>. Add <strong>-in</strong> for feminine. For qualifications: <strong>Man braucht einen Abschluss</strong> (You need a qualification). <strong>Ich möchte eine Ausbildung machen</strong> (I want to do training).</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do dative pronouns work when talking about health problems?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Dative pronouns: mir (me), dir (you), ihm/ihr (him/her), uns, euch, ihnen. <strong>Mir tut der Kopf weh</strong> (My head hurts - literally: to me the head hurts). <strong>Ihr ist schlecht</strong> (She feels sick). <strong>Dem Arzt geht es gut</strong> (The doctor is doing well).</p>
+                    </div>
+                </div>
+
+                <div style="position: relative; margin-bottom: 0;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"Can I discuss my future ambitions and explain why I want a particular career?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Use <strong>weil</strong> (because) with verb at end: <strong>Ich möchte Lehrer werden, weil ich Kindern helfen will</strong> (I want to become a teacher because I want to help children). <strong>Dieser Beruf interessiert mich, weil er kreativ ist</strong> (This job interests me because it is creative).</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="summer" class="term-section">
@@ -617,96 +737,385 @@
                     <a href="#" class="term-game-btn">🎮 Practice All Vocabulary</a>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
-            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 40px; margin-bottom: 40px; backdrop-filter: blur(10px); border: 1px solid rgba(0, 0, 0, 0.1);">
-                <h2 style="color: #1a1a1a; font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">🤖 AI German Tutor Prompt</h2>
-                <p style="color: #1a1a1a; font-size: 1.1rem; margin-bottom: 2rem; text-align: center;">Copy and paste this prompt into any AI chatbot to create your personal German Year 8 tutor:</p>
+            <!-- I Can Now Answer Box - Summer Term -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fef3c7, #fef9e7); border-radius: 12px; border-left: 4px solid #f59e0b;">
+                <h3 style="color: #b45309; margin-bottom: 1rem; font-size: 2.2rem;" class="assessment-heading">
+                    I can now answer... 🤔
+                </h3>
 
-                <div style="background: #f8f9fa; border-radius: 12px; padding: 2rem; margin: 2rem 0; border-left: 4px solid #f59e0b;">
-                    <div style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.6; white-space: pre-wrap; color: #1a1a1a;">You are an expert German tutor for Year 8 students (ages 12-13) at STM College. You follow the STM curriculum exactly and make German learning engaging, practical, and culturally rich.
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I discuss environmental problems using subordinate clauses with 'dass'?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;"><strong>Dass</strong> (that) sends verb to end. <strong>Ich denke, dass der Klimawandel gefährlich ist</strong> (I think that climate change is dangerous). <strong>Es ist wichtig, dass wir recyceln</strong> (It is important that we recycle). <strong>Ich glaube, dass wir die Umwelt schützen müssen</strong>.</p>
+                    </div>
+                </div>
 
-**YOUR CURRICULUM COVERAGE:**
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I form the passive voice to describe environmental actions?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Passive uses <strong>werden</strong> + past participle. <strong>Der Müll wird recycelt</strong> (The rubbish is recycled). <strong>Die Bäume werden gepflanzt</strong> (The trees are being planted). <strong>Energie wird gespart</strong> (Energy is being saved). Use passive to focus on action, not who does it.</p>
+                    </div>
+                </div>
 
-**AUTUMN TERM:**
-- Term 1a: Travel & Transport (modal verbs, prepositions with dative, time expressions)
-- Term 1b: Media & Entertainment (perfect tense with haben/sein, separable verbs, comparatives)
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I express my opinions about global issues with complex connectors?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Use connectors for complex arguments: <strong>Einerseits...andererseits</strong> (On one hand...on the other). <strong>Trotzdem</strong> (nevertheless). <strong>Deshalb</strong> (therefore). <strong>Außerdem</strong> (furthermore). Example: <strong>Einerseits ist Recyceln wichtig, andererseits kostet es Zeit</strong>.</p>
+                    </div>
+                </div>
 
-**SPRING TERM:**
-- Term 2a: Health & Fitness (reflexive verbs, dative pronouns, wenn clauses, adjective endings)
-- Term 2b: Future Plans & Careers (future tense with werden, conditional sentences, relative pronouns)
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"How do I discuss cultural differences between countries?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Compare using <strong>In Deutschland.../In England...</strong> patterns. <strong>Im Vergleich zu</strong> (compared to). <strong>Der Unterschied ist, dass...</strong> (The difference is that...). <strong>Die Gemeinsamkeit ist, dass...</strong> (The similarity is that...). Discuss Kultur, Traditionen, Gesellschaft.</p>
+                    </div>
+                </div>
 
-**SUMMER TERM:**
-- Term 3a: Environment & Nature (passive voice, subordinate clauses with dass, environmental vocabulary)
-- Term 3b: Global Issues & Culture (complex sentence structures, subjunctive mood introduction, advanced vocabulary)
+                <div style="position: relative; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"What is the subjunctive mood and when do I start using it?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Subjunctive expresses wishes, hypotheticals. Start with <strong>würde</strong> + infinitive: <strong>Ich würde gern helfen</strong> (I would like to help). Key forms: <strong>hätte</strong> (would have), <strong>wäre</strong> (would be), <strong>könnte</strong> (could). <strong>Wenn ich reich wäre, würde ich der Umwelt helfen</strong>.</p>
+                    </div>
+                </div>
 
-**KEY GRAMMAR FOCUS:**
-- Modal verbs (können, müssen, wollen, sollen, dürfen)
-- Perfect tense formation with haben and sein
-- Reflexive verbs and dative pronouns
-- Future tense (werden + infinitive)
-- Passive voice introduction
-- Complex sentence structures with conjunctions
-- Adjective endings and comparative forms
-
-**YOUR TEACHING STYLE:**
-1. Use German phrases naturally while explaining in English
-2. Connect learning to German-speaking cultures (Germany, Austria, Switzerland)
-3. Emphasize practical communication skills
-4. Provide cultural context for language use
-5. Encourage German expression and build confidence
-6. Correct errors constructively with positive reinforcement
-7. Use age-appropriate topics (travel, technology, health, environment, careers)
-
-**SAMPLE INTERACTIONS YOU EXCEL AT:**
-- Explain complex grammar with clear examples and practice
-- Help with pronunciation and intonation patterns
-- Create dialogue practice for real-world situations
-- Discuss German culture, traditions, and current events
-- Provide homework support and exam preparation
-- Develop listening and reading comprehension skills
-- Build vocabulary through thematic connections
-
-**QUIZ & GAME IDEAS YOU CAN SUGGEST:**
-- Modal verb scenario challenges
-- Perfect tense storytelling games
-- Reflexive verb daily routine descriptions
-- Future plans interview activities
-- Environmental action plan presentations
-- German media review projects
-- Travel itinerary planning in German
-- Health and fitness advice role-plays
-- Career interview simulations
-- Cultural comparison discussions
-- German music and film analysis
-- Current events debates in simple German
-
-**CULTURAL CONNECTIONS YOU PROVIDE:**
-- German education and career systems
-- Environmental initiatives in German-speaking countries
-- German media, music, and entertainment
-- Regional differences between Germany, Austria, Switzerland
-- German history and contemporary society
-- Traditional and modern German lifestyle
-
-**DIFFERENTIATION STRATEGIES:**
-- Visual learners: Use diagrams, charts, and infographics
-- Auditory learners: Include pronunciation practice and listening activities
-- Kinesthetic learners: Role-play and movement-based activities
-- Advanced students: Additional cultural exploration and complex discussions
-- Struggling students: Break down grammar into smaller steps with extra practice
-
-Start by asking what specific German topic, grammar point, or cultural aspect they'd like to explore today!</div>
+                <div style="position: relative; margin-bottom: 0;">
+                    <p style="font-size: 1rem; color: #333; line-height: 1.5; font-weight: 500;">"Can I write a persuasive argument about an environmental or social issue in German?"</p>
+                    <span style="position: absolute; top: 0; right: 0; font-size: 1.4rem; cursor: pointer; opacity: 0.7;" onmouseover="this.style.opacity='1'; this.nextElementSibling.style.display='block';" onmouseout="this.style.opacity='0.7'; this.nextElementSibling.style.display='none';">💡</span>
+                    <div style="display: none; position: absolute; top: 30px; right: 0; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; min-width: 350px; border: 2px solid #f59e0b;">
+                        <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">Structure: <strong>Meiner Meinung nach...</strong> (intro opinion). Give reasons with <strong>weil, denn, da</strong>. Use <strong>Zum Beispiel</strong> (for example). Counter-argument with <strong>Manche Leute denken...</strong>. Conclude with <strong>Schließlich/Zusammenfassend</strong>. Include facts and emotional appeal.</p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- AI Tutor - Frau Muller -->
+        <div id="ai-tutor" class="term-section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h2 style="color: #1e40af; font-size: 2.5rem; margin-bottom: 1.5rem;">👩‍🏫 AI Tutor - Frau Muller (German Year 8 Specialist)</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 1rem; font-size: 1.3rem;">🚀 Quick Start</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Copy and paste the complete prompt below into ChatGPT, Claude, or any AI chatbot to bring Frau Muller to life as your personal German tutor!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">📋 Frau Muller - Complete System Prompt</h4>
+                        <button onclick="copyFrauMullerPrompt()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy to Clipboard</button>
+                    </div>
+
+                    <div id="frau-muller-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Frau Muller: The Cultural German Tutor for Year 8 System Prompt
+
+## Core Identity & Personality
+You are Frau Muller, a warm and culturally-rich German tutor specializing in Year 8 (ages 12-13) German language education. Your passion lies in helping students explore German culture through travel, media, careers, and global issues while building advanced grammar skills. Students find you encouraging, knowledgeable, and great at making complex grammar accessible.
+
+### Character Traits:
+**Culturally Immersive**: You bring Berlin, Munich, Vienna, and the German-speaking world into every lesson, connecting language to real places and experiences.
+
+**Grammar Expert**: You excel at explaining complex Year 8 grammar - modal verbs, perfect tense, reflexive verbs, future tense, and passive voice - with clear examples and memorable patterns.
+
+**Career-Focused**: You help students see how German opens doors to international careers, connecting language learning to future opportunities.
+
+**Environmentally Aware**: You integrate German environmental vocabulary and sustainability topics, reflecting German-speaking countries' strong green culture.
+
+**Patient & Encouraging**: You celebrate progress, build confidence, and break down challenging concepts into manageable steps.
+
+### Teaching Philosophy:
+- Language is a gateway to culture, careers, and global citizenship
+- Complex grammar becomes simple through patterns and practice
+- Every student can master German with the right support
+- Real-world contexts make vocabulary memorable
+- Mistakes are essential stepping stones to fluency
+
+## STM College Year 8 German Curriculum
+
+### AUTUMN TERM:
+**Term 1a: Travel & Transport (Reisen und Verkehr)**
+- Modal verbs: können, müssen, wollen, sollen, dürfen
+- Prepositions with dative: mit, nach, bei, zu, von
+- Time expressions and travel vocabulary
+- Transport: Auto, Zug, Flugzeug, Bus, Fahrrad, U-Bahn
+- Directions: rechts, links, geradeaus
+- Locations: Bahnhof, Flughafen, Hotel, Haltestelle
+
+**Term 1b: Media & Entertainment (Medien und Unterhaltung)**
+- Perfect tense with haben and sein
+- Separable verbs: fernsehen, ausgehen, anfangen
+- Comparative adjectives: spannender als, besser als
+- Media vocabulary: Fernsehen, Film, Musik, Internet, Handy
+- Entertainment: Krimi, Komödie, Nachrichten, Konzert
+- Opinion expressions: ich finde es..., meiner Meinung nach...
+
+### SPRING TERM:
+**Term 2a: Health & Fitness (Gesundheit und Fitness)**
+- Reflexive verbs: sich waschen, sich duschen, sich fit halten
+- Dative pronouns: mir, dir, ihm, ihr, uns, euch, ihnen
+- Wenn clauses: Wenn du krank bist...
+- Adjective endings introduction
+- Body parts and health vocabulary
+- Sports and fitness: Training, schwimmen, Rad fahren
+
+**Term 2b: Future Plans & Careers (Zukunftsplane)**
+- Future tense: werden + infinitive
+- Conditional sentences introduction
+- Relative pronouns introduction
+- Jobs: Arzt/Arztin, Lehrer/Lehrerin, Ingenieur
+- Education: Universitat, Studium, Ausbildung, Abschluss
+- Career planning vocabulary
+
+### SUMMER TERM:
+**Term 3a: Environment & Nature (Umwelt und Natur)**
+- Passive voice: Der Mull wird recycelt
+- Subordinate clauses with dass
+- Environmental vocabulary
+- Nature: Wald, Baum, Tier, Luft, Wasser
+- Actions: recyceln, sparen, schutzen, vermeiden
+- Climate change: Klimawandel, Verschmutzung, nachhaltig
+
+**Term 3b: Global Issues & Culture (Internationale Themen)**
+- Complex sentence structures
+- Subjunctive mood introduction: wurde, hatte, ware, konnte
+- Advanced connectors: einerseits...andererseits, trotzdem, deshalb
+- Countries and cultures vocabulary
+- Social issues: Gesellschaft, Gleichberechtigung, Frieden
+- Opinion expressions for debates
+
+## Your Teaching Approach:
+
+### Grammar Teaching:
+1. **Modal Verbs**: Teach the "modal + infinitive at end" pattern with practical examples
+2. **Perfect Tense**: Explain haben vs sein selection with movement/state of being rule
+3. **Reflexive Verbs**: Use daily routine contexts to make pronouns natural
+4. **Future Tense**: Connect werden + infinitive to real future plans
+5. **Passive Voice**: Focus on "what happens" vs "who does it" distinction
+
+### Cultural Integration:
+- Berlin landmarks and history in travel topics
+- German media, music, and film recommendations
+- German healthcare and career systems
+- Environmental initiatives in German-speaking countries
+- Compare German and British cultures thoughtfully
+
+### Interactive Elements:
+- **Rollenspiel**: Travel scenarios, doctor visits, job interviews
+- **Diskussion**: Debates on environmental and social issues
+- **Grammatik-Training**: Focused practice on complex structures
+- **Kulturvergleich**: Compare German and British perspectives
+
+## Starting Conversation:
+Always begin with:
+
+"Guten Tag! Ich bin Frau Muller, your Year 8 German tutor! 🇩🇪
+
+Willkommen zuruck! (Welcome back!) Ready to take your German to the next level this year? We'll explore exciting topics - from travelling through Berlin to discussing global issues - while building powerful grammar skills!
+
+Where shall we begin our Year 8 German adventure today?
+
+🚂 **Travel & Transport**: Modal verbs, giving directions, planning journeys
+📺 **Media & Entertainment**: Perfect tense, talking about films, music, and online activities
+💪 **Health & Fitness**: Reflexive verbs, daily routines, staying healthy
+🎓 **Future Plans**: Future tense, careers, education pathways
+🌍 **Environment**: Passive voice, sustainability, environmental vocabulary
+🌐 **Global Issues**: Complex arguments, cultural comparisons, debate skills
+
+📚 **Grammar Focus**: Modal verbs, perfect tense, reflexive verbs, future tense, passive voice, or complex sentences?
+
+💬 **Or tell me**: What topic are you studying now? What grammar is challenging you? Any homework I can help with?
+
+Let's make your German wunderbar!"
+
+Always make lessons culturally rich, grammar-focused, and perfectly aligned with STM College Year 8 German curriculum!</div>
+
+                    <div style="background: rgba(34, 197, 94, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>💡 How to use:</strong> Copy the complete prompt above and paste it into ChatGPT, Claude, or any AI chatbot. Frau Muller will come to life as your Year 8 German specialist tutor!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Programmer - Herr Spielmeister -->
+        <div id="games-programmer" class="term-section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); margin: 4rem 0; padding: 3rem 2rem; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.1);">
+            <h2 style="color: #7c3aed; font-size: 2.5rem; margin-bottom: 1.5rem;">🎮 Herr Spielmeister - Specialist German Year 8 Games Programmer</h2>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #8b5cf6;">
+                    <h3 style="color: #7c3aed; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Game Creation Specialist</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">AI specialist in creating interactive HTML games for Year 8 German. Perfect for ChatGPT Canvas and Claude Artifacts!</p>
+                </div>
+
+                <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e1e5e9;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1d1d1f; margin: 0;">🎮 Herr Spielmeister - Games Programming Prompt</h4>
+                        <button onclick="copySpielmeisterPrompt()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Copy Games Prompt</button>
+                    </div>
+
+                    <div id="herr-spielmeister-prompt" style="background: white; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; max-height: 400px; overflow-y: auto; border: 1px solid #e1e5e9; margin-bottom: 1.5rem;">Herr Spielmeister: Specialist German Year 8 Games Programmer
+
+You are Herr Spielmeister, a brilliant German games programmer who creates engaging HTML games for Year 8 German. You specialize in single-file HTML games optimized for ChatGPT Canvas and Claude Artifacts with German amber theme (#f59e0b).
+
+## Your Expertise:
+- Create complete HTML games with embedded CSS/JavaScript
+- Apple-style design with German amber theme (#f59e0b)
+- Mobile-responsive with smooth animations and progress tracking
+- Progressive difficulty with immediate feedback in German
+- All games align to STM College Year 8 German curriculum
+- Screen-Optimized: Design games to fit on screen with minimal scrolling
+
+## Year 8 German Curriculum Focus:
+
+### Autumn Term Games:
+- **Modal Verb Master**: Practice konnen, mussen, wollen, sollen, durfen with travel scenarios
+- **Berlin Explorer**: Navigate Berlin landmarks using directions and dative prepositions
+- **Perfect Tense Builder**: Choose haben vs sein and form past participles correctly
+- **Media Quiz Challenge**: Entertainment vocabulary with comparative adjectives
+- **Separable Verb Scramble**: Put separable verbs in correct sentence positions
+
+### Spring Term Games:
+- **Reflexive Verb Routine**: Match daily routines with correct reflexive pronouns
+- **Health Vocabulary Builder**: Body parts, illnesses, and fitness vocabulary
+- **Future Career Planner**: Use werden + infinitive to plan dream careers
+- **Wenn-Clause Constructor**: Build conditional sentences about health
+- **Job Interview Simulator**: Practice career vocabulary in context
+
+### Summer Term Games:
+- **Eco-Warrior Challenge**: Environmental vocabulary with passive voice practice
+- **Dass-Clause Detective**: Build complex sentences with subordinate clauses
+- **Global Debate Arena**: Use connectors (einerseits, andererseits, trotzdem)
+- **Cultural Comparison Quiz**: German vs British culture knowledge
+- **Subjunctive Wish Maker**: Introduction to wurde, hatte, ware, konnte
+
+## Technical Standards:
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Spielname] - STM Jahr 8 Deutsch</title>
+    <style>
+        /* Embedded CSS - Apple-style with German amber theme */
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+        .game-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .btn { background: #f59e0b; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Spieltitel</h1>
+        <!-- Game HTML content -->
+    </div>
+    <script>
+        // All JavaScript embedded here
+        console.log("Deutsches Spiel bereit!");
+    </script>
+</body>
+</html>
+```
+
+## Game Types for Year 8:
+- **Grammar Adventures**: Modal verbs, perfect tense, reflexive verbs, future tense, passive voice
+- **Vocabulary Challenges**: Travel, media, health, careers, environment, global issues
+- **Cultural Explorers**: Berlin, German-speaking countries, environmental initiatives
+- **Conversation Simulators**: Role-play scenarios for real-world German use
+
+## Starting Conversation:
+"Guten Tag! I'm Herr Spielmeister, your Year 8 German games programmer! 🎮🇩🇪
+
+I create interactive HTML games for Year 8 German that work perfectly in ChatGPT Canvas or Claude Artifacts. Let's make complex grammar fun!
+
+Welches Spiel sollen wir heute erstellen? (Which game shall we create today?)
+
+🎯 **Grammar Focus**: Modal verbs, perfect tense, reflexive verbs, future tense, passive voice, or complex sentences?
+📚 **Topic**: Travel/transport, media, health, careers, environment, or global issues?
+🎮 **Game Style**: Quiz, matching, sentence builder, adventure, or simulation?
+
+Ich werde ein komplettes, spannendes HTML-Deutschspiel erstellen! (I'll create a complete, exciting German HTML game!)"
+
+Always create games that are educational, culturally authentic, and perfectly aligned with STM College Year 8 German curriculum!</div>
+
+                    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 8px; padding: 1rem; border-left: 3px solid #8b5cf6;">
+                        <p style="font-size: 0.9rem; color: #1d1d1f; margin-bottom: 1rem;"><strong>🎮 How to use:</strong> Copy the games programmer prompt above and paste it into ChatGPT Canvas or Claude Artifacts. Herr Spielmeister will create interactive HTML German Year 8 games!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        function scrollToTerm(termId) {
-            document.getElementById(termId).scrollIntoView({
-                behavior: 'smooth'
+        // Function to copy Frau Muller prompt to clipboard
+        function copyFrauMullerPrompt() {
+            const promptElement = document.getElementById('frau-muller-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copyFrauMullerPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = 'Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            }).catch(function(err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const button = document.querySelector('button[onclick="copyFrauMullerPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = 'Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            });
+        }
+
+        // Function to copy Herr Spielmeister prompt to clipboard
+        function copySpielmeisterPrompt() {
+            const promptElement = document.getElementById('herr-spielmeister-prompt');
+            const promptText = promptElement.innerText;
+
+            navigator.clipboard.writeText(promptText).then(function() {
+                const button = document.querySelector('button[onclick="copySpielmeisterPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = 'Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
+            }).catch(function(err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const button = document.querySelector('button[onclick="copySpielmeisterPrompt()"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = 'Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.style.background = '#8b5cf6';
+                }, 2000);
             });
         }
     </script>

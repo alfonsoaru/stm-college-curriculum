@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Berlin Runner - German Year 8 Autumn Term</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-canvas {
+            display: block;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .hud-item {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        #question-overlay {
+            display: block;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 150;
+            pointer-events: none;
+        }
+
+        .question-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 3px solid #f59e0b;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .checkpoint-badge {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .question-context {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .answer-btn {
+            background: #f5f5f7;
+            border: 2px solid #e5e5e5;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e8e8ed;
+            border-color: #f59e0b;
+            transform: translateY(-2px);
+        }
+
+        .answer-btn.correct {
+            background: #22c55e;
+            border-color: #16a34a;
+            color: white;
+        }
+
+        .answer-btn.wrong {
+            background: #ef4444;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        #start-screen, #gameover-screen, #win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #gameover-screen, #win-screen {
+            display: none;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .instructions em {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .instructions p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(29, 78, 216, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(29, 78, 216, 0.5);
+        }
+
+        .theme-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback-text.correct {
+            background: rgba(34, 197, 94, 0.2);
+            color: #166534;
+            display: block;
+        }
+
+        .feedback-text.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        #mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .jump-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #mobile-controls {
+                display: block;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="hud">
+            <div class="hud-item">🏛️ Level: <span id="level">1</span>/3</div>
+            <div class="hud-item">🥨 <span id="pretzels">0</span></div>
+            <div class="hud-item">⭐ <span id="score">0</span></div>
+            <div class="hud-item">❤️ <span id="lives">3</span></div>
+        </div>
+
+        <div id="mobile-controls">
+            <button class="jump-btn" id="jump-btn">⬆️</button>
+        </div>
+
+        <div id="question-overlay">
+            <div class="question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div class="checkpoint-badge">🇩🇪 Q<span id="checkpoint-num">1</span>/<span id="total-questions">12</span></div>
+                    <button id="read-again-btn" onclick="rereadQuestion()" style="background: #f59e0b; color: white; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">🔊 Read Again</button>
+                </div>
+                <div class="question-text" id="q-text">Loading...</div>
+                <div class="question-context" id="q-context">German Grammar Practice</div>
+                <div class="answers-grid" id="answers"></div>
+                <div class="feedback-text" id="feedback"></div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <div class="theme-emoji">🇩🇪</div>
+            <h1 class="title">Berlin Runner</h1>
+            <p class="subtitle">Run, Jump & Master German Grammar!<br><em style="font-size: 0.9em; opacity: 0.8;">Lauf durch Berlin und lerne Deutsch!</em></p>
+
+            <div class="instructions">
+                <h3>How to Play / Wie man spielt</h3>
+                <p>🏃 <strong>RUN</strong> through the streets of Berlin!</p>
+                <p>📚 Practice <strong>MODAL VERBS</strong> & <strong>PERFECT TENSE</strong>!</p>
+                <p>🥨 Collect pretzels for bonus points!</p>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p><strong>⌨️ Keyboard:</strong> SPACE = Jump | A B C D = Answer</p>
+                    <p><strong>🎮 Xbox:</strong> RT/LT = Jump | X Y A B = Answer</p>
+                </div>
+
+                <p style="margin-top: 1rem;">✅ Correct = +1 Life | Learn modal verbs & Perfekt!</p>
+            </div>
+
+            <button class="start-btn" onclick="startGame()">Los geht's! 🚀</button>
+        </div>
+
+        <div id="gameover-screen">
+            <div class="result-icon">💔</div>
+            <h1 class="title">Game Over!</h1>
+            <p class="subtitle">Du hast alle Leben verloren!</p>
+            <div class="stats">
+                <p>Level / Stufe: <span id="final-level">1</span></p>
+                <p>Score / Punkte: <span id="final-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Nochmal! 🔄</button>
+        </div>
+
+        <div id="win-screen">
+            <div class="result-icon">🏆</div>
+            <h1 class="title">Herzlichen Glückwunsch!</h1>
+            <p class="subtitle">Du beherrschst die deutsche Grammatik!</p>
+            <div class="stats">
+                <p>🥨 Pretzels / Brezeln: <span id="win-pretzels">0</span></p>
+                <p>⭐ Score / Punkte: <span id="win-score">0</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Nochmal spielen! 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let gameRunning = false;
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let distance = 0;
+        let checkpointDistance = 22000;
+        let gameSpeed = 4;
+        let baseSpeed = 4;
+        let isSpeakingFeedback = false;
+
+        // Collectibles
+        let pretzels = [];
+        let pretzelCount = 0;
+
+        // Power-ups
+        let powerUps = [];
+        let isInvincible = false;
+        let invincibleTimer = 0;
+
+        // Player
+        let player = {
+            x: 100,
+            y: 0,
+            width: 50,
+            height: 70,
+            velocityY: 0,
+            jumping: false,
+            grounded: true
+        };
+
+        // Physics
+        const gravity = 0.8;
+        const jumpForce = -16;
+
+        // Obstacles
+        let obstacles = [];
+        let obstacleTimer = 0;
+
+        // Background
+        let bgOffset = 0;
+        let buildings = [];
+        let clouds = [];
+
+        // German Year 8 Autumn Term Questions - Modal Verbs, Perfect Tense, Travel & Media
+        const questions = [
+            // Modal Verbs - Travel Context
+            {
+                text: "Ich ___ mit dem Zug fahren",
+                context: "Modal verb: können (can/to be able to)",
+                answers: ["kann", "bin", "habe", "werde"],
+                correct: 0,
+                explanation: "Können (can): ich kann = I can",
+                english: "I can travel by train"
+            },
+            {
+                text: "Du ___ eine Karte kaufen",
+                context: "Modal verb: müssen (must/have to)",
+                answers: ["musst", "bist", "hast", "wirst"],
+                correct: 0,
+                explanation: "Müssen (must): du musst = you must",
+                english: "You must buy a ticket"
+            },
+            {
+                text: "Er ___ nach Berlin reisen",
+                context: "Modal verb: wollen (to want to)",
+                answers: ["will", "ist", "hat", "wird"],
+                correct: 0,
+                explanation: "Wollen (want): er will = he wants",
+                english: "He wants to travel to Berlin"
+            },
+            {
+                text: "Wir ___ das Gepäck tragen",
+                context: "Modal verb: sollen (should)",
+                answers: ["sollen", "sind", "haben", "werden"],
+                correct: 0,
+                explanation: "Sollen (should): wir sollen = we should",
+                english: "We should carry the luggage"
+            },
+            {
+                text: "Sie ___ hier parken",
+                context: "Modal verb: dürfen (may/allowed to)",
+                answers: ["dürfen", "sind", "haben", "werden"],
+                correct: 0,
+                explanation: "Dürfen (may): sie dürfen = they may",
+                english: "They are allowed to park here"
+            },
+            // Perfect Tense - Media Context
+            {
+                text: "Ich ___ einen Film gesehen",
+                context: "Perfect tense with HABEN",
+                answers: ["habe", "bin", "kann", "will"],
+                correct: 0,
+                explanation: "Sehen uses HABEN: ich habe gesehen",
+                english: "I watched/have watched a film"
+            },
+            {
+                text: "Er ___ Musik gehört",
+                context: "Perfect tense with HABEN",
+                answers: ["hat", "ist", "kann", "will"],
+                correct: 0,
+                explanation: "Hören uses HABEN: er hat gehört",
+                english: "He listened to music"
+            },
+            {
+                text: "Wir ___ ins Kino gegangen",
+                context: "Perfect tense with SEIN (movement)",
+                answers: ["sind", "haben", "können", "wollen"],
+                correct: 0,
+                explanation: "Gehen uses SEIN: wir sind gegangen",
+                english: "We went to the cinema"
+            },
+            {
+                text: "Sie ___ nach Hause gefahren",
+                context: "Perfect tense with SEIN (movement)",
+                answers: ["ist", "hat", "kann", "will"],
+                correct: 0,
+                explanation: "Fahren uses SEIN: sie ist gefahren",
+                english: "She drove/went home"
+            },
+            // Vocabulary - Transport
+            {
+                text: "What is 'der Bahnhof'?",
+                context: "Travel vocabulary",
+                answers: ["train station", "airport", "bus stop", "hotel"],
+                correct: 0,
+                explanation: "Der Bahnhof = the train station",
+                english: null
+            },
+            // Vocabulary - Media
+            {
+                text: "What is 'das Fernsehen'?",
+                context: "Media vocabulary",
+                answers: ["television", "radio", "newspaper", "cinema"],
+                correct: 0,
+                explanation: "Das Fernsehen = the television",
+                english: null
+            },
+            // Directions
+            {
+                text: "What is 'geradeaus'?",
+                context: "Directions vocabulary",
+                answers: ["straight ahead", "left", "right", "back"],
+                correct: 0,
+                explanation: "Geradeaus = straight ahead",
+                english: null
+            }
+        ];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 150 - player.height;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        function generateBuildings() {
+            buildings = [];
+            for (let i = 0; i < 10; i++) {
+                buildings.push({
+                    x: i * 200 + Math.random() * 80,
+                    width: 80 + Math.random() * 60,
+                    height: 150 + Math.random() * 150,
+                    color: ['#374151', '#4b5563', '#6b7280', '#1f2937'][Math.floor(Math.random() * 4)]
+                });
+            }
+        }
+
+        function generateClouds() {
+            clouds = [];
+            for (let i = 0; i < 6; i++) {
+                clouds.push({
+                    x: i * 300 + Math.random() * 150,
+                    y: 40 + Math.random() * 60,
+                    size: 25 + Math.random() * 20
+                });
+            }
+        }
+
+        function drawBackground() {
+            // Sky gradient - German autumn day
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.6);
+            skyGradient.addColorStop(0, '#93c5fd');
+            skyGradient.addColorStop(1, '#bfdbfe');
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height * 0.6);
+
+            // Sun
+            ctx.fillStyle = '#fbbf24';
+            ctx.beginPath();
+            ctx.arc(canvas.width - 120, 80, 45, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#fcd34d';
+            ctx.beginPath();
+            ctx.arc(canvas.width - 120, 80, 35, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Clouds
+            ctx.fillStyle = 'rgba(255,255,255,0.9)';
+            clouds.forEach(cloud => {
+                const cloudX = ((cloud.x - bgOffset * 0.2) % (canvas.width + 300)) - 100;
+                drawCloud(cloudX, cloud.y, cloud.size);
+            });
+
+            // Brandenburg Gate silhouette (far background)
+            drawBrandenburgGate();
+
+            // Buildings (Berlin skyline)
+            buildings.forEach(building => {
+                const buildingX = ((building.x - bgOffset * 0.5) % (canvas.width + 400)) - 200;
+                drawBuilding(buildingX, building);
+            });
+
+            // Street
+            ctx.fillStyle = '#374151';
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 150);
+
+            // Sidewalk
+            ctx.fillStyle = '#9ca3af';
+            ctx.fillRect(0, canvas.height - 150, canvas.width, 20);
+
+            // Street markings
+            ctx.fillStyle = '#fcd34d';
+            for (let x = -bgOffset % 100; x < canvas.width; x += 100) {
+                ctx.fillRect(x, canvas.height - 80, 50, 5);
+            }
+
+            // Cobblestone details
+            ctx.fillStyle = '#4b5563';
+            for (let x = -bgOffset % 40; x < canvas.width; x += 40) {
+                ctx.beginPath();
+                ctx.arc(x, canvas.height - 50 + Math.sin(x) * 5, 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawCloud(x, y, size) {
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.arc(x + size, y - 5, size * 1.2, 0, Math.PI * 2);
+            ctx.arc(x + size * 2, y, size, 0, Math.PI * 2);
+            ctx.arc(x + size, y + 8, size * 0.8, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawBrandenburgGate() {
+            const gateX = ((800 - bgOffset * 0.3) % (canvas.width + 600)) - 200;
+            const gateY = canvas.height - 350;
+
+            // Gate silhouette
+            ctx.fillStyle = 'rgba(100, 100, 100, 0.3)';
+
+            // Main pillars
+            for (let i = 0; i < 6; i++) {
+                ctx.fillRect(gateX + i * 30, gateY, 15, 150);
+            }
+
+            // Top beam
+            ctx.fillRect(gateX - 10, gateY - 20, 180, 25);
+
+            // Chariot on top (quadriga)
+            ctx.fillRect(gateX + 60, gateY - 50, 40, 30);
+        }
+
+        function drawBuilding(x, building) {
+            // Main building
+            ctx.fillStyle = building.color;
+            ctx.fillRect(x, canvas.height - 150 - building.height, building.width, building.height);
+
+            // Windows
+            ctx.fillStyle = '#fef3c7';
+            const windowRows = Math.floor(building.height / 40);
+            const windowCols = Math.floor(building.width / 25);
+            for (let row = 0; row < windowRows; row++) {
+                for (let col = 0; col < windowCols; col++) {
+                    if (Math.random() > 0.3) {
+                        ctx.fillRect(
+                            x + 10 + col * 25,
+                            canvas.height - 150 - building.height + 20 + row * 40,
+                            15, 25
+                        );
+                    }
+                }
+            }
+
+            // Roof
+            ctx.fillStyle = '#991b1b';
+            ctx.beginPath();
+            ctx.moveTo(x - 5, canvas.height - 150 - building.height);
+            ctx.lineTo(x + building.width / 2, canvas.height - 150 - building.height - 30);
+            ctx.lineTo(x + building.width + 5, canvas.height - 150 - building.height);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function drawPlayer() {
+            // Body - German colors inspired outfit
+            ctx.fillStyle = '#1d4ed8';
+            ctx.fillRect(player.x, player.y + 20, player.width - 10, 35);
+
+            // Head
+            ctx.fillStyle = '#fcd5b8';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 12, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Hair
+            ctx.fillStyle = '#78350f';
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 5, 12, Math.PI, 0);
+            ctx.fill();
+
+            // Backpack (tourist)
+            ctx.fillStyle = '#dc2626';
+            ctx.fillRect(player.x + 35, player.y + 22, 12, 25);
+
+            // Face
+            ctx.fillStyle = '#1d1d1f';
+            ctx.fillRect(player.x + 14, player.y + 10, 4, 4);
+            ctx.fillRect(player.x + 24, player.y + 10, 4, 4);
+
+            // Smile
+            ctx.beginPath();
+            ctx.arc(player.x + 20, player.y + 16, 6, 0, Math.PI);
+            ctx.stroke();
+
+            // Legs
+            ctx.fillStyle = '#1f2937';
+            if (player.grounded) {
+                ctx.fillRect(player.x + 5, player.y + 55, 12, 15);
+                ctx.fillRect(player.x + 22, player.y + 55, 12, 15);
+            } else {
+                ctx.fillRect(player.x + 5, player.y + 50, 12, 20);
+                ctx.fillRect(player.x + 22, player.y + 50, 12, 20);
+            }
+        }
+
+        function spawnObstacle() {
+            const types = [
+                { width: 45, height: 50, emoji: '🚴' },  // Cyclist
+                { width: 50, height: 40, emoji: '🧳' },  // Suitcase
+                { width: 40, height: 55, emoji: '🚧' },  // Construction
+                { width: 55, height: 35, emoji: '🛴' },  // Scooter
+                { width: 45, height: 45, emoji: '📮' },  // Postbox
+                { width: 50, height: 50, emoji: '🗑️' },  // Bin
+                { width: 40, height: 40, emoji: '🎒' }   // Backpack
+            ];
+            const type = types[Math.floor(Math.random() * types.length)];
+
+            obstacles.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - type.height,
+                width: type.width,
+                height: type.height,
+                emoji: type.emoji
+            });
+
+            if (Math.random() < 0.15 && level > 1) {
+                const type2 = types[Math.floor(Math.random() * types.length)];
+                obstacles.push({
+                    x: canvas.width + 150,
+                    y: canvas.height - 150 - type2.height,
+                    width: type2.width,
+                    height: type2.height,
+                    emoji: type2.emoji
+                });
+            }
+        }
+
+        function spawnPretzel() {
+            const heights = [80, 120, 160];
+            pretzels.push({
+                x: canvas.width + 50,
+                y: canvas.height - 150 - heights[Math.floor(Math.random() * heights.length)],
+                collected: false
+            });
+        }
+
+        function spawnPowerUp() {
+            const types = ['shield', 'magnet', 'slow'];
+            powerUps.push({
+                x: canvas.width + 50,
+                y: canvas.height - 280,
+                type: types[Math.floor(Math.random() * types.length)],
+                collected: false
+            });
+        }
+
+        function drawObstacles() {
+            obstacles.forEach(obs => {
+                ctx.font = `${obs.height}px Arial`;
+                ctx.fillText(obs.emoji, obs.x, obs.y + obs.height - 5);
+            });
+        }
+
+        function drawPretzels() {
+            pretzels.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '35px Arial';
+                    const bob = Math.sin(Date.now() / 200 + p.x) * 5;
+                    ctx.fillText('🥨', p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawPowerUps() {
+            powerUps.forEach(p => {
+                if (!p.collected) {
+                    ctx.font = '40px Arial';
+                    const bob = Math.sin(Date.now() / 150) * 8;
+                    let emoji = p.type === 'shield' ? '⭐' : p.type === 'magnet' ? '🧲' : '⏱️';
+                    ctx.fillText(emoji, p.x, p.y + bob);
+                }
+            });
+        }
+
+        function drawProgressBar() {
+            const barWidth = 200;
+            const barHeight = 10;
+            const barX = canvas.width / 2 - barWidth / 2;
+            const barY = 70;
+            const progress = Math.min(distance / checkpointDistance, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            ctx.fillStyle = '#22c55e';
+            ctx.fillRect(barX, barY, barWidth * progress, barHeight);
+
+            ctx.fillStyle = 'white';
+            ctx.font = '12px Arial';
+            ctx.fillText('🏁', barX + barWidth - 15, barY + 10);
+        }
+
+        let pretzelSpawnTimer = 0;
+        let powerUpSpawnTimer = 0;
+        let comboCount = 0;
+        let comboTimer = 0;
+
+        function update() {
+            if (!gameRunning) return;
+
+            gameSpeed = Math.min(baseSpeed + 5, baseSpeed + (distance / 5000));
+
+            bgOffset += gameSpeed;
+            distance += gameSpeed;
+
+            if (!player.grounded) {
+                player.velocityY += gravity;
+                player.y += player.velocityY;
+
+                if (player.y >= canvas.height - 150 - player.height) {
+                    player.y = canvas.height - 150 - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                    player.jumping = false;
+                }
+            }
+
+            obstacleTimer++;
+            const obstacleFreq = Math.max(80, 180 - gameSpeed * 15);
+            if (obstacleTimer > obstacleFreq + Math.random() * 60) {
+                spawnObstacle();
+                obstacleTimer = 0;
+            }
+
+            pretzelSpawnTimer++;
+            if (pretzelSpawnTimer > 40 + Math.random() * 30) {
+                spawnPretzel();
+                pretzelSpawnTimer = 0;
+            }
+
+            powerUpSpawnTimer++;
+            if (powerUpSpawnTimer > 400 + Math.random() * 200) {
+                spawnPowerUp();
+                powerUpSpawnTimer = 0;
+            }
+
+            obstacles.forEach(obs => { obs.x -= gameSpeed; });
+            pretzels.forEach(p => { p.x -= gameSpeed; });
+            powerUps.forEach(p => { p.x -= gameSpeed; });
+
+            obstacles = obstacles.filter(obs => obs.x > -100);
+            pretzels = pretzels.filter(p => p.x > -100);
+            powerUps = powerUps.filter(p => p.x > -100);
+
+            if (!isInvincible) {
+                obstacles.forEach(obs => {
+                    if (player.x < obs.x + obs.width - 10 &&
+                        player.x + player.width - 10 > obs.x &&
+                        player.y + player.height > obs.y &&
+                        player.y < obs.y + obs.height) {
+                        hitObstacle();
+                    }
+                });
+            }
+
+            pretzels.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 35 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 35 &&
+                    player.y + player.height > p.y - 20) {
+                    p.collected = true;
+                    pretzelCount++;
+                    score += 50;
+                    comboCount++;
+                    comboTimer = 60;
+                    if (comboCount >= 3) score += comboCount * 20;
+                }
+            });
+
+            powerUps.forEach(p => {
+                if (!p.collected &&
+                    player.x < p.x + 40 &&
+                    player.x + player.width > p.x &&
+                    player.y < p.y + 20 &&
+                    player.y + player.height > p.y - 30) {
+                    p.collected = true;
+                    activatePowerUp(p.type);
+                }
+            });
+
+            if (comboTimer > 0) comboTimer--;
+            else comboCount = 0;
+
+            if (isInvincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) isInvincible = false;
+            }
+
+            if (distance >= checkpointDistance) reachCheckpoint();
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('pretzels').textContent = pretzelCount;
+        }
+
+        function activatePowerUp(type) {
+            if (type === 'shield') {
+                isInvincible = true;
+                invincibleTimer = 180;
+            } else if (type === 'slow') {
+                gameSpeed = Math.max(3, gameSpeed - 2);
+                setTimeout(() => { gameSpeed = baseSpeed; }, 3000);
+            } else if (type === 'magnet') {
+                pretzels.forEach(p => {
+                    if (!p.collected && p.x < player.x + 300) {
+                        p.x = player.x + 30;
+                        p.y = player.y + 20;
+                    }
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawPretzels();
+            drawPowerUps();
+            drawObstacles();
+            drawPlayer();
+            drawProgressBar();
+
+            if (comboCount >= 3) {
+                ctx.fillStyle = '#fbbf24';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText(`COMBO x${comboCount}!`, player.x - 20, player.y - 30);
+            }
+
+            if (isInvincible) {
+                ctx.strokeStyle = 'rgba(251, 191, 36, 0.8)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(player.x + 25, player.y + 35, 45, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (player.grounded && gameRunning) {
+                player.velocityY = jumpForce;
+                player.grounded = false;
+                player.jumping = true;
+            }
+        }
+
+        function hitObstacle() {
+            lives--;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                obstacles = [];
+                distance = Math.max(0, distance - 200);
+                canvas.style.filter = 'brightness(2)';
+                setTimeout(() => canvas.style.filter = 'none', 100);
+            }
+        }
+
+        function reachCheckpoint() {
+            distance = 0;
+            level++;
+
+            if (level > 3) {
+                winGame();
+                return;
+            }
+
+            checkpointDistance = 22000 + level * 2000;
+            baseSpeed = 4 + level * 0.5;
+            gameSpeed = baseSpeed;
+            document.getElementById('level').textContent = level;
+        }
+
+        // TTS Functions - German voice detection
+        function isGermanText(text) {
+            // Check for German-specific characters and patterns
+            return /[äöüßÄÖÜ]/.test(text) ||
+                   /^(Ich|Du|Er|Sie|Wir|Ihr|Es|Das|Der|Die|Was|Wie|Wo|Wann|Warum)\b/i.test(text) ||
+                   /\b(kann|musst|will|sollen|dürfen|habe|hat|bin|ist|sind|haben|sein|werden|wurde|mit|dem|der|die|das|und|oder|aber|nicht|kein|eine?|einen?|einem)\b/i.test(text);
+        }
+
+        function speak(text, lang = 'de-DE') {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                const voices = speechSynthesis.getVoices();
+                const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+                if (voice) utterance.voice = voice;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[questionCount % questions.length];
+            currentQuestion = question;
+
+            // Show position in question cycle (1-12, not counting up forever)
+            const questionInCycle = (questionCount % questions.length) + 1;
+            document.getElementById('checkpoint-num').textContent = questionInCycle;
+            document.getElementById('total-questions').textContent = questions.length;
+            document.getElementById('q-text').textContent = question.text;
+            document.getElementById('q-context').textContent = question.context;
+
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+
+            const shuffledAnswers = question.answers.map((ans, i) => ({ text: ans, isCorrect: i === question.correct }));
+            shuffledAnswers.sort(() => Math.random() - 0.5);
+            currentAnswers = shuffledAnswers;
+
+            const labels = ['A', 'B', 'C', 'D'];
+            shuffledAnswers.forEach((ans, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.onclick = () => handleAnswer(btn, ans.isCorrect, question.explanation);
+                btn.innerHTML = `<strong>${labels[i]}</strong> ${ans.text}`;
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback-text';
+
+            readQuestionAndAnswers(question.text, shuffledAnswers, labels);
+        }
+
+        function readQuestionAndAnswers(questionText, answers, labels) {
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeakingFeedback) return;
+
+            speechSynthesis.cancel();
+
+            const voices = speechSynthesis.getVoices();
+            const germanVoice = voices.find(v => v.lang === 'de-DE' && v.name.includes('Google')) ||
+                               voices.find(v => v.lang.startsWith('de'));
+            const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                voices.find(v => v.lang.startsWith('en'));
+
+            const queue = [];
+
+            // Clean underscores
+            let cleanedQuestion = questionText.replace(/_+/g, 'blank');
+
+            // Detect if question is German or English
+            const questionIsGerman = isGermanText(questionText);
+
+            const qUtterance = new SpeechSynthesisUtterance(cleanedQuestion);
+            qUtterance.lang = questionIsGerman ? 'de-DE' : 'en-GB';
+            qUtterance.rate = 0.9;
+            if (questionIsGerman && germanVoice) qUtterance.voice = germanVoice;
+            else if (englishVoice) qUtterance.voice = englishVoice;
+            queue.push(qUtterance);
+
+            // Answers
+            answers.forEach((ans, i) => {
+                const labelUtterance = new SpeechSynthesisUtterance(labels[i]);
+                labelUtterance.lang = 'en-GB';
+                labelUtterance.rate = 1.0;
+                if (englishVoice) labelUtterance.voice = englishVoice;
+                queue.push(labelUtterance);
+
+                const ansIsGerman = isGermanText(ans.text);
+
+                const ansUtterance = new SpeechSynthesisUtterance(ans.text);
+                ansUtterance.lang = ansIsGerman ? 'de-DE' : 'en-GB';
+                ansUtterance.rate = 0.85;
+                if (ansIsGerman && germanVoice) ansUtterance.voice = germanVoice;
+                else if (englishVoice) ansUtterance.voice = englishVoice;
+                queue.push(ansUtterance);
+            });
+
+            let i = 0;
+            function playNext() {
+                if (i < queue.length) {
+                    queue[i].onend = playNext;
+                    speechSynthesis.speak(queue[i]);
+                    i++;
+                }
+            }
+            playNext();
+        }
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.getVoices();
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        let questionCount = 0;
+        let currentQuestion = null;
+        let currentAnswers = null;
+        const answerLabels = ['A', 'B', 'C', 'D'];
+
+        function rereadQuestion() {
+            if (currentQuestion && currentAnswers) {
+                readQuestionAndAnswers(currentQuestion.text, currentAnswers, answerLabels);
+            }
+        }
+
+        function handleAnswer(btn, isCorrect, explanation) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('feedback');
+            const question = questions[questionCount % questions.length];
+            const correctAnswer = question.answers[question.correct];
+            const englishTranslation = question.english;
+
+            speechSynthesis.cancel();
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                lives++;
+                score += 200;
+                document.getElementById('lives').textContent = lives;
+                document.getElementById('score').textContent = score;
+
+                // Show translation in feedback if available
+                if (englishTranslation) {
+                    feedback.textContent = '✅ +1 ❤️ = "' + englishTranslation + '"';
+                } else {
+                    feedback.textContent = '✅ +1 ❤️ +200pts!';
+                }
+                feedback.className = 'feedback-text correct';
+
+                // Speak correct, then English translation if available, then "next question"
+                speakFeedback("Correct!", 'en-GB', () => {
+                    if (englishTranslation) {
+                        speakFeedback("This means: " + englishTranslation, 'en-GB', () => {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        });
+                    } else {
+                        speakFeedback("Next question!", 'en-GB', () => {
+                            questionCount++;
+                            showQuestion();
+                        }, true);
+                    }
+                });
+            } else {
+                btn.classList.add('wrong');
+
+                // Show answer and translation
+                if (englishTranslation) {
+                    feedback.textContent = '❌ ' + correctAnswer + ' = "' + englishTranslation + '"';
+                } else {
+                    feedback.textContent = '❌ Nein! ' + correctAnswer;
+                }
+                feedback.className = 'feedback-text wrong';
+
+                // Speak wrong, answer in German, then English translation, then "next question"
+                speakFeedback("Wrong! The answer is:", 'en-GB', () => {
+                    const answerIsGerman = isGermanText(correctAnswer);
+                    speakFeedback(correctAnswer, answerIsGerman ? 'de-DE' : 'en-GB', () => {
+                        if (englishTranslation) {
+                            speakFeedback("This means: " + englishTranslation, 'en-GB', () => {
+                                speakFeedback("Next question!", 'en-GB', () => {
+                                    questionCount++;
+                                    showQuestion();
+                                }, true);
+                            });
+                        } else {
+                            speakFeedback("Next question!", 'en-GB', () => {
+                                questionCount++;
+                                showQuestion();
+                            }, true);
+                        }
+                    });
+                });
+            }
+        }
+
+        function speakFeedback(text, lang, callback, isLast = false) {
+            isSpeakingFeedback = true;
+            const voices = speechSynthesis.getVoices();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 1.0;
+
+            if (lang === 'de-DE') {
+                const germanVoice = voices.find(v => v.lang === 'de-DE' && v.name.includes('Google')) ||
+                                   voices.find(v => v.lang.startsWith('de'));
+                if (germanVoice) utterance.voice = germanVoice;
+            } else {
+                const englishVoice = voices.find(v => v.lang === 'en-GB' && v.name.includes('Google')) ||
+                                    voices.find(v => v.lang.startsWith('en'));
+                if (englishVoice) utterance.voice = englishVoice;
+            }
+
+            utterance.onend = () => {
+                if (isLast) isSpeakingFeedback = false;
+                if (callback) callback();
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'flex';
+            document.getElementById('final-level').textContent = level;
+            document.getElementById('final-score').textContent = score;
+        }
+
+        function winGame() {
+            gameRunning = false;
+            speechSynthesis.cancel();
+            document.getElementById('question-overlay').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'flex';
+            document.getElementById('win-score').textContent = score;
+            document.getElementById('win-pretzels').textContent = pretzelCount;
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('gameover-screen').style.display = 'none';
+            document.getElementById('win-screen').style.display = 'none';
+            document.getElementById('question-overlay').style.display = 'block';
+
+            level = 1;
+            score = 0;
+            lives = 3;
+            distance = 0;
+            checkpointDistance = 22000;
+            gameSpeed = 4;
+            baseSpeed = 4;
+            isSpeakingFeedback = false;
+            obstacles = [];
+            pretzels = [];
+            powerUps = [];
+            pretzelCount = 0;
+            isInvincible = false;
+            invincibleTimer = 0;
+            comboCount = 0;
+            comboTimer = 0;
+            obstacleTimer = 0;
+            pretzelSpawnTimer = 0;
+            powerUpSpawnTimer = 0;
+            questionCount = 0;
+
+            document.getElementById('level').textContent = level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            document.getElementById('pretzels').textContent = pretzelCount;
+
+            player.y = canvas.height - 150 - player.height;
+            player.velocityY = 0;
+            player.grounded = true;
+
+            generateBuildings();
+            generateClouds();
+            gameRunning = true;
+
+            showQuestion();
+        }
+
+        // Gamepad support
+        let gamepadConnected = false;
+        let lastButtonStates = {};
+
+        window.addEventListener('gamepadconnected', () => { gamepadConnected = true; });
+        window.addEventListener('gamepaddisconnected', () => { gamepadConnected = false; });
+
+        function pollGamepad() {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads) return;
+
+            for (const gamepad of gamepads) {
+                if (!gamepad) continue;
+
+                const buttons = gamepad.buttons;
+
+                if ((buttons[7]?.pressed || buttons[6]?.pressed) && !lastButtonStates['jump']) {
+                    jump();
+                    lastButtonStates['jump'] = true;
+                } else if (!buttons[7]?.pressed && !buttons[6]?.pressed) {
+                    lastButtonStates['jump'] = false;
+                }
+
+                const answerMap = [
+                    { btn: 2, answer: 0, key: 'X' },
+                    { btn: 3, answer: 1, key: 'Y' },
+                    { btn: 0, answer: 2, key: 'A' },
+                    { btn: 1, answer: 3, key: 'B' }
+                ];
+
+                answerMap.forEach(({ btn, answer, key }) => {
+                    if (buttons[btn]?.pressed && !lastButtonStates[key]) {
+                        const answerBtns = document.querySelectorAll('.answer-btn');
+                        if (answerBtns[answer] && !answerBtns[answer].disabled) {
+                            answerBtns[answer].click();
+                        }
+                        lastButtonStates[key] = true;
+                    } else if (!buttons[btn]?.pressed) {
+                        lastButtonStates[key] = false;
+                    }
+                });
+            }
+            requestAnimationFrame(pollGamepad);
+        }
+        pollGamepad();
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+
+            const keyMap = { 'KeyA': 0, 'KeyB': 1, 'KeyC': 2, 'KeyD': 3 };
+            if (keyMap.hasOwnProperty(e.code)) {
+                const btns = document.querySelectorAll('.answer-btn');
+                if (btns[keyMap[e.code]] && !btns[keyMap[e.code]].disabled) {
+                    btns[keyMap[e.code]].click();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', jump);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+        document.getElementById('jump-btn').addEventListener('click', jump);
+        document.getElementById('jump-btn').addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+
+        // Initialize
+        resizeCanvas();
+        generateBuildings();
+        generateClouds();
+        gameLoop();
+    </script>
+</body>
+</html>
