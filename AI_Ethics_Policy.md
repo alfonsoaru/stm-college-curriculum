@@ -56,13 +56,15 @@ This policy defines how STM College Curriculum content that references or enable
 
 ## 8) Review cadence
 - **Quarterly** policy and register review, or sooner after significant AI-related changes.
-- Document decisions and residual risks in version control; update this file when components, risks, or controls change.
+- Document decisions, checklist results, and residual risks in version control; update this file when components, risks, or controls change.
 
 ## 9) AI page checklist (concise)
-Use this quick checklist whenever adding or updating pages with AI content:
+Use this quick checklist for **every page** (AI or not) and record outcomes in review notes:
+0. **AI present?** Does the page include AI prompts/sections? If **no**, record “No AI content” and stop here. If **yes**, continue with steps 1–6.
 1. **Locate AI sections:** Confirm the page has AI tutor and/or AI game/programmer prompts (e.g., `subjects/*-year-7.html`, `subjects/*-year-8.html`, templates in `CLAUDE.md`, `mathematics-year-7-template.md`, `subjectstyle.md`).
 2. **Log the page:** Ensure the AI component register (Section 4) covers the page pattern or add a new row if the location is unique.
 3. **Notices in-page:** Verify the page text near prompts reminds users to avoid personal data and to treat AI outputs as study aids reviewed by humans.
 4. **Scope & risk:** Confirm the feature is limited to educational guidance (no automated assessments); if scope changes, initiate a new risk/DPIA review and reclassify.
 5. **Testing hooks:** Keep automated checks (e.g., Playwright) aligned with AI section presence and usability expectations.
 6. **Sign-off:** Curriculum Owner and AI Steward acknowledge the update and residual risks before publishing.
+7. **Log the run:** Record the checklist results (including “No AI content” outcomes) in `AI_Checklist_Log.md` or release notes.
