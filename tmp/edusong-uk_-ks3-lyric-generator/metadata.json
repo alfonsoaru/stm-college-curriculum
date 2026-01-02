@@ -1,0 +1,5 @@
+{
+  "name": "EduSong UK: KS3 Lyric Generator",
+  "description": "A curriculum-aligned song generator for UK Year 7 and 8 students. Create catchy lyrics and AI music prompts (Suno/Udio) for subjects like Science, History, and Geography based on the UK National Curriculum.",
+  "requestFramePermissions": []
+}
