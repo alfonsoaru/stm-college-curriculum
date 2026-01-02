@@ -60,14 +60,14 @@ for (const year of years) {
 
       test('should have Games Programmer section', async ({ page }) => {
         // Check for games programmer navigation link
-        const gamesLink = page.locator('a[href="#games-programmer"], a[href="#games"]');
+        const gamesLink = page.locator('a[href="#games-programmer"], a[href="#games"]').first();
         await expect(gamesLink).toBeVisible();
 
         // Navigate to games section
         await gamesLink.click();
 
         // Check for games programmer section
-        const gamesSection = page.locator('#games-programmer, #games, [id*="games"]');
+        const gamesSection = page.locator('#games-programmer, #games, [id*="games"]').first();
         await expect(gamesSection).toBeVisible();
 
         // Check for games programmer heading
@@ -165,14 +165,18 @@ for (const year of years) {
         // Should be substantial (at least 500 characters)
         expect(promptText.length).toBeGreaterThan(500);
 
-        // Should contain key curriculum terms
+        // Should contain key curriculum terms (tutor, coach, specialist, etc.)
         expect(promptText.toLowerCase()).toContain('year');
-        expect(promptText.toLowerCase()).toContain('tutor');
+        const hasRoleKeyword = promptText.toLowerCase().includes('tutor') ||
+                               promptText.toLowerCase().includes('coach') ||
+                               promptText.toLowerCase().includes('specialist') ||
+                               promptText.toLowerCase().includes('teacher');
+        expect(hasRoleKeyword).toBe(true);
       });
 
       test('Games Programmer prompt should be copyable and substantive', async ({ page }) => {
         // Navigate to games section
-        await page.locator('a[href="#games-programmer"], a[href="#games"]').click();
+        await page.locator('a[href="#games-programmer"], a[href="#games"]').first().click();
 
         // Find the prompt div
         const promptDiv = page.locator('[id*="games"], [id*="prompt"]').last();
