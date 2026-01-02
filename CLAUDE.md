@@ -271,13 +271,20 @@ Each game uses distinct gradient colors:
 - `re-year-8.html` - With Ethics Quest
 - `design-technology-year-8.html` - With Maker Dash
 
-### Subject Overview Pages
-- `mathematics.html`
-- `english.html`
-- `science.html`
-- `computer-science.html`
-- `french.html`
-- `german.html`
+### Subject Overview Pages (13 subjects - all with Year 7/8 nav buttons)
+- `mathematics.html` - Year nav buttons ✓
+- `english.html` - Year nav buttons ✓
+- `science.html` - Year nav buttons ✓
+- `computer-science.html` - Year nav buttons ✓
+- `french.html` - Year nav buttons ✓
+- `german.html` - Year nav buttons ✓
+- `art.html` - Year nav buttons ✓
+- `geography.html` - Year nav buttons ✓
+- `history.html` - Year nav buttons ✓
+- `pe.html` - Year nav buttons ✓
+- `music.html` - Year nav buttons ✓
+- `re.html` - Year nav buttons ✓
+- `design-technology.html` - Year nav buttons ✓
 
 ### Interactive Games (41 total)
 
@@ -402,3 +409,81 @@ Top-down space shooter format with:
 5. Use appropriate gradient colors for subject theming
 
 This documentation provides the complete template structure for maintaining consistency across all Year 7 curriculum pages in the STM College website.
+
+## AI Use Notice (Required)
+
+All AI Tutor and Games Programmer sections MUST include this notice at the top of the section content:
+
+```html
+<!-- AI Use Notice -->
+<div class="ai-use-notice" style="background: #fff4e5; border: 1px solid #f4c27f; color: #5c3b05; padding: 12px 16px; margin: 0 0 1.5rem 0; border-radius: 10px; font-size: 0.95rem; line-height: 1.5;">
+    ⚠️ AI guidance is optional and for study support. Review all AI outputs before using. Do not paste personal or student-identifying data into external AI tools.
+</div>
+```
+
+Place this inside the `<div style="max-width: 900px; margin: 0 auto;">` container, before the Quick Start section.
+
+## Testing
+
+### Playwright Test Suite
+- **Location**: `tests/curriculum-pages.spec.js`
+- **Total Tests**: 390 (15 tests × 26 pages)
+- **Run tests**: `npx playwright test`
+- **Server required**: `npx http-server -p 8234`
+
+### Test Coverage
+Each Year 7 and Year 8 page is tested for:
+1. Correct page title
+2. Hero/header section with navigation
+3. AI Tutor section with copy button
+4. Games Programmer section with copy button
+5. All three term sections (Autumn, Spring, Summer)
+6. Self-assessment sections
+7. Key vocabulary sections
+8. Week/Unit/Topic sections with learning content
+9. Interactive game integrations
+10. Skills overview section
+11. Viewport meta tag
+12. AI Tutor prompt (500+ chars, contains role keyword)
+13. Games Programmer prompt (300+ chars, contains "game")
+14. Assessment headings with 2.2rem font size
+15. Substantial page content (5000+ chars)
+
+## AI Ethics & Governance
+
+### Policy Documents
+- `AI_Ethics_Policy.md` - Full governance policy (ISO/IEC 42001 aligned)
+- `AI_Ethics_Officer_Prompt.md` - AI Ethics Officer system prompt
+- `AI_Checklist_Log.md` - Checklist run log for all pages
+
+### Key Requirements
+- AI prompts are educational aids only, not automated assessment tools
+- Users must not input personal/student data into external AI tools
+- All AI outputs should be reviewed by educators before use
+- AI sections must include the AI Use Notice (see above)
+
+## Deployment
+
+### GitHub Pages
+- **URL**: https://alfonsoaru.github.io/stm-college-curriculum/
+- **Branch**: master (auto-deploys on push)
+
+### Local Development
+- **Server**: `npx http-server -p 8234`
+- **URL**: http://localhost:8234
+
+## Current Status (January 2026)
+
+### Completed
+- ✅ All 13 Year 7 subject pages with AI Tutor + Games Programmer
+- ✅ All 13 Year 8 subject pages with AI Tutor + Games Programmer
+- ✅ All 13 subject overview pages with Year 7/8 nav buttons
+- ✅ 41 interactive games (parkour runners, space shooters, quizzes)
+- ✅ AI Use Notices on all AI sections
+- ✅ 390 Playwright tests passing
+- ✅ AI Ethics Policy documentation
+
+### Not Yet Implemented
+- ⏳ Year 9-11 curriculum pages
+- ⏳ Parent/teacher portal
+- ⏳ Progress tracking system
